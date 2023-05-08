@@ -20,6 +20,7 @@ extern "C" {
      */
     void sensor_core_read_serial_no(uint8_t *buf);
 
+    void sensor_core_convert(float f_value, uint8_t *b_value);
 
 
 #ifdef	__cplusplus

@@ -13,6 +13,16 @@ void sensor_core_read_serial_no(uint8_t *buf)
     }
 }
 
+union _float_to_b {
+    float f_value;
+    uint8_t b_value[4];
+};
 
 
-
+void sensor_core_convert(float f_value, uint8_t *b_value) {
+    union _float_to_b f2b;
+    f2b.f_value = f_value;
+    for(uint8_t i = 0; i<4; i++){
+        b_value[i] = f2b.b_value[i];
+    }
+}

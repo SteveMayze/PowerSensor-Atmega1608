@@ -58,19 +58,36 @@ typedef enum XBEE_FRAME_TYPE {
 #define XBEE_USART_BROADCAST_SHORT 0xFFFE
 #define XBEE_START_DELIMITER 0x7E
 
-/*
+/*!
+ * Each data message is based on a name value pair. Due to the constraints
+ * of an xbee message, the name is tokenised to a one byte value.
+ * 
+ * The structure of the message follows the following pattern.
+ * 
  * DATA Message
- *      operation
- *      serial_id - Device serial #
- *      addr64bit
- *      payload
- *          OPERATION: operation
- *          SERIAL_ID: serialID
- *          PROPERTTY_1: property_1_value // Packed integer value 4 bytes (Python struct.pack)
- *          PROPERTTY_2: property_2_value
- *          ...         
- *          PROPERTTY_n: property_n_value
+ *      operation - XBEE_TOKEN_OPERATION + Operation code
+ *         
+ *         READY        SEND
+ *         DATAREQ      RECEIVE
+ *         DATA         SEND
+ *         DATAACK      RECEIVE
+ *         NODEINTROREQ RECEIVE
+ *         NODEINTRO    SEND
+ *         NODEINTROACK RECEIVE
+ * 
+ *      serial_id - XBEE_TOKEN_SERIAL_ID + 8 byte serial ID
+ *      payload - token value pair depending on the operation. The basic case
+ *                will be the DATA case.
  */
+    typedef struct _xbee_node_frame {
+        uint8_t operation;
+        uint8_t *serial_id; // (!) The hub is only expecting 8 bytes
+        uint8_t domain; // The domain and class are only used for the NODEINTRO.
+        uint8_t class;
+        uint8_t *payload;
+
+    } xbee_node_frame_t;
+    
 
     typedef struct _xbee_frame {
         uint8_t start_delimiter;

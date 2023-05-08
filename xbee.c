@@ -3,6 +3,8 @@
 
 
 xbee_frame_t xbee_frame;
+xbee_node_frame_t xbee_node_frame;
+
 
 uint8_t calc_checksum(void);
 
@@ -32,10 +34,25 @@ XBEE_STATE_T xbee_build_frame(XBEE_FRAME_TYPE_T frame_type, uint8_t frame_id,
             xbee_frame.rf_data,
             xbee_frame.checksum
             );
+    return XBEE_STATE_SUCCESS;
+}
+
+XBEE_STATE_T xbee_build_node_frame(XBEE_TOKEN_T operation, uint8_t *serial_id, 
+        uint8_t class, uint8_t domain, uint8_t *payload ){
+    
+    xbee_node_frame.operation = operation;
+    xbee_node_frame.serial_id = serial_id;
+    xbee_node_frame.payload = payload;
+    if( operation == XBEE_TOKEN_NODEINTRO ){
+        xbee_node_frame.domain = domain;
+        xbee_node_frame.class = class;
+        printf("node-frame: %02X %02X %02X \n", xbee_node_frame.operation, xbee_node_frame.domain, xbee_node_frame.class);
+    } else {
+        printf("node-frame: %02X \n", xbee_node_frame.operation);
+    }
     
     
     return XBEE_STATE_SUCCESS;
-
 }
 
 uint8_t xbee_get_checksum(void){
