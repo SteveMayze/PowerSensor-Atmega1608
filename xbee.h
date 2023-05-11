@@ -20,6 +20,7 @@ extern "C" {
 #define METADATA_GROUP 0x40
     
     typedef enum XBEE_TOKEN {
+        XBEE_TOKEN_NULL = HEADER_GROUP | 0x00,        
         XBEE_TOKEN_OPERATION = HEADER_GROUP | 0x01,        
         XBEE_TOKEN_SERIAL_ID = HEADER_GROUP | 0x02,        
         XBEE_TOKEN_DOMAIN = HEADER_GROUP | 0x03,        
@@ -80,15 +81,21 @@ typedef enum XBEE_FRAME_TYPE {
  *                will be the DATA case.
  */
     typedef struct _xbee_node_frame {
-        uint8_t operation;
+        XBEE_TOKEN_T operation;
         uint8_t *serial_id; // (!) The hub is only expecting 8 bytes
-        uint8_t domain; // The domain and class are only used for the NODEINTRO.
-        uint8_t class;
+        XBEE_TOKEN_T domain; // The domain and class are only used for the NODEINTRO.
+        XBEE_TOKEN_T class;
+        uint8_t payload_length;
         uint8_t *payload;
 
     } xbee_node_frame_t;
     
 
+    /*!
+     * \brief The structure that represents a message to be passed to the 
+     *        XBEE modem.
+     * 
+     */
     typedef struct _xbee_frame {
         uint8_t start_delimiter;
         uint16_t data_length;
@@ -113,13 +120,28 @@ typedef enum XBEE_FRAME_TYPE {
     } xbee_frame_t;
 
     
-    uint8_t xbee_get_checksum(void);
-    
-    XBEE_STATE_T xbee_build_frame(XBEE_FRAME_TYPE_T frame_type, uint8_t frame_id, 
+    XBEE_STATE_T xbee_build_frame(xbee_frame_t *xbee_frame, XBEE_FRAME_TYPE_T frame_type, uint8_t frame_id, 
         uint64_t dest_addr_long, uint16_t dest_addr_short, 
         uint8_t rf_data_length, char *rf_data);
     
+//    XBEE_STATE_T xbee_build_node_frame(xbee_node_frame_t *xbee_node_frame, XBEE_TOKEN_T operation, uint8_t *serial_id, 
+//            XBEE_TOKEN_T class, XBEE_TOKEN_T domain, uint8_t payload_length, uint8_t *payload );
 
+    XBEE_STATE_T xbee_build_node_data_frame(xbee_node_frame_t *xbee_node_frame, 
+            uint8_t *serial_id, uint8_t payload_length, uint8_t *payload );
+
+
+    XBEE_STATE_T xbee_build_node_intro_frame(xbee_node_frame_t *xbee_node_frame, uint8_t *serial_id, 
+            XBEE_TOKEN_T domain, XBEE_TOKEN_T class, uint8_t payload_length, uint8_t *payload );
+
+    /*!
+     * \brief tokenize and adds a float value to the payload as a byte array.
+     * 
+     * This will return the new index + length of the value added.
+     */
+    uint8_t xbee_add_value_to_payload(uint8_t *payload, uint8_t idx, XBEE_TOKEN_T parameter, float f_value);
+
+        
 #ifdef	__cplusplus
 }
 #endif

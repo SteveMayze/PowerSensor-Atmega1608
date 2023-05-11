@@ -14,13 +14,27 @@ extern "C" {
 
 #include "mcc_generated_files/mcc.h"
     
+    union _float_to_b {
+    float f_value;
+    uint8_t b_value[4];
+};
+
+
+    
     /*!
      * \brief Returns the serial number from the micro-controller Signature Rows.
      * 
      */
     void sensor_core_read_serial_no(uint8_t *buf);
 
-    void sensor_core_convert(float f_value, uint8_t *b_value);
+    /*!
+     * \brief Returns the binary i.e. 4 byte uint8_t array representing a 
+     *        float value.
+     */
+    void sensor_core_convert_float_to_binary(float f_value, uint8_t *b_value);
+    
+    void sensor_core_convert_binary_to_float(uint8_t *b_value, float *f_value);
+
 
 
 #ifdef	__cplusplus
