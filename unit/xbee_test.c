@@ -2,7 +2,7 @@
 #include "../mocks/Mockxbee_usart.h"
 #include "xbee_test.h"
 #include "unity.h"
-#include "../xbee.h"
+#include "../sensor_telemetry.h"
 #include "../sensor_core.h"
 #include <string.h>
 

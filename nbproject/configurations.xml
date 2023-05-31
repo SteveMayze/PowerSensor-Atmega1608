@@ -83,17 +83,17 @@
         <itemPath>test_main.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Unit" projectFiles="true">
-        <itemPath>unit/xbee_test.c</itemPath>
-        <itemPath>unit/xbee_test.h</itemPath>
         <itemPath>unit/sensor_core_test.c</itemPath>
         <itemPath>unit/sensor_core_test.h</itemPath>
+        <itemPath>unit/telemetry_test.c</itemPath>
+        <itemPath>unit/telemetry_test.h</itemPath>
       </logicalFolder>
       <itemPath>xbee_usart.c</itemPath>
       <itemPath>xbee_usart.h</itemPath>
-      <itemPath>xbee.h</itemPath>
-      <itemPath>xbee.c</itemPath>
       <itemPath>sensor_core.c</itemPath>
       <itemPath>sensor_core.h</itemPath>
+      <itemPath>sensor_telemetry.h</itemPath>
+      <itemPath>sensor_telemetry.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -1276,26 +1276,6 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="unit/xbee_test.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="unit/xbee_test.h" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
     </conf>
     <conf name="Test" type="2">
       <toolsSet>
@@ -1306,7 +1286,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.36</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>
