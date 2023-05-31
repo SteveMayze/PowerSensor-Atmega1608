@@ -13,5 +13,9 @@
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/sensor_core_test.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt</file>
         </group>
+        <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/debug/Test/usart1_output.txt</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/xbee.h</file>
+        </group>
     </open-files>
 </project-private>
