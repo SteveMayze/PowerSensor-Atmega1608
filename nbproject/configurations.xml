@@ -87,6 +87,8 @@
         <itemPath>unit/sensor_core_test.h</itemPath>
         <itemPath>unit/telemetry_test.c</itemPath>
         <itemPath>unit/telemetry_test.h</itemPath>
+        <itemPath>unit/power_sensor_test.h</itemPath>
+        <itemPath>unit/power_sensor_test.c</itemPath>
       </logicalFolder>
       <itemPath>xbee_usart.c</itemPath>
       <itemPath>xbee_usart.h</itemPath>
@@ -94,6 +96,10 @@
       <itemPath>sensor_core.h</itemPath>
       <itemPath>sensor_telemetry.h</itemPath>
       <itemPath>sensor_telemetry.c</itemPath>
+      <itemPath>power_sensor.h</itemPath>
+      <itemPath>power_sensor.c</itemPath>
+      <itemPath>INA219.h</itemPath>
+      <itemPath>INA219.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

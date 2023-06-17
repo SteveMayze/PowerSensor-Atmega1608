@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=cmock/src/cmock.c cmock/src/unity.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/twi0_master.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/cpuint.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c test_main.c unit/sensor_core_test.c xbee_usart.c sensor_core.c sensor_telemetry.c unit/telemetry_test.c
+SOURCEFILES_QUOTED_IF_SPACED=cmock/src/cmock.c cmock/src/unity.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/twi0_master.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/cpuint.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c test_main.c unit/sensor_core_test.c unit/telemetry_test.c unit/power_sensor_test.c xbee_usart.c sensor_core.c sensor_telemetry.c power_sensor.c INA219.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/test_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/xbee_usart.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/sensor_telemetry.o ${OBJECTDIR}/unit/telemetry_test.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/cmock/src/cmock.o.d ${OBJECTDIR}/cmock/src/unity.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o.d ${OBJECTDIR}/mcc_generated_files/src/usart0.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/test_main.o.d ${OBJECTDIR}/unit/sensor_core_test.o.d ${OBJECTDIR}/xbee_usart.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/sensor_telemetry.o.d ${OBJECTDIR}/unit/telemetry_test.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/test_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/telemetry_test.o ${OBJECTDIR}/unit/power_sensor_test.o ${OBJECTDIR}/xbee_usart.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/sensor_telemetry.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/INA219.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/cmock/src/cmock.o.d ${OBJECTDIR}/cmock/src/unity.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o.d ${OBJECTDIR}/mcc_generated_files/src/usart0.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/test_main.o.d ${OBJECTDIR}/unit/sensor_core_test.o.d ${OBJECTDIR}/unit/telemetry_test.o.d ${OBJECTDIR}/unit/power_sensor_test.o.d ${OBJECTDIR}/xbee_usart.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/sensor_telemetry.o.d ${OBJECTDIR}/power_sensor.o.d ${OBJECTDIR}/INA219.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/test_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/xbee_usart.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/sensor_telemetry.o ${OBJECTDIR}/unit/telemetry_test.o
+OBJECTFILES=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/test_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/telemetry_test.o ${OBJECTDIR}/unit/power_sensor_test.o ${OBJECTDIR}/xbee_usart.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/sensor_telemetry.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/INA219.o
 
 # Source Files
-SOURCEFILES=cmock/src/cmock.c cmock/src/unity.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/twi0_master.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/cpuint.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c test_main.c unit/sensor_core_test.c xbee_usart.c sensor_core.c sensor_telemetry.c unit/telemetry_test.c
+SOURCEFILES=cmock/src/cmock.c cmock/src/unity.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/twi0_master.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/cpuint.c mcc_generated_files/device_config.c mcc_generated_files/mcc.c test_main.c unit/sensor_core_test.c unit/telemetry_test.c unit/power_sensor_test.c xbee_usart.c sensor_core.c sensor_telemetry.c power_sensor.c INA219.c
 
 
 
@@ -172,6 +172,18 @@ ${OBJECTDIR}/unit/sensor_core_test.o: unit/sensor_core_test.c  .generated_files/
 	@${RM} ${OBJECTDIR}/unit/sensor_core_test.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/sensor_core_test.o.d" -MT "${OBJECTDIR}/unit/sensor_core_test.o.d" -MT ${OBJECTDIR}/unit/sensor_core_test.o -o ${OBJECTDIR}/unit/sensor_core_test.o unit/sensor_core_test.c 
 	
+${OBJECTDIR}/unit/telemetry_test.o: unit/telemetry_test.c  .generated_files/flags/Test/f0503321a99ecb22ed1b9728e19363e6df5b672c .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/telemetry_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/telemetry_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/telemetry_test.o.d" -MT "${OBJECTDIR}/unit/telemetry_test.o.d" -MT ${OBJECTDIR}/unit/telemetry_test.o -o ${OBJECTDIR}/unit/telemetry_test.o unit/telemetry_test.c 
+	
+${OBJECTDIR}/unit/power_sensor_test.o: unit/power_sensor_test.c  .generated_files/flags/Test/ef02fc2f9634dc21319b99f96153b05bf93423ad .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/power_sensor_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/power_sensor_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/power_sensor_test.o.d" -MT "${OBJECTDIR}/unit/power_sensor_test.o.d" -MT ${OBJECTDIR}/unit/power_sensor_test.o -o ${OBJECTDIR}/unit/power_sensor_test.o unit/power_sensor_test.c 
+	
 ${OBJECTDIR}/xbee_usart.o: xbee_usart.c  .generated_files/flags/Test/e11e24a4714559f5b24cd0e732b13f08eb79f1a0 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/xbee_usart.o.d 
@@ -190,11 +202,17 @@ ${OBJECTDIR}/sensor_telemetry.o: sensor_telemetry.c  .generated_files/flags/Test
 	@${RM} ${OBJECTDIR}/sensor_telemetry.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/sensor_telemetry.o.d" -MT "${OBJECTDIR}/sensor_telemetry.o.d" -MT ${OBJECTDIR}/sensor_telemetry.o -o ${OBJECTDIR}/sensor_telemetry.o sensor_telemetry.c 
 	
-${OBJECTDIR}/unit/telemetry_test.o: unit/telemetry_test.c  .generated_files/flags/Test/f0503321a99ecb22ed1b9728e19363e6df5b672c .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
-	@${MKDIR} "${OBJECTDIR}/unit" 
-	@${RM} ${OBJECTDIR}/unit/telemetry_test.o.d 
-	@${RM} ${OBJECTDIR}/unit/telemetry_test.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/telemetry_test.o.d" -MT "${OBJECTDIR}/unit/telemetry_test.o.d" -MT ${OBJECTDIR}/unit/telemetry_test.o -o ${OBJECTDIR}/unit/telemetry_test.o unit/telemetry_test.c 
+${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/Test/b73680b0afc43e6cbdf00e39bbd9bf2674893164 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/power_sensor.o.d 
+	@${RM} ${OBJECTDIR}/power_sensor.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/power_sensor.o.d" -MT "${OBJECTDIR}/power_sensor.o.d" -MT ${OBJECTDIR}/power_sensor.o -o ${OBJECTDIR}/power_sensor.o power_sensor.c 
+	
+${OBJECTDIR}/INA219.o: INA219.c  .generated_files/flags/Test/10bb657847b511ec9c303251eae81f3a52b55b19 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/INA219.o.d 
+	@${RM} ${OBJECTDIR}/INA219.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/INA219.o.d" -MT "${OBJECTDIR}/INA219.o.d" -MT ${OBJECTDIR}/INA219.o -o ${OBJECTDIR}/INA219.o INA219.c 
 	
 else
 ${OBJECTDIR}/cmock/src/cmock.o: cmock/src/cmock.c  .generated_files/flags/Test/6e3bcb6db6e1f174e6a7d6b02da9434e000723cf .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
@@ -275,6 +293,18 @@ ${OBJECTDIR}/unit/sensor_core_test.o: unit/sensor_core_test.c  .generated_files/
 	@${RM} ${OBJECTDIR}/unit/sensor_core_test.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/sensor_core_test.o.d" -MT "${OBJECTDIR}/unit/sensor_core_test.o.d" -MT ${OBJECTDIR}/unit/sensor_core_test.o -o ${OBJECTDIR}/unit/sensor_core_test.o unit/sensor_core_test.c 
 	
+${OBJECTDIR}/unit/telemetry_test.o: unit/telemetry_test.c  .generated_files/flags/Test/3034d33ecf711743a273fb3bfcf8dd22047388ca .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/telemetry_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/telemetry_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/telemetry_test.o.d" -MT "${OBJECTDIR}/unit/telemetry_test.o.d" -MT ${OBJECTDIR}/unit/telemetry_test.o -o ${OBJECTDIR}/unit/telemetry_test.o unit/telemetry_test.c 
+	
+${OBJECTDIR}/unit/power_sensor_test.o: unit/power_sensor_test.c  .generated_files/flags/Test/3f25708ed4a0f0b03d9e46b86931607683ed1050 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/power_sensor_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/power_sensor_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/power_sensor_test.o.d" -MT "${OBJECTDIR}/unit/power_sensor_test.o.d" -MT ${OBJECTDIR}/unit/power_sensor_test.o -o ${OBJECTDIR}/unit/power_sensor_test.o unit/power_sensor_test.c 
+	
 ${OBJECTDIR}/xbee_usart.o: xbee_usart.c  .generated_files/flags/Test/c603b3fb1cfc797dc7159052a88a5ebe355bfd01 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/xbee_usart.o.d 
@@ -293,11 +323,17 @@ ${OBJECTDIR}/sensor_telemetry.o: sensor_telemetry.c  .generated_files/flags/Test
 	@${RM} ${OBJECTDIR}/sensor_telemetry.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/sensor_telemetry.o.d" -MT "${OBJECTDIR}/sensor_telemetry.o.d" -MT ${OBJECTDIR}/sensor_telemetry.o -o ${OBJECTDIR}/sensor_telemetry.o sensor_telemetry.c 
 	
-${OBJECTDIR}/unit/telemetry_test.o: unit/telemetry_test.c  .generated_files/flags/Test/3034d33ecf711743a273fb3bfcf8dd22047388ca .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
-	@${MKDIR} "${OBJECTDIR}/unit" 
-	@${RM} ${OBJECTDIR}/unit/telemetry_test.o.d 
-	@${RM} ${OBJECTDIR}/unit/telemetry_test.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/telemetry_test.o.d" -MT "${OBJECTDIR}/unit/telemetry_test.o.d" -MT ${OBJECTDIR}/unit/telemetry_test.o -o ${OBJECTDIR}/unit/telemetry_test.o unit/telemetry_test.c 
+${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/Test/88e916066e66d8c5804775559c03ca42dc512955 .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/power_sensor.o.d 
+	@${RM} ${OBJECTDIR}/power_sensor.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/power_sensor.o.d" -MT "${OBJECTDIR}/power_sensor.o.d" -MT ${OBJECTDIR}/power_sensor.o -o ${OBJECTDIR}/power_sensor.o power_sensor.c 
+	
+${OBJECTDIR}/INA219.o: INA219.c  .generated_files/flags/Test/50ef0ef7015ed19fc46ee3f449df9026af8fe6bd .generated_files/flags/Test/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/INA219.o.d 
+	@${RM} ${OBJECTDIR}/INA219.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_Test=$(CND_CONF)  -Wl,-u,sigrow  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/INA219.o.d" -MT "${OBJECTDIR}/INA219.o.d" -MT ${OBJECTDIR}/INA219.o -o ${OBJECTDIR}/INA219.o INA219.c 
 	
 endif
 

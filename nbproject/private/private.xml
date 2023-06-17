@@ -7,10 +7,17 @@
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/xbee.h</file>
         </group>
         <group>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/power_sensor.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/Mocktwi0_master.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/power_sensor_test.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/test_main.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/telemetry_test.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/xbee_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/telemetry_test.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/power_sensor.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/INA219.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/power_sensor_test.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mcc_generated_files/examples/twi0_master_example.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/MockINA219.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/INA219.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mcc_generated_files/include/twi0_master.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt</file>
         </group>
     </open-files>
