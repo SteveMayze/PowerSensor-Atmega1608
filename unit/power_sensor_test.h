@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-void run_power_sensor_tests();
+int run_power_sensor_tests();
 
 
 #ifdef	__cplusplus

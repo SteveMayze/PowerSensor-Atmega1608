@@ -5,14 +5,11 @@
 
 
 void set_i2c_address_test(){
-    
-    power_sensor_set_i2c(0x01);
-    
-    
+    TEST_FAIL_MESSAGE("The test is not implemented.");
 }
 
 int run_power_sensor_tests(){
-    UnityBegin("sensor_core_test.c");
+    UnityBegin("sensor_core_test");
     
     RUN_TEST(set_i2c_address_test);
 

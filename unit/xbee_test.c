@@ -74,7 +74,7 @@ void xbee_core_test_add_float_test(){
 
 int run_xbee_tests(void)
 {
-    UnityBegin("xbee_test.c");
+    UnityBegin("xbee_test");
     RUN_TEST(xbee_test_build_frame);
     RUN_TEST(xbee_test_build_data_frame);
     RUN_TEST(xbee_core_test_add_float_test);

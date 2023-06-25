@@ -29,7 +29,11 @@ void INA219_set_calibration(){
     data[0] = INA219_CAL;
     data[1] = CAL >> 8;
     data[2] = 0xFF & CAL;
-    TWI0_Write(iic_address, data, 2);    
+    // TWI0_Write(iic_address, data, 2);    
+    I2C0_Open(iic_address);
+    I2C0_SetBuffer(data, 2);
+    I2C0_MasterOperation(false); // Write
+    I2C0_Close();    
 }
 
 void INA219_Initialise(uint8_t addr) {
@@ -41,7 +45,11 @@ void INA219_Initialise(uint8_t addr) {
     data[0] = INA219_CFG;
     data[1] = INA219_DEFAULT_CFG >> 8;
     data[2] = 0xFF & INA219_DEFAULT_CFG;
-    TWI0_Write(iic_address, data, 2);
+    // TWI0_Write(iic_address, data, 2);
+    I2C0_Open(iic_address);
+    I2C0_SetBuffer(data, 2);
+    I2C0_MasterOperation(false); // Write
+    I2C0_Close();    
 
 }
 
@@ -50,7 +58,12 @@ uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
     if( calibrate )
         INA219_set_calibration();
     write_buffer[0] = reg;
-    TWI0_WriteRead(iic_address, write_buffer, 1, read_buffer.bit8, 2);
+    // TWI0_WriteRead(iic_address, write_buffer, 1, read_buffer.bit8, 2);
+    I2C0_Open(iic_address);
+    I2C0_SetBuffer(read_buffer.bit8, 2);
+    I2C0_MasterOperation(true); // Write
+    I2C0_Close();    
+    
     uint16_t result = ((uint16_t) read_buffer.bit8[0]<<8)|read_buffer.bit8[1];
     return result;
 }
@@ -71,10 +84,10 @@ struct ina219_data INA219_getReadings() {
         reading_ok = readings.raw_bus_voltage & 0x02;
         _delay_ms(500);
         timeout++;
-        if(timeout > 10){
-            LED_BLUE_Toggle();
-            break;
-        }
+//        if(timeout > 10){
+//            LED_BLUE_Toggle();
+//            break;
+//        }
     }
     readings.bus_voltage = (int16_t) ((readings.raw_bus_voltage >> 3) * 4);
     readings.bus_voltage = readings.bus_voltage * 0.001;
