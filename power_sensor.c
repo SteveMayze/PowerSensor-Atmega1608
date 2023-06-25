@@ -1,4 +1,4 @@
 #include "power_sensor.h"
-#include "INA219.h"
+#include "ina219/INA219.h"
 
 

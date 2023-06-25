@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#include "mcc_generated_files/mcc.h"
+#include "../mcc_generated_files/mcc.h"
 
 #define INA219_RST 15
 #define INA219_BRNG 13

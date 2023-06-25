@@ -56,16 +56,14 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f5" displayName="adapters" projectFiles="true">
-        <itemPath>xbee_usart.c</itemPath>
-        <itemPath>xbee_usart.h</itemPath>
-        <itemPath>INA219.h</itemPath>
-        <itemPath>INA219.c</itemPath>
+        <itemPath>libavrxbee/xbee.c</itemPath>
+        <itemPath>libavrxbee/xbee.h</itemPath>
+        <itemPath>ina219/INA219.c</itemPath>
+        <itemPath>ina219/INA219.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f6" displayName="domain" projectFiles="true">
         <itemPath>power_sensor.c</itemPath>
         <itemPath>power_sensor.h</itemPath>
-        <itemPath>sensor_telemetry.c</itemPath>
-        <itemPath>sensor_telemetry.h</itemPath>
         <itemPath>sensor_core.c</itemPath>
         <itemPath>sensor_core.h</itemPath>
       </logicalFolder>
@@ -79,19 +77,18 @@
           <itemPath>mcc_generated_files/examples/twi0_master_example.c</itemPath>
         </logicalFolder>
         <logicalFolder name="src" displayName="src" projectFiles="true">
-          <itemPath>mcc_generated_files/src/pin_manager.c</itemPath>
-          <itemPath>mcc_generated_files/src/twi0_master.c</itemPath>
           <itemPath>mcc_generated_files/src/usart0.c</itemPath>
           <itemPath>mcc_generated_files/src/usart1.c</itemPath>
           <itemPath>mcc_generated_files/src/protected_io.S</itemPath>
           <itemPath>mcc_generated_files/src/rtc.c</itemPath>
+          <itemPath>mcc_generated_files/src/pin_manager.c</itemPath>
           <itemPath>mcc_generated_files/src/cpuint.c</itemPath>
+          <itemPath>mcc_generated_files/src/twi0_master.c</itemPath>
         </logicalFolder>
-        <itemPath>mcc_generated_files/device_config.c</itemPath>
         <itemPath>mcc_generated_files/mcc.c</itemPath>
+        <itemPath>mcc_generated_files/device_config.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f4" displayName="Mocks" projectFiles="true">
-        <itemPath>mocks/Mockxbee_usart.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="test" projectFiles="true">
         <itemPath>test_main.c</itemPath>
@@ -101,8 +98,6 @@
         <itemPath>unit/sensor_core_test.h</itemPath>
         <itemPath>unit/power_sensor_test.h</itemPath>
         <itemPath>unit/power_sensor_test.c</itemPath>
-        <itemPath>unit/sensor_telemetry_test.h</itemPath>
-        <itemPath>unit/sensor_telemetry_test.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -117,6 +112,9 @@
     <Elem>src/main</Elem>
     <Elem>mocks</Elem>
     <Elem>cmock/src</Elem>
+    <Elem>libavrxbee</Elem>
+    <Elem>ina219</Elem>
+    <Elem>mcc_generated_files</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -1266,16 +1264,6 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="mocks/Mockxbee_usart.h" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
       <item path="test_main.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
@@ -1290,12 +1278,12 @@
     <conf name="Test" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>ATmega3208</targetDevice>
+        <targetDevice>ATmega1608</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.36</languageToolchainVersion>
+        <languageToolchainVersion>2.40</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -2374,26 +2362,6 @@
         <property key="wpo-lto" value="false"/>
       </XC8-config-global>
       <item path="main.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="mcc_generated_files/src/usart0.c" ex="false" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="xbee_usart.h" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

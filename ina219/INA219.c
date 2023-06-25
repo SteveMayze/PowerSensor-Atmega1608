@@ -1,6 +1,6 @@
 
-#include "mcc_generated_files/mcc.h"
-#include "mcc_generated_files/include/twi0_master.h"
+#include "../mcc_generated_files/mcc.h"
+#include "../mcc_generated_files/include/twi0_master.h"
 #include "INA219.h"
 #include "util/delay.h"
 

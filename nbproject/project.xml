@@ -17,6 +17,9 @@
                 <sourceRootElem>src/main</sourceRootElem>
                 <sourceRootElem>mocks</sourceRootElem>
                 <sourceRootElem>cmock/src</sourceRootElem>
+                <sourceRootElem>libavrxbee</sourceRootElem>
+                <sourceRootElem>ina219</sourceRootElem>
+                <sourceRootElem>mcc_generated_files</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

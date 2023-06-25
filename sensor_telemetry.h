@@ -13,6 +13,7 @@ extern "C" {
 #endif
     
 #include "mcc_generated_files/mcc.h"
+#include "xbee_usart.h"
     
 #define HEADER_GROUP 0x10
 #define OPERATION_GROUP 0x20
