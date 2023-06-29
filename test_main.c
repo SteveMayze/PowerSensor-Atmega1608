@@ -5,6 +5,7 @@
 #include <util/delay.h>
 #include "unit/power_sensor_test.h"
 #include "unit/sensor_core_test.h"
+#include "unit/node_test.h"
 
 
 int main(void)
@@ -15,6 +16,7 @@ int main(void)
     _delay_ms(1000);
  
     run_sensor_core_tests();
+    run_node_tests();
     run_power_sensor_tests();
     
 }

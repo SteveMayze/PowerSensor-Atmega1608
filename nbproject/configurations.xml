@@ -66,6 +66,10 @@
         <itemPath>power_sensor.h</itemPath>
         <itemPath>sensor_core.c</itemPath>
         <itemPath>sensor_core.h</itemPath>
+        <itemPath>node.c</itemPath>
+        <itemPath>node.h</itemPath>
+        <itemPath>modem.h</itemPath>
+        <itemPath>modem.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="main" projectFiles="true">
         <itemPath>main.c</itemPath>
@@ -94,10 +98,12 @@
         <itemPath>test_main.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Unit" projectFiles="true">
-        <itemPath>unit/sensor_core_test.c</itemPath>
         <itemPath>unit/sensor_core_test.h</itemPath>
-        <itemPath>unit/power_sensor_test.h</itemPath>
         <itemPath>unit/power_sensor_test.c</itemPath>
+        <itemPath>unit/power_sensor_test.h</itemPath>
+        <itemPath>unit/sensor_core_test.c</itemPath>
+        <itemPath>unit/node_test.c</itemPath>
+        <itemPath>unit/node_test.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -108,13 +114,7 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>unit</Elem>
-    <Elem>src/main</Elem>
-    <Elem>mocks</Elem>
-    <Elem>cmock/src</Elem>
-    <Elem>libavrxbee</Elem>
-    <Elem>ina219</Elem>
-    <Elem>mcc_generated_files</Elem>
+    <Elem>.</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -1278,7 +1278,7 @@
     <conf name="Test" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>ATmega1608</targetDevice>
+        <targetDevice>ATmega3208</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
