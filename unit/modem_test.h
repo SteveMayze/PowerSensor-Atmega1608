@@ -1,18 +1,19 @@
 /* 
- * File:   node_test.h
+ * File:   note_test.h
  * Author: Steven
  *
- * Created on 05 July 2023, 15:42
+ * Created on 29 June 2023, 16:33
  */
 
 #ifndef NODE_TEST_H
-#define	NODE_TEST_H
+#define	NOTE_TEST_H
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-int run_node_tests();
+
+int run_modem_tests();
 
 
 

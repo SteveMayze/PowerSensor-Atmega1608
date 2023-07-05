@@ -20,7 +20,7 @@ extern "C" {
 };
 
 
-    
+   
     /*!
      * \brief Returns the serial number from the micro-controller Signature Rows.
      * 

@@ -12,12 +12,17 @@
 extern "C" {
 #endif
 
+#include <stdint.h>
 
 
 
 #ifdef	__cplusplus
 }
 #endif
+
+    void modem_initialise(uint64_t coordinator);
+    
+    uint64_t modem_get_coord_addr();
 
 #endif	/* MODEM_H */
 

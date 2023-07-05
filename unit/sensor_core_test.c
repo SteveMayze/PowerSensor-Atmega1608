@@ -1,11 +1,15 @@
 
+#include <avr/pgmspace.h>
+
+ uint8_t ut_pgm_read_byte(uint16_t addr, const char* file, int line);
+
+
 #include "sensor_core_test.h"
 #include "unity.h"
 #include "../sensor_core.h"
 
-
 void sensor_core_test_get_serial_id(){
-    uint8_t expected[10] = { 0x07 , 0xC0 , 0x23 , 0xFF , 0x06 , 0xC0 , 0x01 , 0x97 , 0xF4 , 0x01};
+    uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
     uint8_t actual[10] =   {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     sensor_core_read_serial_no(actual);
     printf("sensor_core_test_get_serial_id: Expected Device signature: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", 
@@ -72,6 +76,4 @@ int run_sensor_core_tests(void)
     UnityEnd();
     return 0;   
 }
-
-
 

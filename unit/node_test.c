@@ -1,29 +1,32 @@
-
-#include "unity.h"
 #include "node_test.h"
+#include "unity.h"
+#include "../node.h"
+#include <stdlib.h>
 
-
-/**
- * On startup of the device i.e. node, the initialisation should be called.
- * 
- * We have the USART0 - XBee modem and the IIC port - the INA219 (or other sensor).
- * 
- * The address of the coordinator will come after the READY interaction. So perhaps,
- * this should be part of the initialisation - contact with the coordinator.
- * 
- * What to mock and what to spy? Mockusart0 is too low level i.e. at the byte layer 
- * to be simple to work with. It would be nice to deal with things at the sting or message
- * level rather than staging a bunch of isReady and Chars.
- * 
- * We also need the serial number of the device. This can be gotten once
- * 
- */
 void initalise_node_test(){
-    TEST_FAIL_MESSAGE("The test is not implemented.");
-    
-    
+
+    //uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
+    //uint8_t actual[10] =   {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+
+    // Check the state of the modem.
+    // Retrieve the Serial ID.
+    // Clear out the buffers.
+    node_status_t expected = NODE_STATE_OK;
+    node_status_t actual = node_intitialise();
+
+    TEST_ASSERT_EQUAL_UINT(expected, actual);
 }
 
+
+void create_node_message_test(){
+
+    struct node_message *actual = node_create_message();
+    
+    TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
+    
+    free(actual);
+
+}
 
 /**
  * A node is a generic device. It will follow the pattern of
@@ -44,6 +47,7 @@ int run_node_tests(){
     UnityBegin("node_test");
     
     RUN_TEST(initalise_node_test);
+    RUN_TEST(create_node_message_test);
 
     UnityEnd();
     return 0;   

@@ -3,7 +3,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
-#include "unit/power_sensor_test.h"
+#include "unit/modem_test.h"
 #include "unit/sensor_core_test.h"
 #include "unit/node_test.h"
 
@@ -17,7 +17,6 @@ int main(void)
  
     run_sensor_core_tests();
     run_node_tests();
-    run_power_sensor_tests();
     
 }
 

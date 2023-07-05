@@ -12,7 +12,16 @@
 extern "C" {
 #endif
 
-
+    typedef enum node_status_e {
+        NODE_STATE_OK
+    } node_status_t;
+    
+    struct node_message {
+    };
+    
+    node_status_t node_intitialise();
+    
+    struct node_message *node_create_message();
 
 
 #ifdef	__cplusplus
