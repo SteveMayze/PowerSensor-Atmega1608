@@ -20,13 +20,6 @@ extern "C" {
 };
 
 
-   
-    /*!
-     * \brief Returns the serial number from the micro-controller Signature Rows.
-     * 
-     */
-    void sensor_core_read_serial_no(uint8_t *buf);
-
     /*!
      * \brief Returns the binary i.e. 4 byte uint8_t array representing a 
      *        float value.

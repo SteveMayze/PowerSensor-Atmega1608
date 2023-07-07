@@ -14,9 +14,13 @@ int main(void)
     
     SYSTEM_Initialize();
     _delay_ms(1000);
+
+    printf("\n\n========== Test starting ==========\n\n");
  
     run_sensor_core_tests();
     run_node_tests();
+    
+    printf("\n\n========== Test Completed ==========\n\n");
     
 }
 

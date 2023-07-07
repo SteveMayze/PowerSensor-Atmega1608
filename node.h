@@ -13,7 +13,8 @@ extern "C" {
 #endif
 
     typedef enum node_status_e {
-        NODE_STATE_OK
+        NODE_STATE_OK,
+        NODE_STATE_ERROR
     } node_status_t;
     
     struct node_message {
