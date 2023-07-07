@@ -1278,7 +1278,7 @@
     <conf name="Test" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>ATmega3208</targetDevice>
+        <targetDevice>ATmega4808</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>

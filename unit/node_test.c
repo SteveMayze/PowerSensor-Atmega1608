@@ -20,6 +20,9 @@ void initalise_node_test(){
 
 void create_node_message_test(){
 
+    // For READY, the payload is empty.
+    // This is where I need to refer to the Python gateway for the 
+    // structure.
     struct node_message *actual = node_create_message();
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
