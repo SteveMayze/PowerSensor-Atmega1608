@@ -22,15 +22,12 @@ void initalise_node_test(){
     uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 
     eprom_read_serial_id_ExpectAndReturn(expected);
-
     node_status_t expected_status = NODE_STATE_OK;
     
     // Check the state of the modem.
     // Retrieve the Serial ID.
     // Clear out the buffers.
-    printf("Calling node initialiser\n");
     node_status_t actual_status = node_intitialise();
-    printf("Called node initialiser. Returned: %d\n", actual_status);
 
     TEST_ASSERT_EQUAL_UINT(expected_status, actual_status);
 
