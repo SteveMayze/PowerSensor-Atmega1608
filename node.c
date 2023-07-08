@@ -6,7 +6,13 @@
 
 uint8_t sid[10];
 
+struct node_message message;
 
+
+/**
+ * Initialse the data structures for creating and sending a message
+ * @return 
+ */
 node_status_t node_intitialise(){
      uint8_t *sid_ = eprom_read_serial_id();
      
@@ -16,8 +22,14 @@ node_status_t node_intitialise(){
     return NODE_STATE_OK;
 }
 
-struct node_message *node_create_message() {
-   
-	struct node_message *message = malloc(sizeof(struct node_message));
-    return message;
+/**
+ * Create a node message
+ * 
+ * @return 
+ */
+struct node_message* node_create_ready_message(uint8_t *sid) {
+
+    message.sid = sid;
+    message.operation = NODE_OPERATION_READY;
+    return &message;
 }

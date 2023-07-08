@@ -17,19 +17,13 @@
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt</file>
         </group>
         <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/debug/Test/usart1_output.txt</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mocks/Mockeprom.h</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mocks/Mockeprom.c</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/node_test.c</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/eprom.h</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/modem_test.c</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/debug/Test/usart1_output.txt</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.h</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/eprom.c</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/test_main.c</file>
-            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/cmock/src/unity.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.c</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mocks/Mockeprom.c</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/node_test.c</file>
         </group>
     </open-files>
 </project-private>

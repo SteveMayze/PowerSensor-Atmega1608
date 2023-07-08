@@ -1269,8 +1269,24 @@
         </XC8-config-global>
       </item>
       <item path="mocks/Mockeprom.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="mocks/Mockeprom.h" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="test_main.c" ex="true" overriding="false">
         <HI-TECH-COMP>
@@ -2371,6 +2387,14 @@
         <property key="wpo-lto" value="false"/>
       </XC8-config-global>
       <item path="eprom.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="main.c" ex="true" overriding="false">
         <HI-TECH-COMP>

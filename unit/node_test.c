@@ -16,10 +16,11 @@
 //    TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, 10);
 //}
 
+uint8_t test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 
 void initalise_node_test(){
     
-    uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
+    uint8_t *expected = test_sid;
 
     eprom_read_serial_id_ExpectAndReturn(expected);
     node_status_t expected_status = NODE_STATE_OK;
@@ -39,12 +40,12 @@ void create_node_message_test(){
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    struct node_message *actual = node_create_message();
+    struct node_message *actual = node_create_ready_message(test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(test_sid, actual->sid, 10);  
+    TEST_ASSERT_EQUAL(NODE_OPERATION_READY, actual->operation);
     
-    free(actual);
-
 }
 
 /**
