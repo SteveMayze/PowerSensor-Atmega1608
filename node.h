@@ -14,11 +14,25 @@ extern "C" {
     
 #include "mcc_generated_files/mcc.h"
 
+    typedef enum operation_e {
+        READY = 1,
+        DATAREQ,
+        DATA,
+        DATAACK,
+        NODEINTROREQ,
+        NODEINTRO,
+        NODEINTROACK,
+        TIMEOUT
+    } Operation_t;
+    
     #define OPERATION_GROUP 0x10
     #define METADATA_GROUP  0x40
 
     typedef enum token_e {
-        NODE_OPERATION_READY = OPERATION_GROUP | 0x01,
+        // OPERATIONS
+        NODE_OPERATION_READY = OPERATION_GROUP | READY,
+                
+        // METADATA
         NODE_METADATA_POWER =  METADATA_GROUP | 0x03
                 
     } node_token_t;
@@ -36,9 +50,16 @@ extern "C" {
     
     node_status_t node_intitialise();
     
-    struct node_message *node_create_ready_message(uint8_t *sid);
+    struct node_message *node_create_message(Operation_t operation, uint8_t *sid);
 
+    typedef void (*callback_t)();
+    
 
+    
+    void node_set_callback(Operation_t, callback_t cb);
+    void node_send_message();
+
+    
 #ifdef	__cplusplus
 }
 #endif

@@ -34,17 +34,37 @@ void initalise_node_test(){
 
 }
 
+bool ready_response = false;
+bool timeout_response = false;
+
+void test_handle_ready_response(){
+    ready_response = true;
+}
+
+void test_handle_ready_timeout(){
+    timeout_response = true;
+}
 
 void create_node_message_test(){
 
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    struct node_message *actual = node_create_ready_message(test_sid);
+    printf("Testing the message\n");
+    struct node_message *actual = node_create_message(READY, test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(test_sid, actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_OPERATION_READY, actual->operation);
+    
+    
+    printf("Testing the send operation for READY\n");
+    node_set_callback(READY, test_handle_ready_response);
+    node_set_callback(TIMEOUT, test_handle_ready_timeout);
+    
+    node_send_message();
+    
+    TEST_ASSERT_EQUAL(true, ready_response);
     
 }
 

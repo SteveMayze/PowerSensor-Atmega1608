@@ -18,12 +18,15 @@
         </group>
         <group name="Leawood_FieldDevice_R3">
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/debug/Test/usart1_output.txt</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mcc_generated_files/src/twi0_master.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.h</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mcc_generated_files/examples/twi0_master_example.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mocks/Mockeprom.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mocks/Mockeprom.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/node_test.c</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/mcc_generated_files/include/twi0_master.h</file>
         </group>
     </open-files>
 </project-private>

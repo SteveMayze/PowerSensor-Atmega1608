@@ -7,6 +7,7 @@
 uint8_t sid[10];
 
 struct node_message message;
+callback_t node_callbacks[9];
 
 
 /**
@@ -27,9 +28,26 @@ node_status_t node_intitialise(){
  * 
  * @return 
  */
-struct node_message* node_create_ready_message(uint8_t *sid) {
+struct node_message* node_create_message(Operation_t operation, uint8_t *sid) {
 
     message.sid = sid;
-    message.operation = NODE_OPERATION_READY;
+    message.operation = OPERATION_GROUP | operation;
     return &message;
+}
+
+void node_set_callback(Operation_t operation, callback_t cb){
+    printf("Setting callback for the operation: %02X\n", operation);
+    node_callbacks[operation] = cb;
+}
+
+
+void node_send_message(){
+    printf("Sending the message for operation; %02X\n", message.operation);
+    switch(message.operation & 0x0F){
+        case READY:
+            node_callbacks[READY]();
+            break;
+        default:
+            break;
+    }
 }
