@@ -14,8 +14,14 @@ extern "C" {
     
 #include "mcc_generated_files/mcc.h"
 
+    typedef enum node_error_e {
+        NODE_NOERR,
+        NODE_TIMEOUT
+    } node_error_t;
+    
     typedef enum operation_e {
-        READY = 1,
+        IDLE = 0,
+        READY,
         DATAREQ,
         DATA,
         DATAACK,
@@ -38,17 +44,12 @@ extern "C" {
     } node_token_t;
 
     
-    typedef enum node_status_e {
-        NODE_STATE_OK,
-        NODE_STATE_ERROR
-    } node_status_t;
-    
     struct node_message {
         uint8_t *sid;
         node_token_t operation;
     };
     
-    node_status_t node_intitialise();
+    node_error_t node_intitialise();
     
     struct node_message *node_create_message(Operation_t operation, uint8_t *sid);
 
@@ -56,7 +57,7 @@ extern "C" {
     
 
     
-    void node_set_callback(Operation_t, callback_t cb);
+    void node_set_callback(Operation_t, callback_t cb, void* payload);
     void node_send_message();
 
     

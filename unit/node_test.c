@@ -23,12 +23,12 @@ void initalise_node_test(){
     uint8_t *expected = test_sid;
 
     eprom_read_serial_id_ExpectAndReturn(expected);
-    node_status_t expected_status = NODE_STATE_OK;
+    node_error_t expected_status = NODE_NOERR;
     
     // Check the state of the modem.
     // Retrieve the Serial ID.
     // Clear out the buffers.
-    node_status_t actual_status = node_intitialise();
+    node_error_t actual_status = node_intitialise();
 
     TEST_ASSERT_EQUAL_UINT(expected_status, actual_status);
 
@@ -59,8 +59,8 @@ void create_node_message_test(){
     
     
     printf("Testing the send operation for READY\n");
-    node_set_callback(READY, test_handle_ready_response);
-    node_set_callback(TIMEOUT, test_handle_ready_timeout);
+    node_set_callback(READY, test_handle_ready_response, NULL);
+    node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
     
     node_send_message();
     
