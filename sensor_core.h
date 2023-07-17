@@ -19,12 +19,14 @@ extern "C" {
     uint8_t b_value[4];
 };
 
+    // These are the return codes for the primary functions for the node.
     typedef enum node_error_e {
         NODE_OK,
         NODE_BUSY,
         NODE_TIMEOUT_ERR
     } Error_t;
     
+    // According to FSM, these are really states.
     typedef enum operation_e {
         IDLE = 0,
         READY,
@@ -37,6 +39,10 @@ extern "C" {
         RESET,
         TIMEOUT
     } Operation_t;
+    
+    typedef enum fsm_operation_e {
+        CONTINUE
+    } FMS_Operation_t;
     
     #define OPERATION_GROUP 0x10
     #define METADATA_GROUP  0x40

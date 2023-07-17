@@ -109,7 +109,7 @@ void create_node_message_timeout_test(){
     
     
     printf("\ncreate_node_message_timeout_test: Testing the send operation for READY\n");
-    node_set_timeout(0x0002);
+    node_set_timeout(0x0001);
     node_set_callback(READY, test_handle_ready_response, NULL);
     node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
     
