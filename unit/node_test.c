@@ -18,17 +18,20 @@
 
 uint8_t test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 
-void initalise_node_test(){
+/**
+ * Verify the initialisation and the setting of the Serial ID (sid).
+ */
+void initialise_node_test(){
     
     uint8_t *expected = test_sid;
 
     eprom_read_serial_id_ExpectAndReturn(expected);
-    node_error_t expected_status = NODE_NOERR;
+    Error_t expected_status = NODE_OK;
     
     // Check the state of the modem.
     // Retrieve the Serial ID.
     // Clear out the buffers.
-    node_error_t actual_status = node_intitialise();
+    Error_t actual_status = node_intitialise();
 
     TEST_ASSERT_EQUAL_UINT(expected_status, actual_status);
 
@@ -45,12 +48,23 @@ void test_handle_ready_timeout(){
     timeout_response = true;
 }
 
+/**
+ * Verify the creation of the message and the READY send API is called.
+ */
 void create_node_message_test(){
+    
+    ready_response = false;
+    timeout_response = false;
+    uint8_t *expected = test_sid;
+    eprom_read_serial_id_ExpectAndReturn(expected);
+    Error_t actual_status = node_intitialise();
+    Error_t expected_status = NODE_OK;
+    TEST_ASSERT_EQUAL_UINT(expected_status, actual_status);
 
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    printf("Testing the message\n");
+    printf("\ncreate_node_message_test: READY message test\n");
     struct node_message *actual = node_create_message(READY, test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
@@ -58,13 +72,52 @@ void create_node_message_test(){
     TEST_ASSERT_EQUAL(NODE_OPERATION_READY, actual->operation);
     
     
-    printf("Testing the send operation for READY\n");
+    printf("\ncreate_node_message_test: Testing the send operation for READY\n");
+    node_set_timeout(0x000F);
     node_set_callback(READY, test_handle_ready_response, NULL);
     node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
     
-    node_send_message();
+    node_check();
     
+    TEST_ASSERT_EQUAL(NODE_OK, node_close());
     TEST_ASSERT_EQUAL(true, ready_response);
+    
+}
+
+/**
+ * Verify the creation of the message and the READY send API is called.
+ */
+void create_node_message_timeout_test(){
+    
+    ready_response = false;
+    timeout_response = false;
+    uint8_t *expected = test_sid;
+    eprom_read_serial_id_ExpectAndReturn(expected);
+    Error_t actual_status = node_intitialise();
+    Error_t expected_status = NODE_OK;
+    TEST_ASSERT_EQUAL_UINT(expected_status, actual_status);
+
+    // For READY, the payload is empty.
+    // This is where I need to refer to the Python gateway for the 
+    // structure.
+    printf("\ncreate_node_message_timeout_test: READY message test\n");
+    struct node_message *actual = node_create_message(READY, test_sid);
+    
+    TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(test_sid, actual->sid, 10);  
+    TEST_ASSERT_EQUAL(NODE_OPERATION_READY, actual->operation);
+    
+    
+    printf("\ncreate_node_message_timeout_test: Testing the send operation for READY\n");
+    node_set_timeout(0x0002);
+    node_set_callback(READY, test_handle_ready_response, NULL);
+    node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
+    
+    node_check();
+    
+    TEST_ASSERT_EQUAL(NODE_OK, node_close());
+    TEST_ASSERT_EQUAL(true, ready_response);
+    TEST_ASSERT_EQUAL(true, timeout_response);
     
 }
 
@@ -86,8 +139,9 @@ void create_node_message_test(){
 int run_node_tests(){
     UnityBegin("node_test");
     
-    RUN_TEST(initalise_node_test);
+    RUN_TEST(initialise_node_test);
     RUN_TEST(create_node_message_test);
+    RUN_TEST(create_node_message_timeout_test);
 
     UnityEnd();
     return 0;   

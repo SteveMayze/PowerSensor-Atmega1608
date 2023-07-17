@@ -20,7 +20,7 @@ void initalise_modem_test(){
     // The broadcast address is set on the initial start up of the system
     // this enables the system to connect to the nearest available coordinator
     // and introduce itself.
-    modem_initialise(XBEE_ADDR_BROADCAST);
+    modem_open(XBEE_ADDR_BROADCAST);
     
     uint64_t coordinator = modem_get_coord_addr();
     
@@ -33,16 +33,6 @@ void initalise_modem_test(){
         
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
-}
-
-void send_ready_message_test(){
-    
-    // This is where I need to refer to the xbee library example to 
-    // create a message. It is not just the XBee message, but we need to
-    // create a node message - This will differ for the purpose.
-    
-    TEST_FAIL_MESSAGE("The test is not implemented");
-    
 }
 
 
@@ -65,7 +55,6 @@ int run_modem_tests(){
     UnityBegin("modem_test");
     
     RUN_TEST(initalise_modem_test);
-    RUN_TEST(send_ready_message_test);
 
     UnityEnd();
     return 0;   

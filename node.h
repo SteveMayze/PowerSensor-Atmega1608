@@ -14,42 +14,16 @@ extern "C" {
     
 #include "mcc_generated_files/mcc.h"
 
-    typedef enum node_error_e {
-        NODE_NOERR,
-        NODE_TIMEOUT
-    } node_error_t;
-    
-    typedef enum operation_e {
-        IDLE = 0,
-        READY,
-        DATAREQ,
-        DATA,
-        DATAACK,
-        NODEINTROREQ,
-        NODEINTRO,
-        NODEINTROACK,
-        TIMEOUT
-    } Operation_t;
-    
-    #define OPERATION_GROUP 0x10
-    #define METADATA_GROUP  0x40
-
-    typedef enum token_e {
-        // OPERATIONS
-        NODE_OPERATION_READY = OPERATION_GROUP | READY,
-                
-        // METADATA
-        NODE_METADATA_POWER =  METADATA_GROUP | 0x03
-                
-    } node_token_t;
-
+#include "sensor_core.h"
     
     struct node_message {
         uint8_t *sid;
-        node_token_t operation;
+        Token_t operation;
     };
     
-    node_error_t node_intitialise();
+    Error_t node_intitialise();
+    Error_t node_close();
+    void node_set_timeout(uint16_t timeout);
     
     struct node_message *node_create_message(Operation_t operation, uint8_t *sid);
 
@@ -58,7 +32,10 @@ extern "C" {
 
     
     void node_set_callback(Operation_t, callback_t cb, void* payload);
-    void node_send_message();
+    
+    void node_check();
+    
+    
 
     
 #ifdef	__cplusplus

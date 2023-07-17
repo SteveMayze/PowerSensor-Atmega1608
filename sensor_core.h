@@ -19,6 +19,37 @@ extern "C" {
     uint8_t b_value[4];
 };
 
+    typedef enum node_error_e {
+        NODE_OK,
+        NODE_BUSY,
+        NODE_TIMEOUT_ERR
+    } Error_t;
+    
+    typedef enum operation_e {
+        IDLE = 0,
+        READY,
+        DATAREQ,
+        DATA,
+        DATAACK,
+        NODEINTROREQ,
+        NODEINTRO,
+        NODEINTROACK,
+        RESET,
+        TIMEOUT
+    } Operation_t;
+    
+    #define OPERATION_GROUP 0x10
+    #define METADATA_GROUP  0x40
+
+    typedef enum token_e {
+        // OPERATIONS
+        NODE_OPERATION_READY = OPERATION_GROUP | READY,
+                
+        // METADATA
+        NODE_METADATA_POWER =  METADATA_GROUP | 0x03
+                
+    } Token_t;
+
 
     /*!
      * \brief Returns the binary i.e. 4 byte uint8_t array representing a 

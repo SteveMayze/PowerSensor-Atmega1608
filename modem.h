@@ -20,9 +20,24 @@ extern "C" {
 }
 #endif
 
-    void modem_initialise(uint64_t coordinator);
+#include "sensor_core.h"
+#include "libavrxbee/xbee.h"
+
+
+    typedef struct response_message {
+        
+        uint8_t *data;
+        uint8_t data_length;
+        Operation_t operation;
+    } ModemResponse_t;
+
+    void modem_open(uint64_t coordinator);
+    
+    void modem_close(void);
     
     uint64_t modem_get_coord_addr();
+    
+    ModemResponse_t* modem_receive_message(void);
 
 #endif	/* MODEM_H */
 
