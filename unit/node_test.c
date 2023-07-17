@@ -3,6 +3,7 @@
 #include "../node.h"
 #include <stdlib.h>
 #include "../mocks/Mockeprom.h"
+#include "../mocks/Mockmodem.h"
 
 //void sensor_core_test_get_serial_id(){
 //    uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
@@ -37,14 +38,17 @@ void initialise_node_test(){
 
 }
 
+
+
+
 bool ready_response = false;
 bool timeout_response = false;
 
-void test_handle_ready_response(){
+void test_handle_dataack_response(){
     ready_response = true;
 }
 
-void test_handle_ready_timeout(){
+void test_handle_dataack_timeout(){
     timeout_response = true;
 }
 
@@ -65,7 +69,16 @@ void create_node_message_test(){
     // This is where I need to refer to the Python gateway for the 
     // structure.
     printf("\ncreate_node_message_test: READY message test\n");
-    struct node_message *actual = node_create_message(READY, test_sid);
+    ModemResponse_t response;
+    ModemResponse_t* response_ptr = &response;
+    
+    response.operation = FSM_DATAACK;    
+    modem_open_Expect(XBEE_ADDR_BROADCAST);
+    modem_close_Expect();
+    modem_message_arrived_ExpectAndReturn(true);
+    modem_receive_message_ExpectAndReturn(response_ptr);
+
+    struct node_message *actual = node_create_message(FSM_READY, test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(test_sid, actual->sid, 10);  
@@ -74,8 +87,8 @@ void create_node_message_test(){
     
     printf("\ncreate_node_message_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
-    node_set_callback(READY, test_handle_ready_response, NULL);
-    node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
+    fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response, NULL);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_dataack_timeout, NULL);
     
     node_check();
     
@@ -87,7 +100,7 @@ void create_node_message_test(){
 /**
  * Verify the creation of the message and the READY send API is called.
  */
-void create_node_message_timeout_test(){
+void node_timeout_test(){
     
     ready_response = false;
     timeout_response = false;
@@ -101,23 +114,24 @@ void create_node_message_timeout_test(){
     // This is where I need to refer to the Python gateway for the 
     // structure.
     printf("\ncreate_node_message_timeout_test: READY message test\n");
-    struct node_message *actual = node_create_message(READY, test_sid);
+
+    modem_open_Expect(XBEE_ADDR_BROADCAST);
+    modem_close_Expect();
     
-    TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
-    TEST_ASSERT_EQUAL_HEX8_ARRAY(test_sid, actual->sid, 10);  
-    TEST_ASSERT_EQUAL(NODE_OPERATION_READY, actual->operation);
+    modem_message_arrived_ExpectAndReturn(false);
     
-    
-    printf("\ncreate_node_message_timeout_test: Testing the send operation for READY\n");
-    node_set_timeout(0x0001);
-    node_set_callback(READY, test_handle_ready_response, NULL);
-    node_set_callback(TIMEOUT, test_handle_ready_timeout, NULL);
+    printf("\ncreate_node_message_timeout_test: Testing the timeout operation\n");
+    node_set_timeout(0x0002);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_dataack_timeout, NULL);
     
     node_check();
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
-    TEST_ASSERT_EQUAL(true, ready_response);
     TEST_ASSERT_EQUAL(true, timeout_response);
+    
+}
+
+void ready_receives_datareq_request(){
     
 }
 

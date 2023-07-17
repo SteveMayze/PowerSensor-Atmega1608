@@ -2,8 +2,8 @@
 #ifndef _MOCKMODEM_H
 #define _MOCKMODEM_H
 
-#include "unity.h"
-#include "modem.h"
+#include "../unit/unity.h"
+#include "../modem.h"
 
 /* Ignore the following warnings, since we are copying code */
 #if defined(__GNUC__) && !defined(__ICC) && !defined(__TMS470__)
@@ -28,10 +28,16 @@ void Mockmodem_Verify(void);
 
 
 
-#define modem_initialise_Expect(coordinator) modem_initialise_CMockExpect(__LINE__, coordinator)
-void modem_initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t coordinator);
+#define modem_open_Expect(coordinator) modem_open_CMockExpect(__LINE__, coordinator)
+void modem_open_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t coordinator);
+#define modem_close_Expect() modem_close_CMockExpect(__LINE__)
+void modem_close_CMockExpect(UNITY_LINE_TYPE cmock_line);
+#define modem_message_arrived_ExpectAndReturn(cmock_retval) modem_message_arrived_CMockExpectAndReturn(__LINE__, cmock_retval)
+void modem_message_arrived_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
 #define modem_get_coord_addr_ExpectAndReturn(cmock_retval) modem_get_coord_addr_CMockExpectAndReturn(__LINE__, cmock_retval)
 void modem_get_coord_addr_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint64_t cmock_to_return);
+#define modem_receive_message_ExpectAndReturn(cmock_retval) modem_receive_message_CMockExpectAndReturn(__LINE__, cmock_retval)
+void modem_receive_message_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, ModemResponse_t* cmock_to_return);
 
 #ifdef __cplusplus
 }

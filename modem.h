@@ -28,12 +28,14 @@ extern "C" {
         
         uint8_t *data;
         uint8_t data_length;
-        Operation_t operation;
+        FSM_States_t operation;
     } ModemResponse_t;
 
     void modem_open(uint64_t coordinator);
     
     void modem_close(void);
+    
+    bool modem_message_arrived(void);
     
     uint64_t modem_get_coord_addr();
     

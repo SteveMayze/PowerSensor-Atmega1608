@@ -2,19 +2,35 @@
 #include <string.h>
 #include <stdlib.h>
 #include <setjmp.h>
-#include "cmock.h"
-#include "Mockmodem.h"
+#include "../cmock/src/cmock.h"
+#include "../mocks/Mockmodem.h"
 
 static const char* CMockString_coordinator = "coordinator";
+static const char* CMockString_modem_close = "modem_close";
 static const char* CMockString_modem_get_coord_addr = "modem_get_coord_addr";
-static const char* CMockString_modem_initialise = "modem_initialise";
+static const char* CMockString_modem_message_arrived = "modem_message_arrived";
+static const char* CMockString_modem_open = "modem_open";
+static const char* CMockString_modem_receive_message = "modem_receive_message";
 
-typedef struct _CMOCK_modem_initialise_CALL_INSTANCE
+typedef struct _CMOCK_modem_open_CALL_INSTANCE
 {
   UNITY_LINE_TYPE LineNumber;
   uint64_t Expected_coordinator;
 
-} CMOCK_modem_initialise_CALL_INSTANCE;
+} CMOCK_modem_open_CALL_INSTANCE;
+
+typedef struct _CMOCK_modem_close_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+
+} CMOCK_modem_close_CALL_INSTANCE;
+
+typedef struct _CMOCK_modem_message_arrived_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  bool ReturnVal;
+
+} CMOCK_modem_message_arrived_CALL_INSTANCE;
 
 typedef struct _CMOCK_modem_get_coord_addr_CALL_INSTANCE
 {
@@ -23,10 +39,20 @@ typedef struct _CMOCK_modem_get_coord_addr_CALL_INSTANCE
 
 } CMOCK_modem_get_coord_addr_CALL_INSTANCE;
 
+typedef struct _CMOCK_modem_receive_message_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  ModemResponse_t* ReturnVal;
+
+} CMOCK_modem_receive_message_CALL_INSTANCE;
+
 static struct MockmodemInstance
 {
-  CMOCK_MEM_INDEX_TYPE modem_initialise_CallInstance;
+  CMOCK_MEM_INDEX_TYPE modem_open_CallInstance;
+  CMOCK_MEM_INDEX_TYPE modem_close_CallInstance;
+  CMOCK_MEM_INDEX_TYPE modem_message_arrived_CallInstance;
   CMOCK_MEM_INDEX_TYPE modem_get_coord_addr_CallInstance;
+  CMOCK_MEM_INDEX_TYPE modem_receive_message_CallInstance;
 } Mock;
 
 extern jmp_buf AbortFrame;
@@ -35,16 +61,34 @@ void Mockmodem_Verify(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_MEM_INDEX_TYPE call_instance;
-  call_instance = Mock.modem_initialise_CallInstance;
+  call_instance = Mock.modem_open_CallInstance;
   if (CMOCK_GUTS_NONE != call_instance)
   {
-    UNITY_SET_DETAIL(CMockString_modem_initialise);
+    UNITY_SET_DETAIL(CMockString_modem_open);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  call_instance = Mock.modem_close_CallInstance;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_modem_close);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  call_instance = Mock.modem_message_arrived_CallInstance;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_modem_message_arrived);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
   call_instance = Mock.modem_get_coord_addr_CallInstance;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_modem_get_coord_addr);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  call_instance = Mock.modem_receive_message_CallInstance;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_modem_receive_message);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
 }
@@ -60,38 +104,84 @@ void Mockmodem_Destroy(void)
   memset(&Mock, 0, sizeof(Mock));
 }
 
-void modem_initialise(uint64_t coordinator)
+void modem_open(uint64_t coordinator)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
-  CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance;
-  UNITY_SET_DETAIL(CMockString_modem_initialise);
-  cmock_call_instance = (CMOCK_modem_initialise_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_initialise_CallInstance);
-  Mock.modem_initialise_CallInstance = CMock_Guts_MemNext(Mock.modem_initialise_CallInstance);
+  CMOCK_modem_open_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_modem_open);
+  cmock_call_instance = (CMOCK_modem_open_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_open_CallInstance);
+  Mock.modem_open_CallInstance = CMock_Guts_MemNext(Mock.modem_open_CallInstance);
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
-    UNITY_SET_DETAILS(CMockString_modem_initialise,CMockString_coordinator);
+    UNITY_SET_DETAILS(CMockString_modem_open,CMockString_coordinator);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_coordinator), (void*)(&coordinator), sizeof(uint64_t), cmock_line, CMockStringMismatch);
   }
   UNITY_CLR_DETAILS();
 }
 
-void CMockExpectParameters_modem_initialise(CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance, uint64_t coordinator);
-void CMockExpectParameters_modem_initialise(CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance, uint64_t coordinator)
+void CMockExpectParameters_modem_open(CMOCK_modem_open_CALL_INSTANCE* cmock_call_instance, uint64_t coordinator);
+void CMockExpectParameters_modem_open(CMOCK_modem_open_CALL_INSTANCE* cmock_call_instance, uint64_t coordinator)
 {
   memcpy((void*)(&cmock_call_instance->Expected_coordinator), (void*)(&coordinator),
          sizeof(uint64_t[sizeof(coordinator) == sizeof(uint64_t) ? 1 : -1])); /* add uint64_t to :treat_as_array if this causes an error */
 }
 
-void modem_initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t coordinator)
+void modem_open_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t coordinator)
 {
-  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_initialise_CALL_INSTANCE));
-  CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_initialise_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_open_CALL_INSTANCE));
+  CMOCK_modem_open_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_open_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
-  Mock.modem_initialise_CallInstance = CMock_Guts_MemChain(Mock.modem_initialise_CallInstance, cmock_guts_index);
+  Mock.modem_open_CallInstance = CMock_Guts_MemChain(Mock.modem_open_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
-  CMockExpectParameters_modem_initialise(cmock_call_instance, coordinator);
+  CMockExpectParameters_modem_open(cmock_call_instance, coordinator);
+}
+
+void modem_close(void)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_modem_close_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_modem_close);
+  cmock_call_instance = (CMOCK_modem_close_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_close_CallInstance);
+  Mock.modem_close_CallInstance = CMock_Guts_MemNext(Mock.modem_close_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  UNITY_CLR_DETAILS();
+}
+
+void modem_close_CMockExpect(UNITY_LINE_TYPE cmock_line)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_close_CALL_INSTANCE));
+  CMOCK_modem_close_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_close_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.modem_close_CallInstance = CMock_Guts_MemChain(Mock.modem_close_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+}
+
+bool modem_message_arrived(void)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_modem_message_arrived_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_modem_message_arrived);
+  cmock_call_instance = (CMOCK_modem_message_arrived_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_message_arrived_CallInstance);
+  Mock.modem_message_arrived_CallInstance = CMock_Guts_MemNext(Mock.modem_message_arrived_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  UNITY_CLR_DETAILS();
+  return cmock_call_instance->ReturnVal;
+}
+
+void modem_message_arrived_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_message_arrived_CALL_INSTANCE));
+  CMOCK_modem_message_arrived_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_message_arrived_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.modem_message_arrived_CallInstance = CMock_Guts_MemChain(Mock.modem_message_arrived_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
 }
 
 uint64_t modem_get_coord_addr(void)
@@ -117,5 +207,29 @@ void modem_get_coord_addr_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint6
   cmock_call_instance->LineNumber = cmock_line;
   memcpy((void*)(&cmock_call_instance->ReturnVal), (void*)(&cmock_to_return),
          sizeof(uint64_t[sizeof(cmock_to_return) == sizeof(uint64_t) ? 1 : -1])); /* add uint64_t to :treat_as_array if this causes an error */
+}
+
+ModemResponse_t* modem_receive_message(void)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_modem_receive_message_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_modem_receive_message);
+  cmock_call_instance = (CMOCK_modem_receive_message_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_receive_message_CallInstance);
+  Mock.modem_receive_message_CallInstance = CMock_Guts_MemNext(Mock.modem_receive_message_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  UNITY_CLR_DETAILS();
+  return cmock_call_instance->ReturnVal;
+}
+
+void modem_receive_message_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, ModemResponse_t* cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_receive_message_CALL_INSTANCE));
+  CMOCK_modem_receive_message_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_receive_message_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.modem_receive_message_CallInstance = CMock_Guts_MemChain(Mock.modem_receive_message_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
 }
 

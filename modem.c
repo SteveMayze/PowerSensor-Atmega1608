@@ -20,10 +20,14 @@ void modem_close(void){
 
 ModemResponse_t* modem_receive_message(void){
     printf("modem_receive_message: BEGIN\n");
-    response.operation = DATAACK;
+    response.operation = FSM_DATAACK;
     response.data_length = 0;
     printf("modem_receive_message: END\n");
     return &response;
 }
+    
+bool modem_message_arrived(void){
+
+}    
     
     

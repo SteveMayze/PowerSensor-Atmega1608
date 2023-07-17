@@ -27,29 +27,29 @@ extern "C" {
     } Error_t;
     
     // According to FSM, these are really states.
-    typedef enum operation_e {
-        IDLE = 0,
-        READY,
-        DATAREQ,
-        DATA,
-        DATAACK,
-        NODEINTROREQ,
-        NODEINTRO,
-        NODEINTROACK,
-        RESET,
-        TIMEOUT
-    } Operation_t;
+    typedef enum fsm_states_e {
+        FSM_IDLE = 0,
+        FSM_READY,
+        FSM_DATAREQ,
+        FSM_DATA,
+        FSM_DATAACK,
+        FSM_NODEINTROREQ,
+        FSM_NODEINTRO,
+        FSM_NODEINTROACK,
+        FSM_RESET,
+        FSM_TIMEOUT
+    } FSM_States_t;
     
-    typedef enum fsm_operation_e {
-        CONTINUE
-    } FMS_Operation_t;
+    typedef enum fsm_operations_e {
+        FSM_CONTINUE
+    } FMS_Operations_t;
     
     #define OPERATION_GROUP 0x10
     #define METADATA_GROUP  0x40
 
     typedef enum token_e {
         // OPERATIONS
-        NODE_OPERATION_READY = OPERATION_GROUP | READY,
+        NODE_OPERATION_READY = OPERATION_GROUP | FSM_READY,
                 
         // METADATA
         NODE_METADATA_POWER =  METADATA_GROUP | 0x03
