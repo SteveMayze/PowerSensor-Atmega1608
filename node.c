@@ -15,65 +15,70 @@ uint8_t sid[10];
 
 struct node_message message;
 
-
 typedef struct {
-    uint64_t    coordinator_addr;
-    callback_t  callbacks[8];
-    void *      callback_payload[8];
+    uint64_t coordinator_addr;
+    callback_t event_callbacks[6];
+    void * event_callback_payload[6];
     FSM_States_t state;
-    uint16_t    timeout;
-    uint16_t    timeout_value;
-    unsigned    busy : 1;
+    uint16_t timeout;
+    uint16_t timeout_value;
+    unsigned busy : 1;
 } Node_State_t;
 Node_State_t node_state = {0};
 
 typedef FSM_States_t(stateHandlerFunction)(void);
 
-// Prototype for the state handlers.
-static FSM_States_t NODE_SEND_READY(void);
-static FSM_States_t NODE_DATAACK(void);
-static FSM_States_t NODE_RESET(void);
-static FSM_States_t NODE_IDLE(void);
-static FSM_States_t NODE_TIMEOUT(void);
-static FSM_States_t NODE_VOID(void);
+/**
+    typedef enum node_error_e {
+        NODE_OK,
+        NODE_BUSY,
+        NODE_TIMEOUT_ERR
+    } Error_t;
+    
+    // According to FSM, these are really states.
+    typedef enum fsm_states_e {
+        FSM_IDLE = 0,
+        FSM_READY,
+        FSM_DATA,
+        FSM_NODEINTRO,
+        FSM_RESET,
+    } FSM_States_t;
+    
+    typedef enum fsm_events_e {
+        FSM_DATAREQ,
+        FSM_DATAACK,
+        FSM_NODEINTROREQ,
+        FSM_NODEINTROACK,
+        FSM_TIMEOUT,
+    } FSM_Events_t;
 
-/*
-        0   IDLE = 0,
-        1   READY,
-        2   DATAREQ,
-        3   DATA,
-        4   DATAACK,
-        5   NODEINTROREQ,
-        6   NODEINTRO,
-        7   NODEINTROACK,
-        8   RESET,
-        9   TIMEOUT
- 
  */
+
+// Prototype for the state handlers.
+static FSM_States_t FSM_IDLE_STATE(void);
+static FSM_States_t FSM_READY_STATE(void);
+static FSM_States_t FSM_DATA_STATE(void);
+static FSM_States_t FSM_RESET_STATE(void);
+static FSM_States_t FSM_NODEINTRO_STATE(void);
 
 // An array to collect the state handlers
 stateHandlerFunction *fsm_state_table[] = {
-    NODE_IDLE,
-    NODE_SEND_READY,
-    NODE_VOID,
-    NODE_VOID,
-    NODE_DATAACK,
-    NODE_VOID,
-    NODE_VOID,
-    NODE_VOID,
-    NODE_RESET,
-    NODE_TIMEOUT,
+    FSM_IDLE_STATE,
+    FSM_READY_STATE,
+    FSM_DATA_STATE,
+    FSM_NODEINTRO_STATE,
+    FSM_RESET_STATE,    
 };
 
 /**
  * Initialise the data structures for creating and sending a message
  * @return 
  */
-Error_t node_intitialise(){
-     uint8_t *sid_ = eprom_read_serial_id();
-     
-    printf("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", 
-      sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
+Error_t node_intitialise() {
+    uint8_t *sid_ = eprom_read_serial_id();
+
+    printf("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
+            sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;
@@ -87,15 +92,14 @@ Error_t node_intitialise(){
  * 
  * @param timeout
  */
-void node_set_timeout(uint16_t timeout){
+void node_set_timeout(uint16_t timeout) {
     node_state.timeout_value = timeout;
 }
 
-
-Error_t node_close(){
-    if(node_state.busy)
+Error_t node_close() {
+    if (node_state.busy)
         return NODE_BUSY;
-    
+
     return NODE_OK;
 }
 
@@ -104,21 +108,20 @@ Error_t node_close(){
  * 
  * @return 
  */
-struct node_message* node_create_message(FSM_States_t operation, uint8_t *sid) {
+struct node_message* node_create_message(Token_t token, uint8_t *sid) {
 
     message.sid = sid;
-    message.operation = OPERATION_GROUP | operation;
+    message.operation = token;
     return &message;
 }
 
-void fsm_set_event_callback(FSM_States_t operation, callback_t cb, void *payload){
-    printf("node_set_callback: Setting callback for the operation: %02X\n", operation);
-    node_state.callbacks[operation] = cb;
-    node_state.callback_payload[operation] = payload;
+void fsm_set_event_callback(FSM_Events_t event, callback_t cb, void *payload) {
+    printf("node_set_callback: Setting callback for the operation: %02X\n", event);
+    node_state.event_callbacks[event] = cb;
+    node_state.event_callback_payload[event] = payload;
 }
 
-
-void node_wait(){   
+void node_wait() {
     // Test for any messages on the XBEE.
     //_delay_ms(1000);
 }
@@ -129,22 +132,25 @@ void node_fsm_execution() {
     node_state.state = fsm_state_table[node_state.state]();
 }
 
-void node_fsm_poller(){
+void node_fsm_poller() {
     printf("node_fsm_poller: BEGIN\n");
-    while(node_state.busy){
+    while (node_state.busy) {
         printf("node_fsm_poller: Polling...\n");
         node_wait();
         node_fsm_execution();
-        if(!(node_state.timeout--))
-            node_state.state = FSM_TIMEOUT;
+        if (!(node_state.timeout--)) {
+            node_state.event_callbacks[FSM_TIMEOUT]();
+            node_state.busy = 0;
+            node_state.state = FSM_IDLE;
+        }
+
     }
-    printf("node_fsm_poller: END\n");    
+    printf("node_fsm_poller: END\n");
 }
 
-
-void node_check(){
+void node_check() {
     printf("node_check: Sending the message for operation; %02X\n", message.operation);
-    if( !node_state.busy){
+    if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
         node_fsm_execution();
@@ -153,52 +159,55 @@ void node_check(){
     modem_close();
 }
 
-
-
-
-FSM_States_t NODE_SEND_READY(void)
-{
+FSM_States_t FSM_READY_STATE(void) {
     ModemResponse_t* response;
     printf("NODE_SEND_READY: \n");
 
-    switch(message.operation & 0x0F){
-       case FSM_READY:
-           // Send message
-           // wait for response
-           // handle the response based on a request or a timeouts
-           if( modem_message_arrived() ){
-               printf("A message has arrived \n");
+    switch (message.operation) {
+        case NODE_TOKEN_READY:
+            // Send message
+            // ...
+            // handle the response based on a request or a timeouts
+            if (modem_message_arrived()) {
+                printf("A message has arrived \n");
                 response = modem_receive_message();
-                    switch(response->operation){
-                    case FSM_DATAACK:
-                         node_state.callbacks[FSM_DATAACK]();
-                         node_state.busy = 0;
-                         node_state.state =  FSM_IDLE;
+                switch (response->operation) {
+                    case NODE_TOKEN_DATAREQ:
+                        printf("Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
+                        // Received DATAREQ - Move to the DATA state
+                        node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
+                        node_state.state = FSM_DATA;
+                        // Resetting the busy flag. THough this might need to
+                        // be handled differently i.e. come out of the READY
+                        // state and go into the DATA state
+                        node_state.busy = 1;
                         break;
                     default:
-                         node_state.busy = 1;
-                         node_state.state =  FSM_READY;
+                        node_state.busy = 1;
+                        node_state.state = FSM_READY;
                         break;
                 }
-           }
-       default:
-           break;
+            }
+        default:
+            break;
     }
-    return FSM_IDLE;
+    return node_state.state;
 }
-    
-static FSM_States_t NODE_DATAACK(void){
-    printf("NODE_DATAACK: \n");
+
+static FSM_States_t FSM_DATA_STATE(void) {
+    printf("FSM_DATA_STATE: Transmit the collected information \n");
+    // Transmit the data collected in the FMS_DATAREQ callback.
+    node_state.busy = 0;    
+    node_state.state = FSM_IDLE;
     return FSM_IDLE;
 }
 
-
-FSM_States_t NODE_RESET(void){
+FSM_States_t FSM_RESET_STATE(void) {
     printf("NODE_RESET: \n");
     FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
-    switch(message.operation & 0x0F){
-        case FSM_READY:
+    switch (message.operation ) {
+        case NODE_TOKEN_READY:
             printf("NODE_RESET: Setting next state as READY\n");
             node_state.busy = 1;
             ret = FSM_READY;
@@ -211,23 +220,15 @@ FSM_States_t NODE_RESET(void){
     return ret;
 }
 
-FSM_States_t NODE_IDLE(void){
+
+FSM_States_t FSM_NODEINTRO_STATE(void) {
+    printf("FSM_NODEINTRO_STATE: Transmit the node information\n");
+    return FSM_IDLE;
+}
+
+
+FSM_States_t FSM_IDLE_STATE(void) {
     printf("NODE_IDLE: dozing...\n");
-     _delay_ms(1000);
+    // _delay_ms(1000);
     return FSM_IDLE;
 }
-
-FSM_States_t NODE_TIMEOUT(void) {
-    printf("NODE_TIMEOUT: \n");
-    node_state.busy = 0;
-    node_state.state = FSM_IDLE;
-    node_state.callbacks[FSM_TIMEOUT]();
-    return FSM_IDLE;
-}
-
-FSM_States_t NODE_VOID(void){
-    printf("NODE_VOID: No implementation for %02X\n", node_state.state);
-    return FSM_IDLE;
-}
-
-

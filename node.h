@@ -25,13 +25,13 @@ extern "C" {
     Error_t node_close();
     void node_set_timeout(uint16_t timeout);
     
-    struct node_message *node_create_message(FSM_States_t operation, uint8_t *sid);
+    struct node_message *node_create_message(Token_t token, uint8_t *sid);
 
     typedef void (*callback_t)();
     
 
     
-    void fsm_set_event_callback(FSM_States_t, callback_t cb, void* payload);
+    void fsm_set_event_callback(FSM_Events_t event, callback_t cb, void* payload);
     
     void node_check();
     

@@ -28,7 +28,7 @@ extern "C" {
         
         uint8_t *data;
         uint8_t data_length;
-        FSM_States_t operation;
+        Token_t operation;
     } ModemResponse_t;
 
     void modem_open(uint64_t coordinator);

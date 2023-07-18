@@ -30,26 +30,31 @@ extern "C" {
     typedef enum fsm_states_e {
         FSM_IDLE = 0,
         FSM_READY,
-        FSM_DATAREQ,
         FSM_DATA,
-        FSM_DATAACK,
-        FSM_NODEINTROREQ,
         FSM_NODEINTRO,
-        FSM_NODEINTROACK,
         FSM_RESET,
-        FSM_TIMEOUT
     } FSM_States_t;
     
-    typedef enum fsm_operations_e {
-        FSM_CONTINUE
-    } FMS_Operations_t;
+    typedef enum fsm_events_e {
+        FSM_DATAREQ = 1,
+        FSM_DATAACK,
+        FSM_NODEINTROREQ,
+        FSM_NODEINTROACK,
+        FSM_TIMEOUT,
+    } FSM_Events_t;
     
     #define OPERATION_GROUP 0x10
     #define METADATA_GROUP  0x40
 
     typedef enum token_e {
         // OPERATIONS
-        NODE_OPERATION_READY = OPERATION_GROUP | FSM_READY,
+        NODE_TOKEN_READY = OPERATION_GROUP | 0x01,
+        NODE_TOKEN_DATAREQ = OPERATION_GROUP | 0x02,
+        NODE_TOKEN_DATA = OPERATION_GROUP | 0x03,
+        NODE_TOKEN_DATAACK = OPERATION_GROUP | 0x04,
+        NODE_TOKEN_NODEINTROREQ = OPERATION_GROUP | 0x05,
+        NODE_TOKEN_NODEINTRO = OPERATION_GROUP | 0x06,
+        NODE_TOKEN_NODEINTROACK = OPERATION_GROUP | 0x07,
                 
         // METADATA
         NODE_METADATA_POWER =  METADATA_GROUP | 0x03
