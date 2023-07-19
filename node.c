@@ -161,45 +161,64 @@ void node_check() {
 
 FSM_States_t FSM_READY_STATE(void) {
     ModemResponse_t* response;
-    printf("NODE_SEND_READY: \n");
+    printf("FSM_READY_STATE: Send the READY signal and wait for the reply.\n");
 
-    switch (message.operation) {
-        case NODE_TOKEN_READY:
-            // Send message
-            // ...
-            // handle the response based on a request or a timeouts
-            if (modem_message_arrived()) {
-                printf("A message has arrived \n");
-                response = modem_receive_message();
-                switch (response->operation) {
-                    case NODE_TOKEN_DATAREQ:
-                        printf("Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
-                        // Received DATAREQ - Move to the DATA state
-                        node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
-                        node_state.state = FSM_DATA;
-                        // Resetting the busy flag. THough this might need to
-                        // be handled differently i.e. come out of the READY
-                        // state and go into the DATA state
-                        node_state.busy = 1;
-                        break;
-                    default:
-                        node_state.busy = 1;
-                        node_state.state = FSM_READY;
-                        break;
-                }
-            }
-        default:
-            break;
+    // Send message
+    // ...
+    // handle the response based on a request or a timeouts
+    if (modem_message_arrived()) {
+        printf("A message has arrived \n");
+        response = modem_receive_message();
+        switch (response->operation) {
+            case NODE_TOKEN_DATAREQ:
+                printf("Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
+                // Received DATAREQ - Move to the DATA state
+                node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
+                node_state.state = FSM_DATA;
+                // Resetting the busy flag. THough this might need to
+                // be handled differently i.e. come out of the READY
+                // state and go into the DATA state
+                node_state.busy = 1;
+                break;
+            default:
+                node_state.busy = 1;
+                node_state.state = FSM_READY;
+                break;
+        }
     }
     return node_state.state;
 }
 
 static FSM_States_t FSM_DATA_STATE(void) {
-    printf("FSM_DATA_STATE: Transmit the collected information \n");
+
+    ModemResponse_t* response;
+    printf("FSM_DATA_STATE: transmitting the collected data\n");
+
     // Transmit the data collected in the FMS_DATAREQ callback.
-    node_state.busy = 0;    
-    node_state.state = FSM_IDLE;
-    return FSM_IDLE;
+    // ...
+    // handle the response based on a request or a timeouts
+    if (modem_message_arrived()) {
+        printf("A message has arrived \n");
+        response = modem_receive_message();
+        switch (response->operation) {
+            case NODE_TOKEN_DATAACK:
+                printf("Operation NODE_TOKEN_DATAACK - Calling the DATAREQ callback.\n");
+                // Received DATAREQ - Move to the DATA state
+                node_state.event_callbacks[FSM_DATAACK](); // Collect the information to send
+                node_state.state = FSM_IDLE;
+                // Resetting the busy flag. THough this might need to
+                // be handled differently i.e. come out of the READY
+                // state and go into the DATA state
+                node_state.busy = 0;
+                break;
+            default:
+                node_state.busy = 1;
+                node_state.state = FSM_DATA;
+                break;
+        }
+    }
+    return node_state.state;
+    
 }
 
 FSM_States_t FSM_RESET_STATE(void) {

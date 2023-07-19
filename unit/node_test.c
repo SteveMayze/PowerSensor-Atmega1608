@@ -5,18 +5,6 @@
 #include "../mocks/Mockeprom.h"
 #include "../mocks/Mockmodem.h"
 
-//void sensor_core_test_get_serial_id(){
-//    uint8_t expected[10] = { 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
-//    uint8_t actual[10] =   {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-//    eprom_read_serial_no(actual);
-//    printf("sensor_core_test_get_serial_id: Expected Device signature: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", 
-//      expected[0], expected[1], expected[2], expected[3], expected[4], expected[5], expected[6], expected[7], expected[8], expected[9]);
-//    printf("sensor_core_test_get_serial_id: Actual Device signature: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n", 
-//      actual[0], actual[1], actual[2], actual[3], actual[4], actual[5], actual[6], actual[7], actual[8], actual[9]);
-//
-//    TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, 10);
-//}
-
 uint8_t test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 
 /**
@@ -39,29 +27,33 @@ void initialise_node_test(){
 }
 
 
-
-
-bool datareq_response = false;
-bool timeout_response = false;
+bool datareq_response_flag = false;
+bool dataack_response_flag = false;
+bool timeout_response_flag = false;
 
 void test_handle_datareq_response(){
     printf("test_handle_datareq_response: Handle DATAREQ - Collect information\n");
     // Collect the data from the INA219
-    datareq_response = true;
+    datareq_response_flag = true;
+}
+
+void test_handle_dataack_response(){
+    printf("test_handle_dataack_response: Handle DATAACK - Success. Go back to sleep\n");
+    dataack_response_flag = true;
 }
 
 void test_handle_datareq_timeout(){
     printf("test_handle_datareq_timeout: Handle timeout\n");
-    timeout_response = true;
+    timeout_response_flag = true;
 }
 
 /**
  * Verify the creation of the message and the READY send API is called.
  */
-void create_node_message_test(){
+void ready_data_message_test(){
     
-    datareq_response = false;
-    timeout_response = false;
+    datareq_response_flag = false;
+    timeout_response_flag = false;
     uint8_t *expected = test_sid;
     eprom_read_serial_id_ExpectAndReturn(expected);
     Error_t actual_status = node_intitialise();
@@ -72,14 +64,22 @@ void create_node_message_test(){
     // This is where I need to refer to the Python gateway for the 
     // structure.
     printf("\ncreate_node_message_test: READY message test\n");
-    ModemResponse_t response;
-    ModemResponse_t* response_ptr = &response;
+    ModemResponse_t datareq_response;
+    ModemResponse_t* datareq_response_ptr = &datareq_response;
     
-    response.operation = NODE_TOKEN_DATAREQ;    
+    ModemResponse_t dataack_response;
+    ModemResponse_t* dataack_response_ptr = &dataack_response;
+    
+    datareq_response.operation = NODE_TOKEN_DATAREQ;  
+    dataack_response.operation = NODE_TOKEN_DATAACK;
+    
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
     modem_message_arrived_ExpectAndReturn(true);
-    modem_receive_message_ExpectAndReturn(response_ptr);
+    modem_receive_message_ExpectAndReturn(datareq_response_ptr);
+
+    modem_message_arrived_ExpectAndReturn(true);
+    modem_receive_message_ExpectAndReturn(dataack_response_ptr);
 
     struct node_message *actual = node_create_message(NODE_TOKEN_READY, test_sid);
     
@@ -91,13 +91,15 @@ void create_node_message_test(){
     printf("\ncreate_node_message_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
     fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response, NULL);
+    fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response, NULL);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_datareq_timeout, NULL);
     
     node_check();
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
-    TEST_ASSERT_EQUAL(true, datareq_response);
-    TEST_ASSERT_EQUAL(false, timeout_response);
+    TEST_ASSERT_EQUAL(true, datareq_response_flag);
+    TEST_ASSERT_EQUAL(true, dataack_response_flag);
+    TEST_ASSERT_EQUAL(false, timeout_response_flag);
     
 }
 
@@ -106,8 +108,8 @@ void create_node_message_test(){
  */
 void node_timeout_test(){
     
-    datareq_response = false;
-    timeout_response = false;
+    datareq_response_flag = false;
+    timeout_response_flag = false;
     uint8_t *expected_sid = test_sid;
     eprom_read_serial_id_ExpectAndReturn(expected_sid);
     Error_t actual_status = node_intitialise();
@@ -138,7 +140,7 @@ void node_timeout_test(){
     node_check();
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
-    TEST_ASSERT_EQUAL(true, timeout_response);
+    TEST_ASSERT_EQUAL(true, timeout_response_flag);
     
 }
 
@@ -165,8 +167,13 @@ int run_node_tests(){
     UnityBegin("node_test");
     
     RUN_TEST(initialise_node_test);
-    RUN_TEST(create_node_message_test);
+    RUN_TEST(ready_data_message_test);
     RUN_TEST(node_timeout_test);
+    
+    // Test the timeout on DATAACK    
+    // Test READY NODEINTROACK flow    
+    // Test sending only once and waiting for a response.
+    
 
     UnityEnd();
     return 0;   

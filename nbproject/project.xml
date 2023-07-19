@@ -17,11 +17,15 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>default</name>
+                    <name>main</name>
                     <type>2</type>
                 </confElem>
                 <confElem>
-                    <name>Test</name>
+                    <name>test_fsm</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>test_adapter</name>
                     <type>2</type>
                 </confElem>
             </confList>

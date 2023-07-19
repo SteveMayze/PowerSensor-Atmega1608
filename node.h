@@ -15,6 +15,8 @@ extern "C" {
 #include "mcc_generated_files/mcc.h"
 
 #include "sensor_core.h"
+#include "modem.h"
+
     
     struct node_message {
         uint8_t *sid;

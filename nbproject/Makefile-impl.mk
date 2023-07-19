@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=PowerSensor-Atmega1608
 
 # Active Configuration
-DEFAULTCONF=Test
+DEFAULTCONF=test_fsm
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=default Test 
+ALLCONFS=main test_fsm test_adapter 
 
 
 # build
@@ -45,15 +45,17 @@ ALLCONFS=default Test
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default clean
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Test clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=main clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_fsm clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_adapter clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Test build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=main build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_fsm build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_adapter build
 
 
 
