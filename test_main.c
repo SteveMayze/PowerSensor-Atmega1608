@@ -18,6 +18,9 @@ int main(void)
     printf("\n\n========== Test starting ==========\n\n");
  
     run_sensor_core_tests();
+
+    printf("\n\n===================================\n\n");
+
     run_node_tests();
     
     printf("\n\n========== Test Completed ==========\n\n");
