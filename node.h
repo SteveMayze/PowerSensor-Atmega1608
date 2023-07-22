@@ -26,6 +26,8 @@ extern "C" {
     Error_t node_intitialise();
     Error_t node_close();
     void node_set_timeout(uint16_t timeout);
+    void node_data_collection(void);
+    void node_data_received(void);
     
     struct node_message *node_create_message(Token_t token, uint8_t *sid);
 

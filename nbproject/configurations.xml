@@ -110,6 +110,8 @@
         <itemPath>unit/modem_test.c</itemPath>
         <itemPath>unit/node_test.c</itemPath>
         <itemPath>unit/node_test.h</itemPath>
+        <itemPath>unit/node_init_test.h</itemPath>
+        <itemPath>unit/node_init_test.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

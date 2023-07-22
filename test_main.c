@@ -5,6 +5,7 @@
 #include <util/delay.h>
 #include "unit/modem_test.h"
 #include "unit/sensor_core_test.h"
+#include "unit/node_init_test.h"
 #include "unit/node_test.h"
 
 
@@ -14,9 +15,15 @@ int main(void)
     
     SYSTEM_Initialize();
     _delay_ms(1000);
+    
+    
 
     printf("\n\n========== Test starting ==========\n\n");
- 
+
+    run_node_init_tests();
+
+    printf("\n\n===================================\n\n");
+
     run_sensor_core_tests();
 
     printf("\n\n===================================\n\n");

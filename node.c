@@ -272,3 +272,16 @@ FSM_States_t FSM_IDLE_STATE(void) {
     // _delay_ms(1000);
     return FSM_IDLE;
 }
+
+
+void node_data_collection(void){
+    printf("node_data_collection: BEGIN\n");
+    printf("node_data_collection: END\n");
+}
+
+
+void node_data_received(void){
+    printf("node_data_received: BEGIN\n");
+    printf("node_data_received: END\n");
+}
+    

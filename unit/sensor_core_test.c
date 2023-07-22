@@ -1,8 +1,4 @@
 
-#include <avr/pgmspace.h>
-
- uint8_t ut_pgm_read_byte(uint16_t addr, const char* file, int line);
-
 
 #include "sensor_core_test.h"
 #include "unity.h"

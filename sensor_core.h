@@ -43,9 +43,6 @@ extern "C" {
         FSM_TIMEOUT,
     } FSM_Events_t;
     
-    #define OPERATION_GROUP 0x10
-    #define METADATA_GROUP  0x40
-
 
     /*!
      * \brief Returns the binary i.e. 4 byte uint8_t array representing a 

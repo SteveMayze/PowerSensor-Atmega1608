@@ -23,6 +23,11 @@ extern "C" {
 #include "sensor_core.h"
 #include "libavrxbee/xbee.h"
 
+#define HEADER_GROUP 0x10
+#define OPERATION_GROUP 0x20
+#define METADATA_GROUP  0x40
+
+
     typedef enum token_e {
         // OPERATIONS
         NODE_TOKEN_READY = OPERATION_GROUP | 0x01,
