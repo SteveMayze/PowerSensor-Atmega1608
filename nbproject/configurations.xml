@@ -99,6 +99,8 @@
         <itemPath>mocks/Mockeprom.h</itemPath>
         <itemPath>mocks/Mockmodem.c</itemPath>
         <itemPath>mocks/Mockmodem.h</itemPath>
+        <itemPath>mocks/MockINA219.c</itemPath>
+        <itemPath>mocks/MockINA219.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="test" projectFiles="true">
         <itemPath>test_main.c</itemPath>
@@ -2399,6 +2401,8 @@
         </XC8-CO>
         <XC8-config-global>
         </XC8-config-global>
+      </item>
+      <item path="ina219/INA219.c" ex="true" overriding="false">
       </item>
       <item path="main.c" ex="true" overriding="false">
         <HI-TECH-COMP>

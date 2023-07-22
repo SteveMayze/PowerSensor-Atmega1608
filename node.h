@@ -16,7 +16,7 @@ extern "C" {
 
 #include "sensor_core.h"
 #include "modem.h"
-
+#include "ina219/INA219.h"
     
     struct node_message {
         uint8_t *sid;
