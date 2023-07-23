@@ -75,7 +75,7 @@ extern "C" {
 #define INA219_ADDR_SCL_SCL    0b01001111
     
     
-    struct ina219_data {
+    typedef struct  {
         uint16_t raw_shunt_voltage;
         uint16_t raw_bus_voltage;
         uint16_t raw_current;
@@ -85,11 +85,11 @@ extern "C" {
         float bus_voltage;
         float power;
         float current;
-    };
+    } INA219_Data_t;
     
     void INA219_Initialise(uint8_t addr);
     
-    struct ina219_data INA219_getReadings();
+    INA219_Data_t* INA219_getReadings();
     
 #ifdef	__cplusplus
 }

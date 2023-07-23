@@ -19,7 +19,7 @@ typedef struct _CMOCK_INA219_Initialise_CALL_INSTANCE
 typedef struct _CMOCK_INA219_getReadings_CALL_INSTANCE
 {
   UNITY_LINE_TYPE LineNumber;
-  struct ina219_data ReturnVal;
+  INA219_Data_t* ReturnVal;
 
 } CMOCK_INA219_getReadings_CALL_INSTANCE;
 
@@ -93,7 +93,7 @@ void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr)
   CMockExpectParameters_INA219_Initialise(cmock_call_instance, addr);
 }
 
-struct ina219_data INA219_getReadings(void)
+INA219_Data_t* INA219_getReadings(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_INA219_getReadings_CALL_INSTANCE* cmock_call_instance;
@@ -106,7 +106,7 @@ struct ina219_data INA219_getReadings(void)
   return cmock_call_instance->ReturnVal;
 }
 
-void INA219_getReadings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, struct ina219_data cmock_to_return)
+void INA219_getReadings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Data_t* cmock_to_return)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_INA219_getReadings_CALL_INSTANCE));
   CMOCK_INA219_getReadings_CALL_INSTANCE* cmock_call_instance = (CMOCK_INA219_getReadings_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
@@ -114,7 +114,6 @@ void INA219_getReadings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, struct 
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.INA219_getReadings_CallInstance = CMock_Guts_MemChain(Mock.INA219_getReadings_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
-  memcpy((void*)(&cmock_call_instance->ReturnVal), (void*)(&cmock_to_return),
-         sizeof(struct ina219_data[sizeof(cmock_to_return) == sizeof(struct ina219_data) ? 1 : -1])); /* add struct ina219_data to :treat_as_array if this causes an error */
+  cmock_call_instance->ReturnVal = cmock_to_return;
 }
 

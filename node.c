@@ -276,7 +276,7 @@ FSM_States_t FSM_IDLE_STATE(void) {
 
 void node_data_collection(void){
     printf("node_data_collection: BEGIN\n");
-    struct ina219_data data = INA219_getReadings();
+    INA219_Data_t* data = INA219_getReadings();
     printf("node_data_collection: END\n");
 }
 

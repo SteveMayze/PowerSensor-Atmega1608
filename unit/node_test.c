@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "../mocks/Mockmodem.h"
 #include "../mocks/Mockeprom.h"
+#include "../mocks/MockINA219.h"
 
 
 uint8_t node_test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
@@ -15,6 +16,8 @@ ModemResponse_t dataack_response;
 
 ModemResponse_t nodeintroreq_response;
 ModemResponse_t nodeintroack_response;
+
+INA219_Data_t ina219_data;
 
 ModemResponse_t *get_dataReq_response(){
     return &datareq_response;
@@ -211,7 +214,9 @@ void ready_data_collection_test(){
 
     printf("\nready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
     
-
+    INA219_Data_t* ina219Data_ptr = &ina219_data;
+    INA219_getReadings_ExpectAndReturn(ina219Data_ptr);
+    
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
     
@@ -244,6 +249,8 @@ void ready_data_collection_test(){
     
     // The MockINA219 should be checked to ensure that the data was read.
     // The Mockmodem should be checked to ensure the correct message was sent.
+    
+    TEST_ASSERT_EQUAL(10.5, ina219_data.bus_voltage);
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
 

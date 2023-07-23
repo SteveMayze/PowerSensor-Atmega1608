@@ -5,7 +5,8 @@
 #include "util/delay.h"
 
 static volatile uint8_t iic_address;
-
+INA219_Data_t INA219_Data;
+        
 uint8_t write_buffer[3];
 union read_buffer_t {
     uint16_t bit16;
@@ -69,19 +70,18 @@ uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
 }
 
 
-struct ina219_data INA219_getReadings() {
+INA219_Data_t* INA219_getReadings() {
 
-    struct ina219_data readings;
     uint8_t timeout = 0;
 
-    readings.bus_voltage = 0.0;
-    readings.shunt_voltage = 0.0;
-    readings.current = 0.0;
-    readings.power = 0.0;
+    INA219_Data.bus_voltage = 0.0;
+    INA219_Data.shunt_voltage = 0.0;
+    INA219_Data.current = 0.0;
+    INA219_Data.power = 0.0;
     bool reading_ok = false;
     while (!reading_ok) {
-        readings.raw_bus_voltage = get_regsiter_value(INA219_BUS_VOLTAGE, false);
-        reading_ok = readings.raw_bus_voltage & 0x02;
+        INA219_Data.raw_bus_voltage = get_regsiter_value(INA219_BUS_VOLTAGE, false);
+        reading_ok = INA219_Data.raw_bus_voltage & 0x02;
         _delay_ms(500);
         timeout++;
 //        if(timeout > 10){
@@ -89,20 +89,20 @@ struct ina219_data INA219_getReadings() {
 //            break;
 //        }
     }
-    readings.bus_voltage = (int16_t) ((readings.raw_bus_voltage >> 3) * 4);
-    readings.bus_voltage = readings.bus_voltage * 0.001;
+    INA219_Data.bus_voltage = (int16_t) ((readings.raw_bus_voltage >> 3) * 4);
+    INA219_Data.bus_voltage = INA219_Data.bus_voltage * 0.001;
 
-    readings.raw_shunt_voltage = get_regsiter_value(INA219_SHUNT_VOLTAGE, false);
-    readings.shunt_voltage = readings.raw_shunt_voltage * 0.01;
+    INA219_Data.raw_shunt_voltage = get_regsiter_value(INA219_SHUNT_VOLTAGE, false);
+    INA219_Data.shunt_voltage = INA219_Data.raw_shunt_voltage * 0.01;
 
 
-    readings.raw_current = get_regsiter_value(INA219_CURRENT, true);
-    readings.current = ((float) readings.raw_current / 10.0);
+    INA219_Data.raw_current = get_regsiter_value(INA219_CURRENT, true);
+    INA219_Data.current = ((float) INA219_Data.raw_current / 10.0);
 
-    readings.raw_power = get_regsiter_value(INA219_POWER, true);
-    readings.power = ((float) readings.raw_power * 2.0);
+    INA219_Data.raw_power = get_regsiter_value(INA219_POWER, true);
+    INA219_Data.power = ((float) INA219_Data.raw_power * 2.0);
 
-    return readings;
+    return &readings;
 
 }
 
