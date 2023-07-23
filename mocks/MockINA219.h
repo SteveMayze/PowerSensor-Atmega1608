@@ -2,8 +2,8 @@
 #ifndef _MOCKINA219_H
 #define _MOCKINA219_H
 
-#include "unity.h"
-#include "INA219.h"
+#include "../unit/unity.h"
+#include "../ina219/INA219.h"
 
 /* Ignore the following warnings, since we are copying code */
 #if defined(__GNUC__) && !defined(__ICC) && !defined(__TMS470__)

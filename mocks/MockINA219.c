@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <setjmp.h>
-#include "cmock.h"
+#include "../cmock/src/cmock.h"
 #include "MockINA219.h"
 
 static const char* CMockString_INA219_Initialise = "INA219_Initialise";
