@@ -13,7 +13,7 @@
 
 uint8_t sid[10];
 
-struct node_message message;
+Node_Message_t _message;
 
 typedef struct {
     uint64_t coordinator_addr;
@@ -28,31 +28,6 @@ Node_State_t node_state = {0};
 
 typedef FSM_States_t(stateHandlerFunction)(void);
 
-/**
-    typedef enum node_error_e {
-        NODE_OK,
-        NODE_BUSY,
-        NODE_TIMEOUT_ERR
-    } Error_t;
-    
-    // According to FSM, these are really states.
-    typedef enum fsm_states_e {
-        FSM_IDLE = 0,
-        FSM_READY,
-        FSM_DATA,
-        FSM_NODEINTRO,
-        FSM_RESET,
-    } FSM_States_t;
-    
-    typedef enum fsm_events_e {
-        FSM_DATAREQ,
-        FSM_DATAACK,
-        FSM_NODEINTROREQ,
-        FSM_NODEINTROACK,
-        FSM_TIMEOUT,
-    } FSM_Events_t;
-
- */
 
 // Prototype for the state handlers.
 static FSM_States_t FSM_IDLE_STATE(void);
@@ -108,11 +83,11 @@ Error_t node_close() {
  * 
  * @return 
  */
-struct node_message* node_create_message(Token_t token, uint8_t *sid) {
+Node_Message_t* node_create_message(Token_t token, uint8_t *sid) {
 
-    message.sid = sid;
-    message.operation = token;
-    return &message;
+    _message.sid = sid;
+    _message.operation = token;
+    return &_message;
 }
 
 void fsm_set_event_callback(FSM_Events_t event, callback_t cb, void *payload) {
@@ -149,7 +124,7 @@ void node_fsm_poller() {
 }
 
 void node_check() {
-    printf("node_check: Sending the message for operation; %02X\n", message.operation);
+    printf("node_check: Sending the message for operation; %02X\n", _message.operation);
     if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
@@ -222,7 +197,7 @@ FSM_States_t FSM_RESET_STATE(void) {
     printf("NODE_RESET: \n");
     FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
-    switch (message.operation ) {
+    switch (_message.operation ) {
         case NODE_TOKEN_READY:
             printf("NODE_RESET: Setting next state as READY\n");
             node_state.busy = 1;
@@ -274,9 +249,17 @@ FSM_States_t FSM_IDLE_STATE(void) {
 }
 
 
-void node_data_collection(void){
+void node_data_collection(){
     printf("node_data_collection: BEGIN\n");
     INA219_Data_t* data = INA219_getReadings();
+    // Move the data into the struct node_message message
+    _message.data_length = 3;
+    _message.data_token[0] = NODE_TOKEN_BUS_VOLTAGE; // bus voltage
+    _message.data_value[0] = data->bus_voltage;
+    _message.data_token[1] = NODE_TOKEN_SHUNT_VOLTAGE; // shunt voltage
+    _message.data_value[1] = data->shunt_voltage;
+    _message.data_token[2] = NODE_TOKEN_LOAD_CURRENT; // load current
+    _message.data_value[2] = data->current;
     printf("node_data_collection: END\n");
 }
 

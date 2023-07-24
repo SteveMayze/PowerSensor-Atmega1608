@@ -97,7 +97,7 @@ void ready_datareq_dataack_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(dataack_response_ptr);
 
-    struct node_message *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 5);  
@@ -145,7 +145,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(nodeintroack_response_ptr);
 
-    struct node_message *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 5);  
@@ -188,7 +188,7 @@ void node_timeout_test(){
     modem_message_arrived_ExpectAndReturn(false);
     modem_message_arrived_ExpectAndReturn(false);
 
-    struct node_message *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
@@ -216,6 +216,9 @@ void ready_data_collection_test(){
     
     INA219_Data_t* ina219Data_ptr = &ina219_data;
     INA219_getReadings_ExpectAndReturn(ina219Data_ptr);
+    ina219_data.bus_voltage = 10.5;
+    ina219_data.shunt_voltage = 1.0;
+    ina219_data.current = 2.5;
     
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
@@ -231,7 +234,7 @@ void ready_data_collection_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(dataack_response_ptr);
 
-    struct node_message *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 5);  
@@ -248,9 +251,19 @@ void ready_data_collection_test(){
     node_check();
     
     // The MockINA219 should be checked to ensure that the data was read.
-    // The Mockmodem should be checked to ensure the correct message was sent.
+    // The Mock-modem should be checked to ensure the correct message was sent.
     
     TEST_ASSERT_EQUAL(10.5, ina219_data.bus_voltage);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_BUS_VOLTAGE, actual->data_token[0]);
+    TEST_ASSERT_EQUAL(10.5, actual->data_value[0]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_SHUNT_VOLTAGE, actual->data_token[1]);
+    TEST_ASSERT_EQUAL(1.0, actual->data_value[1]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_LOAD_CURRENT, actual->data_token[2]);
+    TEST_ASSERT_EQUAL(2.5, actual->data_value[2]);
+    
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
 

@@ -18,18 +18,21 @@ extern "C" {
 #include "modem.h"
 #include "ina219/INA219.h"
     
-    struct node_message {
-        uint8_t *sid;
+    typedef struct {
         Token_t operation;
-    };
+        uint8_t *sid;
+        uint8_t data_token[16];
+        float data_value[16];
+        uint8_t data_length;
+    } Node_Message_t;
     
     Error_t node_intitialise();
     Error_t node_close();
     void node_set_timeout(uint16_t timeout);
-    void node_data_collection(void);
+    void node_data_collection();
     void node_data_received(void);
     
-    struct node_message *node_create_message(Token_t token, uint8_t *sid);
+    Node_Message_t *node_create_message(Token_t token, uint8_t *sid);
 
     typedef void (*callback_t)();
     
