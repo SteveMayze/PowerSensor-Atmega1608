@@ -34,11 +34,11 @@ extern "C" {
     
     Node_Message_t *node_create_message(Token_t token, uint8_t *sid);
 
-    typedef void (*callback_t)();
+    typedef void (*Event_Callback_t)();
     
 
     
-    void fsm_set_event_callback(FSM_Events_t event, callback_t cb, void* payload);
+    void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb);
     
     void node_check();
     

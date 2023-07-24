@@ -15,6 +15,7 @@
         <group>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/MockINA219.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/MockINA219.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.c</file>

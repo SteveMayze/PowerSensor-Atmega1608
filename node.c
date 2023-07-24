@@ -17,8 +17,7 @@ Node_Message_t _message;
 
 typedef struct {
     uint64_t coordinator_addr;
-    callback_t event_callbacks[6];
-    void * event_callback_payload[6];
+    Event_Callback_t event_callbacks[6];
     FSM_States_t state;
     uint16_t timeout;
     uint16_t timeout_value;
@@ -90,10 +89,9 @@ Node_Message_t* node_create_message(Token_t token, uint8_t *sid) {
     return &_message;
 }
 
-void fsm_set_event_callback(FSM_Events_t event, callback_t cb, void *payload) {
+void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb) {
     printf("node_set_callback: Setting callback for the operation: %02X\n", event);
     node_state.event_callbacks[event] = cb;
-    node_state.event_callback_payload[event] = payload;
 }
 
 void node_wait() {

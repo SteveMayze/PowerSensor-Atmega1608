@@ -105,9 +105,9 @@ void ready_datareq_dataack_test(){
     
     printf("\nready_datareq_dataack_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
-    fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response, NULL);
-    fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response, NULL);
-    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout, NULL);
+    fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response);
+    fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
     
@@ -153,9 +153,9 @@ void ready_nodeintroreq_nodeintroack_test(){
     
     printf("\nready_nodeintroreq_nodeintroack_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
-    fsm_set_event_callback(FSM_NODEINTROREQ, test_handle_nodeintroreq_response, NULL);
-    fsm_set_event_callback(FSM_NODEINTROACK, test_handle_nodeintroack_response, NULL);
-    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout, NULL);
+    fsm_set_event_callback(FSM_NODEINTROREQ, test_handle_nodeintroreq_response);
+    fsm_set_event_callback(FSM_NODEINTROACK, test_handle_nodeintroack_response);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
     
@@ -195,7 +195,7 @@ void node_timeout_test(){
     
     printf("\nnode_timeout_test: Testing the timeout operation\n");
     node_set_timeout(0x0002);
-    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout, NULL);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
     
@@ -243,10 +243,10 @@ void ready_data_collection_test(){
     printf("\nready_data_collection_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
     // This time, set up the real call-backs to go through the motions.
-    fsm_set_event_callback(FSM_DATAREQ, node_data_collection, NULL);
-    fsm_set_event_callback(FSM_DATAACK, node_data_received, NULL);
+    fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
+    fsm_set_event_callback(FSM_DATAACK, node_data_received);
     
-    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout, NULL);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
     
