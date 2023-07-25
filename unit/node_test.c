@@ -240,7 +240,7 @@ void ready_data_collection_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
-    printf("\nready_data_collection_test: Testing the send operation for READY\n");
+    printf("\nready_data_collection_test: Testing the send operation for DATAREQ\n");
     node_set_timeout(0x000F);
     // This time, set up the real call-backs to go through the motions.
     fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
@@ -269,6 +269,47 @@ void ready_data_collection_test(){
 
 }
 
+void ready_node_intro_test(){
+    
+    nodeintroreq_response_flag = false;
+    timeout_response_flag = false;
+    eprom_read_serial_id_ExpectAndReturn(node_test_sid);
+    node_intitialise();
+    
+    // For READY, the payload is empty.
+    // This is where I need to refer to the Python gateway for the 
+    // structure.
+    printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
+    ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
+    ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
+    
+    datareq_response.operation = NODE_TOKEN_NODEINTROREQ;  
+    dataack_response.operation = NODE_TOKEN_NODEINTROACK;
+    
+    modem_open_Expect(XBEE_ADDR_BROADCAST);
+    modem_close_Expect();
+    modem_message_arrived_ExpectAndReturn(true);
+    modem_receive_message_ExpectAndReturn(nodeintroreq_response_ptr);
+
+    modem_message_arrived_ExpectAndReturn(true);
+    modem_receive_message_ExpectAndReturn(nodeintroack_response_ptr);
+
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, node_test_sid);
+    
+    TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(node_test_sid, actual->sid, 5);  
+    TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
+    
+    printf("\nready_node_intro_test: Testing the send operation for READY\n");
+    node_set_timeout(0x000F);
+    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
+    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+    
+    node_check();
+
+}
+
 
 /**
  * A node is a generic device. It will follow the pattern of
@@ -293,6 +334,7 @@ int run_node_tests(){
     RUN_TEST(node_timeout_test);
     
     RUN_TEST(ready_data_collection_test);
+    RUN_TEST(ready_node_intro_test);
 
     UnityEnd();
     return 0;   
