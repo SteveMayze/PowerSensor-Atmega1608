@@ -66,6 +66,8 @@ extern "C" {
     uint64_t modem_get_coord_addr();
     
     ModemResponse_t* modem_receive_message(void);
+    
+    void modem_send_message(uint8_t *messasge_stream, uint8_t message_length);
 
 #endif	/* MODEM_H */
 

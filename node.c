@@ -266,4 +266,12 @@ void node_data_received(void){
     printf("node_data_received: BEGIN\n");
     printf("node_data_received: END\n");
 }
+
+uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream){
+    printf("node_message_to_stream: BEGIN\n");
     
+    printf("node_message_to_stream: END\n");
+    return 0x00;
+}
+
+   

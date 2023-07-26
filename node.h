@@ -42,6 +42,8 @@ extern "C" {
     
     void node_check();
     
+    uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream);
+
     
 
     

@@ -29,5 +29,10 @@ ModemResponse_t* modem_receive_message(void){
 bool modem_message_arrived(void){
 
 }    
+
+void modem_send_message(uint8_t *messasge_stream, uint8_t message_length){
+    printf("modem_send_message: BEGIN\n");
+    printf("modem_send_message: END\n");
+}
     
     

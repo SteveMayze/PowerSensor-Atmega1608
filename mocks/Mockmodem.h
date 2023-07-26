@@ -38,6 +38,8 @@ void modem_message_arrived_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool
 void modem_get_coord_addr_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint64_t cmock_to_return);
 #define modem_receive_message_ExpectAndReturn(cmock_retval) modem_receive_message_CMockExpectAndReturn(__LINE__, cmock_retval)
 void modem_receive_message_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, ModemResponse_t* cmock_to_return);
+#define modem_send_message_Expect(messasge_stream, message_length) modem_send_message_CMockExpect(__LINE__, messasge_stream, message_length)
+void modem_send_message_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t* messasge_stream, uint8_t message_length);
 
 #ifdef __cplusplus
 }

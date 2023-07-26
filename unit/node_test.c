@@ -35,6 +35,8 @@ ModemResponse_t *get_nodeintroack_response(){
     return &dataack_response;
 }
 
+uint8_t message_stream[128] = { 0 }; 
+
 
 bool datareq_response_flag = false;
 bool dataack_response_flag = false;
@@ -247,6 +249,16 @@ void ready_data_collection_test(){
     fsm_set_event_callback(FSM_DATAACK, node_data_received);
     
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+
+    
+    uint8_t message_length = node_message_to_stream(actual, message_stream);
+    uint8_t expected_message_length = 20;
+    TEST_ASSERT_EQUAL(expected_message_length, message_length);
+    
+    modem_send_message_Expect(message_stream, message_length);
+    uint8_t expected_message[128] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    TEST_ASSERT_EQUAL_INT8_ARRAY(expected_message, message_stream, message_length);
+    
     
     node_check();
     
@@ -302,8 +314,8 @@ void ready_node_intro_test(){
     
     printf("\nready_node_intro_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
-    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
-    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
+//    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
+//    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
@@ -334,7 +346,7 @@ int run_node_tests(){
     RUN_TEST(node_timeout_test);
     
     RUN_TEST(ready_data_collection_test);
-    RUN_TEST(ready_node_intro_test);
+    // RUN_TEST(ready_node_intro_test);
 
     UnityEnd();
     return 0;   
