@@ -110,10 +110,12 @@
         <itemPath>unit/sensor_core_test.c</itemPath>
         <itemPath>unit/modem_test.h</itemPath>
         <itemPath>unit/modem_test.c</itemPath>
-        <itemPath>unit/node_test.c</itemPath>
-        <itemPath>unit/node_test.h</itemPath>
         <itemPath>unit/node_init_test.h</itemPath>
         <itemPath>unit/node_init_test.c</itemPath>
+        <itemPath>unit/node_basic_test.h</itemPath>
+        <itemPath>unit/node_basic_test.c</itemPath>
+        <itemPath>unit/node_test.h</itemPath>
+        <itemPath>unit/node_test.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -1314,7 +1316,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>

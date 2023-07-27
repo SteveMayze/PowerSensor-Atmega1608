@@ -13,18 +13,14 @@
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/node_test.c</file>
         </group>
         <group>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/MockINA219.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/Mockmodem.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/MockINA219.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_test.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/Mockmodem.h</file>
         </group>
     </open-files>
 </project-private>

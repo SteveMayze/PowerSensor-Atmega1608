@@ -30,6 +30,10 @@ extern "C" {
 
 
     typedef enum token_e {
+        
+        NODE_TOKEN_HEADER_OPERATION = HEADER_GROUP | 0x01,
+        NODE_TOKEN_HEADER_SERIAL_ID = HEADER_GROUP | 0x02,
+                
         // OPERATIONS
         NODE_TOKEN_READY = OPERATION_GROUP | 0x01,
         NODE_TOKEN_DATAREQ = OPERATION_GROUP | 0x02,

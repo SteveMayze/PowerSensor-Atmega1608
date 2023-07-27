@@ -10,7 +10,7 @@ void sensor_core_test_convert_float_to_binary() {
     
     float sample = 10.5;
     
-    sensor_core_convert_float_to_binary(sample, actual);
+    sensor_core_convert_float_to_binary(&sample, actual);
     printf("sensor_core_test_convert_float_to_binary: Expected Value: %02X %02X %02X %02X \n", 
             expected[0][0], expected[0][1], expected[0][2], expected[0][3]);
     printf("sensor_core_test_convert_float_to_binary: Actual Value: %02X %02X %02X %02X \n", 
@@ -19,7 +19,7 @@ void sensor_core_test_convert_float_to_binary() {
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected[0], actual, 4);
     
     sample = -240.05;
-    sensor_core_convert_float_to_binary(sample, actual);
+    sensor_core_convert_float_to_binary(&sample, actual);
     printf("sensor_core_test_convert_float_to_binary: Expected Value: %02X %02X %02X %02X \n", 
             expected[1][0], expected[1][1], expected[1][2], expected[1][3]);
     printf("sensor_core_test_convert_float_to_binary: Actual Value: %02X %02X %02X %02X \n", 

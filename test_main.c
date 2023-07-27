@@ -6,6 +6,7 @@
 #include "unit/modem_test.h"
 #include "unit/sensor_core_test.h"
 #include "unit/node_init_test.h"
+#include "unit/node_basic_test.h"
 #include "unit/node_test.h"
 
 
@@ -26,6 +27,10 @@ int main(void)
 
     run_sensor_core_tests();
 
+    printf("\n\n===================================\n\n");
+
+    run_node_basic_tests();
+    
     printf("\n\n===================================\n\n");
 
     run_node_tests();

@@ -270,8 +270,25 @@ void node_data_received(void){
 uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream){
     printf("node_message_to_stream: BEGIN\n");
     
-    printf("node_message_to_stream: END\n");
-    return 0x00;
+    uint8_t message_length = 0;
+    message_stream[message_length++] = NODE_TOKEN_HEADER_OPERATION;
+    message_stream[message_length++] = message->operation;
+    message_stream[message_length++] = NODE_TOKEN_HEADER_SERIAL_ID;
+    for(uint8_t i = 0; i<10; i++){
+        message_stream[message_length++] = message->sid[i];
+    }
+    uint8_t buffer[4];
+    for(uint8_t i=0; i<message->data_length; i++){
+        message_stream[message_length++] = message->data_token[i];
+        float fValue = message->data_value[i];
+        sensor_core_convert_float_to_binary(&fValue, buffer);
+        for(uint8_t j = 0; j<4; j++){
+            message_stream[message_length++] = buffer[j];
+        }
+    }
+
+    printf("node_message_to_stream: END message_length: %d\n", message_length);
+    return message_length;
 }
 
    
