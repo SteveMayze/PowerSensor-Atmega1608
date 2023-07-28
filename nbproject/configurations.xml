@@ -116,6 +116,8 @@
         <itemPath>unit/node_basic_test.c</itemPath>
         <itemPath>unit/node_test.h</itemPath>
         <itemPath>unit/node_test.c</itemPath>
+        <itemPath>unit/test_common.h</itemPath>
+        <itemPath>unit/test_common.c</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
