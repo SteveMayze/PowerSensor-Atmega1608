@@ -28,11 +28,11 @@ ModemResponse_t *get_dataack_response(){
 }
 
 ModemResponse_t *get_nodeintroreq_response(){
-    return &datareq_response;
+    return &nodeintroreq_response;
 }
 
 ModemResponse_t *get_nodeintroack_response(){
-    return &dataack_response;
+    return &nodeintroack_response;
 }
 
 bool datareq_response_flag = false;
@@ -133,8 +133,8 @@ void ready_nodeintroreq_nodeintroack_test(){
     ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
     ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
     
-    datareq_response.operation = NODE_TOKEN_NODEINTROREQ;  
-    dataack_response.operation = NODE_TOKEN_NODEINTROACK;
+    nodeintroreq_response.operation = NODE_TOKEN_NODEINTROREQ;  
+    nodeintroack_response.operation = NODE_TOKEN_NODEINTROACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();

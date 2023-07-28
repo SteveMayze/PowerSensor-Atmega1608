@@ -28,11 +28,11 @@ ModemResponse_t *nt_get_dataack_response(){
 }
 
 ModemResponse_t *nt_get_nodeintroreq_response(){
-    return &nt_datareq_response;
+    return &nt_nodeintroreq_response;
 }
 
 ModemResponse_t *nt_get_nodeintroack_response(){
-    return &nt_dataack_response;
+    return &nt_nodeintroack_response;
 }
 
 uint8_t message_stream[128] = { 0 }; 
@@ -173,8 +173,8 @@ void ready_node_intro_test(){
     ModemResponse_t* nodeintroreq_response_ptr = nt_get_nodeintroreq_response();    
     ModemResponse_t* nodeintroack_response_ptr = nt_get_nodeintroack_response();
     
-    nt_datareq_response.operation = NODE_TOKEN_NODEINTROREQ;  
-    nt_dataack_response.operation = NODE_TOKEN_NODEINTROACK;
+    nt_nodeintroreq_response.operation = NODE_TOKEN_NODEINTROREQ;  
+    nt_nodeintroack_response.operation = NODE_TOKEN_NODEINTROACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
