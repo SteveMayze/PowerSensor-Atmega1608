@@ -61,6 +61,9 @@ bool get_timeout_response_flag(){
     return timeout_response_flag;
 }
 
+INA219_Data_t *get_ina219_data(){
+    return &ina219_data;
+}
 
 ModemResponse_t *get_dataReq_response(){
     return &datareq_response;

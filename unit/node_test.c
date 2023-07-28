@@ -5,68 +5,33 @@
 #include "../mocks/Mockmodem.h"
 #include "../mocks/Mockeprom.h"
 #include "../mocks/MockINA219.h"
+#include "test_common.h"
 
-
-uint8_t _node_test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
-
-
-
-ModemResponse_t nt_datareq_response;
-ModemResponse_t nt_dataack_response;
-
-ModemResponse_t nt_nodeintroreq_response;
-ModemResponse_t nt_nodeintroack_response;
-
-INA219_Data_t nt_ina219_data;
-
-ModemResponse_t *nt_get_dataReq_response(){
-    return &nt_datareq_response;
-}
-
-ModemResponse_t *nt_get_dataack_response(){
-    return &nt_dataack_response;
-}
-
-ModemResponse_t *nt_get_nodeintroreq_response(){
-    return &nt_nodeintroreq_response;
-}
-
-ModemResponse_t *nt_get_nodeintroack_response(){
-    return &nt_nodeintroack_response;
-}
 
 uint8_t message_stream[128] = { 0 }; 
-
-
-bool nt_timeout_response_flag = false;
-
-void _test_handle_timeout(){
-    printf("test_handle_timeout: Handle timeout\n");
-    nt_timeout_response_flag = true;
-}
-
 
 
 /**
  * Tests the interaction with the INA210 domain module.
  */
 void ready_data_collection_test(){
-    eprom_read_serial_id_ExpectAndReturn(_node_test_sid);
+    set_timeout_response_flag(false);
+    eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     node_intitialise();
 
     printf("\nready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
     
-    INA219_Data_t* ina219Data_ptr = &nt_ina219_data;
+    INA219_Data_t* ina219Data_ptr = get_ina219_data();
     INA219_getReadings_ExpectAndReturn(ina219Data_ptr);
-    nt_ina219_data.bus_voltage = 10.5;
-    nt_ina219_data.shunt_voltage = 1.0;
-    nt_ina219_data.current = 2.5;
+    ina219Data_ptr->bus_voltage = 10.5;
+    ina219Data_ptr->shunt_voltage = 1.0;
+    ina219Data_ptr->current = 2.5;
     
-    ModemResponse_t* datareq_response_ptr = nt_get_dataReq_response();    
-    ModemResponse_t* dataack_response_ptr = nt_get_dataack_response();
+    ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
+    ModemResponse_t* dataack_response_ptr = get_dataack_response();
     
-    nt_datareq_response.operation = NODE_TOKEN_DATAREQ;  
-    nt_dataack_response.operation = NODE_TOKEN_DATAACK;
+    datareq_response_ptr->operation = NODE_TOKEN_DATAREQ;  
+    dataack_response_ptr->operation = NODE_TOKEN_DATAACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -76,10 +41,10 @@ void ready_data_collection_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(dataack_response_ptr);
 
-    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, _node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, get_test_sid());
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
-    TEST_ASSERT_EQUAL_HEX8_ARRAY(_node_test_sid, actual->sid, 5);  
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
     printf("\nready_data_collection_test: Testing the send operation for DATAREQ\n");
@@ -88,7 +53,7 @@ void ready_data_collection_test(){
     fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
     fsm_set_event_callback(FSM_DATAACK, node_data_received);
     
-    fsm_set_event_callback(FSM_TIMEOUT, _test_handle_timeout);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
 
     uint8_t expected_message_stream[128] = {NODE_TOKEN_HEADER_OPERATION, NODE_TOKEN_READY,
                                             NODE_TOKEN_HEADER_SERIAL_ID, 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0, 
@@ -109,7 +74,7 @@ void ready_data_collection_test(){
     for(uint8_t i = 0; i<4; i++){
         expected_message_stream[24+i] = buffer[i];
     }
-    Node_Message_t *expected_message = node_create_message(NODE_TOKEN_READY, _node_test_sid);
+    Node_Message_t *expected_message = node_create_message(NODE_TOKEN_READY, get_test_sid());
     expected_message->data_length = 3;
     expected_message->data_token[0]=NODE_TOKEN_BUS_VOLTAGE;
     expected_message->data_value[0]=10.5;
@@ -139,12 +104,12 @@ void ready_data_collection_test(){
     
     node_check();
 
-    TEST_ASSERT_EQUAL(false, nt_timeout_response_flag);
+    TEST_ASSERT_EQUAL(false, get_timeout_response_flag());
     
     // The MockINA219 should be checked to ensure that the data was read.
     // The Mock-modem should be checked to ensure the correct message was sent.
     
-    TEST_ASSERT_EQUAL(10.5, nt_ina219_data.bus_voltage);
+    TEST_ASSERT_EQUAL(10.5, ina219Data_ptr->bus_voltage);
     
     TEST_ASSERT_EQUAL(NODE_TOKEN_BUS_VOLTAGE, actual->data_token[0]);
     TEST_ASSERT_EQUAL(10.5, actual->data_value[0]);
@@ -162,19 +127,19 @@ void ready_data_collection_test(){
 
 void ready_node_intro_test(){
     
-    nt_timeout_response_flag = false;
-    eprom_read_serial_id_ExpectAndReturn(_node_test_sid);
+    set_timeout_response_flag(false);
+    eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     node_intitialise();
     
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
     printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
-    ModemResponse_t* nodeintroreq_response_ptr = nt_get_nodeintroreq_response();    
-    ModemResponse_t* nodeintroack_response_ptr = nt_get_nodeintroack_response();
+    ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
+    ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
     
-    nt_nodeintroreq_response.operation = NODE_TOKEN_NODEINTROREQ;  
-    nt_nodeintroack_response.operation = NODE_TOKEN_NODEINTROACK;
+    nodeintroreq_response_ptr->operation = NODE_TOKEN_NODEINTROREQ;  
+    nodeintroack_response_ptr->operation = NODE_TOKEN_NODEINTROACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -184,20 +149,20 @@ void ready_node_intro_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(nodeintroack_response_ptr);
 
-    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, _node_test_sid);
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, get_test_sid());
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
-    TEST_ASSERT_EQUAL_HEX8_ARRAY(_node_test_sid, actual->sid, 5);  
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
     printf("\nready_node_intro_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
 //    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
 //    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
-    fsm_set_event_callback(FSM_TIMEOUT, _test_handle_timeout);
+    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
     
     node_check();
-    TEST_ASSERT_EQUAL(false, nt_timeout_response_flag);
+    TEST_ASSERT_EQUAL(false, get_timeout_response_flag());
 
 }
 

@@ -14,6 +14,7 @@ extern "C" {
     
 #include "../mcc_generated_files/mcc.h"
 #include "../modem.h"
+#include "../ina219/INA219.h"    
     
 uint8_t *get_test_sid();
 void set_datareq_response_flag(bool _flag);
@@ -45,6 +46,9 @@ void test_handle_nodeintroreq_response();
 void test_handle_nodeintroack_response();
 
 void test_handle_timeout();
+
+INA219_Data_t *get_ina219_data();
+
 
 #ifdef	__cplusplus
 }
