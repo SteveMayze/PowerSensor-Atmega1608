@@ -252,11 +252,11 @@ void node_data_collection(){
     INA219_Data_t* data = INA219_getReadings();
     // Move the data into the struct node_message message
     _message.data_length = 3;
-    _message.data_token[0] = NODE_TOKEN_BUS_VOLTAGE; // bus voltage
+    _message.data_token[0] = NODE_TOKEN_PROPERTY_BUS_VOLTAGE; // bus voltage
     _message.data_value[0] = data->bus_voltage;
-    _message.data_token[1] = NODE_TOKEN_SHUNT_VOLTAGE; // shunt voltage
+    _message.data_token[1] = NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE; // shunt voltage
     _message.data_value[1] = data->shunt_voltage;
-    _message.data_token[2] = NODE_TOKEN_LOAD_CURRENT; // load current
+    _message.data_token[2] = NODE_TOKEN_PROPERTY_LOAD_CURRENT; // load current
     _message.data_value[2] = data->current;
     printf("node_data_collection: END\n");
 }
@@ -267,8 +267,28 @@ void node_data_received(void){
     printf("node_data_received: END\n");
 }
 
+
+void node_intro_callback(void){
+    _message.data_length = 5;
+    _message.data_token[0] = NODE_TOKEN_HEADER_DOMAIN;
+    _message.data_value[0] = NODE_METADATA_DOMAIN_POWER;
+    _message.data_token[1] = NODE_TOKEN_HEADER_CLASS;
+    _message.data_value[1] = NODE_METADATA_CLASS_SENSOR;
+    _message.data_token[2] = NODE_TOKEN_PROPERTY;
+    _message.data_value[2] = NODE_TOKEN_PROPERTY_BUS_VOLTAGE;
+    _message.data_token[3] = NODE_TOKEN_PROPERTY;
+    _message.data_value[3] = NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE;
+    _message.data_token[4] = NODE_TOKEN_PROPERTY;
+    _message.data_value[4] = NODE_TOKEN_PROPERTY_LOAD_CURRENT;
+}
+
+void node_intro_ack_callback(void){
+    
+}
+
+
 uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream){
-    printf("node_message_to_stream: BEGIN\n");
+    printf("node_message_to_stream: BEGIN for operation %02X\n", message->operation);
     
     uint8_t message_length = 0;
     message_stream[message_length++] = NODE_TOKEN_HEADER_OPERATION;
@@ -277,13 +297,23 @@ uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream)
     for(uint8_t i = 0; i<10; i++){
         message_stream[message_length++] = message->sid[i];
     }
-    uint8_t buffer[4];
-    for(uint8_t i=0; i<message->data_length; i++){
-        message_stream[message_length++] = message->data_token[i];
-        float fValue = message->data_value[i];
-        sensor_core_convert_float_to_binary(&fValue, buffer);
-        for(uint8_t j = 0; j<4; j++){
-            message_stream[message_length++] = buffer[j];
+    if( NODE_TOKEN_DATA == message->operation){
+        printf("Parsing the data for NODE_TOKEN_DATA\n");
+        uint8_t buffer[4];
+        for(uint8_t i=0; i<message->data_length; i++){
+            message_stream[message_length++] = message->data_token[i];
+            float fValue = message->data_value[i];
+            sensor_core_convert_float_to_binary(&fValue, buffer);
+            for(uint8_t j = 0; j<4; j++){
+                message_stream[message_length++] = buffer[j];
+            }
+        }
+    }
+    if( NODE_TOKEN_NODEINTRO == message->operation){
+        printf("Parsing the data for NODE_TOKEN_NODEINTRO\n");
+        for(uint8_t i=0; i<message->data_length; i++){
+            message_stream[message_length++] = message->data_token[i];
+            message_stream[message_length++] = message->data_value[i];
         }
     }
 

@@ -31,6 +31,8 @@ extern "C" {
     void node_set_timeout(uint16_t timeout);
     void node_data_collection();
     void node_data_received(void);
+    void node_intro_callback(void);
+    void node_intro_ack_callback(void);
     
     Node_Message_t *node_create_message(Token_t token, uint8_t *sid);
 

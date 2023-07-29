@@ -41,11 +41,11 @@ void ready_data_collection_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(dataack_response_ptr);
 
-    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, get_test_sid());
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_DATA, get_test_sid());
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
-    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
-    TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
+    TEST_ASSERT_EQUAL(NODE_TOKEN_DATA, actual->operation);
     
     printf("\nready_data_collection_test: Testing the send operation for DATAREQ\n");
     node_set_timeout(0x000F);
@@ -55,11 +55,11 @@ void ready_data_collection_test(){
     
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
 
-    uint8_t expected_message_stream[128] = {NODE_TOKEN_HEADER_OPERATION, NODE_TOKEN_READY,
+    uint8_t expected_message_stream[128] = {NODE_TOKEN_HEADER_OPERATION, NODE_TOKEN_DATA,
                                             NODE_TOKEN_HEADER_SERIAL_ID, 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0, 
-                                            NODE_TOKEN_BUS_VOLTAGE, 0,0,0,0,
-                                            NODE_TOKEN_SHUNT_VOLTAGE, 0,0,0,0,
-                                            NODE_TOKEN_LOAD_CURRENT, 0,0,0,0};
+                                            NODE_TOKEN_PROPERTY_BUS_VOLTAGE, 0,0,0,0,
+                                            NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE, 0,0,0,0,
+                                            NODE_TOKEN_PROPERTY_LOAD_CURRENT, 0,0,0,0};
     float values[3] = {10.5, 1.0, 2.5};
     uint8_t buffer[4] = {0,0,0,0};
     sensor_core_convert_float_to_binary(&values[0], buffer);
@@ -74,16 +74,15 @@ void ready_data_collection_test(){
     for(uint8_t i = 0; i<4; i++){
         expected_message_stream[24+i] = buffer[i];
     }
-    Node_Message_t *expected_message = node_create_message(NODE_TOKEN_READY, get_test_sid());
+    Node_Message_t *expected_message = node_create_message(NODE_TOKEN_DATA, get_test_sid());
     expected_message->data_length = 3;
-    expected_message->data_token[0]=NODE_TOKEN_BUS_VOLTAGE;
+    expected_message->data_token[0]=NODE_TOKEN_PROPERTY_BUS_VOLTAGE;
     expected_message->data_value[0]=10.5;
-    expected_message->data_token[1]=NODE_TOKEN_SHUNT_VOLTAGE;
+    expected_message->data_token[1]=NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE;
     expected_message->data_value[1]=1.0;
-    expected_message->data_token[2]=NODE_TOKEN_LOAD_CURRENT;
+    expected_message->data_token[2]=NODE_TOKEN_PROPERTY_LOAD_CURRENT;
     expected_message->data_value[2]=2.5;
     
-
     uint8_t message_length = node_message_to_stream(expected_message, message_stream);
     
     printf("expected_message_stream: ");
@@ -111,13 +110,13 @@ void ready_data_collection_test(){
     
     TEST_ASSERT_EQUAL(10.5, ina219Data_ptr->bus_voltage);
     
-    TEST_ASSERT_EQUAL(NODE_TOKEN_BUS_VOLTAGE, actual->data_token[0]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_BUS_VOLTAGE, actual->data_token[0]);
     TEST_ASSERT_EQUAL(10.5, actual->data_value[0]);
     
-    TEST_ASSERT_EQUAL(NODE_TOKEN_SHUNT_VOLTAGE, actual->data_token[1]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE, actual->data_token[1]);
     TEST_ASSERT_EQUAL(1.0, actual->data_value[1]);
     
-    TEST_ASSERT_EQUAL(NODE_TOKEN_LOAD_CURRENT, actual->data_token[2]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_LOAD_CURRENT, actual->data_token[2]);
     TEST_ASSERT_EQUAL(2.5, actual->data_value[2]);
     
     
@@ -126,15 +125,13 @@ void ready_data_collection_test(){
 }
 
 void ready_node_intro_test(){
-    
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     node_intitialise();
     
-    // For READY, the payload is empty.
-    // This is where I need to refer to the Python gateway for the 
-    // structure.
     printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
+
+    
     ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
     ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
     
@@ -149,20 +146,81 @@ void ready_node_intro_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(nodeintroack_response_ptr);
 
-    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, get_test_sid());
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_NODEINTRO, get_test_sid());
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
-    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
-    TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
+    TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
+    TEST_ASSERT_EQUAL(NODE_TOKEN_NODEINTRO, actual->operation);
     
-    printf("\nready_node_intro_test: Testing the send operation for READY\n");
-    node_set_timeout(0x000F);
-//    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
-//    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
-    fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+   printf("\nready_node_intro_test: Testing the send operation for READY\n");
+   node_set_timeout(0x000F);
+   fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
+   fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
+   fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+   
+   uint8_t expected_message_stream[128] = {NODE_TOKEN_HEADER_OPERATION, NODE_TOKEN_NODEINTRO,
+                                           NODE_TOKEN_HEADER_SERIAL_ID, 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0,
+                                           NODE_TOKEN_HEADER_DOMAIN, NODE_METADATA_DOMAIN_POWER,
+                                           NODE_TOKEN_HEADER_CLASS, NODE_METADATA_CLASS_SENSOR,
+                                           NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_BUS_VOLTAGE,
+                                           NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE,
+                                           NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_LOAD_CURRENT,
+                                        };
+   
+    Node_Message_t *expected_message = node_create_message(NODE_TOKEN_NODEINTRO, get_test_sid());
+    expected_message->data_length = 5;
+    expected_message->data_token[0]=NODE_TOKEN_HEADER_DOMAIN;
+    expected_message->data_value[0]=NODE_METADATA_DOMAIN_POWER;
+    expected_message->data_token[1]=NODE_TOKEN_HEADER_CLASS;
+    expected_message->data_value[1]=NODE_METADATA_CLASS_SENSOR;
+    expected_message->data_token[2]=NODE_TOKEN_PROPERTY;
+    expected_message->data_value[2]=NODE_TOKEN_PROPERTY_BUS_VOLTAGE;
+    expected_message->data_token[3]=NODE_TOKEN_PROPERTY;
+    expected_message->data_value[3]=NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE;
+    expected_message->data_token[4]=NODE_TOKEN_PROPERTY;
+    expected_message->data_value[4]=NODE_TOKEN_PROPERTY_LOAD_CURRENT;
     
+    uint8_t message_length = node_message_to_stream(expected_message, message_stream);
+    
+    printf("expected_message_stream: ");
+    for(uint8_t i=0; i<message_length; i++){
+        printf("%02X ", expected_message_stream[i]);
+    }
+    printf("\n         message_stream: ");
+    for(uint8_t i=0; i<message_length; i++){
+        printf("%02X ", message_stream[i]);
+    }
+    printf("\n");
+    
+    
+    uint8_t expected_message_length = 23;
+
+    TEST_ASSERT_EQUAL(expected_message_length, message_length);
+    TEST_ASSERT_EQUAL_INT8_ARRAY(expected_message_stream, message_stream, expected_message_length);
+    
+    modem_send_message_Expect(expected_message_stream, message_length);
+    
+
     node_check();
+    
     TEST_ASSERT_EQUAL(false, get_timeout_response_flag());
+    TEST_ASSERT_EQUAL(NODE_TOKEN_HEADER_DOMAIN, actual->data_token[0]);
+    TEST_ASSERT_EQUAL(NODE_METADATA_DOMAIN_POWER, actual->data_value[0]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_HEADER_CLASS, actual->data_token[1]);
+    TEST_ASSERT_EQUAL(NODE_METADATA_CLASS_SENSOR, actual->data_value[1]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY, actual->data_token[2]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_BUS_VOLTAGE, actual->data_value[2]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY, actual->data_token[3]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE, actual->data_value[3]);
+    
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY, actual->data_token[4]);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_PROPERTY_LOAD_CURRENT, actual->data_value[4]);
+    
+    
+    TEST_ASSERT_EQUAL(NODE_OK, node_close());
 
 }
 
@@ -185,8 +243,13 @@ void ready_node_intro_test(){
 int run_node_tests(){
     UnityBegin("node_test");
         
+    printf("\n\n=============== ready_data_collection_test ====================\n\n");
+
     RUN_TEST(ready_data_collection_test);
-    // RUN_TEST(ready_node_intro_test);
+
+    printf("\n\n=============== ready_node_intro_test ====================\n\n");
+
+    RUN_TEST(ready_node_intro_test);
 
     UnityEnd();
     return 0;   

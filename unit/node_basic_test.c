@@ -164,8 +164,16 @@ void node_timeout_test(){
 int run_node_basic_tests(){
     UnityBegin("run_node_basic_tests");
     
+    printf("\n\n================ ready_datareq_dataack_test ===================\n\n");
+    
     RUN_TEST(ready_datareq_dataack_test);
+    
+    printf("\n\n================ready_nodeintroreq_nodeintroack_test ===================\n\n");
+
     RUN_TEST(ready_nodeintroreq_nodeintroack_test);
+
+    printf("\n\n=============== ready_nodeintroreq_nodeintroack_test ====================\n\n");
+
     RUN_TEST(node_timeout_test);
     
     UnityEnd();
