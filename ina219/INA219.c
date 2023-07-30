@@ -14,6 +14,8 @@ union read_buffer_t {
 
 };
 
+
+
 union read_buffer_t read_buffer;
 
 #define INA219_DEFAULT_CFG 0x199F
@@ -89,7 +91,7 @@ INA219_Data_t* INA219_getReadings() {
 //            break;
 //        }
     }
-    INA219_Data.bus_voltage = (int16_t) ((readings.raw_bus_voltage >> 3) * 4);
+    INA219_Data.bus_voltage = (int16_t) ((INA219_Data.raw_bus_voltage >> 3) * 4);
     INA219_Data.bus_voltage = INA219_Data.bus_voltage * 0.001;
 
     INA219_Data.raw_shunt_voltage = get_regsiter_value(INA219_SHUNT_VOLTAGE, false);
@@ -102,7 +104,7 @@ INA219_Data_t* INA219_getReadings() {
     INA219_Data.raw_power = get_regsiter_value(INA219_POWER, true);
     INA219_Data.power = ((float) INA219_Data.raw_power * 2.0);
 
-    return &readings;
+    return &INA219_Data;
 
 }
 

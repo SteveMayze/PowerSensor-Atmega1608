@@ -27,7 +27,7 @@ ModemResponse_t* modem_receive_message(void){
 }
     
 bool modem_message_arrived(void){
-
+    return false;
 }    
 
 void modem_send_message(uint8_t *messasge_stream, uint8_t message_length){

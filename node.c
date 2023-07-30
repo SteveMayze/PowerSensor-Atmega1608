@@ -11,7 +11,6 @@
 
 #include <util/delay.h>
 
-uint8_t sid[10];
 
 Node_Message_t _message;
 
