@@ -103,7 +103,8 @@
         <itemPath>mocks/MockINA219.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="test" projectFiles="true">
-        <itemPath>test_main.c</itemPath>
+        <itemPath>test_fsm_main.c</itemPath>
+        <itemPath>test_adapter_main.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="Unit" projectFiles="true">
         <itemPath>unit/sensor_core_test.h</itemPath>
@@ -1358,7 +1359,7 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="test_main.c" ex="true" overriding="false">
+      <item path="test_fsm_main.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>
@@ -2648,6 +2649,8 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
+      <item path="test_adapter_main.c" ex="true" overriding="false">
+      </item>
     </conf>
     <conf name="test_adapter" type="2">
       <toolsSet>
@@ -2833,12 +2836,12 @@
         <property key="usart0io.output" value="file"/>
         <property key="usart0io.outputfile" value="usart0_output.txt"/>
         <property key="usart0io.uartioenabled" value="true"/>
-        <property key="usart1io.output" value="file"/>
+        <property key="usart1io.output" value="window"/>
         <property key="usart1io.outputfile" value="usart1_output.txt"/>
         <property key="usart1io.uartioenabled" value="true"/>
         <property key="usart2io.output" value="window"/>
         <property key="usart2io.outputfile" value=""/>
-        <property key="usart2io.uartioenabled" value="false"/>
+        <property key="usart2io.uartioenabled" value="true"/>
         <property key="usart3io.output" value="window"/>
         <property key="usart3io.outputfile" value=""/>
         <property key="usart3io.uartioenabled" value="false"/>
@@ -3305,12 +3308,12 @@
         <property key="usart0io.output" value="file"/>
         <property key="usart0io.outputfile" value="usart0_output.txt"/>
         <property key="usart0io.uartioenabled" value="true"/>
-        <property key="usart1io.output" value="file"/>
+        <property key="usart1io.output" value="window"/>
         <property key="usart1io.outputfile" value="usart1_output.txt"/>
         <property key="usart1io.uartioenabled" value="true"/>
         <property key="usart2io.output" value="window"/>
         <property key="usart2io.outputfile" value=""/>
-        <property key="usart2io.uartioenabled" value="false"/>
+        <property key="usart2io.uartioenabled" value="true"/>
         <property key="usart3io.output" value="window"/>
         <property key="usart3io.outputfile" value=""/>
         <property key="usart3io.uartioenabled" value="false"/>
@@ -3746,6 +3749,8 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
+      <item path="ina219/INA219.c" ex="true" overriding="false">
+      </item>
       <item path="main.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
@@ -3765,6 +3770,8 @@
         </XC8-CO>
         <XC8-config-global>
         </XC8-config-global>
+      </item>
+      <item path="test_fsm_main.c" ex="true" overriding="false">
       </item>
     </conf>
   </confs>
