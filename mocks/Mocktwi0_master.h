@@ -2,8 +2,8 @@
 #ifndef _MOCKTWI0_MASTER_H
 #define _MOCKTWI0_MASTER_H
 
-#include "unity.h"
-#include "twi0_master.h"
+#include "../unit/unity.h"
+#include "../mcc_generated_files/include/twi0_master.h"
 
 /* Ignore the following warnings, since we are copying code */
 #if defined(__GNUC__) && !defined(__ICC) && !defined(__TMS470__)

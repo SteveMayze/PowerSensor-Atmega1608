@@ -101,6 +101,8 @@
         <itemPath>mocks/Mockmodem.h</itemPath>
         <itemPath>mocks/MockINA219.c</itemPath>
         <itemPath>mocks/MockINA219.h</itemPath>
+        <itemPath>mocks/Mocktwi0_master.c</itemPath>
+        <itemPath>mocks/Mocktwi0_master.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="test" projectFiles="true">
         <itemPath>test_fsm_main.c</itemPath>
@@ -119,6 +121,8 @@
         <itemPath>unit/node_test.c</itemPath>
         <itemPath>unit/test_common.h</itemPath>
         <itemPath>unit/test_common.c</itemPath>
+        <itemPath>unit/ina219_test.c</itemPath>
+        <itemPath>unit/ina219_test.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -2650,6 +2654,14 @@
         </XC8-config-global>
       </item>
       <item path="test_adapter_main.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
     </conf>
     <conf name="test_adapter" type="2">
@@ -3749,7 +3761,15 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="ina219/INA219.c" ex="true" overriding="false">
+      <item path="ina219/INA219.c" ex="false" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="main.c" ex="true" overriding="false">
         <HI-TECH-COMP>
@@ -3760,6 +3780,12 @@
         </XC8-CO>
         <XC8-config-global>
         </XC8-config-global>
+      </item>
+      <item path="mcc_generated_files/src/twi0_master.c" ex="true" overriding="false">
+      </item>
+      <item path="mocks/MockINA219.c" ex="true" overriding="false">
+      </item>
+      <item path="mocks/MockINA219.h" ex="true" overriding="false">
       </item>
       <item path="modem.c" ex="true" overriding="false">
         <HI-TECH-COMP>
@@ -3772,6 +3798,14 @@
         </XC8-config-global>
       </item>
       <item path="test_fsm_main.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
     </conf>
   </confs>

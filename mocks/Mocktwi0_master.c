@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <setjmp.h>
-#include "cmock.h"
+#include "../cmock/src/cmock.h"
 #include "Mocktwi0_master.h"
 
 static const char* CMockString_I2C0_Close = "I2C0_Close";

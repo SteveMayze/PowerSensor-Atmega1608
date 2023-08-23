@@ -12,7 +12,7 @@
 
 int main(void)
 {
-    // Initialise drivers from MCC
+    // Initialize drivers from MCC
     
     SYSTEM_Initialize();
     _delay_ms(1000);
