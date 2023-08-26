@@ -13,23 +13,17 @@
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/node_test.c</file>
         </group>
         <group>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/sensor_core_test.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_init_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/eprom.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/main.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/sensor_core_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/eprom.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/Mocktwi0_master.h</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/test_common.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/test_main.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_init_test.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/ina219_test.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/test_adapter_main.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_init_test.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mocks/Mocktwi0_master.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/ina219/INA219.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/ina219_test.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_basic_test.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/mcc_generated_files/include/twi0_master.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt</file>
         </group>
     </open-files>
 </project-private>
