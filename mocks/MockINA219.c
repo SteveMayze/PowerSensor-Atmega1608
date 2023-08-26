@@ -3,16 +3,18 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include "../cmock/src/cmock.h"
-#include "MockINA219.h"
+#include "../mocks/MockINA219.h"
 
 static const char* CMockString_INA219_Initialise = "INA219_Initialise";
 static const char* CMockString_INA219_getReadings = "INA219_getReadings";
 static const char* CMockString_addr = "addr";
+static const char* CMockString_profile = "profile";
 
 typedef struct _CMOCK_INA219_Initialise_CALL_INSTANCE
 {
   UNITY_LINE_TYPE LineNumber;
   uint8_t Expected_addr;
+  INA219_Config_Profile_t Expected_profile;
 
 } CMOCK_INA219_Initialise_CALL_INSTANCE;
 
@@ -60,7 +62,7 @@ void MockINA219_Destroy(void)
   memset(&Mock, 0, sizeof(Mock));
 }
 
-void INA219_Initialise(uint8_t addr)
+void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance;
@@ -73,16 +75,22 @@ void INA219_Initialise(uint8_t addr)
     UNITY_SET_DETAILS(CMockString_INA219_Initialise,CMockString_addr);
     UNITY_TEST_ASSERT_EQUAL_HEX8(cmock_call_instance->Expected_addr, addr, cmock_line, CMockStringMismatch);
   }
+  {
+    UNITY_SET_DETAILS(CMockString_INA219_Initialise,CMockString_profile);
+    UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_profile), (void*)(&profile), sizeof(INA219_Config_Profile_t), cmock_line, CMockStringMismatch);
+  }
   UNITY_CLR_DETAILS();
 }
 
-void CMockExpectParameters_INA219_Initialise(CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance, uint8_t addr);
-void CMockExpectParameters_INA219_Initialise(CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance, uint8_t addr)
+void CMockExpectParameters_INA219_Initialise(CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance, uint8_t addr, INA219_Config_Profile_t profile);
+void CMockExpectParameters_INA219_Initialise(CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance, uint8_t addr, INA219_Config_Profile_t profile)
 {
   cmock_call_instance->Expected_addr = addr;
+  memcpy((void*)(&cmock_call_instance->Expected_profile), (void*)(&profile),
+         sizeof(INA219_Config_Profile_t[sizeof(profile) == sizeof(INA219_Config_Profile_t) ? 1 : -1])); /* add INA219_Config_Profile_t to :treat_as_array if this causes an error */
 }
 
-void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr)
+void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr, INA219_Config_Profile_t profile)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_INA219_Initialise_CALL_INSTANCE));
   CMOCK_INA219_Initialise_CALL_INSTANCE* cmock_call_instance = (CMOCK_INA219_Initialise_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
@@ -90,7 +98,7 @@ void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr)
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.INA219_Initialise_CallInstance = CMock_Guts_MemChain(Mock.INA219_Initialise_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
-  CMockExpectParameters_INA219_Initialise(cmock_call_instance, addr);
+  CMockExpectParameters_INA219_Initialise(cmock_call_instance, addr, profile);
 }
 
 INA219_Data_t* INA219_getReadings(void)

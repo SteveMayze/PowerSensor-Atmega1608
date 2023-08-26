@@ -2643,6 +2643,10 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
+      <item path="mocks/Mocktwi0_master.c" ex="true" overriding="false">
+      </item>
+      <item path="mocks/Mocktwi0_master.h" ex="true" overriding="false">
+      </item>
       <item path="modem.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
