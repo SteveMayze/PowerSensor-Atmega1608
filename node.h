@@ -17,7 +17,9 @@ extern "C" {
 #include "sensor_core.h"
 #include "modem.h"
 #include "ina219/INA219.h"
-    
+
+#define NODE_INA219_IIC_ADDR INA219_ADDR_GND_GND
+
     typedef struct {
         Token_t operation;
         uint8_t *sid;

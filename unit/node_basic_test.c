@@ -16,6 +16,8 @@ void ready_datareq_dataack_test(){
     set_timeout_response_flag(false);
     
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
+    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+
     node_intitialise();
 
 
@@ -65,6 +67,8 @@ void ready_nodeintroreq_nodeintroack_test(){
     set_nodeintroreq_response_flag(false);
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
+    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+
     node_intitialise();
     
     // For READY, the payload is empty.

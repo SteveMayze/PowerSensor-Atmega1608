@@ -14,6 +14,7 @@
 
 Node_Message_t _message;
 
+
 typedef struct {
     uint64_t coordinator_addr;
     Event_Callback_t event_callbacks[6];
@@ -55,6 +56,9 @@ Error_t node_intitialise() {
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;
+    
+    INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_DEFAULT);
+
     return NODE_OK;
 }
 

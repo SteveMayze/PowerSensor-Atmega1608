@@ -17,6 +17,8 @@ uint8_t message_stream[128] = { 0 };
 void ready_data_collection_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
+    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+
     node_intitialise();
 
     printf("\nready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
@@ -127,6 +129,8 @@ void ready_data_collection_test(){
 void ready_node_intro_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
+    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+
     node_intitialise();
     
     printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
