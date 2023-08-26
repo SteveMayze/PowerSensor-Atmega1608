@@ -7,31 +7,26 @@
 
 void ina219_initialise_default_profile_test(void) {
 
-    printf("\n\nINA219_Initialise\n");
-    uint8_t expected_cal[3];
-    uint8_t expected_cfg[3];
+    printf("\n\nINA219_Initialise default profile: start\n");
+    
+    uint8_t expected_cal[3] = {INA219_CAL, 0x00, 0x10};
+    uint8_t expected_cfg[3] = {INA219_CFG, 0x39, 0x9F};
     
     // CALIBRATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
-    expected_cal[0] = INA219_CAL;
-    expected_cal[1] = 0x00;
-    expected_cal[2] = 0x10;
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetBuffer_Expect(expected_cal, 2);
     I2C0_MasterOperation_ExpectAndReturn(false, I2C0_NOERR);
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
     // CONFIGURATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
-    expected_cfg[0] = INA219_CFG;
-    expected_cfg[1] = 0x39;
-    expected_cfg[2] = 0x9F;
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetBuffer_Expect(expected_cfg, 2);
     I2C0_MasterOperation_ExpectAndReturn(false,I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR); 
     
     INA219_Initialise(INA219_ADDR_GND_GND, INA219_CONFIG_PROFILE_DEFAULT );
     
-    printf("\nINA219_Initialise\n\n");
+    printf("\nINA219_Initialise default profile: end\n\n");
 
 }
 
@@ -53,21 +48,18 @@ void ina219_initialise_default_profile_test(void) {
  */
 void ina219_initialise_large_profile_test(void) {
 
-    printf("\n\nINA219_Initialise\n");
-    uint8_t expected_cal[3];
-    uint8_t expected_cfg[3];
+    printf("\nINA219_Initialise large profile: start\n");
+    uint8_t expected_cal[3] = {INA219_CAL, 0x74, 0x91};
+    uint8_t expected_cfg[3] = {INA219_CFG, 0x39, 0x9F};
     
     // CALIBRATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
-    expected_cal[0] = INA219_CAL;
-    expected_cal[1] = 0x74;
-    expected_cal[2] = 0x91;
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetBuffer_Expect(expected_cal, 2);
     I2C0_MasterOperation_ExpectAndReturn(false, I2C0_NOERR);
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
     // CONFIGURATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     expected_cfg[0] = INA219_CFG;
     expected_cfg[1] = 0x39;
     expected_cfg[2] = 0x9F;
@@ -77,7 +69,7 @@ void ina219_initialise_large_profile_test(void) {
     
     INA219_Initialise(INA219_ADDR_GND_GND, INA219_CONFIG_PROFILE_20V_15A );
     
-    printf("\nINA219_Initialise\n\n");
+    printf("\nINA219_Initialise large profile: end\n\n");
 
 }
 
@@ -97,44 +89,78 @@ void ina219_initialise_large_profile_test(void) {
     ======================================*/
 void ina219_initialise_small_profile_test(void) {
 
-    printf("\n\nINA219_Initialise\n");
-    uint8_t expected_cal[3];
-    uint8_t expected_cfg[3];
+    printf("\nINA219_Initialise small profile: start\n");
+    uint8_t expected_cal[3] = {INA219_CAL, 0x88, 0x95};
+    uint8_t expected_cfg[3] = {INA219_CFG, 0x18, 0x8F};
     
     // CALIBRATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
-    expected_cal[0] = INA219_CAL;
-    expected_cal[1] = 0x88;
-    expected_cal[2] = 0x95;
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetBuffer_Expect(expected_cal, 2);
     I2C0_MasterOperation_ExpectAndReturn(false, I2C0_NOERR);
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
     // CONFIGURATION
-    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
-    expected_cfg[0] = INA219_CFG;
-    expected_cfg[1] = 0x39;
-    expected_cfg[2] = 0x9F;
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetBuffer_Expect(expected_cfg, 2);
     I2C0_MasterOperation_ExpectAndReturn(false,I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR); 
     
     INA219_Initialise(INA219_ADDR_GND_GND, INA219_CONFIG_PROFILE_12V_3A );
     
-    printf("\nINA219_Initialise\n\n");
+    printf("\nINA219_Initialise small profile: end\n\n");
 
 }
 
+static twi0_operations_t test_read_callback(void *ptr){
+    uint16_t *v = 0;
+    ptr = v;
+    return I2C0_RESTART_READ;
+}
 
+static twi0_operations_t test_restart_callback(void *ptr){
+    uint16_t *v = 0;
+    ptr = v;
+    return I2C0_RESTART_READ;
+}
+
+void ina219_getReadings_test(void) {
+    
+
+    // uint8_t expected_raw_bus[2] = {0, 0};
+    uint16_t expected = 0;
+    
+    uint8_t expected_register = INA219_BUS_VOLTAGE;
+
+    // REG Write
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
+    I2C0_SetDataCompleteCallback_Expect(test_read_callback, &expected);
+    I2C0_SetBuffer_Expect(&expected_register, 1);
+    I2C0_SetAddressNackCallback_Expect(test_restart_callback, NULL);
+//    I2C0_SetBuffer_Expect(expected_raw_bus, 2);
+    I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR);
+    I2C0_Close_ExpectAndReturn(I2C0_NOERR);
+
+    // Data Read
+    I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
+    
+    INA219_set_read_callback(test_read_callback);
+    INA219_set_restartwrite_callback(test_restart_callback);
+    INA219_Data_t* actual = INA219_getReadings();
+    
+    TEST_ASSERT_EQUAL(320, actual->bus_voltage);
+    
+}
 
 /**
  */
 int run_ina219_tests(){
     UnityBegin("run_ina219_tests");
-    
+    printf("run_ina219_tests: begin\n");
     RUN_TEST(ina219_initialise_default_profile_test);
     RUN_TEST(ina219_initialise_large_profile_test);
     RUN_TEST(ina219_initialise_small_profile_test);
+    RUN_TEST(ina219_getReadings_test);
+    printf("run_ina219_tests: end\n");
 
     UnityEnd();
     return 0;   

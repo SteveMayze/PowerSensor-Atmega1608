@@ -514,6 +514,7 @@ void I2C0_Initialize_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cm
 
 twi0_error_t I2C0_Open(twi0_address_t address)
 {
+    
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_I2C0_Open_CALL_INSTANCE* cmock_call_instance;
   UNITY_SET_DETAIL(CMockString_I2C0_Open);
@@ -526,6 +527,7 @@ twi0_error_t I2C0_Open(twi0_address_t address)
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_address), (void*)(&address), sizeof(twi0_address_t), cmock_line, CMockStringMismatch);
   }
   UNITY_CLR_DETAILS();
+  printf("I2C0_Open: Returning with %d\n", cmock_call_instance->ReturnVal );
   return cmock_call_instance->ReturnVal;
 }
 

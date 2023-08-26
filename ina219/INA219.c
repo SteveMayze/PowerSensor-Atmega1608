@@ -10,6 +10,8 @@
 
 INA219_Data_t INA219_Data;
         
+
+
 uint8_t write_buffer[3];
 union read_buffer_t {
     uint16_t bit16;
@@ -19,15 +21,11 @@ union read_buffer_t {
 
 union read_buffer_t read_buffer;
 
-/*
-    r_shunt: 0.022?, max current: 14.545454545454547A, power: 4.8W
-    min current_lsb: 0.000457763671875, max current_lsb: 0.003662109375
-    current_lsb: 0.0005
-    Calibration: 37236
-*/
 
 typedef void(profileSetupFunction)(void);
 
+twi0_callback_t ina219_read_callback;
+twi0_callback_t ina219_restart_write_callback; 
 
 // Prototype for the state handlers.
 static void INA219_DEFAULT_CONFIG(void);
@@ -52,16 +50,26 @@ void INA219_set_calibration(uint16_t calibaration){
     data[0] = INA219_CAL; // Register
     data[1] = calibaration >> 8;   // MSB
     data[2] = 0xFF & calibaration; // LSB
-    I2C0_Open(iic_address);
+    while(!I2C0_Open(iic_address));
     I2C0_SetBuffer(data, 2);
     I2C0_MasterOperation(false); // Write
     I2C0_Close();    
+}
+
+static twi0_operations_t default_read_handler(void *ptr)
+{
+    I2C0_SetBuffer(ptr, 2);
+    I2C0_SetDataCompleteCallback(NULL, NULL);
+    return I2C0_RESTART_READ;
 }
 
 /**
  * 
  */
 void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
+    
+    INA219_set_read_callback(default_read_handler);
+    INA219_set_restartwrite_callback(I2C0_SetRestartWriteCallback);
     
     iic_address = addr;
     
@@ -73,25 +81,41 @@ void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
     data[0] = INA219_CFG;                   // Configuration register
     data[1] = ina219_configuration >> 8;      // MSB
     data[2] = 0xFF & ina219_configuration;    // LSB
-    I2C0_Open(iic_address);
+    while(!I2C0_Open(iic_address));
     I2C0_SetBuffer(data, 2);
     I2C0_MasterOperation(false); // Write
     I2C0_Close();    
 
 }
 
+/**
+ * \brief Sets a callback for recording the register values, if needed.
+ */
+void INA219_set_read_callback(twi0_callback_t callback){
+    ina219_read_callback = callback;
+}
+
+void INA219_set_restartwrite_callback(twi0_callback_t callback){
+    ina219_restart_write_callback = callback;
+}
 
 uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
     if( calibrate )
         INA219_set_calibration(ina219_calibration);
-    write_buffer[0] = reg;
-    I2C0_Open(iic_address);
-    I2C0_SetBuffer(read_buffer.bit8, 2);
-    I2C0_MasterOperation(true); // Write
-    I2C0_Close();    
     
+    while(!I2C0_Open(iic_address)); // sit here until we get the bus..
+    I2C0_SetDataCompleteCallback(ina219_read_callback, read_buffer.bit8);
+    I2C0_SetBuffer(&reg, 1);
+    
+    I2C0_SetAddressNackCallback(ina219_restart_write_callback, NULL); //NACK polling?
+    I2C0_MasterWrite();
+    while(I2C0_BUSY == I2C0_Close()); // sit here until finished.
+
     uint16_t result = ((uint16_t) read_buffer.bit8[0]<<8)|read_buffer.bit8[1];
+
     return result;
+    
+    
 }
 
 
@@ -139,7 +163,7 @@ static void INA219_DEFAULT_CONFIG(void){
     ina219_configuration = INA219_BRNG_32V | INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
     ina219_calibration = 0x399F;
-    printf("INA219_DEFAULT_CONFIG: End\n");
+    printf("INA219_DEFAULT_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
 /*
@@ -168,7 +192,7 @@ static void INA219_20V_15A_CONFIG(void){
     ina219_configuration = INA219_BRNG_32V | INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
     ina219_calibration = 0x9174;
-    printf("INA219_20V_15A_CONFIG: End\n");
+    printf("INA219_20V_15A_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
 
@@ -196,7 +220,7 @@ static void INA219_12V_3A_CONFIG(void){
     ina219_configuration = INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
     ina219_calibration = 0x9588;
-    printf("INA219_12V_3A_CONFIG: End\n");
+    printf("INA219_12V_3A_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
 
