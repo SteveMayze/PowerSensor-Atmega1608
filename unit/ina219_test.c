@@ -4,6 +4,8 @@
 #include "../ina219/INA219.h"
 #include "../mocks/Mocktwi0_master.h"
 
+void INA219_set_read_callback(twi0_callback_t callback);
+void INA219_set_restartwrite_callback(twi0_callback_t callback);
 
 void ina219_initialise_default_profile_test(void) {
 
@@ -124,30 +126,63 @@ static twi0_operations_t test_restart_callback(void *ptr){
 }
 
 void ina219_getReadings_test(void) {
-    
+    printf("\nina219_getReadings_test: start\n");
 
-    // uint8_t expected_raw_bus[2] = {0, 0};
+    INA219_set_read_callback(test_read_callback);
+    INA219_set_restartwrite_callback(test_restart_callback);
+    
     uint16_t expected = 0;
     
-    uint8_t expected_register = INA219_BUS_VOLTAGE;
+    //uint8_t data[4] = {0};
 
-    // REG Write
+    // Shunt Voltage
+    // Bus Voltage
+    // uint8_t expected_register[] = {INA219_BUS_VOLTAGE};
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
     I2C0_SetDataCompleteCallback_Expect(test_read_callback, &expected);
-    I2C0_SetBuffer_Expect(&expected_register, 1);
+    I2C0_SetBuffer_Ignore();
     I2C0_SetAddressNackCallback_Expect(test_restart_callback, NULL);
-//    I2C0_SetBuffer_Expect(expected_raw_bus, 2);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR);
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
-    // Data Read
+    // expected_register[0] = INA219_SHUNT_VOLTAGE;
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
+    I2C0_SetDataCompleteCallback_Expect(test_read_callback, &expected);
+    I2C0_SetBuffer_Ignore();
+    I2C0_SetAddressNackCallback_Expect(test_restart_callback, NULL);
+    I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR);
+    I2C0_Close_ExpectAndReturn(I2C0_NOERR);
     
-    INA219_set_read_callback(test_read_callback);
-    INA219_set_restartwrite_callback(test_restart_callback);
+    
+
+
+//    // Current Voltage
+//    expected_register[0] = INA219_CURRENT;
+//    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
+//    I2C0_SetDataCompleteCallback_Expect(test_read_callback, &expected);
+//    I2C0_SetBuffer_Expect(expected_register, 1);
+//    I2C0_SetAddressNackCallback_Expect(test_restart_callback, NULL);
+//    I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR);
+//    I2C0_Close_ExpectAndReturn(I2C0_NOERR);
+//
+//    // Power Voltage
+//    expected_register[0] = INA219_POWER;
+//    I2C0_Open_ExpectAndReturn(0x40, I2C0_NOERR);
+//    I2C0_SetDataCompleteCallback_Expect(test_read_callback, &expected);
+//    I2C0_SetBuffer_Expect(expected_register, 1);
+//    I2C0_SetAddressNackCallback_Expect(test_restart_callback, NULL);
+//    I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR);
+//    I2C0_Close_ExpectAndReturn(I2C0_NOERR);
+
+    
+
+    // Data Read
+    
+    
     INA219_Data_t* actual = INA219_getReadings();
     
     TEST_ASSERT_EQUAL(320, actual->bus_voltage);
+    printf("\nina219_getReadings_test: end\n");
     
 }
 

@@ -163,8 +163,6 @@ typedef enum ina219_config_profile_e {
      */
     void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile);
     
-    void INA219_set_read_callback(twi0_callback_t callback);
-    void INA219_set_restartwrite_callback(twi0_callback_t callback);
 
     /**
      * \brief Returns a pointer to the readings object.

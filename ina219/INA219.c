@@ -4,6 +4,10 @@
 #include "INA219.h"
 #include "util/delay.h"
 
+
+void INA219_set_read_callback(twi0_callback_t callback);
+void INA219_set_restartwrite_callback(twi0_callback_t callback);
+
   uint8_t iic_address;
   uint16_t ina219_calibration;
   uint16_t ina219_configuration;
@@ -46,6 +50,7 @@ profileSetupFunction *ina219_configurations[] = {
 
 
 void INA219_set_calibration(uint16_t calibaration){
+    printf("INA219_set_calibration: start calibration: %04x\n", calibaration);
     uint8_t data[3];
     data[0] = INA219_CAL; // Register
     data[1] = calibaration >> 8;   // MSB
@@ -54,12 +59,15 @@ void INA219_set_calibration(uint16_t calibaration){
     I2C0_SetBuffer(data, 2);
     I2C0_MasterOperation(false); // Write
     I2C0_Close();    
+    printf("INA219_set_calibration: end\n");
 }
 
 static twi0_operations_t default_read_handler(void *ptr)
 {
+    printf("default_read_handler: Start\n");
     I2C0_SetBuffer(ptr, 2);
     I2C0_SetDataCompleteCallback(NULL, NULL);
+    printf("default_read_handler: End %d\n", I2C0_RESTART_READ);
     return I2C0_RESTART_READ;
 }
 
@@ -67,7 +75,8 @@ static twi0_operations_t default_read_handler(void *ptr)
  * 
  */
 void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
-    
+    printf("INA219_Initialise: Start\n");
+
     INA219_set_read_callback(default_read_handler);
     INA219_set_restartwrite_callback(I2C0_SetRestartWriteCallback);
     
@@ -85,6 +94,7 @@ void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
     I2C0_SetBuffer(data, 2);
     I2C0_MasterOperation(false); // Write
     I2C0_Close();    
+    printf("INA219_Initialise: End\n");
 
 }
 
@@ -92,16 +102,20 @@ void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
  * \brief Sets a callback for recording the register values, if needed.
  */
 void INA219_set_read_callback(twi0_callback_t callback){
+    printf("INA219_set_read_callback: Setting the read call back\n");
     ina219_read_callback = callback;
 }
 
 void INA219_set_restartwrite_callback(twi0_callback_t callback){
+    printf("INA219_set_read_callback: Setting the restart write call back\n");
     ina219_restart_write_callback = callback;
 }
 
-uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
-    if( calibrate )
+uint16_t read_register_value(uint8_t reg, bool calibrate){
+    printf("get_register_value: start reg: %d, calibrate: %d\n", reg, (uint8_t)calibrate);
+    if( calibrate ){
         INA219_set_calibration(ina219_calibration);
+    }
     
     while(!I2C0_Open(iic_address)); // sit here until we get the bus..
     I2C0_SetDataCompleteCallback(ina219_read_callback, read_buffer.bit8);
@@ -112,6 +126,7 @@ uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
     while(I2C0_BUSY == I2C0_Close()); // sit here until finished.
 
     uint16_t result = ((uint16_t) read_buffer.bit8[0]<<8)|read_buffer.bit8[1];
+    printf("get_register_value: end result: %04x\n", result );
 
     return result;
     
@@ -120,32 +135,29 @@ uint16_t get_regsiter_value(uint8_t reg, bool calibrate){
 
 
 INA219_Data_t* INA219_getReadings() {
-
-    uint8_t timeout = 0;
+    printf("INA219_getReadings: start\n");
 
     INA219_Data.bus_voltage = 0.0;
     INA219_Data.shunt_voltage = 0.0;
     INA219_Data.current = 0.0;
     INA219_Data.power = 0.0;
-    bool reading_ok = false;
-    while (!reading_ok) {
-        INA219_Data.raw_bus_voltage = get_regsiter_value(INA219_BUS_VOLTAGE, false);
-        reading_ok = INA219_Data.raw_bus_voltage & 0x02;
-        _delay_ms(500);
-        timeout++;
-    }
+    printf("INA219_getReadings: get INA219_BUS_VOLTAGE\n");
+    INA219_Data.raw_bus_voltage = read_register_value(INA219_BUS_VOLTAGE, false);
     INA219_Data.bus_voltage = (int16_t) ((INA219_Data.raw_bus_voltage >> 3) * 4);
     INA219_Data.bus_voltage = INA219_Data.bus_voltage * 0.001;
-
-    INA219_Data.raw_shunt_voltage = get_regsiter_value(INA219_SHUNT_VOLTAGE, false);
+    
+    printf("INA219_getReadings: get INA219_SHUNT_VOLTAGE\n");
+    INA219_Data.raw_shunt_voltage = read_register_value(INA219_SHUNT_VOLTAGE, false);
     INA219_Data.shunt_voltage = INA219_Data.raw_shunt_voltage * 0.01;
 
-
-    INA219_Data.raw_current = get_regsiter_value(INA219_CURRENT, true);
+    printf("INA219_getReadings: get INA219_CURRENT\n");
+    INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
     INA219_Data.current = ((float) INA219_Data.raw_current / 10.0);
-
-    INA219_Data.raw_power = get_regsiter_value(INA219_POWER, true);
+    
+    printf("INA219_getReadings: get INA219_POWER\n");
+    INA219_Data.raw_power = read_register_value(INA219_POWER, true);
     INA219_Data.power = ((float) INA219_Data.raw_power * 2.0);
+    printf("INA219_getReadings: end\n");
 
     return &INA219_Data;
 
