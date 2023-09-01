@@ -139,6 +139,12 @@ typedef enum ina219_config_profile_e {
     INA219_CONFIG_PROFILE_12V_3A,
 } INA219_Config_Profile_t;
 
+typedef enum ina219_readings {
+    INA219_READING_BUS_VOLTAGE,
+    INA219_READING_SHUNT_VOLTAGE,
+    INA219_READING_CURRENT,
+    INA219_READING_POWER
+} INA219_Readings;
 
     // Data structure for the reading results.
     typedef struct  {
@@ -170,6 +176,14 @@ typedef enum ina219_config_profile_e {
      * \return the readings in the pointer to the INA219_Data_t structure.
      */
     INA219_Data_t* INA219_getReadings();
+    
+    /**
+     * \brief Obtain a single reading value.
+     * 
+     * \param reading
+     * \return 
+     */
+    uint16_t INA219_getReading(INA219_Readings reading);
     
 #ifdef	__cplusplus
 }

@@ -25,8 +25,21 @@ union read_buffer_t {
 
 union read_buffer_t read_buffer;
 
+typedef uint16_t (*data_handler)(void);
 
-typedef void(profileSetupFunction)(void);
+static uint16_t get_shunt_voltage();
+static uint16_t get_bus_voltage();
+static uint16_t get_current();
+static uint16_t get_power();
+
+data_handler data_handlers[] = {
+    get_shunt_voltage,
+    get_bus_voltage,
+    get_current,
+    get_power
+};
+
+
 
 twi0_callback_t ina219_read_callback;
 twi0_callback_t ina219_restart_write_callback; 
@@ -36,8 +49,10 @@ static void INA219_DEFAULT_CONFIG(void);
 static void INA219_20V_15A_CONFIG(void);
 static void INA219_12V_3A_CONFIG(void);
 
+typedef void (*profileSetupFunction)(void);
+
 // An array to collect the state handlers
-profileSetupFunction *ina219_configurations[] = {
+profileSetupFunction ina219_configurations[] = {
     INA219_DEFAULT_CONFIG,
     INA219_20V_15A_CONFIG,
     INA219_12V_3A_CONFIG,
@@ -57,7 +72,7 @@ void INA219_set_calibration(uint16_t calibaration){
     data[2] = 0xFF & calibaration; // LSB
     while(!I2C0_Open(iic_address));
     I2C0_SetBuffer(data, 2);
-    I2C0_MasterOperation(false); // Write
+    I2C0_MasterWrite(); // Write
     I2C0_Close();    
     printf("INA219_set_calibration: end\n");
 }
@@ -92,7 +107,7 @@ void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
     data[2] = 0xFF & ina219_configuration;    // LSB
     while(!I2C0_Open(iic_address));
     I2C0_SetBuffer(data, 2);
-    I2C0_MasterOperation(false); // Write
+    I2C0_MasterWrite(); // Write
     I2C0_Close();    
     printf("INA219_Initialise: End\n");
 
@@ -129,8 +144,7 @@ uint16_t read_register_value(uint8_t reg, bool calibrate){
     printf("get_register_value: end result: %04x\n", result );
 
     return result;
-    
-    
+
 }
 
 
@@ -142,7 +156,7 @@ INA219_Data_t* INA219_getReadings() {
     INA219_Data.current = 0.0;
     INA219_Data.power = 0.0;
     printf("INA219_getReadings: get INA219_BUS_VOLTAGE\n");
-    INA219_Data.raw_bus_voltage = read_register_value(INA219_BUS_VOLTAGE, false);
+    INA219_Data.raw_bus_voltage = get_shunt_voltage();
     INA219_Data.bus_voltage = (int16_t) ((INA219_Data.raw_bus_voltage >> 3) * 4);
     INA219_Data.bus_voltage = INA219_Data.bus_voltage * 0.001;
     
@@ -162,6 +176,29 @@ INA219_Data_t* INA219_getReadings() {
     return &INA219_Data;
 
 }
+
+static uint16_t get_shunt_voltage(){
+    return read_register_value(INA219_BUS_VOLTAGE, false);
+}
+
+static uint16_t get_bus_voltage(){
+    return read_register_value(INA219_SHUNT_VOLTAGE, false);
+}
+
+static uint16_t get_current(){
+    return read_register_value(INA219_CURRENT, false);
+}
+
+static uint16_t get_power(){
+    return read_register_value(INA219_POWER, false);
+}
+
+
+uint16_t INA219_getReading(INA219_Readings reading) {
+    printf("INA219_getReading: reading: %d\n", reading);
+    return data_handlers[reading]();
+}
+
 
 /**
  * \brief Sets the INA219 default values for the configuration and the 

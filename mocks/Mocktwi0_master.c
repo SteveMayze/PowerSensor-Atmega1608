@@ -37,6 +37,9 @@ typedef struct _CMOCK_I2C0_SetReturnStopCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_operations_t ReturnVal;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetReturnStopCallback_CALL_INSTANCE;
 
@@ -45,6 +48,9 @@ typedef struct _CMOCK_I2C0_SetReturnResetCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_operations_t ReturnVal;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetReturnResetCallback_CALL_INSTANCE;
 
@@ -53,6 +59,9 @@ typedef struct _CMOCK_I2C0_SetRestartWriteCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_operations_t ReturnVal;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetRestartWriteCallback_CALL_INSTANCE;
 
@@ -61,6 +70,9 @@ typedef struct _CMOCK_I2C0_SetRestartReadCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_operations_t ReturnVal;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetRestartReadCallback_CALL_INSTANCE;
 
@@ -120,6 +132,9 @@ typedef struct _CMOCK_I2C0_SetBuffer_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   void* Expected_buffer;
   size_t Expected_bufferSize;
+  char ReturnThruPtr_buffer_Used;
+  void* ReturnThruPtr_buffer_Val;
+  size_t ReturnThruPtr_buffer_Size;
 
 } CMOCK_I2C0_SetBuffer_CALL_INSTANCE;
 
@@ -128,6 +143,9 @@ typedef struct _CMOCK_I2C0_SetDataCompleteCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_callback_t Expected_cb;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetDataCompleteCallback_CALL_INSTANCE;
 
@@ -136,6 +154,9 @@ typedef struct _CMOCK_I2C0_SetWriteCollisionCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_callback_t Expected_cb;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetWriteCollisionCallback_CALL_INSTANCE;
 
@@ -144,6 +165,9 @@ typedef struct _CMOCK_I2C0_SetAddressNackCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_callback_t Expected_cb;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetAddressNackCallback_CALL_INSTANCE;
 
@@ -152,6 +176,9 @@ typedef struct _CMOCK_I2C0_SetDataNackCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_callback_t Expected_cb;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetDataNackCallback_CALL_INSTANCE;
 
@@ -160,6 +187,9 @@ typedef struct _CMOCK_I2C0_SetTimeoutCallback_CALL_INSTANCE
   UNITY_LINE_TYPE LineNumber;
   twi0_callback_t Expected_cb;
   void* Expected_funPtr;
+  char ReturnThruPtr_funPtr_Used;
+  void* ReturnThruPtr_funPtr_Val;
+  size_t ReturnThruPtr_funPtr_Size;
 
 } CMOCK_I2C0_SetTimeoutCallback_CALL_INSTANCE;
 
@@ -180,51 +210,108 @@ static struct Mocktwi0_masterInstance
 {
   char I2C0_SetReturnStopCallback_IgnoreBool;
   twi0_operations_t I2C0_SetReturnStopCallback_FinalReturn;
+  char I2C0_SetReturnStopCallback_CallbackBool;
+  CMOCK_I2C0_SetReturnStopCallback_CALLBACK I2C0_SetReturnStopCallback_CallbackFunctionPointer;
+  int I2C0_SetReturnStopCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetReturnStopCallback_CallInstance;
   char I2C0_SetReturnResetCallback_IgnoreBool;
   twi0_operations_t I2C0_SetReturnResetCallback_FinalReturn;
+  char I2C0_SetReturnResetCallback_CallbackBool;
+  CMOCK_I2C0_SetReturnResetCallback_CALLBACK I2C0_SetReturnResetCallback_CallbackFunctionPointer;
+  int I2C0_SetReturnResetCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetReturnResetCallback_CallInstance;
   char I2C0_SetRestartWriteCallback_IgnoreBool;
   twi0_operations_t I2C0_SetRestartWriteCallback_FinalReturn;
+  char I2C0_SetRestartWriteCallback_CallbackBool;
+  CMOCK_I2C0_SetRestartWriteCallback_CALLBACK I2C0_SetRestartWriteCallback_CallbackFunctionPointer;
+  int I2C0_SetRestartWriteCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetRestartWriteCallback_CallInstance;
   char I2C0_SetRestartReadCallback_IgnoreBool;
   twi0_operations_t I2C0_SetRestartReadCallback_FinalReturn;
+  char I2C0_SetRestartReadCallback_CallbackBool;
+  CMOCK_I2C0_SetRestartReadCallback_CALLBACK I2C0_SetRestartReadCallback_CallbackFunctionPointer;
+  int I2C0_SetRestartReadCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetRestartReadCallback_CallInstance;
   char I2C0_Initialize_IgnoreBool;
   uint8_t I2C0_Initialize_FinalReturn;
+  char I2C0_Initialize_CallbackBool;
+  CMOCK_I2C0_Initialize_CALLBACK I2C0_Initialize_CallbackFunctionPointer;
+  int I2C0_Initialize_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_Initialize_CallInstance;
   char I2C0_Open_IgnoreBool;
   twi0_error_t I2C0_Open_FinalReturn;
+  char I2C0_Open_CallbackBool;
+  CMOCK_I2C0_Open_CALLBACK I2C0_Open_CallbackFunctionPointer;
+  int I2C0_Open_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_Open_CallInstance;
   char I2C0_Close_IgnoreBool;
   twi0_error_t I2C0_Close_FinalReturn;
+  char I2C0_Close_CallbackBool;
+  CMOCK_I2C0_Close_CALLBACK I2C0_Close_CallbackFunctionPointer;
+  int I2C0_Close_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_Close_CallInstance;
   char I2C0_MasterOperation_IgnoreBool;
   twi0_error_t I2C0_MasterOperation_FinalReturn;
+  char I2C0_MasterOperation_CallbackBool;
+  CMOCK_I2C0_MasterOperation_CALLBACK I2C0_MasterOperation_CallbackFunctionPointer;
+  int I2C0_MasterOperation_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_MasterOperation_CallInstance;
   char I2C0_MasterWrite_IgnoreBool;
   twi0_error_t I2C0_MasterWrite_FinalReturn;
+  char I2C0_MasterWrite_CallbackBool;
+  CMOCK_I2C0_MasterWrite_CALLBACK I2C0_MasterWrite_CallbackFunctionPointer;
+  int I2C0_MasterWrite_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_MasterWrite_CallInstance;
   char I2C0_MasterRead_IgnoreBool;
   twi0_error_t I2C0_MasterRead_FinalReturn;
+  char I2C0_MasterRead_CallbackBool;
+  CMOCK_I2C0_MasterRead_CALLBACK I2C0_MasterRead_CallbackFunctionPointer;
+  int I2C0_MasterRead_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_MasterRead_CallInstance;
   char I2C0_SetTimeout_IgnoreBool;
+  char I2C0_SetTimeout_CallbackBool;
+  CMOCK_I2C0_SetTimeout_CALLBACK I2C0_SetTimeout_CallbackFunctionPointer;
+  int I2C0_SetTimeout_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetTimeout_CallInstance;
   char I2C0_SetBuffer_IgnoreBool;
+  char I2C0_SetBuffer_CallbackBool;
+  CMOCK_I2C0_SetBuffer_CALLBACK I2C0_SetBuffer_CallbackFunctionPointer;
+  int I2C0_SetBuffer_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetBuffer_CallInstance;
   char I2C0_SetDataCompleteCallback_IgnoreBool;
+  char I2C0_SetDataCompleteCallback_CallbackBool;
+  CMOCK_I2C0_SetDataCompleteCallback_CALLBACK I2C0_SetDataCompleteCallback_CallbackFunctionPointer;
+  int I2C0_SetDataCompleteCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetDataCompleteCallback_CallInstance;
   char I2C0_SetWriteCollisionCallback_IgnoreBool;
+  char I2C0_SetWriteCollisionCallback_CallbackBool;
+  CMOCK_I2C0_SetWriteCollisionCallback_CALLBACK I2C0_SetWriteCollisionCallback_CallbackFunctionPointer;
+  int I2C0_SetWriteCollisionCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetWriteCollisionCallback_CallInstance;
   char I2C0_SetAddressNackCallback_IgnoreBool;
+  char I2C0_SetAddressNackCallback_CallbackBool;
+  CMOCK_I2C0_SetAddressNackCallback_CALLBACK I2C0_SetAddressNackCallback_CallbackFunctionPointer;
+  int I2C0_SetAddressNackCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetAddressNackCallback_CallInstance;
   char I2C0_SetDataNackCallback_IgnoreBool;
+  char I2C0_SetDataNackCallback_CallbackBool;
+  CMOCK_I2C0_SetDataNackCallback_CALLBACK I2C0_SetDataNackCallback_CallbackFunctionPointer;
+  int I2C0_SetDataNackCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetDataNackCallback_CallInstance;
   char I2C0_SetTimeoutCallback_IgnoreBool;
+  char I2C0_SetTimeoutCallback_CallbackBool;
+  CMOCK_I2C0_SetTimeoutCallback_CALLBACK I2C0_SetTimeoutCallback_CallbackFunctionPointer;
+  int I2C0_SetTimeoutCallback_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetTimeoutCallback_CallInstance;
   char I2C0_Poller_IgnoreBool;
+  char I2C0_Poller_CallbackBool;
+  CMOCK_I2C0_Poller_CALLBACK I2C0_Poller_CallbackFunctionPointer;
+  int I2C0_Poller_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_Poller_CallInstance;
   char I2C0_SetAddress_IgnoreBool;
+  char I2C0_SetAddress_CallbackBool;
+  CMOCK_I2C0_SetAddress_CALLBACK I2C0_SetAddress_CallbackFunctionPointer;
+  int I2C0_SetAddress_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE I2C0_SetAddress_CallInstance;
 } Mock;
 
@@ -242,6 +329,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetReturnStopCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetReturnResetCallback_CallInstance;
   if (Mock.I2C0_SetReturnResetCallback_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -249,6 +341,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetReturnResetCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_SetRestartWriteCallback_CallInstance;
   if (Mock.I2C0_SetRestartWriteCallback_IgnoreBool)
@@ -258,6 +355,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetRestartWriteCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetRestartReadCallback_CallInstance;
   if (Mock.I2C0_SetRestartReadCallback_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -265,6 +367,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetRestartReadCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_Initialize_CallInstance;
   if (Mock.I2C0_Initialize_IgnoreBool)
@@ -274,6 +381,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_Initialize);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_Open_CallInstance;
   if (Mock.I2C0_Open_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -281,6 +393,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_Open);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_Open_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_Close_CallInstance;
   if (Mock.I2C0_Close_IgnoreBool)
@@ -290,6 +407,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_Close);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_Close_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_MasterOperation_CallInstance;
   if (Mock.I2C0_MasterOperation_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -297,6 +419,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_MasterOperation);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_MasterOperation_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_MasterWrite_CallInstance;
   if (Mock.I2C0_MasterWrite_IgnoreBool)
@@ -306,6 +433,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_MasterWrite);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_MasterWrite_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_MasterRead_CallInstance;
   if (Mock.I2C0_MasterRead_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -313,6 +445,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_MasterRead);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_MasterRead_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_SetTimeout_CallInstance;
   if (Mock.I2C0_SetTimeout_IgnoreBool)
@@ -322,6 +459,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetTimeout);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetTimeout_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetBuffer_CallInstance;
   if (Mock.I2C0_SetBuffer_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -329,6 +471,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetBuffer);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetBuffer_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_SetDataCompleteCallback_CallInstance;
   if (Mock.I2C0_SetDataCompleteCallback_IgnoreBool)
@@ -338,6 +485,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetDataCompleteCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetWriteCollisionCallback_CallInstance;
   if (Mock.I2C0_SetWriteCollisionCallback_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -345,6 +497,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetWriteCollisionCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_SetAddressNackCallback_CallInstance;
   if (Mock.I2C0_SetAddressNackCallback_IgnoreBool)
@@ -354,6 +511,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetAddressNackCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetDataNackCallback_CallInstance;
   if (Mock.I2C0_SetDataNackCallback_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -361,6 +523,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetDataNackCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
   call_instance = Mock.I2C0_SetTimeoutCallback_CallInstance;
   if (Mock.I2C0_SetTimeoutCallback_IgnoreBool)
@@ -370,6 +537,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_SetTimeoutCallback);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_Poller_CallInstance;
   if (Mock.I2C0_Poller_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -378,6 +550,11 @@ void Mocktwi0_master_Verify(void)
     UNITY_SET_DETAIL(CMockString_I2C0_Poller);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.I2C0_Poller_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.I2C0_SetAddress_CallInstance;
   if (Mock.I2C0_SetAddress_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -385,6 +562,11 @@ void Mocktwi0_master_Verify(void)
   {
     UNITY_SET_DETAIL(CMockString_I2C0_SetAddress);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.I2C0_SetAddress_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
 }
 
@@ -415,6 +597,13 @@ twi0_operations_t I2C0_SetReturnStopCallback(void* funPtr)
          sizeof(twi0_operations_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_SetReturnStopCallback_CallbackBool &&
+      Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer != NULL)
+  {
+    twi0_operations_t cmock_cb_ret = Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetReturnStopCallback_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
@@ -424,6 +613,16 @@ twi0_operations_t I2C0_SetReturnStopCallback(void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetReturnStopCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -432,6 +631,7 @@ void CMockExpectParameters_I2C0_SetReturnStopCallback(CMOCK_I2C0_SetReturnStopCa
 void CMockExpectParameters_I2C0_SetReturnStopCallback(CMOCK_I2C0_SetReturnStopCallback_CALL_INSTANCE* cmock_call_instance, void* funPtr)
 {
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetReturnStopCallback_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, twi0_operations_t cmock_to_return)
@@ -468,6 +668,29 @@ void I2C0_SetReturnStopCallback_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line,
          sizeof(twi0_operations_t[sizeof(cmock_to_return) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_SetReturnStopCallback_AddCallback(CMOCK_I2C0_SetReturnStopCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetReturnStopCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetReturnStopCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetReturnStopCallback_Stub(CMOCK_I2C0_SetReturnStopCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetReturnStopCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetReturnStopCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetReturnStopCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetReturnStopCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetReturnStopCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetReturnStopCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetReturnStopCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 twi0_operations_t I2C0_SetReturnResetCallback(void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -484,6 +707,13 @@ twi0_operations_t I2C0_SetReturnResetCallback(void* funPtr)
          sizeof(twi0_operations_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_SetReturnResetCallback_CallbackBool &&
+      Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer != NULL)
+  {
+    twi0_operations_t cmock_cb_ret = Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetReturnResetCallback_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
@@ -493,6 +723,16 @@ twi0_operations_t I2C0_SetReturnResetCallback(void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetReturnResetCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -501,6 +741,7 @@ void CMockExpectParameters_I2C0_SetReturnResetCallback(CMOCK_I2C0_SetReturnReset
 void CMockExpectParameters_I2C0_SetReturnResetCallback(CMOCK_I2C0_SetReturnResetCallback_CALL_INSTANCE* cmock_call_instance, void* funPtr)
 {
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetReturnResetCallback_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, twi0_operations_t cmock_to_return)
@@ -537,6 +778,29 @@ void I2C0_SetReturnResetCallback_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line
          sizeof(twi0_operations_t[sizeof(cmock_to_return) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_SetReturnResetCallback_AddCallback(CMOCK_I2C0_SetReturnResetCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetReturnResetCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetReturnResetCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetReturnResetCallback_Stub(CMOCK_I2C0_SetReturnResetCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetReturnResetCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetReturnResetCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetReturnResetCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetReturnResetCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetReturnResetCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetReturnResetCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetReturnResetCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 twi0_operations_t I2C0_SetRestartWriteCallback(void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -553,6 +817,13 @@ twi0_operations_t I2C0_SetRestartWriteCallback(void* funPtr)
          sizeof(twi0_operations_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_SetRestartWriteCallback_CallbackBool &&
+      Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer != NULL)
+  {
+    twi0_operations_t cmock_cb_ret = Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetRestartWriteCallback_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
@@ -562,6 +833,16 @@ twi0_operations_t I2C0_SetRestartWriteCallback(void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetRestartWriteCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -570,6 +851,7 @@ void CMockExpectParameters_I2C0_SetRestartWriteCallback(CMOCK_I2C0_SetRestartWri
 void CMockExpectParameters_I2C0_SetRestartWriteCallback(CMOCK_I2C0_SetRestartWriteCallback_CALL_INSTANCE* cmock_call_instance, void* funPtr)
 {
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetRestartWriteCallback_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, twi0_operations_t cmock_to_return)
@@ -606,6 +888,29 @@ void I2C0_SetRestartWriteCallback_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_lin
          sizeof(twi0_operations_t[sizeof(cmock_to_return) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_SetRestartWriteCallback_AddCallback(CMOCK_I2C0_SetRestartWriteCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetRestartWriteCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetRestartWriteCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetRestartWriteCallback_Stub(CMOCK_I2C0_SetRestartWriteCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetRestartWriteCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetRestartWriteCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetRestartWriteCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetRestartWriteCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetRestartWriteCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetRestartWriteCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetRestartWriteCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 twi0_operations_t I2C0_SetRestartReadCallback(void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -622,6 +927,13 @@ twi0_operations_t I2C0_SetRestartReadCallback(void* funPtr)
          sizeof(twi0_operations_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_SetRestartReadCallback_CallbackBool &&
+      Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer != NULL)
+  {
+    twi0_operations_t cmock_cb_ret = Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetRestartReadCallback_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
@@ -631,6 +943,16 @@ twi0_operations_t I2C0_SetRestartReadCallback(void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer(funPtr, Mock.I2C0_SetRestartReadCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -639,6 +961,7 @@ void CMockExpectParameters_I2C0_SetRestartReadCallback(CMOCK_I2C0_SetRestartRead
 void CMockExpectParameters_I2C0_SetRestartReadCallback(CMOCK_I2C0_SetRestartReadCallback_CALL_INSTANCE* cmock_call_instance, void* funPtr)
 {
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetRestartReadCallback_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, twi0_operations_t cmock_to_return)
@@ -675,6 +998,29 @@ void I2C0_SetRestartReadCallback_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line
          sizeof(twi0_operations_t[sizeof(cmock_to_return) == sizeof(twi0_operations_t) ? 1 : -1])); /* add twi0_operations_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_SetRestartReadCallback_AddCallback(CMOCK_I2C0_SetRestartReadCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetRestartReadCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetRestartReadCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetRestartReadCallback_Stub(CMOCK_I2C0_SetRestartReadCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetRestartReadCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetRestartReadCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetRestartReadCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetRestartReadCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetRestartReadCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetRestartReadCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetRestartReadCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 uint8_t I2C0_Initialize(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -690,8 +1036,19 @@ uint8_t I2C0_Initialize(void)
     Mock.I2C0_Initialize_FinalReturn = cmock_call_instance->ReturnVal;
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_Initialize_CallbackBool &&
+      Mock.I2C0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    uint8_t cmock_cb_ret = Mock.I2C0_Initialize_CallbackFunctionPointer(Mock.I2C0_Initialize_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.I2C0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_Initialize_CallbackFunctionPointer(Mock.I2C0_Initialize_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -728,6 +1085,20 @@ void I2C0_Initialize_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cm
   cmock_call_instance->ReturnVal = cmock_to_return;
 }
 
+void I2C0_Initialize_AddCallback(CMOCK_I2C0_Initialize_CALLBACK Callback)
+{
+  Mock.I2C0_Initialize_IgnoreBool = (char)0;
+  Mock.I2C0_Initialize_CallbackBool = (char)1;
+  Mock.I2C0_Initialize_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_Initialize_Stub(CMOCK_I2C0_Initialize_CALLBACK Callback)
+{
+  Mock.I2C0_Initialize_IgnoreBool = (char)0;
+  Mock.I2C0_Initialize_CallbackBool = (char)0;
+  Mock.I2C0_Initialize_CallbackFunctionPointer = Callback;
+}
+
 twi0_error_t I2C0_Open(twi0_address_t address)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -744,11 +1115,22 @@ twi0_error_t I2C0_Open(twi0_address_t address)
          sizeof(twi0_error_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_Open_CallbackBool &&
+      Mock.I2C0_Open_CallbackFunctionPointer != NULL)
+  {
+    twi0_error_t cmock_cb_ret = Mock.I2C0_Open_CallbackFunctionPointer(address, Mock.I2C0_Open_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_I2C0_Open,CMockString_address);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_address), (void*)(&address), sizeof(twi0_address_t), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.I2C0_Open_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_Open_CallbackFunctionPointer(address, Mock.I2C0_Open_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
@@ -795,6 +1177,20 @@ void I2C0_Open_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, twi0_address_t a
          sizeof(twi0_error_t[sizeof(cmock_to_return) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_Open_AddCallback(CMOCK_I2C0_Open_CALLBACK Callback)
+{
+  Mock.I2C0_Open_IgnoreBool = (char)0;
+  Mock.I2C0_Open_CallbackBool = (char)1;
+  Mock.I2C0_Open_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_Open_Stub(CMOCK_I2C0_Open_CALLBACK Callback)
+{
+  Mock.I2C0_Open_IgnoreBool = (char)0;
+  Mock.I2C0_Open_CallbackBool = (char)0;
+  Mock.I2C0_Open_CallbackFunctionPointer = Callback;
+}
+
 twi0_error_t I2C0_Close(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -811,8 +1207,19 @@ twi0_error_t I2C0_Close(void)
          sizeof(twi0_error_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_Close_CallbackBool &&
+      Mock.I2C0_Close_CallbackFunctionPointer != NULL)
+  {
+    twi0_error_t cmock_cb_ret = Mock.I2C0_Close_CallbackFunctionPointer(Mock.I2C0_Close_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.I2C0_Close_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_Close_CallbackFunctionPointer(Mock.I2C0_Close_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -850,6 +1257,20 @@ void I2C0_Close_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, twi0_error_t cm
          sizeof(twi0_error_t[sizeof(cmock_to_return) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_Close_AddCallback(CMOCK_I2C0_Close_CALLBACK Callback)
+{
+  Mock.I2C0_Close_IgnoreBool = (char)0;
+  Mock.I2C0_Close_CallbackBool = (char)1;
+  Mock.I2C0_Close_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_Close_Stub(CMOCK_I2C0_Close_CALLBACK Callback)
+{
+  Mock.I2C0_Close_IgnoreBool = (char)0;
+  Mock.I2C0_Close_CallbackBool = (char)0;
+  Mock.I2C0_Close_CallbackFunctionPointer = Callback;
+}
+
 twi0_error_t I2C0_MasterOperation(bool read)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -866,11 +1287,22 @@ twi0_error_t I2C0_MasterOperation(bool read)
          sizeof(twi0_error_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_MasterOperation_CallbackBool &&
+      Mock.I2C0_MasterOperation_CallbackFunctionPointer != NULL)
+  {
+    twi0_error_t cmock_cb_ret = Mock.I2C0_MasterOperation_CallbackFunctionPointer(read, Mock.I2C0_MasterOperation_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_I2C0_MasterOperation,CMockString_read);
     UNITY_TEST_ASSERT_EQUAL_INT(cmock_call_instance->Expected_read, read, cmock_line, CMockStringMismatch);
+  }
+  if (Mock.I2C0_MasterOperation_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_MasterOperation_CallbackFunctionPointer(read, Mock.I2C0_MasterOperation_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
@@ -916,6 +1348,20 @@ void I2C0_MasterOperation_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool 
          sizeof(twi0_error_t[sizeof(cmock_to_return) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_MasterOperation_AddCallback(CMOCK_I2C0_MasterOperation_CALLBACK Callback)
+{
+  Mock.I2C0_MasterOperation_IgnoreBool = (char)0;
+  Mock.I2C0_MasterOperation_CallbackBool = (char)1;
+  Mock.I2C0_MasterOperation_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_MasterOperation_Stub(CMOCK_I2C0_MasterOperation_CALLBACK Callback)
+{
+  Mock.I2C0_MasterOperation_IgnoreBool = (char)0;
+  Mock.I2C0_MasterOperation_CallbackBool = (char)0;
+  Mock.I2C0_MasterOperation_CallbackFunctionPointer = Callback;
+}
+
 twi0_error_t I2C0_MasterWrite(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -932,8 +1378,19 @@ twi0_error_t I2C0_MasterWrite(void)
          sizeof(twi0_error_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_MasterWrite_CallbackBool &&
+      Mock.I2C0_MasterWrite_CallbackFunctionPointer != NULL)
+  {
+    twi0_error_t cmock_cb_ret = Mock.I2C0_MasterWrite_CallbackFunctionPointer(Mock.I2C0_MasterWrite_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.I2C0_MasterWrite_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_MasterWrite_CallbackFunctionPointer(Mock.I2C0_MasterWrite_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -971,6 +1428,20 @@ void I2C0_MasterWrite_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, twi0_erro
          sizeof(twi0_error_t[sizeof(cmock_to_return) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_MasterWrite_AddCallback(CMOCK_I2C0_MasterWrite_CALLBACK Callback)
+{
+  Mock.I2C0_MasterWrite_IgnoreBool = (char)0;
+  Mock.I2C0_MasterWrite_CallbackBool = (char)1;
+  Mock.I2C0_MasterWrite_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_MasterWrite_Stub(CMOCK_I2C0_MasterWrite_CALLBACK Callback)
+{
+  Mock.I2C0_MasterWrite_IgnoreBool = (char)0;
+  Mock.I2C0_MasterWrite_CallbackBool = (char)0;
+  Mock.I2C0_MasterWrite_CallbackFunctionPointer = Callback;
+}
+
 twi0_error_t I2C0_MasterRead(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -987,8 +1458,19 @@ twi0_error_t I2C0_MasterRead(void)
          sizeof(twi0_error_t[sizeof(cmock_call_instance->ReturnVal) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
     return cmock_call_instance->ReturnVal;
   }
+  if (!Mock.I2C0_MasterRead_CallbackBool &&
+      Mock.I2C0_MasterRead_CallbackFunctionPointer != NULL)
+  {
+    twi0_error_t cmock_cb_ret = Mock.I2C0_MasterRead_CallbackFunctionPointer(Mock.I2C0_MasterRead_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.I2C0_MasterRead_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.I2C0_MasterRead_CallbackFunctionPointer(Mock.I2C0_MasterRead_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
@@ -1026,6 +1508,20 @@ void I2C0_MasterRead_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, twi0_error
          sizeof(twi0_error_t[sizeof(cmock_to_return) == sizeof(twi0_error_t) ? 1 : -1])); /* add twi0_error_t to :treat_as_array if this causes an error */
 }
 
+void I2C0_MasterRead_AddCallback(CMOCK_I2C0_MasterRead_CALLBACK Callback)
+{
+  Mock.I2C0_MasterRead_IgnoreBool = (char)0;
+  Mock.I2C0_MasterRead_CallbackBool = (char)1;
+  Mock.I2C0_MasterRead_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_MasterRead_Stub(CMOCK_I2C0_MasterRead_CALLBACK Callback)
+{
+  Mock.I2C0_MasterRead_IgnoreBool = (char)0;
+  Mock.I2C0_MasterRead_CallbackBool = (char)0;
+  Mock.I2C0_MasterRead_CallbackFunctionPointer = Callback;
+}
+
 void I2C0_SetTimeout(uint8_t to)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1038,11 +1534,22 @@ void I2C0_SetTimeout(uint8_t to)
     UNITY_CLR_DETAILS();
     return;
   }
+  if (!Mock.I2C0_SetTimeout_CallbackBool &&
+      Mock.I2C0_SetTimeout_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetTimeout_CallbackFunctionPointer(to, Mock.I2C0_SetTimeout_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_I2C0_SetTimeout,CMockString_to);
     UNITY_TEST_ASSERT_EQUAL_HEX8(cmock_call_instance->Expected_to, to, cmock_line, CMockStringMismatch);
+  }
+  if (Mock.I2C0_SetTimeout_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetTimeout_CallbackFunctionPointer(to, Mock.I2C0_SetTimeout_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -1075,6 +1582,20 @@ void I2C0_SetTimeout_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t to)
   CMockExpectParameters_I2C0_SetTimeout(cmock_call_instance, to);
 }
 
+void I2C0_SetTimeout_AddCallback(CMOCK_I2C0_SetTimeout_CALLBACK Callback)
+{
+  Mock.I2C0_SetTimeout_IgnoreBool = (char)0;
+  Mock.I2C0_SetTimeout_CallbackBool = (char)1;
+  Mock.I2C0_SetTimeout_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetTimeout_Stub(CMOCK_I2C0_SetTimeout_CALLBACK Callback)
+{
+  Mock.I2C0_SetTimeout_IgnoreBool = (char)0;
+  Mock.I2C0_SetTimeout_CallbackBool = (char)0;
+  Mock.I2C0_SetTimeout_CallbackFunctionPointer = Callback;
+}
+
 void I2C0_SetBuffer(void* buffer, size_t bufferSize)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1084,6 +1605,13 @@ void I2C0_SetBuffer(void* buffer, size_t bufferSize)
   Mock.I2C0_SetBuffer_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetBuffer_CallInstance);
   if (Mock.I2C0_SetBuffer_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetBuffer_CallbackBool &&
+      Mock.I2C0_SetBuffer_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetBuffer_CallbackFunctionPointer(buffer, bufferSize, Mock.I2C0_SetBuffer_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1100,6 +1628,16 @@ void I2C0_SetBuffer(void* buffer, size_t bufferSize)
     UNITY_SET_DETAILS(CMockString_I2C0_SetBuffer,CMockString_bufferSize);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_bufferSize), (void*)(&bufferSize), sizeof(size_t), cmock_line, CMockStringMismatch);
   }
+  if (Mock.I2C0_SetBuffer_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetBuffer_CallbackFunctionPointer(buffer, bufferSize, Mock.I2C0_SetBuffer_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_buffer_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(buffer, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)buffer, (void*)cmock_call_instance->ReturnThruPtr_buffer_Val,
+      cmock_call_instance->ReturnThruPtr_buffer_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1107,6 +1645,7 @@ void CMockExpectParameters_I2C0_SetBuffer(CMOCK_I2C0_SetBuffer_CALL_INSTANCE* cm
 void CMockExpectParameters_I2C0_SetBuffer(CMOCK_I2C0_SetBuffer_CALL_INSTANCE* cmock_call_instance, void* buffer, size_t bufferSize)
 {
   cmock_call_instance->Expected_buffer = buffer;
+  cmock_call_instance->ReturnThruPtr_buffer_Used = 0;
   memcpy((void*)(&cmock_call_instance->Expected_bufferSize), (void*)(&bufferSize),
          sizeof(size_t[sizeof(bufferSize) == sizeof(size_t) ? 1 : -1])); /* add size_t to :treat_as_array if this causes an error */
 }
@@ -1133,6 +1672,29 @@ void I2C0_SetBuffer_CMockExpect(UNITY_LINE_TYPE cmock_line, void* buffer, size_t
   CMockExpectParameters_I2C0_SetBuffer(cmock_call_instance, buffer, bufferSize);
 }
 
+void I2C0_SetBuffer_AddCallback(CMOCK_I2C0_SetBuffer_CALLBACK Callback)
+{
+  Mock.I2C0_SetBuffer_IgnoreBool = (char)0;
+  Mock.I2C0_SetBuffer_CallbackBool = (char)1;
+  Mock.I2C0_SetBuffer_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetBuffer_Stub(CMOCK_I2C0_SetBuffer_CALLBACK Callback)
+{
+  Mock.I2C0_SetBuffer_IgnoreBool = (char)0;
+  Mock.I2C0_SetBuffer_CallbackBool = (char)0;
+  Mock.I2C0_SetBuffer_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetBuffer_CMockReturnMemThruPtr_buffer(UNITY_LINE_TYPE cmock_line, void* buffer, size_t cmock_size)
+{
+  CMOCK_I2C0_SetBuffer_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetBuffer_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetBuffer_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_buffer_Used = 1;
+  cmock_call_instance->ReturnThruPtr_buffer_Val = buffer;
+  cmock_call_instance->ReturnThruPtr_buffer_Size = cmock_size;
+}
+
 void I2C0_SetDataCompleteCallback(twi0_callback_t cb, void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1142,6 +1704,13 @@ void I2C0_SetDataCompleteCallback(twi0_callback_t cb, void* funPtr)
   Mock.I2C0_SetDataCompleteCallback_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetDataCompleteCallback_CallInstance);
   if (Mock.I2C0_SetDataCompleteCallback_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetDataCompleteCallback_CallbackBool &&
+      Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetDataCompleteCallback_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1158,6 +1727,16 @@ void I2C0_SetDataCompleteCallback(twi0_callback_t cb, void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetDataCompleteCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1167,6 +1746,7 @@ void CMockExpectParameters_I2C0_SetDataCompleteCallback(CMOCK_I2C0_SetDataComple
   memcpy((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb),
          sizeof(twi0_callback_t[sizeof(cb) == sizeof(twi0_callback_t) ? 1 : -1])); /* add twi0_callback_t to :treat_as_array if this causes an error */
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetDataCompleteCallback_CMockIgnore(void)
@@ -1191,6 +1771,29 @@ void I2C0_SetDataCompleteCallback_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0_c
   CMockExpectParameters_I2C0_SetDataCompleteCallback(cmock_call_instance, cb, funPtr);
 }
 
+void I2C0_SetDataCompleteCallback_AddCallback(CMOCK_I2C0_SetDataCompleteCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetDataCompleteCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetDataCompleteCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetDataCompleteCallback_Stub(CMOCK_I2C0_SetDataCompleteCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetDataCompleteCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetDataCompleteCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetDataCompleteCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetDataCompleteCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetDataCompleteCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetDataCompleteCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetDataCompleteCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 void I2C0_SetWriteCollisionCallback(twi0_callback_t cb, void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1200,6 +1803,13 @@ void I2C0_SetWriteCollisionCallback(twi0_callback_t cb, void* funPtr)
   Mock.I2C0_SetWriteCollisionCallback_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetWriteCollisionCallback_CallInstance);
   if (Mock.I2C0_SetWriteCollisionCallback_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetWriteCollisionCallback_CallbackBool &&
+      Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetWriteCollisionCallback_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1216,6 +1826,16 @@ void I2C0_SetWriteCollisionCallback(twi0_callback_t cb, void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetWriteCollisionCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1225,6 +1845,7 @@ void CMockExpectParameters_I2C0_SetWriteCollisionCallback(CMOCK_I2C0_SetWriteCol
   memcpy((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb),
          sizeof(twi0_callback_t[sizeof(cb) == sizeof(twi0_callback_t) ? 1 : -1])); /* add twi0_callback_t to :treat_as_array if this causes an error */
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetWriteCollisionCallback_CMockIgnore(void)
@@ -1249,6 +1870,29 @@ void I2C0_SetWriteCollisionCallback_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0
   CMockExpectParameters_I2C0_SetWriteCollisionCallback(cmock_call_instance, cb, funPtr);
 }
 
+void I2C0_SetWriteCollisionCallback_AddCallback(CMOCK_I2C0_SetWriteCollisionCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetWriteCollisionCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetWriteCollisionCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetWriteCollisionCallback_Stub(CMOCK_I2C0_SetWriteCollisionCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetWriteCollisionCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetWriteCollisionCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetWriteCollisionCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetWriteCollisionCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetWriteCollisionCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetWriteCollisionCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetWriteCollisionCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 void I2C0_SetAddressNackCallback(twi0_callback_t cb, void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1258,6 +1902,13 @@ void I2C0_SetAddressNackCallback(twi0_callback_t cb, void* funPtr)
   Mock.I2C0_SetAddressNackCallback_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetAddressNackCallback_CallInstance);
   if (Mock.I2C0_SetAddressNackCallback_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetAddressNackCallback_CallbackBool &&
+      Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetAddressNackCallback_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1274,6 +1925,16 @@ void I2C0_SetAddressNackCallback(twi0_callback_t cb, void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetAddressNackCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1283,6 +1944,7 @@ void CMockExpectParameters_I2C0_SetAddressNackCallback(CMOCK_I2C0_SetAddressNack
   memcpy((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb),
          sizeof(twi0_callback_t[sizeof(cb) == sizeof(twi0_callback_t) ? 1 : -1])); /* add twi0_callback_t to :treat_as_array if this causes an error */
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetAddressNackCallback_CMockIgnore(void)
@@ -1307,6 +1969,29 @@ void I2C0_SetAddressNackCallback_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0_ca
   CMockExpectParameters_I2C0_SetAddressNackCallback(cmock_call_instance, cb, funPtr);
 }
 
+void I2C0_SetAddressNackCallback_AddCallback(CMOCK_I2C0_SetAddressNackCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetAddressNackCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetAddressNackCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetAddressNackCallback_Stub(CMOCK_I2C0_SetAddressNackCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetAddressNackCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetAddressNackCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetAddressNackCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetAddressNackCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetAddressNackCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetAddressNackCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetAddressNackCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 void I2C0_SetDataNackCallback(twi0_callback_t cb, void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1316,6 +2001,13 @@ void I2C0_SetDataNackCallback(twi0_callback_t cb, void* funPtr)
   Mock.I2C0_SetDataNackCallback_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetDataNackCallback_CallInstance);
   if (Mock.I2C0_SetDataNackCallback_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetDataNackCallback_CallbackBool &&
+      Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetDataNackCallback_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1332,6 +2024,16 @@ void I2C0_SetDataNackCallback(twi0_callback_t cb, void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetDataNackCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1341,6 +2043,7 @@ void CMockExpectParameters_I2C0_SetDataNackCallback(CMOCK_I2C0_SetDataNackCallba
   memcpy((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb),
          sizeof(twi0_callback_t[sizeof(cb) == sizeof(twi0_callback_t) ? 1 : -1])); /* add twi0_callback_t to :treat_as_array if this causes an error */
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetDataNackCallback_CMockIgnore(void)
@@ -1365,6 +2068,29 @@ void I2C0_SetDataNackCallback_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0_callb
   CMockExpectParameters_I2C0_SetDataNackCallback(cmock_call_instance, cb, funPtr);
 }
 
+void I2C0_SetDataNackCallback_AddCallback(CMOCK_I2C0_SetDataNackCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetDataNackCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetDataNackCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetDataNackCallback_Stub(CMOCK_I2C0_SetDataNackCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetDataNackCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetDataNackCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetDataNackCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetDataNackCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetDataNackCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetDataNackCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetDataNackCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 void I2C0_SetTimeoutCallback(twi0_callback_t cb, void* funPtr)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1374,6 +2100,13 @@ void I2C0_SetTimeoutCallback(twi0_callback_t cb, void* funPtr)
   Mock.I2C0_SetTimeoutCallback_CallInstance = CMock_Guts_MemNext(Mock.I2C0_SetTimeoutCallback_CallInstance);
   if (Mock.I2C0_SetTimeoutCallback_IgnoreBool)
   {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.I2C0_SetTimeoutCallback_CallbackBool &&
+      Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetTimeoutCallback_CallbackCalls++);
     UNITY_CLR_DETAILS();
     return;
   }
@@ -1390,6 +2123,16 @@ void I2C0_SetTimeoutCallback(twi0_callback_t cb, void* funPtr)
     else
       { UNITY_TEST_ASSERT_EQUAL_HEX8_ARRAY(cmock_call_instance->Expected_funPtr, funPtr, 1, cmock_line, CMockStringMismatch); }
   }
+  if (Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer(cb, funPtr, Mock.I2C0_SetTimeoutCallback_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_funPtr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(funPtr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)funPtr, (void*)cmock_call_instance->ReturnThruPtr_funPtr_Val,
+      cmock_call_instance->ReturnThruPtr_funPtr_Size);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1399,6 +2142,7 @@ void CMockExpectParameters_I2C0_SetTimeoutCallback(CMOCK_I2C0_SetTimeoutCallback
   memcpy((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb),
          sizeof(twi0_callback_t[sizeof(cb) == sizeof(twi0_callback_t) ? 1 : -1])); /* add twi0_callback_t to :treat_as_array if this causes an error */
   cmock_call_instance->Expected_funPtr = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 0;
 }
 
 void I2C0_SetTimeoutCallback_CMockIgnore(void)
@@ -1423,6 +2167,29 @@ void I2C0_SetTimeoutCallback_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0_callba
   CMockExpectParameters_I2C0_SetTimeoutCallback(cmock_call_instance, cb, funPtr);
 }
 
+void I2C0_SetTimeoutCallback_AddCallback(CMOCK_I2C0_SetTimeoutCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetTimeoutCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetTimeoutCallback_CallbackBool = (char)1;
+  Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetTimeoutCallback_Stub(CMOCK_I2C0_SetTimeoutCallback_CALLBACK Callback)
+{
+  Mock.I2C0_SetTimeoutCallback_IgnoreBool = (char)0;
+  Mock.I2C0_SetTimeoutCallback_CallbackBool = (char)0;
+  Mock.I2C0_SetTimeoutCallback_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetTimeoutCallback_CMockReturnMemThruPtr_funPtr(UNITY_LINE_TYPE cmock_line, void* funPtr, size_t cmock_size)
+{
+  CMOCK_I2C0_SetTimeoutCallback_CALL_INSTANCE* cmock_call_instance = (CMOCK_I2C0_SetTimeoutCallback_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.I2C0_SetTimeoutCallback_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_funPtr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_funPtr_Val = funPtr;
+  cmock_call_instance->ReturnThruPtr_funPtr_Size = cmock_size;
+}
+
 void I2C0_Poller(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1435,8 +2202,19 @@ void I2C0_Poller(void)
     UNITY_CLR_DETAILS();
     return;
   }
+  if (!Mock.I2C0_Poller_CallbackBool &&
+      Mock.I2C0_Poller_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_Poller_CallbackFunctionPointer(Mock.I2C0_Poller_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.I2C0_Poller_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_Poller_CallbackFunctionPointer(Mock.I2C0_Poller_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
 }
 
@@ -1461,6 +2239,20 @@ void I2C0_Poller_CMockExpect(UNITY_LINE_TYPE cmock_line)
   cmock_call_instance->LineNumber = cmock_line;
 }
 
+void I2C0_Poller_AddCallback(CMOCK_I2C0_Poller_CALLBACK Callback)
+{
+  Mock.I2C0_Poller_IgnoreBool = (char)0;
+  Mock.I2C0_Poller_CallbackBool = (char)1;
+  Mock.I2C0_Poller_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_Poller_Stub(CMOCK_I2C0_Poller_CALLBACK Callback)
+{
+  Mock.I2C0_Poller_IgnoreBool = (char)0;
+  Mock.I2C0_Poller_CallbackBool = (char)0;
+  Mock.I2C0_Poller_CallbackFunctionPointer = Callback;
+}
+
 void I2C0_SetAddress(twi0_address_t address)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
@@ -1473,11 +2265,22 @@ void I2C0_SetAddress(twi0_address_t address)
     UNITY_CLR_DETAILS();
     return;
   }
+  if (!Mock.I2C0_SetAddress_CallbackBool &&
+      Mock.I2C0_SetAddress_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetAddress_CallbackFunctionPointer(address, Mock.I2C0_SetAddress_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_I2C0_SetAddress,CMockString_address);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_address), (void*)(&address), sizeof(twi0_address_t), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.I2C0_SetAddress_CallbackFunctionPointer != NULL)
+  {
+    Mock.I2C0_SetAddress_CallbackFunctionPointer(address, Mock.I2C0_SetAddress_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -1509,5 +2312,19 @@ void I2C0_SetAddress_CMockExpect(UNITY_LINE_TYPE cmock_line, twi0_address_t addr
   Mock.I2C0_SetAddress_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_I2C0_SetAddress(cmock_call_instance, address);
+}
+
+void I2C0_SetAddress_AddCallback(CMOCK_I2C0_SetAddress_CALLBACK Callback)
+{
+  Mock.I2C0_SetAddress_IgnoreBool = (char)0;
+  Mock.I2C0_SetAddress_CallbackBool = (char)1;
+  Mock.I2C0_SetAddress_CallbackFunctionPointer = Callback;
+}
+
+void I2C0_SetAddress_Stub(CMOCK_I2C0_SetAddress_CALLBACK Callback)
+{
+  Mock.I2C0_SetAddress_IgnoreBool = (char)0;
+  Mock.I2C0_SetAddress_CallbackBool = (char)0;
+  Mock.I2C0_SetAddress_CallbackFunctionPointer = Callback;
 }
 
