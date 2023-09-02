@@ -252,7 +252,7 @@ FSM_States_t FSM_IDLE_STATE(void) {
 
 void node_data_collection(){
     printf("node_data_collection: BEGIN\n");
-    INA219_Data_t* data = INA219_getReadings();
+    INA219_Data_t* data = INA219_get_all_readings();
     // Move the data into the struct node_message message
     _message.data_length = 3;
     _message.data_token[0] = NODE_TOKEN_PROPERTY_BUS_VOLTAGE; // bus voltage

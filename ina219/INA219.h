@@ -175,7 +175,7 @@ typedef enum ina219_readings {
      * 
      * \return the readings in the pointer to the INA219_Data_t structure.
      */
-    INA219_Data_t* INA219_getReadings();
+    INA219_Data_t* INA219_get_all_readings();
     
     /**
      * \brief Obtain a single reading value.
@@ -183,7 +183,7 @@ typedef enum ina219_readings {
      * \param reading
      * \return 
      */
-    uint16_t INA219_getReading(INA219_Readings reading);
+    uint16_t INA219_get_raw_reading(INA219_Readings reading);
     
 #ifdef	__cplusplus
 }

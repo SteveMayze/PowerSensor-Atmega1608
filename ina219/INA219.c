@@ -27,16 +27,16 @@ union read_buffer_t read_buffer;
 
 typedef uint16_t (*data_handler)(void);
 
-static uint16_t get_shunt_voltage();
-static uint16_t get_bus_voltage();
-static uint16_t get_current();
-static uint16_t get_power();
+static uint16_t get_raw_shunt_voltage();
+static uint16_t get_raw_bus_voltage();
+static uint16_t get_raw_current();
+static uint16_t get_raw_power();
 
 data_handler data_handlers[] = {
-    get_shunt_voltage,
-    get_bus_voltage,
-    get_current,
-    get_power
+    get_raw_shunt_voltage,
+    get_raw_bus_voltage,
+    get_raw_current,
+    get_raw_power
 };
 
 
@@ -77,6 +77,11 @@ void INA219_set_calibration(uint16_t calibaration){
     printf("INA219_set_calibration: end\n");
 }
 
+/**
+ * \brief The default read handler for a two bytes of data
+ * \param ptr
+ * \return 
+ */
 static twi0_operations_t default_read_handler(void *ptr)
 {
     printf("default_read_handler: Start\n");
@@ -148,23 +153,23 @@ uint16_t read_register_value(uint8_t reg, bool calibrate){
 }
 
 
-INA219_Data_t* INA219_getReadings() {
-    printf("INA219_getReadings: start\n");
+INA219_Data_t* INA219_get_all_readings() {
+    printf("INA219_get_all_readings: start\n");
 
     INA219_Data.bus_voltage = 0.0;
     INA219_Data.shunt_voltage = 0.0;
     INA219_Data.current = 0.0;
     INA219_Data.power = 0.0;
-    printf("INA219_getReadings: get INA219_BUS_VOLTAGE\n");
-    INA219_Data.raw_bus_voltage = get_shunt_voltage();
+    printf("INA219_get_all_readings: get INA219_BUS_VOLTAGE\n");
+    INA219_Data.raw_bus_voltage = read_register_value(INA219_BUS_VOLTAGE, false);
     INA219_Data.bus_voltage = (int16_t) ((INA219_Data.raw_bus_voltage >> 3) * 4);
-    INA219_Data.bus_voltage = INA219_Data.bus_voltage * 0.001;
+    INA219_Data.bus_voltage =((float) INA219_Data.bus_voltage * 0.001);
     
-    printf("INA219_getReadings: get INA219_SHUNT_VOLTAGE\n");
+    printf("INA219_get_all_readings: get INA219_SHUNT_VOLTAGE\n");
     INA219_Data.raw_shunt_voltage = read_register_value(INA219_SHUNT_VOLTAGE, false);
-    INA219_Data.shunt_voltage = INA219_Data.raw_shunt_voltage * 0.01;
+    INA219_Data.shunt_voltage = ((float)INA219_Data.raw_shunt_voltage * 0.01);
 
-    printf("INA219_getReadings: get INA219_CURRENT\n");
+    printf("INA219_get_all_readings: get INA219_CURRENT\n");
     INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
     INA219_Data.current = ((float) INA219_Data.raw_current / 10.0);
     
@@ -177,24 +182,24 @@ INA219_Data_t* INA219_getReadings() {
 
 }
 
-static uint16_t get_shunt_voltage(){
+static uint16_t get_raw_shunt_voltage(){
     return read_register_value(INA219_BUS_VOLTAGE, false);
 }
 
-static uint16_t get_bus_voltage(){
+static uint16_t get_raw_bus_voltage(){
     return read_register_value(INA219_SHUNT_VOLTAGE, false);
 }
 
-static uint16_t get_current(){
+static uint16_t get_raw_current(){
     return read_register_value(INA219_CURRENT, false);
 }
 
-static uint16_t get_power(){
+static uint16_t get_raw_power(){
     return read_register_value(INA219_POWER, false);
 }
 
 
-uint16_t INA219_getReading(INA219_Readings reading) {
+uint16_t INA219_get_raw_reading(INA219_Readings reading) {
     printf("INA219_getReading: reading: %d\n", reading);
     return data_handlers[reading]();
 }
