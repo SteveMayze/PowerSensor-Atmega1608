@@ -88,13 +88,13 @@ void ina219_initialise_large_profile_test(void) {
     r_shunt: 0.107?, max current: 3A, power: 0.96W
     min current_lsb: 92µA, max current_lsb: 733µA
     current_lsb: 100.0µA
-    Calibration: 38280 ? 0x9588
+    Calibration: 3828 ? 0x9588
 
     ======================================*/
 void ina219_initialise_small_profile_test(void) {
 
     printf("\n ina219_initialise_small_profile_test small profile: start\n");
-    uint8_t expected_cal[3] = {INA219_CAL, 0x88, 0x95};
+    uint8_t expected_cal[3] = {INA219_CAL, 0xF4, 0x0E};
     uint8_t expected_cfg[3] = {INA219_CFG, 0x18, 0x8F};
     
     // CALIBRATION
@@ -130,63 +130,71 @@ static twi0_operations_t test_restart_callback(void *ptr){
 }
 
 union read_buffer_t {
-    float_t bitFloat;
+    float bitFloat;
     uint16_t bit16;
     uint8_t bit8[2];
 
 };
 
 
-float_t fixture[] = {
-    0x647A, // VOID
-    0x647A, // Bus      0b0110 0100 0111 1010 12.5 V
-    13400, // Shunt    0b0000 0000 0000 1010 0.107 V
-    12.5, // Current  0b0000 0000 0000 1100 1.25 A
-    7.8125, // Power    0b0000 0000 0000 1100 15.625 W
+float fixture[] = {
+    0x4f88, // Bus - Vin- = Vin+ - Vrs 10.5 - 0.321 = 10.179 => 10.18
+    0x4f88, // Bus      
+    0x7D00, // Shunt Full scale
+    2990, // Current Vs * calibration : 4096
+    1521, // Power Current * Vbus : 5000
 };
 
-void TEST_I2C0_SetDataCompleteCallback(twi0_callback_t cb, void* funPtr, int num_of_call) {
-    printf("TEST_I2C0_SetDataCompleteCallback: Callback being called %d, called: %d times\n", (uint16_t)funPtr, num_of_call);
-    union read_buffer_t input, output;    
-    switch(num_of_call){
+void TEST_I2C0_SetDataCompleteCallback(twi0_callback_t cb, void* funPtr, int call_count) {
+    printf("TEST_I2C0_SetDataCompleteCallback: Callback being called: %d times\n", call_count);
+    union read_buffer_t input, output;  
+//    float calibration = 3828;
+    switch(call_count){
         case 1: // BUS Voltage
-            input.bit16 = fixture[num_of_call];
+            input.bit16 = fixture[call_count];
+            printf("TEST_I2C0_SetDataCompleteCallback: setting BUS Voltage fixture[%d] %04X to input.bit16 %04X \n",
+                    call_count, (uint16_t)fixture[call_count], input.bit16);
             break;
         case 2: // SHUNT Voltage 
-            input.bit16 = fixture[num_of_call];
+            input.bit16 = fixture[call_count];
+            printf("TEST_I2C0_SetDataCompleteCallback: setting SHUNT Voltage fixture[%d] %04X to input.bit16 %04X \n",
+                    call_count, (uint16_t)fixture[call_count], input.bit16);
             break;
-        case 3: // CURRENT Voltage 
-            // input.bit16 = fixture[num_of_call];
-            // (shunt * calibration):4096
-            input.bitFloat = ((fixture[2]/100) * 38280)/4096;
+        case 3: // CURRENT  
+            input.bit16 = fixture[call_count];
+            printf("TEST_I2C0_SetDataCompleteCallback: setting CURRENT input.bit16 %04X \n",
+                   input.bit16);
             break;
-        case 4: // POWER Voltage 
-            // input.bit16 = fixture[num_of_call];
-            // (current x Bus Voltage) : 5000
-            input.bitFloat = ((((fixture[2]/100) * 38280)/4096)*fixture[1])/5000;
+        case 4: // POWER  
+            input.bit16 = fixture[call_count];
+            printf("TEST_I2C0_SetDataCompleteCallback: setting POWER input.bit16 %04X \n",
+                    input.bit16);
+
             break;
         default: // BUS Voltage 
-            input.bitFloat = fixture[num_of_call];
+            input.bit16 = fixture[call_count];
+            printf("TEST_I2C0_SetDataCompleteCallback: setting BUS Voltage fixture[%d] %0f to input.bit16 %04X \n",
+                    call_count, fixture[call_count], input.bit16);
             break;
     }
     
-    
-    
     output.bit8[0] = input.bit8[1];
     output.bit8[1] = input.bit8[0];
-    
+        
     memcpy(funPtr, output.bit8, 2);
-    printf("TEST_I2C0_SetDataCompleteCallback: Callback setting sample data %d -> %p\n", output.bit16, funPtr);
+    printf("TEST_I2C0_SetDataCompleteCallback: setting sample data[%d] %04X -> %04X \n", 
+            call_count, input.bit16, output.bit16);
 }
 
 void ina219_busReadings_test(void) {
-    printf("\n ina219_busReadings_test: start\n");
+    printf("\n ina219_busReadings_test: start \n");
 
     INA219_set_read_callback(test_read_callback);
     INA219_set_restartwrite_callback(test_restart_callback);
     
     union read_buffer_t expected;
-    expected.bit16 = 62464;
+    expected.bit16 = fixture[0];
+    printf("ina219_busReadings_test: Set up the expected as %04X \n", expected.bit16);
     
     // Bus Voltage
     uint8_t expected_register[] = {INA219_BUS_VOLTAGE};
@@ -201,11 +209,24 @@ void ina219_busReadings_test(void) {
 
     uint16_t actual = INA219_get_raw_reading(INA219_READING_BUS_VOLTAGE);
     
-    TEST_ASSERT_EQUAL(expected.bit16, actual);
+    TEST_ASSERT_EQUAL_HEX16(expected.bit16, actual);
     printf("\n ina219_busReadings_test: end\n");
     
 }
 
+/*
+System Voltage [20]: 16
+Load [15]: 3
+Full scale value [0.32]: 
+system voltage: 16, load: 3, full scale voltage: 0.32
+
+======================================
+
+r_shunt: 0.107Ohms, max current: 3A, power: 0.96W
+min current_lsb: 92µA, max current_lsb: 733µA
+current_lsb: 100.0µA
+Calibration: 3828 -> 0x0EF4
+*/
 void ina219_get_all_readings_test(void) {
     printf("\n ina219_get_all_readings_test: start\n");
 
@@ -213,8 +234,9 @@ void ina219_get_all_readings_test(void) {
     INA219_set_restartwrite_callback(test_restart_callback);
     
     union read_buffer_t expected;
-    expected.bit16 = 25722;
-    
+    expected.bit16 = fixture[0];
+    printf("ina219_busReadings_test: Set up the expected as %04X \n", expected.bit16);
+
     I2C0_Open_IgnoreAndReturn(I2C0_BUSY);
     I2C0_SetDataCompleteCallback_StubWithCallback(TEST_I2C0_SetDataCompleteCallback);
     I2C0_SetBuffer_Ignore();
@@ -227,12 +249,12 @@ void ina219_get_all_readings_test(void) {
 
     INA219_Data_t* actual = INA219_get_all_readings();
     
-    TEST_ASSERT_EQUAL(expected.bit16, actual->raw_bus_voltage);
+    TEST_ASSERT_EQUAL_HEX16(expected.bit16, actual->raw_bus_voltage);
 
-    TEST_ASSERT_EQUAL_FLOAT(12.86, actual->bus_voltage);
-    TEST_ASSERT_EQUAL_FLOAT(134, actual->shunt_voltage); // mV
-    TEST_ASSERT_EQUAL_FLOAT(6537.2, actual->current);
-    TEST_ASSERT_EQUAL_FLOAT(14, actual->power);
+    TEST_ASSERT_EQUAL_FLOAT(10.18, actual->bus_voltage);    // V
+    TEST_ASSERT_EQUAL_FLOAT(0.32, actual->shunt_voltage);   // mV
+    TEST_ASSERT_EQUAL_FLOAT(2.99, actual->current);         // A
+    TEST_ASSERT_EQUAL_FLOAT(30.42, actual->power);          // W
 
     printf("\n ina219_get_all_readings_test: end\n");
     

@@ -18,6 +18,7 @@ INA219_Data_t INA219_Data;
 
 uint8_t write_buffer[3];
 union read_buffer_t {
+    float bitFloat;
     uint16_t bit16;
     uint8_t bit8[2];
 
@@ -65,7 +66,7 @@ profileSetupFunction ina219_configurations[] = {
 
 
 void INA219_set_calibration(uint16_t calibaration){
-    printf("INA219_set_calibration: start calibration: %04x\n", calibaration);
+    printf("INA219_set_calibration: start calibration: %04X\n", calibaration);
     uint8_t data[3];
     data[0] = INA219_CAL; // Register
     data[1] = calibaration >> 8;   // MSB
@@ -146,7 +147,7 @@ uint16_t read_register_value(uint8_t reg, bool calibrate){
     while(I2C0_BUSY == I2C0_Close()); // sit here until finished.
 
     uint16_t result = ((uint16_t) read_buffer.bit8[0]<<8)|read_buffer.bit8[1];
-    printf("get_register_value: end result: %04x\n", result );
+    printf("get_register_value: end result: %04X\n", result );
 
     return result;
 
@@ -160,22 +161,22 @@ INA219_Data_t* INA219_get_all_readings() {
     INA219_Data.shunt_voltage = 0.0;
     INA219_Data.current = 0.0;
     INA219_Data.power = 0.0;
+
     printf("INA219_get_all_readings: get INA219_BUS_VOLTAGE\n");
     INA219_Data.raw_bus_voltage = read_register_value(INA219_BUS_VOLTAGE, false);
-    INA219_Data.bus_voltage = (int16_t) ((INA219_Data.raw_bus_voltage >> 3) * 4);
-    INA219_Data.bus_voltage =((float) INA219_Data.bus_voltage * 0.001);
+    INA219_Data.bus_voltage = (float) ((float)(INA219_Data.raw_bus_voltage >> 3) * 0.004);
     
     printf("INA219_get_all_readings: get INA219_SHUNT_VOLTAGE\n");
     INA219_Data.raw_shunt_voltage = read_register_value(INA219_SHUNT_VOLTAGE, false);
-    INA219_Data.shunt_voltage = ((float)INA219_Data.raw_shunt_voltage * 0.01);
+    INA219_Data.shunt_voltage = ((float)INA219_Data.raw_shunt_voltage * 0.000010);
 
     printf("INA219_get_all_readings: get INA219_CURRENT\n");
     INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
-    INA219_Data.current = ((float) INA219_Data.raw_current / 10.0);
+    INA219_Data.current = ((float) INA219_Data.raw_current * 0.001);
     
     printf("INA219_getReadings: get INA219_POWER\n");
     INA219_Data.raw_power = read_register_value(INA219_POWER, true);
-    INA219_Data.power = ((float) INA219_Data.raw_power * 2.0);
+    INA219_Data.power = ((float) INA219_Data.raw_power * 0.02);
     printf("INA219_getReadings: end\n");
 
     return &INA219_Data;
@@ -273,7 +274,7 @@ static void INA219_12V_3A_CONFIG(void){
     ina219_configuration = 0x00;
     ina219_configuration = INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
-    ina219_calibration = 0x9588;
+    ina219_calibration = 0x0EF4;
     printf("INA219_12V_3A_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
