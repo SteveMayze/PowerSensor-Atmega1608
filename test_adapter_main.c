@@ -6,12 +6,14 @@
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
 #include "unit/ina219_test.h"
+#include "mocks/Mockusart0.h"
 
 int main(void) {
     
     // Initialize drivers from MCC
     // Need to specify the intialisation mock during the SYSTEM_Initialize.
     I2C0_Initialize_ExpectAndReturn(0);
+    USART0_Initialize_Expect();
 
     SYSTEM_Initialize();
     _delay_ms(1000);

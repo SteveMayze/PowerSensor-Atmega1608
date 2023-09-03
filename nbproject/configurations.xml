@@ -103,6 +103,8 @@
         <itemPath>mocks/MockINA219.h</itemPath>
         <itemPath>mocks/Mocktwi0_master.c</itemPath>
         <itemPath>mocks/Mocktwi0_master.h</itemPath>
+        <itemPath>mocks/Mockusart0.c</itemPath>
+        <itemPath>mocks/Mockusart0.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f3" displayName="test" projectFiles="true">
         <itemPath>test_fsm_main.c</itemPath>
@@ -146,7 +148,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.36</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>
@@ -1503,7 +1505,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>
@@ -2693,7 +2695,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>
@@ -3810,6 +3812,8 @@
         </XC8-CO>
         <XC8-config-global>
         </XC8-config-global>
+      </item>
+      <item path="mcc_generated_files/src/usart0.c" ex="true" overriding="false">
       </item>
       <item path="mocks/MockINA219.c" ex="true" overriding="false">
         <HI-TECH-COMP>
