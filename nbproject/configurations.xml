@@ -62,6 +62,8 @@
         <itemPath>ina219/INA219.h</itemPath>
         <itemPath>eprom.h</itemPath>
         <itemPath>eprom.c</itemPath>
+        <itemPath>modem.c</itemPath>
+        <itemPath>modem.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f6" displayName="domain" projectFiles="true">
         <itemPath>power_sensor.c</itemPath>
@@ -70,8 +72,6 @@
         <itemPath>sensor_core.h</itemPath>
         <itemPath>node.c</itemPath>
         <itemPath>node.h</itemPath>
-        <itemPath>modem.h</itemPath>
-        <itemPath>modem.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="main" projectFiles="true">
         <itemPath>main.c</itemPath>
@@ -3814,6 +3814,14 @@
         </XC8-config-global>
       </item>
       <item path="mcc_generated_files/src/usart0.c" ex="true" overriding="false">
+        <HI-TECH-COMP>
+        </HI-TECH-COMP>
+        <HI-TECH-LINK>
+        </HI-TECH-LINK>
+        <XC8-CO>
+        </XC8-CO>
+        <XC8-config-global>
+        </XC8-config-global>
       </item>
       <item path="mocks/MockINA219.c" ex="true" overriding="false">
         <HI-TECH-COMP>
@@ -3835,7 +3843,11 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="modem.c" ex="true" overriding="false">
+      <item path="mocks/Mockmodem.c" ex="true" overriding="false">
+      </item>
+      <item path="mocks/Mockmodem.h" ex="true" overriding="false">
+      </item>
+      <item path="modem.c" ex="false" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

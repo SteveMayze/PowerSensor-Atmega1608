@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=ina219/INA219.c eprom.c power_sensor.c sensor_core.c node.c modem.c main.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/src/twi0_master.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c
+SOURCEFILES_QUOTED_IF_SPACED=ina219/INA219.c eprom.c modem.c power_sensor.c sensor_core.c node.c main.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/src/twi0_master.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mocktwi0_master.c mocks/Mockusart0.c test_adapter_main.c unit/ina219_test.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/eprom.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/main.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/ina219/INA219.o.d ${OBJECTDIR}/eprom.o.d ${OBJECTDIR}/power_sensor.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/node.o.d ${OBJECTDIR}/modem.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/usart0.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/eprom.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/main.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/mocks/Mockusart0.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/ina219_test.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/ina219/INA219.o.d ${OBJECTDIR}/eprom.o.d ${OBJECTDIR}/modem.o.d ${OBJECTDIR}/power_sensor.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/node.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/usart0.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d ${OBJECTDIR}/mocks/Mocktwi0_master.o.d ${OBJECTDIR}/mocks/Mockusart0.o.d ${OBJECTDIR}/test_adapter_main.o.d ${OBJECTDIR}/unit/ina219_test.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/eprom.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/main.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o
+OBJECTFILES=${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/eprom.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/main.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart0.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/src/twi0_master.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/mocks/Mockusart0.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/ina219_test.o
 
 # Source Files
-SOURCEFILES=ina219/INA219.c eprom.c power_sensor.c sensor_core.c node.c modem.c main.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/src/twi0_master.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c
+SOURCEFILES=ina219/INA219.c eprom.c modem.c power_sensor.c sensor_core.c node.c main.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart0.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/src/twi0_master.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mocktwi0_master.c mocks/Mockusart0.c test_adapter_main.c unit/ina219_test.c
 
 
 
@@ -106,6 +106,12 @@ ${OBJECTDIR}/eprom.o: eprom.c  .generated_files/flags/main/7be20431891978509b454
 	@${RM} ${OBJECTDIR}/eprom.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/eprom.o.d" -MT "${OBJECTDIR}/eprom.o.d" -MT ${OBJECTDIR}/eprom.o -o ${OBJECTDIR}/eprom.o eprom.c 
 	
+${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/main/2b4cc503155d96f3c5c2d4559f61ebfb4daebc2b .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/modem.o.d 
+	@${RM} ${OBJECTDIR}/modem.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
+	
 ${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/main/47852ca9de94e8354bb2a155baed9e9e1d96a53d .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/power_sensor.o.d 
@@ -123,12 +129,6 @@ ${OBJECTDIR}/node.o: node.c  .generated_files/flags/main/623c555bc7c95c89bf3f09d
 	@${RM} ${OBJECTDIR}/node.o.d 
 	@${RM} ${OBJECTDIR}/node.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/node.o.d" -MT "${OBJECTDIR}/node.o.d" -MT ${OBJECTDIR}/node.o -o ${OBJECTDIR}/node.o node.c 
-	
-${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/main/2b4cc503155d96f3c5c2d4559f61ebfb4daebc2b .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/modem.o.d 
-	@${RM} ${OBJECTDIR}/modem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
 	
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/main/3834d2311482045192632acddce2f44d71b35aa7 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
@@ -190,6 +190,30 @@ ${OBJECTDIR}/mcc_generated_files/device_config.o: mcc_generated_files/device_con
 	@${RM} ${OBJECTDIR}/mcc_generated_files/device_config.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mcc_generated_files/device_config.o.d" -MT "${OBJECTDIR}/mcc_generated_files/device_config.o.d" -MT ${OBJECTDIR}/mcc_generated_files/device_config.o -o ${OBJECTDIR}/mcc_generated_files/device_config.o mcc_generated_files/device_config.c 
 	
+${OBJECTDIR}/mocks/Mocktwi0_master.o: mocks/Mocktwi0_master.c  .generated_files/flags/main/f35a33ff6c5bbb9209411cbc57be899d7f8c15aa .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT ${OBJECTDIR}/mocks/Mocktwi0_master.o -o ${OBJECTDIR}/mocks/Mocktwi0_master.o mocks/Mocktwi0_master.c 
+	
+${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/main/7abb7de3f74abf9090590d1aadaaedaeda6433 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
+	
+${OBJECTDIR}/test_adapter_main.o: test_adapter_main.c  .generated_files/flags/main/19f2990c622231ffc9b4769e0ea4053432babd63 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/test_adapter_main.o.d 
+	@${RM} ${OBJECTDIR}/test_adapter_main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/test_adapter_main.o.d" -MT "${OBJECTDIR}/test_adapter_main.o.d" -MT ${OBJECTDIR}/test_adapter_main.o -o ${OBJECTDIR}/test_adapter_main.o test_adapter_main.c 
+	
+${OBJECTDIR}/unit/ina219_test.o: unit/ina219_test.c  .generated_files/flags/main/89ada44b80f4030def901634df28d6b5c95da590 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/ina219_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/ina219_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/ina219_test.o.d" -MT "${OBJECTDIR}/unit/ina219_test.o.d" -MT ${OBJECTDIR}/unit/ina219_test.o -o ${OBJECTDIR}/unit/ina219_test.o unit/ina219_test.c 
+	
 else
 ${OBJECTDIR}/ina219/INA219.o: ina219/INA219.c  .generated_files/flags/main/a7df0332b0b79ea32202bff3da53890a65e1c790 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}/ina219" 
@@ -202,6 +226,12 @@ ${OBJECTDIR}/eprom.o: eprom.c  .generated_files/flags/main/242b9309673f2678c2f23
 	@${RM} ${OBJECTDIR}/eprom.o.d 
 	@${RM} ${OBJECTDIR}/eprom.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/eprom.o.d" -MT "${OBJECTDIR}/eprom.o.d" -MT ${OBJECTDIR}/eprom.o -o ${OBJECTDIR}/eprom.o eprom.c 
+	
+${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/main/9154cc5a9651653a7de1402f7275a58666903619 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/modem.o.d 
+	@${RM} ${OBJECTDIR}/modem.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
 	
 ${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/main/1e0098352fa8e937d1b1e20350b266514e347bbc .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
@@ -220,12 +250,6 @@ ${OBJECTDIR}/node.o: node.c  .generated_files/flags/main/f68a6e0e14ee02308a65490
 	@${RM} ${OBJECTDIR}/node.o.d 
 	@${RM} ${OBJECTDIR}/node.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/node.o.d" -MT "${OBJECTDIR}/node.o.d" -MT ${OBJECTDIR}/node.o -o ${OBJECTDIR}/node.o node.c 
-	
-${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/main/9154cc5a9651653a7de1402f7275a58666903619 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/modem.o.d 
-	@${RM} ${OBJECTDIR}/modem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
 	
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/main/5f171fa158d676aa224cdfa1eb168fa5c12ebd91 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
 	@${MKDIR} "${OBJECTDIR}" 
@@ -286,6 +310,30 @@ ${OBJECTDIR}/mcc_generated_files/device_config.o: mcc_generated_files/device_con
 	@${RM} ${OBJECTDIR}/mcc_generated_files/device_config.o.d 
 	@${RM} ${OBJECTDIR}/mcc_generated_files/device_config.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mcc_generated_files/device_config.o.d" -MT "${OBJECTDIR}/mcc_generated_files/device_config.o.d" -MT ${OBJECTDIR}/mcc_generated_files/device_config.o -o ${OBJECTDIR}/mcc_generated_files/device_config.o mcc_generated_files/device_config.c 
+	
+${OBJECTDIR}/mocks/Mocktwi0_master.o: mocks/Mocktwi0_master.c  .generated_files/flags/main/1a7388b60cab65ed94097b1389e98b79a91e8d9b .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT ${OBJECTDIR}/mocks/Mocktwi0_master.o -o ${OBJECTDIR}/mocks/Mocktwi0_master.o mocks/Mocktwi0_master.c 
+	
+${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/main/380e3cc036d1439ead67f7a842c72d8d31fa2fe1 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
+	
+${OBJECTDIR}/test_adapter_main.o: test_adapter_main.c  .generated_files/flags/main/5d74a7617875bf5eb981298b35b083b8dd6c6a43 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/test_adapter_main.o.d 
+	@${RM} ${OBJECTDIR}/test_adapter_main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/test_adapter_main.o.d" -MT "${OBJECTDIR}/test_adapter_main.o.d" -MT ${OBJECTDIR}/test_adapter_main.o -o ${OBJECTDIR}/test_adapter_main.o test_adapter_main.c 
+	
+${OBJECTDIR}/unit/ina219_test.o: unit/ina219_test.c  .generated_files/flags/main/ad8d2aaf8b986ddd2992264931b9783ee260f0f4 .generated_files/flags/main/95600eefdf492cd0547f68884fb955949a0fe144
+	@${MKDIR} "${OBJECTDIR}/unit" 
+	@${RM} ${OBJECTDIR}/unit/ina219_test.o.d 
+	@${RM} ${OBJECTDIR}/unit/ina219_test.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__   -mdfp="${DFP_DIR}/xc8"  -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_main=$(CND_CONF)  $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/ina219_test.o.d" -MT "${OBJECTDIR}/unit/ina219_test.o.d" -MT ${OBJECTDIR}/unit/ina219_test.o -o ${OBJECTDIR}/unit/ina219_test.o unit/ina219_test.c 
 	
 endif
 

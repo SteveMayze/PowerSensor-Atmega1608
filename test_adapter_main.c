@@ -6,6 +6,7 @@
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
 #include "unit/ina219_test.h"
+#include "unit/modem_test.h"
 #include "mocks/Mockusart0.h"
 
 int main(void) {
@@ -20,11 +21,15 @@ int main(void) {
 
 
 
-    printf("\n\n========== Test starting ==========\n\n");
+    printf("\n\n========== Test starting - INA219 Tests ==========\n\n");
 
     run_ina219_tests();
+    
+    printf("\n\n========== Test starting - MODEM Tests ===========\n\n");    
+    
+    run_modem_tests();
 
-    printf("\n\n========== Test Completed ==========\n\n");
+    printf("\n\n================= Test Completed =================\n\n");
 
 }
 

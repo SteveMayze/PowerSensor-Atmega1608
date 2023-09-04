@@ -24,15 +24,28 @@ void initalise_modem_test(){
     
     uint64_t coordinator = modem_get_coord_addr();
     
-    printf("Coordinator Address: %04X %04X %04X %04X\n", (uint16_t)(coordinator >> 48)&0xFFFF, (uint16_t)(coordinator >> 32)&0xFFFF, (uint16_t)(coordinator >> 16)&0xFFFF, (uint16_t)(coordinator)&0xFFFF);    
+    printf("initalise_modem_test: Coordinator Address: %04X %04X %04X %04X\n", 
+            (uint16_t)(coordinator >> 48)&0xFFFF, 
+            (uint16_t)(coordinator >> 32)&0xFFFF, 
+            (uint16_t)(coordinator >> 16)&0xFFFF, 
+            (uint16_t)(coordinator)&0xFFFF);    
     
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected = XBEE_ADDR_BROADCAST >> i*16;
-        printf("Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        printf("initalise_modem_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
+}
+
+void modem_reset_on_open() {
+        printf("\n modem_reset_on_open: Start \n");
+        
+        USART0_
+        modem_open(XBEE_ADDR_BROADCAST);
+        
+        
 }
 
 

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=cmock/src/cmock.c cmock/src/unity.c libavrxbee/xbee.c ina219/INA219.c power_sensor.c sensor_core.c node.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mockeprom.c mocks/Mockmodem.c mocks/Mocktwi0_master.c test_adapter_main.c unit/sensor_core_test.c unit/modem_test.c unit/node_init_test.c unit/node_basic_test.c unit/node_test.c unit/test_common.c unit/ina219_test.c mocks/Mockusart0.c
+SOURCEFILES_QUOTED_IF_SPACED=cmock/src/cmock.c cmock/src/unity.c libavrxbee/xbee.c ina219/INA219.c modem.c power_sensor.c sensor_core.c node.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mockeprom.c mocks/Mocktwi0_master.c mocks/Mockusart0.c test_adapter_main.c unit/sensor_core_test.c unit/modem_test.c unit/node_init_test.c unit/node_basic_test.c unit/node_test.c unit/test_common.c unit/ina219_test.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/libavrxbee/xbee.o ${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mockeprom.o ${OBJECTDIR}/mocks/Mockmodem.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/modem_test.o ${OBJECTDIR}/unit/node_init_test.o ${OBJECTDIR}/unit/node_basic_test.o ${OBJECTDIR}/unit/node_test.o ${OBJECTDIR}/unit/test_common.o ${OBJECTDIR}/unit/ina219_test.o ${OBJECTDIR}/mocks/Mockusart0.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/cmock/src/cmock.o.d ${OBJECTDIR}/cmock/src/unity.o.d ${OBJECTDIR}/libavrxbee/xbee.o.d ${OBJECTDIR}/ina219/INA219.o.d ${OBJECTDIR}/power_sensor.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/node.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d ${OBJECTDIR}/mocks/Mockeprom.o.d ${OBJECTDIR}/mocks/Mockmodem.o.d ${OBJECTDIR}/mocks/Mocktwi0_master.o.d ${OBJECTDIR}/test_adapter_main.o.d ${OBJECTDIR}/unit/sensor_core_test.o.d ${OBJECTDIR}/unit/modem_test.o.d ${OBJECTDIR}/unit/node_init_test.o.d ${OBJECTDIR}/unit/node_basic_test.o.d ${OBJECTDIR}/unit/node_test.o.d ${OBJECTDIR}/unit/test_common.o.d ${OBJECTDIR}/unit/ina219_test.o.d ${OBJECTDIR}/mocks/Mockusart0.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/libavrxbee/xbee.o ${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mockeprom.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/mocks/Mockusart0.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/modem_test.o ${OBJECTDIR}/unit/node_init_test.o ${OBJECTDIR}/unit/node_basic_test.o ${OBJECTDIR}/unit/node_test.o ${OBJECTDIR}/unit/test_common.o ${OBJECTDIR}/unit/ina219_test.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/cmock/src/cmock.o.d ${OBJECTDIR}/cmock/src/unity.o.d ${OBJECTDIR}/libavrxbee/xbee.o.d ${OBJECTDIR}/ina219/INA219.o.d ${OBJECTDIR}/modem.o.d ${OBJECTDIR}/power_sensor.o.d ${OBJECTDIR}/sensor_core.o.d ${OBJECTDIR}/node.o.d ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o.d ${OBJECTDIR}/mcc_generated_files/src/usart1.o.d ${OBJECTDIR}/mcc_generated_files/src/protected_io.o.d ${OBJECTDIR}/mcc_generated_files/src/rtc.o.d ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/src/cpuint.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/device_config.o.d ${OBJECTDIR}/mocks/Mockeprom.o.d ${OBJECTDIR}/mocks/Mocktwi0_master.o.d ${OBJECTDIR}/mocks/Mockusart0.o.d ${OBJECTDIR}/test_adapter_main.o.d ${OBJECTDIR}/unit/sensor_core_test.o.d ${OBJECTDIR}/unit/modem_test.o.d ${OBJECTDIR}/unit/node_init_test.o.d ${OBJECTDIR}/unit/node_basic_test.o.d ${OBJECTDIR}/unit/node_test.o.d ${OBJECTDIR}/unit/test_common.o.d ${OBJECTDIR}/unit/ina219_test.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/libavrxbee/xbee.o ${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mockeprom.o ${OBJECTDIR}/mocks/Mockmodem.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/modem_test.o ${OBJECTDIR}/unit/node_init_test.o ${OBJECTDIR}/unit/node_basic_test.o ${OBJECTDIR}/unit/node_test.o ${OBJECTDIR}/unit/test_common.o ${OBJECTDIR}/unit/ina219_test.o ${OBJECTDIR}/mocks/Mockusart0.o
+OBJECTFILES=${OBJECTDIR}/cmock/src/cmock.o ${OBJECTDIR}/cmock/src/unity.o ${OBJECTDIR}/libavrxbee/xbee.o ${OBJECTDIR}/ina219/INA219.o ${OBJECTDIR}/modem.o ${OBJECTDIR}/power_sensor.o ${OBJECTDIR}/sensor_core.o ${OBJECTDIR}/node.o ${OBJECTDIR}/mcc_generated_files/examples/twi0_master_example.o ${OBJECTDIR}/mcc_generated_files/src/usart1.o ${OBJECTDIR}/mcc_generated_files/src/protected_io.o ${OBJECTDIR}/mcc_generated_files/src/rtc.o ${OBJECTDIR}/mcc_generated_files/src/pin_manager.o ${OBJECTDIR}/mcc_generated_files/src/cpuint.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/device_config.o ${OBJECTDIR}/mocks/Mockeprom.o ${OBJECTDIR}/mocks/Mocktwi0_master.o ${OBJECTDIR}/mocks/Mockusart0.o ${OBJECTDIR}/test_adapter_main.o ${OBJECTDIR}/unit/sensor_core_test.o ${OBJECTDIR}/unit/modem_test.o ${OBJECTDIR}/unit/node_init_test.o ${OBJECTDIR}/unit/node_basic_test.o ${OBJECTDIR}/unit/node_test.o ${OBJECTDIR}/unit/test_common.o ${OBJECTDIR}/unit/ina219_test.o
 
 # Source Files
-SOURCEFILES=cmock/src/cmock.c cmock/src/unity.c libavrxbee/xbee.c ina219/INA219.c power_sensor.c sensor_core.c node.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mockeprom.c mocks/Mockmodem.c mocks/Mocktwi0_master.c test_adapter_main.c unit/sensor_core_test.c unit/modem_test.c unit/node_init_test.c unit/node_basic_test.c unit/node_test.c unit/test_common.c unit/ina219_test.c mocks/Mockusart0.c
+SOURCEFILES=cmock/src/cmock.c cmock/src/unity.c libavrxbee/xbee.c ina219/INA219.c modem.c power_sensor.c sensor_core.c node.c mcc_generated_files/examples/twi0_master_example.c mcc_generated_files/src/usart1.c mcc_generated_files/src/protected_io.S mcc_generated_files/src/rtc.c mcc_generated_files/src/pin_manager.c mcc_generated_files/src/cpuint.c mcc_generated_files/mcc.c mcc_generated_files/device_config.c mocks/Mockeprom.c mocks/Mocktwi0_master.c mocks/Mockusart0.c test_adapter_main.c unit/sensor_core_test.c unit/modem_test.c unit/node_init_test.c unit/node_basic_test.c unit/node_test.c unit/test_common.c unit/ina219_test.c
 
 
 
@@ -117,6 +117,12 @@ ${OBJECTDIR}/ina219/INA219.o: ina219/INA219.c  .generated_files/flags/test_adapt
 	@${RM} ${OBJECTDIR}/ina219/INA219.o.d 
 	@${RM} ${OBJECTDIR}/ina219/INA219.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ina219/INA219.o.d" -MT "${OBJECTDIR}/ina219/INA219.o.d" -MT ${OBJECTDIR}/ina219/INA219.o -o ${OBJECTDIR}/ina219/INA219.o ina219/INA219.c 
+	
+${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/test_adapter/fbcffe49a9a351930d54a5aafd01ca71ffc22009 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/modem.o.d 
+	@${RM} ${OBJECTDIR}/modem.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
 	
 ${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/test_adapter/a0c11f37b73e1c643bf883a11d4ec862b2241ac8 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}" 
@@ -184,17 +190,17 @@ ${OBJECTDIR}/mocks/Mockeprom.o: mocks/Mockeprom.c  .generated_files/flags/test_a
 	@${RM} ${OBJECTDIR}/mocks/Mockeprom.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockeprom.o.d" -MT "${OBJECTDIR}/mocks/Mockeprom.o.d" -MT ${OBJECTDIR}/mocks/Mockeprom.o -o ${OBJECTDIR}/mocks/Mockeprom.o mocks/Mockeprom.c 
 	
-${OBJECTDIR}/mocks/Mockmodem.o: mocks/Mockmodem.c  .generated_files/flags/test_adapter/25cdc6fb8e7c8a989c868a0211140b9f1bc0d68f .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
-	@${MKDIR} "${OBJECTDIR}/mocks" 
-	@${RM} ${OBJECTDIR}/mocks/Mockmodem.o.d 
-	@${RM} ${OBJECTDIR}/mocks/Mockmodem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockmodem.o.d" -MT "${OBJECTDIR}/mocks/Mockmodem.o.d" -MT ${OBJECTDIR}/mocks/Mockmodem.o -o ${OBJECTDIR}/mocks/Mockmodem.o mocks/Mockmodem.c 
-	
 ${OBJECTDIR}/mocks/Mocktwi0_master.o: mocks/Mocktwi0_master.c  .generated_files/flags/test_adapter/834a9a0e21bbda22f98ae551eb84455f1d6ccbe7 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}/mocks" 
 	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o.d 
 	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT ${OBJECTDIR}/mocks/Mocktwi0_master.o -o ${OBJECTDIR}/mocks/Mocktwi0_master.o mocks/Mocktwi0_master.c 
+	
+${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/test_adapter/743f5f14a73ee92ff4b8c86fa6a89e12da7e12fb .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
 	
 ${OBJECTDIR}/test_adapter_main.o: test_adapter_main.c  .generated_files/flags/test_adapter/b6d78d8caca51e7747103d47a99d103e6de9c9 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}" 
@@ -244,12 +250,6 @@ ${OBJECTDIR}/unit/ina219_test.o: unit/ina219_test.c  .generated_files/flags/test
 	@${RM} ${OBJECTDIR}/unit/ina219_test.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/ina219_test.o.d" -MT "${OBJECTDIR}/unit/ina219_test.o.d" -MT ${OBJECTDIR}/unit/ina219_test.o -o ${OBJECTDIR}/unit/ina219_test.o unit/ina219_test.c 
 	
-${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/test_adapter/743f5f14a73ee92ff4b8c86fa6a89e12da7e12fb .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
-	@${MKDIR} "${OBJECTDIR}/mocks" 
-	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
-	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1 -g -DDEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1 -gdwarf-2  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
-	
 else
 ${OBJECTDIR}/cmock/src/cmock.o: cmock/src/cmock.c  .generated_files/flags/test_adapter/54f319c0d7881790dcd82302efa55816f7efcfaa .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}/cmock/src" 
@@ -274,6 +274,12 @@ ${OBJECTDIR}/ina219/INA219.o: ina219/INA219.c  .generated_files/flags/test_adapt
 	@${RM} ${OBJECTDIR}/ina219/INA219.o.d 
 	@${RM} ${OBJECTDIR}/ina219/INA219.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/ina219/INA219.o.d" -MT "${OBJECTDIR}/ina219/INA219.o.d" -MT ${OBJECTDIR}/ina219/INA219.o -o ${OBJECTDIR}/ina219/INA219.o ina219/INA219.c 
+	
+${OBJECTDIR}/modem.o: modem.c  .generated_files/flags/test_adapter/be9ab49ea2dc9b1817374306ffb748833c2b6436 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/modem.o.d 
+	@${RM} ${OBJECTDIR}/modem.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/modem.o.d" -MT "${OBJECTDIR}/modem.o.d" -MT ${OBJECTDIR}/modem.o -o ${OBJECTDIR}/modem.o modem.c 
 	
 ${OBJECTDIR}/power_sensor.o: power_sensor.c  .generated_files/flags/test_adapter/fc19b05fa6765288938d70cb7d2823e168bdcde7 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}" 
@@ -341,17 +347,17 @@ ${OBJECTDIR}/mocks/Mockeprom.o: mocks/Mockeprom.c  .generated_files/flags/test_a
 	@${RM} ${OBJECTDIR}/mocks/Mockeprom.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockeprom.o.d" -MT "${OBJECTDIR}/mocks/Mockeprom.o.d" -MT ${OBJECTDIR}/mocks/Mockeprom.o -o ${OBJECTDIR}/mocks/Mockeprom.o mocks/Mockeprom.c 
 	
-${OBJECTDIR}/mocks/Mockmodem.o: mocks/Mockmodem.c  .generated_files/flags/test_adapter/3d6fb62c71fc55b759a65665be2f1ab3d4276eb3 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
-	@${MKDIR} "${OBJECTDIR}/mocks" 
-	@${RM} ${OBJECTDIR}/mocks/Mockmodem.o.d 
-	@${RM} ${OBJECTDIR}/mocks/Mockmodem.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockmodem.o.d" -MT "${OBJECTDIR}/mocks/Mockmodem.o.d" -MT ${OBJECTDIR}/mocks/Mockmodem.o -o ${OBJECTDIR}/mocks/Mockmodem.o mocks/Mockmodem.c 
-	
 ${OBJECTDIR}/mocks/Mocktwi0_master.o: mocks/Mocktwi0_master.c  .generated_files/flags/test_adapter/3be581547a0150171959edbe6e853bc90618d057 .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}/mocks" 
 	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o.d 
 	@${RM} ${OBJECTDIR}/mocks/Mocktwi0_master.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT "${OBJECTDIR}/mocks/Mocktwi0_master.o.d" -MT ${OBJECTDIR}/mocks/Mocktwi0_master.o -o ${OBJECTDIR}/mocks/Mocktwi0_master.o mocks/Mocktwi0_master.c 
+	
+${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/test_adapter/7dac3aeebe78bc4dccd31e0cfff273eb2686363c .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
+	@${MKDIR} "${OBJECTDIR}/mocks" 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
+	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
 	
 ${OBJECTDIR}/test_adapter_main.o: test_adapter_main.c  .generated_files/flags/test_adapter/ffd625d31226d2fa450ee59f52a253ca1ea2989d .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
 	@${MKDIR} "${OBJECTDIR}" 
@@ -400,12 +406,6 @@ ${OBJECTDIR}/unit/ina219_test.o: unit/ina219_test.c  .generated_files/flags/test
 	@${RM} ${OBJECTDIR}/unit/ina219_test.o.d 
 	@${RM} ${OBJECTDIR}/unit/ina219_test.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/unit/ina219_test.o.d" -MT "${OBJECTDIR}/unit/ina219_test.o.d" -MT ${OBJECTDIR}/unit/ina219_test.o -o ${OBJECTDIR}/unit/ina219_test.o unit/ina219_test.c 
-	
-${OBJECTDIR}/mocks/Mockusart0.o: mocks/Mockusart0.c  .generated_files/flags/test_adapter/7dac3aeebe78bc4dccd31e0cfff273eb2686363c .generated_files/flags/test_adapter/1300d012931cb66396aec37cb3eb72dc7f908852
-	@${MKDIR} "${OBJECTDIR}/mocks" 
-	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o.d 
-	@${RM} ${OBJECTDIR}/mocks/Mockusart0.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -x c -D__$(MP_PROCESSOR_OPTION)__    -Wl,--gc-sections -O1 -ffunction-sections -fdata-sections -fshort-enums -fno-common -funsigned-char -funsigned-bitfields -Wall -DXPRJ_test_adapter=$(CND_CONF)  -Wl,-u,sigrowl,--defsym,min_heap_size=512 $(COMPARISON_BUILD)  -gdwarf-3     -MD -MP -MF "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT "${OBJECTDIR}/mocks/Mockusart0.o.d" -MT ${OBJECTDIR}/mocks/Mockusart0.o -o ${OBJECTDIR}/mocks/Mockusart0.o mocks/Mockusart0.c 
 	
 endif
 
