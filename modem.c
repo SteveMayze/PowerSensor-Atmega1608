@@ -1,3 +1,6 @@
+#include <avr/portpins.h>
+#include <avr/iom4808.h>
+
 #include "modem.h"
 #include "mocks/Mockusart0.h"
 
@@ -11,8 +14,7 @@ void modem_open(uint64_t coordinator){
     coord_addresss = coordinator;
     // Reset the modem...
     MODEM_RESET_SetLow();
-    MODEM_RESET_SetHigh();
-    
+    MODEM_RESET_SetHigh();    
 }
 
 uint64_t modem_get_coord_addr(){
