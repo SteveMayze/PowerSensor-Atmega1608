@@ -1,5 +1,3 @@
-#include <avr/portpins.h>
-#include <avr/iom4808.h>
 
 #include "modem.h"
 #include "mocks/Mockusart0.h"
@@ -33,11 +31,11 @@ ModemResponse_t* modem_receive_message(void){
     
     // Receive XBee message
     uint8_t buffer_ptr = 0;
-    while(USART0_IsRxReady){
+    while(USART0_IsRxReady()){
         rx_buffer[buffer_ptr++] = USART0_Read();
     }
     
-    uint8_t buffer_length = buffer_ptr;
+    // uint8_t buffer_length = buffer_ptr;
     
     // Traverse the buffer since this will be an XBEE message
     // and extract the data. 

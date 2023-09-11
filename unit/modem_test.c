@@ -42,7 +42,6 @@ void initalise_modem_test(){
 void modem_reset_on_open() {
         printf("\n modem_reset_on_open: Start \n");
         
-        USART0_
         modem_open(XBEE_ADDR_BROADCAST);
         
         
