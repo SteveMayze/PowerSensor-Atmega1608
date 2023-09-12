@@ -3,12 +3,14 @@
 #include <stdlib.h>
 #include <setjmp.h>
 #include "../cmock/src/cmock.h"
-#include "../mocks/MockINA219.h"
+#include "MockINA219.h"
 
 static const char* CMockString_INA219_Initialise = "INA219_Initialise";
-static const char* CMockString_INA219_getReadings = "INA219_getReadings";
+static const char* CMockString_INA219_get_all_readings = "INA219_get_all_readings";
+static const char* CMockString_INA219_get_raw_reading = "INA219_get_raw_reading";
 static const char* CMockString_addr = "addr";
 static const char* CMockString_profile = "profile";
+static const char* CMockString_reading = "reading";
 
 typedef struct _CMOCK_INA219_Initialise_CALL_INSTANCE
 {
@@ -18,17 +20,26 @@ typedef struct _CMOCK_INA219_Initialise_CALL_INSTANCE
 
 } CMOCK_INA219_Initialise_CALL_INSTANCE;
 
-typedef struct _CMOCK_INA219_getReadings_CALL_INSTANCE
+typedef struct _CMOCK_INA219_get_all_readings_CALL_INSTANCE
 {
   UNITY_LINE_TYPE LineNumber;
   INA219_Data_t* ReturnVal;
 
-} CMOCK_INA219_getReadings_CALL_INSTANCE;
+} CMOCK_INA219_get_all_readings_CALL_INSTANCE;
+
+typedef struct _CMOCK_INA219_get_raw_reading_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  uint16_t ReturnVal;
+  INA219_Readings Expected_reading;
+
+} CMOCK_INA219_get_raw_reading_CALL_INSTANCE;
 
 static struct MockINA219Instance
 {
   CMOCK_MEM_INDEX_TYPE INA219_Initialise_CallInstance;
-  CMOCK_MEM_INDEX_TYPE INA219_getReadings_CallInstance;
+  CMOCK_MEM_INDEX_TYPE INA219_get_all_readings_CallInstance;
+  CMOCK_MEM_INDEX_TYPE INA219_get_raw_reading_CallInstance;
 } Mock;
 
 extern jmp_buf AbortFrame;
@@ -43,10 +54,16 @@ void MockINA219_Verify(void)
     UNITY_SET_DETAIL(CMockString_INA219_Initialise);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
-  call_instance = Mock.INA219_getReadings_CallInstance;
+  call_instance = Mock.INA219_get_all_readings_CallInstance;
   if (CMOCK_GUTS_NONE != call_instance)
   {
-    UNITY_SET_DETAIL(CMockString_INA219_getReadings);
+    UNITY_SET_DETAIL(CMockString_INA219_get_all_readings);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  call_instance = Mock.INA219_get_raw_reading_CallInstance;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_INA219_get_raw_reading);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
 }
@@ -101,27 +118,63 @@ void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr, INA
   CMockExpectParameters_INA219_Initialise(cmock_call_instance, addr, profile);
 }
 
-INA219_Data_t* INA219_getReadings(void)
+INA219_Data_t* INA219_get_all_readings(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
-  CMOCK_INA219_getReadings_CALL_INSTANCE* cmock_call_instance;
-  UNITY_SET_DETAIL(CMockString_INA219_getReadings);
-  cmock_call_instance = (CMOCK_INA219_getReadings_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.INA219_getReadings_CallInstance);
-  Mock.INA219_getReadings_CallInstance = CMock_Guts_MemNext(Mock.INA219_getReadings_CallInstance);
+  CMOCK_INA219_get_all_readings_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_INA219_get_all_readings);
+  cmock_call_instance = (CMOCK_INA219_get_all_readings_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.INA219_get_all_readings_CallInstance);
+  Mock.INA219_get_all_readings_CallInstance = CMock_Guts_MemNext(Mock.INA219_get_all_readings_CallInstance);
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
 }
 
-void INA219_getReadings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Data_t* cmock_to_return)
+void INA219_get_all_readings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Data_t* cmock_to_return)
 {
-  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_INA219_getReadings_CALL_INSTANCE));
-  CMOCK_INA219_getReadings_CALL_INSTANCE* cmock_call_instance = (CMOCK_INA219_getReadings_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_INA219_get_all_readings_CALL_INSTANCE));
+  CMOCK_INA219_get_all_readings_CALL_INSTANCE* cmock_call_instance = (CMOCK_INA219_get_all_readings_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
-  Mock.INA219_getReadings_CallInstance = CMock_Guts_MemChain(Mock.INA219_getReadings_CallInstance, cmock_guts_index);
+  Mock.INA219_get_all_readings_CallInstance = CMock_Guts_MemChain(Mock.INA219_get_all_readings_CallInstance, cmock_guts_index);
   cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+uint16_t INA219_get_raw_reading(INA219_Readings reading)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_INA219_get_raw_reading_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_INA219_get_raw_reading);
+  cmock_call_instance = (CMOCK_INA219_get_raw_reading_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.INA219_get_raw_reading_CallInstance);
+  Mock.INA219_get_raw_reading_CallInstance = CMock_Guts_MemNext(Mock.INA219_get_raw_reading_CallInstance);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  {
+    UNITY_SET_DETAILS(CMockString_INA219_get_raw_reading,CMockString_reading);
+    UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_reading), (void*)(&reading), sizeof(INA219_Readings), cmock_line, CMockStringMismatch);
+  }
+  UNITY_CLR_DETAILS();
+  return cmock_call_instance->ReturnVal;
+}
+
+void CMockExpectParameters_INA219_get_raw_reading(CMOCK_INA219_get_raw_reading_CALL_INSTANCE* cmock_call_instance, INA219_Readings reading);
+void CMockExpectParameters_INA219_get_raw_reading(CMOCK_INA219_get_raw_reading_CALL_INSTANCE* cmock_call_instance, INA219_Readings reading)
+{
+  memcpy((void*)(&cmock_call_instance->Expected_reading), (void*)(&reading),
+         sizeof(INA219_Readings[sizeof(reading) == sizeof(INA219_Readings) ? 1 : -1])); /* add INA219_Readings to :treat_as_array if this causes an error */
+}
+
+void INA219_get_raw_reading_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Readings reading, uint16_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_INA219_get_raw_reading_CALL_INSTANCE));
+  CMOCK_INA219_get_raw_reading_CALL_INSTANCE* cmock_call_instance = (CMOCK_INA219_get_raw_reading_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.INA219_get_raw_reading_CallInstance = CMock_Guts_MemChain(Mock.INA219_get_raw_reading_CallInstance, cmock_guts_index);
+  cmock_call_instance->LineNumber = cmock_line;
+  CMockExpectParameters_INA219_get_raw_reading(cmock_call_instance, reading);
   cmock_call_instance->ReturnVal = cmock_to_return;
 }
 

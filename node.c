@@ -25,15 +25,15 @@ typedef struct {
 } Node_State_t;
 Node_State_t node_state = {0};
 
-typedef FSM_States_t(stateHandlerFunction)(void);
+typedef FSM_States_t(stateHandlerFunction)(uint8_t count);
 
 
 // Prototype for the state handlers.
-static FSM_States_t FSM_IDLE_STATE(void);
-static FSM_States_t FSM_READY_STATE(void);
-static FSM_States_t FSM_DATA_STATE(void);
-static FSM_States_t FSM_RESET_STATE(void);
-static FSM_States_t FSM_NODEINTRO_STATE(void);
+static FSM_States_t FSM_IDLE_STATE(uint8_t count);
+static FSM_States_t FSM_READY_STATE(uint8_t count);
+static FSM_States_t FSM_DATA_STATE(uint8_t count);
+static FSM_States_t FSM_RESET_STATE(uint8_t count);
+static FSM_States_t FSM_NODEINTRO_STATE(uint8_t count);
 
 // An array to collect the state handlers
 stateHandlerFunction *fsm_state_table[] = {
@@ -105,17 +105,18 @@ void node_wait() {
 void node_fsm_execution() {
     printf("node_fsm_execution: Executing %02X\n", node_state.state);
     // Execute the current state.
-    node_state.state = fsm_state_table[node_state.state]();
+    node_state.state = fsm_state_table[node_state.state](0);
 }
 
 void node_fsm_poller() {
     printf("node_fsm_poller: BEGIN\n");
+    uint8_t count = 0;
     while (node_state.busy) {
         printf("node_fsm_poller: Polling...\n");
         node_wait();
         node_fsm_execution();
         if (!(node_state.timeout--)) {
-            node_state.event_callbacks[FSM_TIMEOUT]();
+            node_state.event_callbacks[FSM_TIMEOUT](count++);
             node_state.busy = 0;
             node_state.state = FSM_IDLE;
         }
@@ -125,7 +126,7 @@ void node_fsm_poller() {
 }
 
 void node_check() {
-    printf("node_check: Sending the message for operation; %02X\n", _message.operation);
+    printf("node_check: Sending the message for operation: %02X\n", _message.operation);
     if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
@@ -135,12 +136,17 @@ void node_check() {
     modem_close();
 }
 
-FSM_States_t FSM_READY_STATE(void) {
+FSM_States_t FSM_READY_STATE(uint8_t count) {
     ModemResponse_t* response;
-    printf("FSM_READY_STATE: Send the READY signal and wait for the reply.\n");
+    printf("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
 
     // Send message
-    // ...
+    ModemResponse_t modem_message;
+    modem_message.operation = _message.operation;
+    modem_message.data = NULL;
+    modem_message.data_length = 0;
+    modem_send_message(&modem_message);
+    
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
         printf("A message has arrived \n");
@@ -169,11 +175,10 @@ FSM_States_t FSM_READY_STATE(void) {
     return node_state.state;
 }
 
-static FSM_States_t FSM_DATA_STATE(void) {
+static FSM_States_t FSM_DATA_STATE(uint8_t count) {
     ModemResponse_t* response;
-    printf("FSM_DATA_STATE: transmitting the collected data\n");
-    // Transmit the data collected in the FMS_DATAREQ callback.
-    // ...
+    printf("FSM_DATA_STATE: Waiting for ack on the transmitted data count: %d \n", count);
+    
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
         printf("A message has arrived \n");
@@ -194,8 +199,8 @@ static FSM_States_t FSM_DATA_STATE(void) {
     return node_state.state;    
 }
 
-FSM_States_t FSM_RESET_STATE(void) {
-    printf("NODE_RESET: \n");
+FSM_States_t FSM_RESET_STATE(uint8_t count) {
+    printf("NODE_RESET: count: %d \n", count);
     FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
     switch (_message.operation ) {
@@ -213,12 +218,11 @@ FSM_States_t FSM_RESET_STATE(void) {
 }
 
 
-FSM_States_t FSM_NODEINTRO_STATE(void) {
+FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
 
     ModemResponse_t* response;
-    printf("FSM_NODEINTRO_STATE: Transmit the node information\n");
-    // Transmit the data collected in the FMS_DATAREQ callback.
-    // ...
+    printf("FSM_NODEINTRO_STATE: Transmit the node information count: %d \n", count);
+
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
         printf("A message has arrived \n");
@@ -226,7 +230,7 @@ FSM_States_t FSM_NODEINTRO_STATE(void) {
         switch (response->operation) {
             case NODE_TOKEN_NODEINTROACK:
                 printf("Operation NODE_TOKEN_NODEINTROACK - Calling the NODEINTROACK callback.\n");
-                node_state.event_callbacks[FSM_NODEINTROACK](); // Collect the information to send
+                node_state.event_callbacks[FSM_NODEINTROACK](); 
                 node_state.state = FSM_IDLE;
                 node_state.busy = 0;
                 break;
@@ -243,8 +247,8 @@ FSM_States_t FSM_NODEINTRO_STATE(void) {
 }
 
 
-FSM_States_t FSM_IDLE_STATE(void) {
-    printf("NODE_IDLE: dozing...\n");
+FSM_States_t FSM_IDLE_STATE(uint8_t count) {
+    printf("NODE_IDLE: dozing... count: %d \n", count);
     // _delay_ms(1000);
     return FSM_IDLE;
 }
@@ -254,6 +258,7 @@ void node_data_collection(){
     printf("node_data_collection: BEGIN\n");
     INA219_Data_t* data = INA219_get_all_readings();
     // Move the data into the struct node_message message
+    _message.operation = NODE_TOKEN_DATA;
     _message.data_length = 3;
     _message.data_token[0] = NODE_TOKEN_PROPERTY_BUS_VOLTAGE; // bus voltage
     _message.data_value[0] = data->bus_voltage;
@@ -261,6 +266,17 @@ void node_data_collection(){
     _message.data_value[1] = data->shunt_voltage;
     _message.data_token[2] = NODE_TOKEN_PROPERTY_LOAD_CURRENT; // load current
     _message.data_value[2] = data->current;
+    
+    printf("node_data_collection: transmitting the collected data \n");
+    // Send message
+    ModemResponse_t modem_message;
+    modem_message.operation = _message.operation;
+    uint8_t payload[50] = {0};
+    uint8_t size = node_message_to_stream(&_message, payload);
+    modem_message.data = payload;
+    modem_message.data_length = size;
+    modem_send_message(&modem_message);
+
     printf("node_data_collection: END\n");
 }
 
@@ -272,6 +288,7 @@ void node_data_received(void){
 
 
 void node_intro_callback(void){
+    _message.operation = NODE_TOKEN_DATA;
     _message.data_length = 5;
     _message.data_token[0] = NODE_TOKEN_HEADER_DOMAIN;
     _message.data_value[0] = NODE_METADATA_DOMAIN_POWER;
@@ -283,6 +300,16 @@ void node_intro_callback(void){
     _message.data_value[3] = NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE;
     _message.data_token[4] = NODE_TOKEN_PROPERTY;
     _message.data_value[4] = NODE_TOKEN_PROPERTY_LOAD_CURRENT;
+
+    printf("node_intro_callback: transmitting the node information \n");
+    ModemResponse_t modem_message;
+    modem_message.operation = _message.operation;
+    uint8_t payload[50] = {0};
+    uint8_t size = node_message_to_stream(&_message, payload);
+    modem_message.data = payload;
+    modem_message.data_length = size;
+    modem_send_message(&modem_message);
+
 }
 
 void node_intro_ack_callback(void){

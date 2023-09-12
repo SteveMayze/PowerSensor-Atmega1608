@@ -30,8 +30,10 @@ void MockINA219_Verify(void);
 
 #define INA219_Initialise_Expect(addr, profile) INA219_Initialise_CMockExpect(__LINE__, addr, profile)
 void INA219_Initialise_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t addr, INA219_Config_Profile_t profile);
-#define INA219_getReadings_ExpectAndReturn(cmock_retval) INA219_getReadings_CMockExpectAndReturn(__LINE__, cmock_retval)
-void INA219_getReadings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Data_t* cmock_to_return);
+#define INA219_get_all_readings_ExpectAndReturn(cmock_retval) INA219_get_all_readings_CMockExpectAndReturn(__LINE__, cmock_retval)
+void INA219_get_all_readings_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Data_t* cmock_to_return);
+#define INA219_get_raw_reading_ExpectAndReturn(reading, cmock_retval) INA219_get_raw_reading_CMockExpectAndReturn(__LINE__, reading, cmock_retval)
+void INA219_get_raw_reading_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, INA219_Readings reading, uint16_t cmock_to_return);
 
 #ifdef __cplusplus
 }

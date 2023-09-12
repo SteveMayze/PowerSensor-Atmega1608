@@ -6,7 +6,25 @@
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
 
-
+void send_message_callback(ModemResponse_t * message, int call_count){
+    printf("send_message_callback: call_count: %d \n", call_count);
+    
+    switch(message->operation){
+        case NODE_TOKEN_READY:
+            printf("send_message_callback: NODE_TOKEN_READY \n");
+            break;
+        case NODE_TOKEN_DATA:
+            printf("send_message_callback: NODE_TOKEN_DATA \n");
+            break;
+        case NODE_TOKEN_NODEINTRO:
+            printf("send_message_callback: NODE_TOKEN_NODEINTRO \n");
+            break;
+        default:
+            printf("send_message_callback: UNKNOWN \n");
+            break;
+    }
+    
+}
 
 /**
  * Verify the creation of the message and the READY, DATA send API is called.
@@ -28,8 +46,6 @@ void ready_datareq_dataack_test(){
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
     
-    datareq_response_ptr->operation = NODE_TOKEN_DATAREQ;  
-    dataack_response_ptr->operation = NODE_TOKEN_DATAACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -50,6 +66,8 @@ void ready_datareq_dataack_test(){
     fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response);
     fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+    
+    modem_send_message_StubWithCallback(send_message_callback);
     
     node_check();
     
@@ -97,9 +115,15 @@ void ready_nodeintroreq_nodeintroack_test(){
     
     printf("\nready_nodeintroreq_nodeintroack_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
+    
+    // fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
+    // fsm_set_event_callback(FSM_DATAACK, node_data_received);
+
     fsm_set_event_callback(FSM_NODEINTROREQ, test_handle_nodeintroreq_response);
     fsm_set_event_callback(FSM_NODEINTROACK, test_handle_nodeintroack_response);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
+
+    modem_send_message_StubWithCallback(send_message_callback);
     
     node_check();
     
@@ -140,7 +164,9 @@ void node_timeout_test(){
     printf("\nnode_timeout_test: Testing the timeout operation\n");
     node_set_timeout(0x0002);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
-    
+
+    modem_send_message_StubWithCallback(send_message_callback);
+        
     node_check();
     
     TEST_ASSERT_EQUAL(NODE_OK, node_close());
