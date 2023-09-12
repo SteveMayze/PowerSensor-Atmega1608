@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=PowerSensor-Atmega1608
 
 # Active Configuration
-DEFAULTCONF=test_adapter
+DEFAULTCONF=XBee_Spike
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=main test_fsm test_adapter 
+ALLCONFS=main test_fsm test_adapter XBee_Spike 
 
 
 # build
@@ -48,6 +48,7 @@ ALLCONFS=main test_fsm test_adapter
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=main clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_fsm clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_adapter clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=XBee_Spike clean
 
 
 
@@ -56,6 +57,7 @@ ALLCONFS=main test_fsm test_adapter
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=main build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_fsm build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=test_adapter build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=XBee_Spike build
 
 
 
