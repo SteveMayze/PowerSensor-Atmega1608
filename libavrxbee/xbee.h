@@ -82,6 +82,8 @@ struct xbee_frame {
 
 struct xbee_tx_request {
     int64_t addr;
+    int64_t addr_msb;
+    int64_t addr_lsb;
     uint16_t network;
     uint8_t radius;
     tx_request_option opts;
