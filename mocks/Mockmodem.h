@@ -28,18 +28,70 @@ void Mockmodem_Verify(void);
 
 
 
+#define modem_open_Ignore() modem_open_CMockIgnore()
+void modem_open_CMockIgnore(void);
+#define modem_open_StopIgnore() modem_open_CMockStopIgnore()
+void modem_open_CMockStopIgnore(void);
 #define modem_open_Expect(coordinator) modem_open_CMockExpect(__LINE__, coordinator)
 void modem_open_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t coordinator);
+typedef void (* CMOCK_modem_open_CALLBACK)(uint64_t coordinator, int cmock_num_calls);
+void modem_open_AddCallback(CMOCK_modem_open_CALLBACK Callback);
+void modem_open_Stub(CMOCK_modem_open_CALLBACK Callback);
+#define modem_open_StubWithCallback modem_open_Stub
+#define modem_close_Ignore() modem_close_CMockIgnore()
+void modem_close_CMockIgnore(void);
+#define modem_close_StopIgnore() modem_close_CMockStopIgnore()
+void modem_close_CMockStopIgnore(void);
 #define modem_close_Expect() modem_close_CMockExpect(__LINE__)
 void modem_close_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_modem_close_CALLBACK)(int cmock_num_calls);
+void modem_close_AddCallback(CMOCK_modem_close_CALLBACK Callback);
+void modem_close_Stub(CMOCK_modem_close_CALLBACK Callback);
+#define modem_close_StubWithCallback modem_close_Stub
+#define modem_message_arrived_IgnoreAndReturn(cmock_retval) modem_message_arrived_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void modem_message_arrived_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+#define modem_message_arrived_StopIgnore() modem_message_arrived_CMockStopIgnore()
+void modem_message_arrived_CMockStopIgnore(void);
 #define modem_message_arrived_ExpectAndReturn(cmock_retval) modem_message_arrived_CMockExpectAndReturn(__LINE__, cmock_retval)
 void modem_message_arrived_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+typedef bool (* CMOCK_modem_message_arrived_CALLBACK)(int cmock_num_calls);
+void modem_message_arrived_AddCallback(CMOCK_modem_message_arrived_CALLBACK Callback);
+void modem_message_arrived_Stub(CMOCK_modem_message_arrived_CALLBACK Callback);
+#define modem_message_arrived_StubWithCallback modem_message_arrived_Stub
+#define modem_get_coord_addr_IgnoreAndReturn(cmock_retval) modem_get_coord_addr_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void modem_get_coord_addr_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint64_t cmock_to_return);
+#define modem_get_coord_addr_StopIgnore() modem_get_coord_addr_CMockStopIgnore()
+void modem_get_coord_addr_CMockStopIgnore(void);
 #define modem_get_coord_addr_ExpectAndReturn(cmock_retval) modem_get_coord_addr_CMockExpectAndReturn(__LINE__, cmock_retval)
 void modem_get_coord_addr_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint64_t cmock_to_return);
+typedef uint64_t (* CMOCK_modem_get_coord_addr_CALLBACK)(int cmock_num_calls);
+void modem_get_coord_addr_AddCallback(CMOCK_modem_get_coord_addr_CALLBACK Callback);
+void modem_get_coord_addr_Stub(CMOCK_modem_get_coord_addr_CALLBACK Callback);
+#define modem_get_coord_addr_StubWithCallback modem_get_coord_addr_Stub
+#define modem_receive_message_IgnoreAndReturn(cmock_retval) modem_receive_message_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void modem_receive_message_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, ModemResponse_t* cmock_to_return);
+#define modem_receive_message_StopIgnore() modem_receive_message_CMockStopIgnore()
+void modem_receive_message_CMockStopIgnore(void);
 #define modem_receive_message_ExpectAndReturn(cmock_retval) modem_receive_message_CMockExpectAndReturn(__LINE__, cmock_retval)
 void modem_receive_message_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, ModemResponse_t* cmock_to_return);
-#define modem_send_message_Expect(messasge_stream, message_length) modem_send_message_CMockExpect(__LINE__, messasge_stream, message_length)
-void modem_send_message_CMockExpect(UNITY_LINE_TYPE cmock_line, uint8_t* messasge_stream, uint8_t message_length);
+typedef ModemResponse_t* (* CMOCK_modem_receive_message_CALLBACK)(int cmock_num_calls);
+void modem_receive_message_AddCallback(CMOCK_modem_receive_message_CALLBACK Callback);
+void modem_receive_message_Stub(CMOCK_modem_receive_message_CALLBACK Callback);
+#define modem_receive_message_StubWithCallback modem_receive_message_Stub
+#define modem_send_message_Ignore() modem_send_message_CMockIgnore()
+void modem_send_message_CMockIgnore(void);
+#define modem_send_message_StopIgnore() modem_send_message_CMockStopIgnore()
+void modem_send_message_CMockStopIgnore(void);
+#define modem_send_message_Expect(modem_message) modem_send_message_CMockExpect(__LINE__, modem_message)
+void modem_send_message_CMockExpect(UNITY_LINE_TYPE cmock_line, ModemResponse_t* modem_message);
+typedef void (* CMOCK_modem_send_message_CALLBACK)(ModemResponse_t* modem_message, int cmock_num_calls);
+void modem_send_message_AddCallback(CMOCK_modem_send_message_CALLBACK Callback);
+void modem_send_message_Stub(CMOCK_modem_send_message_CALLBACK Callback);
+#define modem_send_message_StubWithCallback modem_send_message_Stub
+#define modem_send_message_ReturnThruPtr_modem_message(modem_message) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, sizeof(ModemResponse_t))
+#define modem_send_message_ReturnArrayThruPtr_modem_message(modem_message, cmock_len) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, cmock_len * sizeof(*modem_message))
+#define modem_send_message_ReturnMemThruPtr_modem_message(modem_message, cmock_size) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, cmock_size)
+void modem_send_message_CMockReturnMemThruPtr_modem_message(UNITY_LINE_TYPE cmock_line, ModemResponse_t* modem_message, size_t cmock_size);
 
 #ifdef __cplusplus
 }

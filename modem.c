@@ -59,7 +59,7 @@ bool modem_message_arrived(void){
     return USART0_IsRxReady();
 }    
 
-void modem_send_message(uint8_t *messasge_stream, uint8_t message_length){
+void modem_send_message(ModemResponse_t *modem_message){
     printf("modem_send_message: BEGIN\n");
     
     // The message stream is actually a node message stream. This needs to be

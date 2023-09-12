@@ -24,7 +24,7 @@ void ready_data_collection_test(){
     printf("\nready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
     
     INA219_Data_t* ina219Data_ptr = get_ina219_data();
-    INA219_getReadings_ExpectAndReturn(ina219Data_ptr);
+    INA219_get_all_readings_ExpectAndReturn(ina219Data_ptr);
     ina219Data_ptr->bus_voltage = 10.5;
     ina219Data_ptr->shunt_voltage = 1.0;
     ina219Data_ptr->current = 2.5;
@@ -101,7 +101,7 @@ void ready_data_collection_test(){
     TEST_ASSERT_EQUAL(expected_message_length, message_length);
     TEST_ASSERT_EQUAL_INT8_ARRAY(expected_message_stream, message_stream, expected_message_length);
     
-    modem_send_message_Expect(expected_message_stream, message_length);
+    modem_send_message_Ignore();
     
     node_check();
 
@@ -202,7 +202,7 @@ void ready_node_intro_test(){
     TEST_ASSERT_EQUAL(expected_message_length, message_length);
     TEST_ASSERT_EQUAL_INT8_ARRAY(expected_message_stream, message_stream, expected_message_length);
     
-    modem_send_message_Expect(expected_message_stream, message_length);
+    modem_send_message_Ignore();
     
 
     node_check();

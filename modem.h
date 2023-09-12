@@ -65,9 +65,10 @@ extern "C" {
 
     typedef struct response_message {
         
-        uint8_t *data;
-        uint8_t data_length;
         Token_t operation;
+        uint8_t data_length;
+        uint8_t *data;
+        
     } ModemResponse_t;
 
     void modem_open(uint64_t coordinator);
@@ -80,7 +81,7 @@ extern "C" {
     
     ModemResponse_t* modem_receive_message(void);
     
-    void modem_send_message(uint8_t *messasge_stream, uint8_t message_length);
+    void modem_send_message(ModemResponse_t *modem_message);
 
 #endif	/* MODEM_H */
 

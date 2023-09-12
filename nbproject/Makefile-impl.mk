@@ -27,7 +27,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=PowerSensor-Atmega1608
 
 # Active Configuration
-DEFAULTCONF=test_adapter
+DEFAULTCONF=test_fsm
 CONF=${DEFAULTCONF}
 
 # All Configurations
