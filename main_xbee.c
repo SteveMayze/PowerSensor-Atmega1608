@@ -16,8 +16,8 @@ int main(void) {
     struct xbee_tx_request r;
 
     r.addr = RED_ADDR;
-    r.data = (unsigned char*)strdup("coming from the atmega328P!");
-    r.len = strlen("coming from the atmega328P!");
+    r.data = (unsigned char*)strdup("coming from the atmega 1608!");
+    r.len = strlen("coming from the atmega 1608!");
 
     struct xbee_frame *f;
 
