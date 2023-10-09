@@ -42,7 +42,9 @@
             <word>dest</word>
             <word>rf</word>
             <word>struct</word>
+            <word>tx</word>
             <word>uint</word>
+            <word>usart</word>
             <word>xbee</word>
         </spellchecker-wordlist>
     </configuration>

@@ -17,6 +17,8 @@
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/modem_test.c</file>
         </group>
-        <group name="Leawood_FieldDevice_R3"/>
+        <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/main_xbee.c</file>
+        </group>
     </open-files>
 </project-private>

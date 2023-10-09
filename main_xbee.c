@@ -9,7 +9,7 @@
 #define RED_ADDR   0x0013A20041AE49D4
 
 int main(void) {
-    // Initialize drivers from MCC
+    // Initialise drivers from MCC
     SYSTEM_Initialize();
     
     printf("main: One \n");
