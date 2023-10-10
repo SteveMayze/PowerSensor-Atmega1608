@@ -82,16 +82,16 @@ void modem_receive_message_Stub(CMOCK_modem_receive_message_CALLBACK Callback);
 void modem_send_message_CMockIgnore(void);
 #define modem_send_message_StopIgnore() modem_send_message_CMockStopIgnore()
 void modem_send_message_CMockStopIgnore(void);
-#define modem_send_message_Expect(modem_message) modem_send_message_CMockExpect(__LINE__, modem_message)
-void modem_send_message_CMockExpect(UNITY_LINE_TYPE cmock_line, ModemResponse_t* modem_message);
-typedef void (* CMOCK_modem_send_message_CALLBACK)(ModemResponse_t* modem_message, int cmock_num_calls);
+#define modem_send_message_Expect(node_message, data_length) modem_send_message_CMockExpect(__LINE__, node_message, data_length)
+void modem_send_message_CMockExpect(UNITY_LINE_TYPE cmock_line, unsigned char* node_message, uint8_t data_length);
+typedef void (* CMOCK_modem_send_message_CALLBACK)(unsigned char* node_message, uint8_t data_length, int cmock_num_calls);
 void modem_send_message_AddCallback(CMOCK_modem_send_message_CALLBACK Callback);
 void modem_send_message_Stub(CMOCK_modem_send_message_CALLBACK Callback);
 #define modem_send_message_StubWithCallback modem_send_message_Stub
-#define modem_send_message_ReturnThruPtr_modem_message(modem_message) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, sizeof(ModemResponse_t))
-#define modem_send_message_ReturnArrayThruPtr_modem_message(modem_message, cmock_len) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, cmock_len * sizeof(*modem_message))
-#define modem_send_message_ReturnMemThruPtr_modem_message(modem_message, cmock_size) modem_send_message_CMockReturnMemThruPtr_modem_message(__LINE__, modem_message, cmock_size)
-void modem_send_message_CMockReturnMemThruPtr_modem_message(UNITY_LINE_TYPE cmock_line, ModemResponse_t* modem_message, size_t cmock_size);
+#define modem_send_message_ReturnThruPtr_node_message(node_message) modem_send_message_CMockReturnMemThruPtr_node_message(__LINE__, node_message, sizeof(unsigned char))
+#define modem_send_message_ReturnArrayThruPtr_node_message(node_message, cmock_len) modem_send_message_CMockReturnMemThruPtr_node_message(__LINE__, node_message, cmock_len * sizeof(*node_message))
+#define modem_send_message_ReturnMemThruPtr_node_message(node_message, cmock_size) modem_send_message_CMockReturnMemThruPtr_node_message(__LINE__, node_message, cmock_size)
+void modem_send_message_CMockReturnMemThruPtr_node_message(UNITY_LINE_TYPE cmock_line, unsigned char* node_message, size_t cmock_size);
 
 #ifdef __cplusplus
 }

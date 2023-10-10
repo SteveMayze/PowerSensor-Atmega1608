@@ -110,7 +110,7 @@ void USART0_EnableTx();
 void USART0_Disable();
 
 /**
- * \brief Get recieved data from USART0
+ * \brief Get received data from USART0
  *
  * \return Data register from USART0 module
  */

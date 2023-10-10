@@ -1,6 +1,7 @@
 
 #include "modem.h"
 #include "mocks/Mockusart0.h"
+#include <string.h>
 
 
 uint64_t coord_addresss;
@@ -10,7 +11,7 @@ uint8_t buffer[70];
 
 void modem_open(uint64_t coordinator){
     coord_addresss = coordinator;
-    // Reset the modem...
+    // Reset the modem ~{RESET} pin...
     MODEM_RESET_SetLow();
     MODEM_RESET_SetHigh();    
 }
@@ -59,7 +60,7 @@ bool modem_message_arrived(void){
     return USART0_IsRxReady();
 }    
 
-void modem_send_message(ModemResponse_t *modem_message){
+void modem_send_message(unsigned char* node_message, uint8_t data_length){
     printf("modem_send_message: BEGIN\n");
     
     // The message stream is actually a node message stream. This needs to be
@@ -67,6 +68,29 @@ void modem_send_message(ModemResponse_t *modem_message){
     // the USART0_Write. This is not like the TW0 API that uses a finite state
     // machine to set a buffer and then write the content - which could be 
     // simpler
+    
+    struct xbee_tx_request r;
+
+    r.addr = coord_addresss;
+    r.data = node_message;
+    r.len =  data_length;
+
+    struct xbee_frame *f;
+
+    f = xbee_create_tx_request_frame(0x01, &r);
+    free(r.data);
+
+    unsigned int size;
+    unsigned char *bytes;
+    bytes = xbee_frame_to_bytes(f, &size);
+    free(f);
+
+    // usart_tx_blob(bytes, size);
+    for(int idx = 0; idx<size; idx++){
+        USART0_Write(bytes[idx]);
+    }
+    free(bytes);    
+    
     
     printf("modem_send_message: END\n");
 }

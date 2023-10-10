@@ -81,7 +81,7 @@ extern "C" {
     
     ModemResponse_t* modem_receive_message(void);
     
-    void modem_send_message(ModemResponse_t *modem_message);
+    void modem_send_message(unsigned char* node_message, uint8_t data_length);
 
 #endif	/* MODEM_H */
 

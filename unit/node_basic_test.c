@@ -6,23 +6,23 @@
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
 
-void send_message_callback(ModemResponse_t * message, int call_count){
+void send_message_callback(unsigned char* node_message, uint8_t data_length, int call_count){
     printf("send_message_callback: call_count: %d \n", call_count);
     
-    switch(message->operation){
-        case NODE_TOKEN_READY:
-            printf("send_message_callback: NODE_TOKEN_READY \n");
-            break;
-        case NODE_TOKEN_DATA:
-            printf("send_message_callback: NODE_TOKEN_DATA \n");
-            break;
-        case NODE_TOKEN_NODEINTRO:
-            printf("send_message_callback: NODE_TOKEN_NODEINTRO \n");
-            break;
-        default:
-            printf("send_message_callback: UNKNOWN \n");
-            break;
-    }
+//    switch(message->operation){
+//        case NODE_TOKEN_READY:
+//            printf("send_message_callback: NODE_TOKEN_READY \n");
+//            break;
+//        case NODE_TOKEN_DATA:
+//            printf("send_message_callback: NODE_TOKEN_DATA \n");
+//            break;
+//        case NODE_TOKEN_NODEINTRO:
+//            printf("send_message_callback: NODE_TOKEN_NODEINTRO \n");
+//            break;
+//        default:
+//            printf("send_message_callback: UNKNOWN \n");
+//            break;
+//    }
     
 }
 

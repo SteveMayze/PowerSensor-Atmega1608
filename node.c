@@ -141,11 +141,19 @@ FSM_States_t FSM_READY_STATE(uint8_t count) {
     printf("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
 
     // Send message
-    ModemResponse_t modem_message;
-    modem_message.operation = _message.operation;
-    modem_message.data = NULL;
-    modem_message.data_length = 0;
-    modem_send_message(&modem_message);
+    _message.operation = NODE_TOKEN_READY;
+    _message.data_length = 0;
+    // _message.data_token = {0};
+    // _message.data_value = {0.0};
+    uint8_t payload[50] = {0};
+    uint8_t size = node_message_to_stream(&_message, payload);
+
+//    ModemResponse_t modem_message;
+//    modem_message.operation = _message.operation;
+//    modem_message.data = NULL;
+//    modem_message.data_length = 0;
+    
+    modem_send_message(payload, size);
     
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
@@ -269,13 +277,13 @@ void node_data_collection(){
     
     printf("node_data_collection: transmitting the collected data \n");
     // Send message
-    ModemResponse_t modem_message;
-    modem_message.operation = _message.operation;
+//    ModemResponse_t modem_message;
+//    modem_message.operation = _message.operation;
     uint8_t payload[50] = {0};
     uint8_t size = node_message_to_stream(&_message, payload);
-    modem_message.data = payload;
-    modem_message.data_length = size;
-    modem_send_message(&modem_message);
+//    modem_message.data = payload;
+//    modem_message.data_length = size;
+    modem_send_message(payload, size);
 
     printf("node_data_collection: END\n");
 }
@@ -302,13 +310,13 @@ void node_intro_callback(void){
     _message.data_value[4] = NODE_TOKEN_PROPERTY_LOAD_CURRENT;
 
     printf("node_intro_callback: transmitting the node information \n");
-    ModemResponse_t modem_message;
-    modem_message.operation = _message.operation;
+//    ModemResponse_t modem_message;
+//    modem_message.operation = _message.operation;
     uint8_t payload[50] = {0};
     uint8_t size = node_message_to_stream(&_message, payload);
-    modem_message.data = payload;
-    modem_message.data_length = size;
-    modem_send_message(&modem_message);
+//    modem_message.data = payload;
+//    modem_message.data_length = size;
+    modem_send_message(payload, size);
 
 }
 

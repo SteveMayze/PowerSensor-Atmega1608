@@ -270,7 +270,7 @@ int run_ina219_tests(){
     RUN_TEST(ina219_initialise_small_profile_test);
     RUN_TEST(ina219_busReadings_test);
     RUN_TEST(ina219_get_all_readings_test);
-    printf("run_ina219_tests: end\n");
+    printf("run_ina219_tests: end\n\n");
 
     UnityEnd();
     return 0;   
