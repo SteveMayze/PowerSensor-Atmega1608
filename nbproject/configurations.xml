@@ -113,8 +113,6 @@
       <logicalFolder name="f1" displayName="Unit" projectFiles="true">
         <itemPath>unit/sensor_core_test.h</itemPath>
         <itemPath>unit/sensor_core_test.c</itemPath>
-        <itemPath>unit/modem_test.h</itemPath>
-        <itemPath>unit/modem_test.c</itemPath>
         <itemPath>unit/node_init_test.h</itemPath>
         <itemPath>unit/node_init_test.c</itemPath>
         <itemPath>unit/node_basic_test.h</itemPath>
@@ -125,6 +123,8 @@
         <itemPath>unit/test_common.c</itemPath>
         <itemPath>unit/ina219_test.c</itemPath>
         <itemPath>unit/ina219_test.h</itemPath>
+        <itemPath>unit/modem_send_test.c</itemPath>
+        <itemPath>unit/modem_send_test.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
@@ -1375,7 +1375,7 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="unit/modem_test.c" ex="true" overriding="false">
+      <item path="unit/modem_send_test.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>
@@ -1385,7 +1385,7 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="unit/modem_test.h" ex="true" overriding="false">
+      <item path="unit/modem_send_test.h" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

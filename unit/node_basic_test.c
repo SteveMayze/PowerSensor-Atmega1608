@@ -113,7 +113,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
-    printf("\nready_nodeintroreq_nodeintroack_test: Testing the send operation for READY\n");
+    printf("\n ready_nodeintroreq_nodeintroack_test: Testing the send operation for READY \n");
     node_set_timeout(0x000F);
     
     // fsm_set_event_callback(FSM_DATAREQ, node_data_collection);

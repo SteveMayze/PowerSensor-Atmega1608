@@ -6,7 +6,7 @@
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
 #include "unit/ina219_test.h"
-#include "unit/modem_test.h"
+#include "unit/modem_send_test.h"
 #include "mocks/Mockusart0.h"
 
 int main(void) {

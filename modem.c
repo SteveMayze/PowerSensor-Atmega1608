@@ -72,6 +72,9 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     struct xbee_tx_request r;
 
     r.addr = coord_addresss;
+    r.network = 0xFFFE;
+    r.radius = 0;
+    r.opts = 0;
     r.data = node_message;
     r.len =  data_length;
 
