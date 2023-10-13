@@ -25,9 +25,13 @@ int main(void) {
 
     run_ina219_tests();
     
-    printf("\n\n========== Test starting - MODEM Tests ===========\n\n");    
+    printf("\n\n========== Test starting - MODEM READY Tests ===========\n\n");    
     
-    run_modem_tests();
+    run_modem_send_ready_tests();
+
+    printf("\n\n========== Test starting - MODEM DATA Tests ===========\n\n");    
+    
+    run_modem_send_data_tests();
 
     printf("\n\n================= Test Completed =================\n\n");
 

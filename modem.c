@@ -60,6 +60,9 @@ bool modem_message_arrived(void){
     return USART0_IsRxReady();
 }    
 
+struct xbee_tx_request r;
+struct xbee_frame *f;
+
 void modem_send_message(unsigned char* node_message, uint8_t data_length){
     printf("modem_send_message: BEGIN\n");
     
@@ -69,7 +72,7 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     // machine to set a buffer and then write the content - which could be 
     // simpler
     
-    struct xbee_tx_request r;
+    
 
     r.addr = coord_addresss;
     r.network = 0xFFFE;
@@ -78,21 +81,21 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     r.data = node_message;
     r.len =  data_length;
 
-    struct xbee_frame *f;
+    
 
     f = xbee_create_tx_request_frame(0x01, &r);
-    free(r.data);
+    // free(r.data);
 
     unsigned int size;
     unsigned char *bytes;
     bytes = xbee_frame_to_bytes(f, &size);
-    free(f);
+    // free(f);
 
     // usart_tx_blob(bytes, size);
     for(int idx = 0; idx<size; idx++){
         USART0_Write(bytes[idx]);
     }
-    free(bytes);    
+    // free(bytes);    
     
     
     printf("modem_send_message: END\n");
