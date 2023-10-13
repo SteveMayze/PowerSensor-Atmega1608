@@ -122,6 +122,7 @@ struct xbee_frame *xbee_create_at_cmd_frame(uint8_t req_id, struct xbee_at_cmd *
 
 struct xbee_frame xbee_tx_frame;
 unsigned char xbee_tx_data[64];
+unsigned char xbee_tx_byte_stream[64];
 
 // xbee_create_tx_request creates an xbee_frame from the xbee_tx_request struct r. The caller is
 // responsible for freeing the returned xbee_frame.
@@ -166,24 +167,22 @@ struct xbee_frame *xbee_create_tx_request_frame(uint8_t req_id, struct xbee_tx_r
 
 }
 
-unsigned char b[64];
 // xbee_frame_to_bytes takes an xbee_frame struct and turns it into a binary blob.
-// Useful for taking an xbee_frame and turning it into a byte array for transmissin.
+// Useful for taking an xbee_frame and turning it into a byte array for transmission.
 unsigned char *xbee_frame_to_bytes(struct xbee_frame *f, unsigned int *len)
 {
 	// size of frame data + delimiter + length + checksum
 	*len = f->len + 1 + 2 + 1;
-	// unsigned char *b = malloc(*len);
-	memset(b, 0, *len);
+	memset(xbee_tx_byte_stream, 0, *len);
 
-	b[0] = f->delimiter;
+	xbee_tx_byte_stream[0] = f->delimiter;
 	uint16_t new_len = endian_swap_16(f->len);
-	memcpy(b + 1, &new_len, 2);
-	b[3] = f->frame_type;
-	b[4] = f->id;
-	memcpy(b + 5, f->data, f->len - 2);
-	b[*len - 1] = f->checksum;
-	return b;
+	memcpy(xbee_tx_byte_stream + 1, &new_len, 2);
+	xbee_tx_byte_stream[3] = f->frame_type;
+	xbee_tx_byte_stream[4] = f->id;
+	memcpy(xbee_tx_byte_stream + 5, f->data, f->len - 2);
+	xbee_tx_byte_stream[*len - 1] = f->checksum;
+	return xbee_tx_byte_stream;
 }
 
 //

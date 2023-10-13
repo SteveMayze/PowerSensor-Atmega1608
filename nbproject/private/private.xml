@@ -18,6 +18,7 @@
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/modem_test.c</file>
         </group>
         <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/modem_receive_test.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/modem_send_test.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/test_adapter_main.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/ina219/INA219.h</file>

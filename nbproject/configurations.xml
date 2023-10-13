@@ -125,6 +125,8 @@
         <itemPath>unit/ina219_test.h</itemPath>
         <itemPath>unit/modem_send_test.h</itemPath>
         <itemPath>unit/modem_send_test.c</itemPath>
+        <itemPath>unit/modem_receive_test.c</itemPath>
+        <itemPath>unit/modem_receive_test.h</itemPath>
       </logicalFolder>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"

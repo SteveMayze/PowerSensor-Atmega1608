@@ -17,12 +17,7 @@
  * I/O is using virtual ports which are addressed to memory.
  * 
  */
-uint8_t actual[46] = {0};
-uint8_t actual_idx = 0;
-uint8_t expected[46] = {0};
-uint8_t payload[48] = {0};
-#
-Node_Message_t *modem_test_message;
+
 
 void initialise_modem_test(){
     printf("\n initialise_modem_test: begin \n");

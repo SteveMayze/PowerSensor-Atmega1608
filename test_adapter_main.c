@@ -7,7 +7,16 @@
 #include <util/delay.h>
 #include "unit/ina219_test.h"
 #include "unit/modem_send_test.h"
+#include "unit/modem_receive_test.h"
 #include "mocks/Mockusart0.h"
+
+uint8_t actual[46] = {0};
+uint8_t actual_idx = 0;
+uint8_t expected[46] = {0};
+uint8_t payload[48] = {0};
+
+Node_Message_t *modem_test_message;
+
 
 int main(void) {
     
@@ -25,10 +34,13 @@ int main(void) {
 
     run_ina219_tests();
     
-    printf("\n\n========== Test starting - MODEM Tests ===========\n\n");    
+    printf("\n\n========== Test starting - MODEM send Tests ===========\n\n");    
     
     run_modem_send_tests();
+  
+    printf("\n\n========== Test starting - MODEM receive Tests ===========\n\n");    
 
+    run_modem_receive_tests();
 
     printf("\n\n================= Test Completed =================\n\n");
 
