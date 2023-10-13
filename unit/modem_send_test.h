@@ -13,14 +13,13 @@ extern "C" {
 #endif
 #include "../node.h"
 
-extern uint8_t actual[46];
-extern uint8_t actual_idx;
-extern uint8_t expected[46];
-extern uint8_t payload[48] ;
-extern Node_Message_t *modem_test_message;
+//extern uint8_t actual[46];
+//extern uint8_t actual_idx;
+//extern uint8_t expected[46];
+//extern uint8_t payload[48] ;
+//extern Node_Message_t *modem_test_message;
 
-int run_modem_send_ready_tests();
-int run_modem_send_data_tests();
+int run_modem_send_tests();
 
 void modem_test_USART0_Write_cb(const uint8_t data, int call_count);
 
