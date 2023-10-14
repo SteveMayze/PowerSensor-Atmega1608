@@ -54,7 +54,7 @@
  // packet data.
  int xbee_frame_to_rx_packet(unsigned char *data, struct xbee_rx_packet *p)
  {
-     if(!data || !p || data[0] != -0x7E || data[3] != XBEE_FT_RX_RECIEVED) {
+     if(!data || !p || data[0] != 0x7E || data[3] != XBEE_FT_RX_RECIEVED) {
          return 0;
      }
 

@@ -112,11 +112,11 @@ struct xbee_tx_status {
 };
 
 struct xbee_rx_packet {
-    uint16_t addr;
+    uint64_t addr;
     uint8_t network;
     rx_packet_option opts;
     int len;
-    unsigned char * data;
+    unsigned char data[16];
 };
 
 struct xbee_tx_request_frame {

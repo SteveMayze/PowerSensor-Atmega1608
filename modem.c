@@ -52,8 +52,7 @@ ModemResponse_t* modem_receive_message(void){
     
     // This should only be set on Data request
     coord_addresss = p.addr;
-    
-    response.operation = FSM_DATAACK;
+    response.operation = p.data[1];
     response.data_length = p.len;
     response.data = p.data;
     
