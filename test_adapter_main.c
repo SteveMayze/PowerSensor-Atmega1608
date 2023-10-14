@@ -21,7 +21,7 @@ Node_Message_t *modem_test_message;
 int main(void) {
     
     // Initialize drivers from MCC
-    // Need to specify the intialisation mock during the SYSTEM_Initialize.
+    // Need to specify the initialisation mock during the SYSTEM_Initialize.
     I2C0_Initialize_ExpectAndReturn(0);
     USART0_Initialize_Expect();
 

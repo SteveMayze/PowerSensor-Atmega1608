@@ -26,6 +26,7 @@ void modem_close(void){
 
 
 uint8_t rx_buffer[USART0_RX_BUFFER_SIZE];
+struct xbee_rx_packet p;
 
 ModemResponse_t* modem_receive_message(void){
     printf("modem_receive_message: BEGIN\n");
@@ -47,10 +48,14 @@ ModemResponse_t* modem_receive_message(void){
     // This data then needs to be traversed again to extract the actual
     // node message
     
+    xbee_frame_to_rx_packet(rx_buffer, &p);
+    
+    // This should only be set on Data request
+    coord_addresss = p.addr;
     
     response.operation = FSM_DATAACK;
-    response.data_length = 0;
-    response.data = buffer;
+    response.data_length = p.len;
+    response.data = p.data;
     
     printf("modem_receive_message: END\n");
     return &response;
@@ -72,8 +77,6 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     // machine to set a buffer and then write the content - which could be 
     // simpler
     
-    
-
     r.addr = coord_addresss;
     r.network = 0xFFFE;
     r.radius = 0;
@@ -81,23 +84,15 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     r.data = node_message;
     r.len =  data_length;
 
-    
-
     f = xbee_create_tx_request_frame(0x01, &r);
-    // free(r.data);
 
     unsigned int size;
     unsigned char *bytes;
     bytes = xbee_frame_to_bytes(f, &size);
-    // free(f);
-
-    // usart_tx_blob(bytes, size);
     for(int idx = 0; idx<size; idx++){
         USART0_Write(bytes[idx]);
     }
-    // free(bytes);    
-    
-    
+
     printf("modem_send_message: END\n");
 }
 
