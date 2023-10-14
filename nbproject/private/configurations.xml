@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="65">
   <projectmakefile>Makefile</projectmakefile>
-  <defaultConf>2</defaultConf>
+  <defaultConf>1</defaultConf>
   <confs>
     <conf name="main" type="2">
       <platformToolSN></platformToolSN>
@@ -23,7 +23,7 @@
     </conf>
     <conf name="test_fsm" type="2">
       <platformToolSN></platformToolSN>
-      <languageToolchainDir>/Applications/microchip/xc8/v2.10/bin</languageToolchainDir>
+      <languageToolchainDir>/Applications/microchip/xc8/v2.36/bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>

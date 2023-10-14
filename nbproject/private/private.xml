@@ -12,14 +12,6 @@
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/unit/modem_send_test.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.c</file>
         </group>
-        <group>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/modem_send_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/test_adapter_main.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/libavrxbee/xbee.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/libavrxbee/xbee.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/modem_receive_test.c</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

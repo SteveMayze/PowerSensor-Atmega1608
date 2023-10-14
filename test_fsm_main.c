@@ -3,7 +3,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
-#include "unit/modem_test.h"
+//#include "unit/modem_send_test.h"
 #include "unit/sensor_core_test.h"
 #include "unit/node_init_test.h"
 #include "unit/node_basic_test.h"
