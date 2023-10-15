@@ -92,7 +92,8 @@ ModemResponse_t *get_nodeintroack_response(){
 void test_handle_datareq_response(){
     printf("test_handle_datareq_response: Handle DATAREQ - Collect and send information \n");
     // Collect the data from the INA219
-    node_create_message(NODE_TOKEN_DATA, get_test_sid());
+    // node_create_message(NODE_TOKEN_DATA, get_test_sid());
+    // ModemResponse_t *msg = get_dataReq_response();
     datareq_response_flag = true;
 }
 

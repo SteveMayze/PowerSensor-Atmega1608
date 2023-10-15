@@ -40,8 +40,6 @@ extern "C" {
 
     typedef void (*Event_Callback_t)();
     
-
-    
     void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb);
     
     void node_check();

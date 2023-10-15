@@ -7,22 +7,21 @@
 #include "test_common.h"
 
 void send_message_callback(unsigned char* node_message, uint8_t data_length, int call_count){
-    printf("send_message_callback: call_count: %d \n", call_count);
-    
-//    switch(message->operation){
-//        case NODE_TOKEN_READY:
-//            printf("send_message_callback: NODE_TOKEN_READY \n");
-//            break;
-//        case NODE_TOKEN_DATA:
-//            printf("send_message_callback: NODE_TOKEN_DATA \n");
-//            break;
-//        case NODE_TOKEN_NODEINTRO:
-//            printf("send_message_callback: NODE_TOKEN_NODEINTRO \n");
-//            break;
-//        default:
-//            printf("send_message_callback: UNKNOWN \n");
-//            break;
-//    }
+    uint8_t operation = node_message[1];
+    switch(operation){
+        case NODE_TOKEN_READY:
+            printf("send_message_callback: NODE_TOKEN_READY call_count: %d \n", call_count);
+            break;
+        case NODE_TOKEN_DATA:
+            printf("send_message_callback: NODE_TOKEN_DATA call_count: %d \n", call_count);
+            break;
+        case NODE_TOKEN_NODEINTRO:
+            printf("send_message_callback: NODE_TOKEN_NODEINTRO call_count: %d \n", call_count);
+            break;
+        default:
+            printf("send_message_callback: UNKNOWN call_count: %d \n", call_count);
+            break;
+    }
     
 }
 
@@ -32,6 +31,9 @@ void send_message_callback(unsigned char* node_message, uint8_t data_length, int
 void ready_datareq_dataack_test(){
     set_datareq_response_flag(false);
     set_timeout_response_flag(false);
+    
+    modem_open_Ignore();
+    modem_close_Ignore();
     
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
@@ -46,9 +48,11 @@ void ready_datareq_dataack_test(){
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
     
+    datareq_response_ptr->operation = NODE_TOKEN_DATAREQ;  
+    dataack_response_ptr->operation = NODE_TOKEN_DATAACK;
+
     
-    modem_open_Expect(XBEE_ADDR_BROADCAST);
-    modem_close_Expect();
+    // modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(datareq_response_ptr);
 
@@ -61,7 +65,7 @@ void ready_datareq_dataack_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
-    printf("\nready_datareq_dataack_test: Testing the send operation for READY\n");
+    printf("\n ready_datareq_dataack_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
     fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response);
     fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response);
@@ -107,11 +111,11 @@ void ready_nodeintroreq_nodeintroack_test(){
     modem_message_arrived_ExpectAndReturn(true);
     modem_receive_message_ExpectAndReturn(nodeintroack_response_ptr);
 
-    Node_Message_t *actual = node_create_message(NODE_TOKEN_READY, get_test_sid());
+    Node_Message_t *actual = node_create_message(NODE_TOKEN_DATA, get_test_sid());
     
     TEST_ASSERT_GREATER_THAN(0, sizeof(actual) );
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
-    TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
+    TEST_ASSERT_EQUAL(NODE_TOKEN_DATA, actual->operation);
     
     printf("\n ready_nodeintroreq_nodeintroack_test: Testing the send operation for READY \n");
     node_set_timeout(0x000F);

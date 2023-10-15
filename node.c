@@ -23,7 +23,8 @@ typedef struct {
     uint16_t timeout_value;
     unsigned busy : 1;
 } Node_State_t;
-Node_State_t node_state = {0};
+
+static Node_State_t node_state = {0};
 
 typedef FSM_States_t(stateHandlerFunction)(uint8_t count);
 
@@ -32,11 +33,11 @@ typedef FSM_States_t(stateHandlerFunction)(uint8_t count);
 static FSM_States_t FSM_IDLE_STATE(uint8_t count);
 static FSM_States_t FSM_READY_STATE(uint8_t count);
 static FSM_States_t FSM_DATA_STATE(uint8_t count);
-static FSM_States_t FSM_RESET_STATE(uint8_t count);
 static FSM_States_t FSM_NODEINTRO_STATE(uint8_t count);
+static FSM_States_t FSM_RESET_STATE(uint8_t count);
 
 // An array to collect the state handlers
-stateHandlerFunction *fsm_state_table[] = {
+static stateHandlerFunction *fsm_state_table[] = {
     FSM_IDLE_STATE,
     FSM_READY_STATE,
     FSM_DATA_STATE,
@@ -89,6 +90,7 @@ Node_Message_t* node_create_message(Token_t token, uint8_t *sid) {
 
     _message.sid = sid;
     _message.operation = token;
+    _message.data_length = 0;
     return &_message;
 }
 
@@ -103,9 +105,11 @@ void node_wait() {
 }
 
 void node_fsm_execution() {
-    printf("node_fsm_execution: Executing %02X\n", node_state.state);
+    printf("node_fsm_execution: Executing for state: %02X\n", node_state.state);
     // Execute the current state.
-    node_state.state = fsm_state_table[node_state.state](0);
+    FSM_States_t state = fsm_state_table[node_state.state](0);
+    node_state.state = state;
+    printf("node_fsm_execution: end state: %02X \n", state);
 }
 
 void node_fsm_poller() {
@@ -126,7 +130,7 @@ void node_fsm_poller() {
 }
 
 void node_check() {
-    printf("node_check: Sending the message for operation: %02X\n", _message.operation);
+    printf("node_check: Checking for operation: %02X, state: %0X2 \n", _message.operation, node_state.state);
     if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
@@ -136,43 +140,45 @@ void node_check() {
     modem_close();
 }
 
-FSM_States_t FSM_READY_STATE(uint8_t count) {
+static FSM_States_t FSM_READY_STATE(uint8_t count) {
     ModemResponse_t* response;
     printf("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
 
     // Send message
     _message.operation = NODE_TOKEN_READY;
     _message.data_length = 0;
-    uint8_t payload[1] = {0};
+    uint8_t payload[1];
     uint8_t size = node_message_to_stream(&_message, payload);
 
     modem_send_message(payload, size);
-    
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
-        printf("A message has arrived \n");
+        printf("FSM_READY_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_DATAREQ:
-                printf("Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
+                printf("FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
                 // Received DATAREQ - Move to the DATA state
                 node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
+                printf("FSM_READY_STATE: Called %02X \n", FSM_DATAREQ);                
                 node_state.state = FSM_DATA;
                 node_state.busy = 1;
                 break;
             case NODE_TOKEN_NODEINTROREQ:
-                printf("Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
+                printf("FSM_READY_STATE: Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
                 // Received DATAREQ - Move to the DATA state
                 node_state.event_callbacks[FSM_NODEINTROREQ](); // Collect the information to send
                 node_state.state = FSM_NODEINTRO;
                 node_state.busy = 1;
                 break;
             default:
+                printf("FSM_READY_STATE: Not supported operation - Staying in READY \n");
                 node_state.busy = 1;
                 node_state.state = FSM_READY;
                 break;
         }
     }
+    printf("FSM_READY_STATE: End with state: %02X \n", node_state.state);
     return node_state.state;
 }
 
@@ -182,25 +188,27 @@ static FSM_States_t FSM_DATA_STATE(uint8_t count) {
     
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
-        printf("A message has arrived \n");
+        printf("FSM_DATA_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_DATAACK:
-                printf("Operation NODE_TOKEN_DATAACK - Calling the DATAREQ callback.\n");
+                printf("FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAREQ callback.\n");
                 node_state.event_callbacks[FSM_DATAACK](); // Collect the information to send
                 node_state.state = FSM_IDLE;
                 node_state.busy = 0;
                 break;
             default:
+                printf("FSM_DATA_STATE: Not supported operation - Staying in DATA \n");
                 node_state.busy = 1;
                 node_state.state = FSM_DATA;
                 break;
         }
     }
+    printf("FSM_DATA_STATE: End with state: %02X \n", node_state.state);
     return node_state.state;    
 }
 
-FSM_States_t FSM_RESET_STATE(uint8_t count) {
+static FSM_States_t FSM_RESET_STATE(uint8_t count) {
     printf("NODE_RESET: count: %d \n", count);
     FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
@@ -211,6 +219,7 @@ FSM_States_t FSM_RESET_STATE(uint8_t count) {
             ret = FSM_READY;
             break;
         default:
+            printf("NODE_RESET: Not supported operation - Staying in IDLE \n");
             node_state.busy = 0;
             ret = FSM_IDLE;
             break;
@@ -219,14 +228,14 @@ FSM_States_t FSM_RESET_STATE(uint8_t count) {
 }
 
 
-FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
+static FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
 
     ModemResponse_t* response;
     printf("FSM_NODEINTRO_STATE: Transmit the node information count: %d \n", count);
 
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
-        printf("A message has arrived \n");
+        printf("FSM_NODEINTRO_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_NODEINTROACK:
@@ -248,7 +257,7 @@ FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
 }
 
 
-FSM_States_t FSM_IDLE_STATE(uint8_t count) {
+static FSM_States_t FSM_IDLE_STATE(uint8_t count) {
     printf("NODE_IDLE: dozing... count: %d \n", count);
     // _delay_ms(1000);
     return FSM_IDLE;
