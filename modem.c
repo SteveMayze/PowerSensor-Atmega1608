@@ -1,6 +1,6 @@
 
 #include "modem.h"
-#include "mocks/Mockusart0.h"
+#include "mcc_generated_files/include/usart0.h"
 #include <string.h>
 
 
