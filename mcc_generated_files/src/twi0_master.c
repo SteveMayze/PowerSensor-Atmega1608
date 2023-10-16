@@ -140,6 +140,7 @@ static twi0_fsm_states_t I2C0_DO_BUS_COLLISION(void);
 static twi0_fsm_states_t I2C0_DO_BUS_ERROR(void);
 
 typedef twi0_fsm_states_t(stateHandlerFunction)(void);
+typedef twi0_fsm_states_t(stateHandlerFunction)(void);
 stateHandlerFunction *I2C0_fsmStateTable[] = {
     I2C0_DO_IDLE,               // I2C_IDLE
     I2C0_DO_SEND_ADR_READ,      // I2C_SEND_ADR_READ

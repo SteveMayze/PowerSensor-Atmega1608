@@ -19,19 +19,36 @@ extern "C" {
     uint8_t b_value[4];
 };
 
-
+    // These are the return codes for the primary functions for the node.
+    typedef enum node_error_e {
+        NODE_OK,
+        NODE_BUSY,
+        NODE_TIMEOUT_ERR
+    } Error_t;
     
-    /*!
-     * \brief Returns the serial number from the micro-controller Signature Rows.
-     * 
-     */
-    void sensor_core_read_serial_no(uint8_t *buf);
+    // According to FSM, these are really states.
+    typedef enum fsm_states_e {
+        FSM_IDLE = 0,
+        FSM_READY,
+        FSM_DATA,
+        FSM_NODEINTRO,
+        FSM_RESET,
+    } FSM_States_t;
+    
+    typedef enum fsm_events_e {
+        FSM_DATAREQ = 1,
+        FSM_DATAACK,
+        FSM_NODEINTROREQ,
+        FSM_NODEINTROACK,
+        FSM_TIMEOUT,
+    } FSM_Events_t;
+    
 
     /*!
      * \brief Returns the binary i.e. 4 byte uint8_t array representing a 
      *        float value.
      */
-    void sensor_core_convert_float_to_binary(float f_value, uint8_t *b_value);
+    void sensor_core_convert_float_to_binary(float *f_value, uint8_t *b_value);
     
     void sensor_core_convert_binary_to_float(uint8_t *b_value, float *f_value);
 

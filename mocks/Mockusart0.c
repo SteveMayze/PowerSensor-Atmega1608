@@ -141,22 +141,96 @@ typedef struct _CMOCK_USART0_SetTXISRCb_CALL_INSTANCE
 
 static struct Mockusart0Instance
 {
+  char USART0_Initialize_IgnoreBool;
+  char USART0_Initialize_CallbackBool;
+  CMOCK_USART0_Initialize_CALLBACK USART0_Initialize_CallbackFunctionPointer;
+  int USART0_Initialize_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_Initialize_CallInstance;
+  char USART0_Enable_IgnoreBool;
+  char USART0_Enable_CallbackBool;
+  CMOCK_USART0_Enable_CALLBACK USART0_Enable_CallbackFunctionPointer;
+  int USART0_Enable_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_Enable_CallInstance;
+  char USART0_EnableRx_IgnoreBool;
+  char USART0_EnableRx_CallbackBool;
+  CMOCK_USART0_EnableRx_CALLBACK USART0_EnableRx_CallbackFunctionPointer;
+  int USART0_EnableRx_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_EnableRx_CallInstance;
+  char USART0_EnableTx_IgnoreBool;
+  char USART0_EnableTx_CallbackBool;
+  CMOCK_USART0_EnableTx_CALLBACK USART0_EnableTx_CallbackFunctionPointer;
+  int USART0_EnableTx_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_EnableTx_CallInstance;
+  char USART0_Disable_IgnoreBool;
+  char USART0_Disable_CallbackBool;
+  CMOCK_USART0_Disable_CALLBACK USART0_Disable_CallbackFunctionPointer;
+  int USART0_Disable_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_Disable_CallInstance;
+  char USART0_GetData_IgnoreBool;
+  uint8_t USART0_GetData_FinalReturn;
+  char USART0_GetData_CallbackBool;
+  CMOCK_USART0_GetData_CALLBACK USART0_GetData_CallbackFunctionPointer;
+  int USART0_GetData_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_GetData_CallInstance;
+  char USART0_IsTxReady_IgnoreBool;
+  bool USART0_IsTxReady_FinalReturn;
+  char USART0_IsTxReady_CallbackBool;
+  CMOCK_USART0_IsTxReady_CALLBACK USART0_IsTxReady_CallbackFunctionPointer;
+  int USART0_IsTxReady_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_IsTxReady_CallInstance;
+  char USART0_IsRxReady_IgnoreBool;
+  bool USART0_IsRxReady_FinalReturn;
+  char USART0_IsRxReady_CallbackBool;
+  CMOCK_USART0_IsRxReady_CALLBACK USART0_IsRxReady_CallbackFunctionPointer;
+  int USART0_IsRxReady_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_IsRxReady_CallInstance;
+  char USART0_IsTxBusy_IgnoreBool;
+  bool USART0_IsTxBusy_FinalReturn;
+  char USART0_IsTxBusy_CallbackBool;
+  CMOCK_USART0_IsTxBusy_CALLBACK USART0_IsTxBusy_CallbackFunctionPointer;
+  int USART0_IsTxBusy_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_IsTxBusy_CallInstance;
+  char USART0_IsTxDone_IgnoreBool;
+  bool USART0_IsTxDone_FinalReturn;
+  char USART0_IsTxDone_CallbackBool;
+  CMOCK_USART0_IsTxDone_CALLBACK USART0_IsTxDone_CallbackFunctionPointer;
+  int USART0_IsTxDone_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_IsTxDone_CallInstance;
+  char USART0_Read_IgnoreBool;
+  uint8_t USART0_Read_FinalReturn;
+  char USART0_Read_CallbackBool;
+  CMOCK_USART0_Read_CALLBACK USART0_Read_CallbackFunctionPointer;
+  int USART0_Read_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_Read_CallInstance;
+  char USART0_Write_IgnoreBool;
+  char USART0_Write_CallbackBool;
+  CMOCK_USART0_Write_CALLBACK USART0_Write_CallbackFunctionPointer;
+  int USART0_Write_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_Write_CallInstance;
+  char USART0_DefaultRxIsrCb_IgnoreBool;
+  char USART0_DefaultRxIsrCb_CallbackBool;
+  CMOCK_USART0_DefaultRxIsrCb_CALLBACK USART0_DefaultRxIsrCb_CallbackFunctionPointer;
+  int USART0_DefaultRxIsrCb_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_DefaultRxIsrCb_CallInstance;
+  char USART0_DefaultTxIsrCb_IgnoreBool;
+  char USART0_DefaultTxIsrCb_CallbackBool;
+  CMOCK_USART0_DefaultTxIsrCb_CALLBACK USART0_DefaultTxIsrCb_CallbackFunctionPointer;
+  int USART0_DefaultTxIsrCb_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_DefaultTxIsrCb_CallInstance;
+  char USART0_SetISRCb_IgnoreBool;
+  char USART0_SetISRCb_CallbackBool;
+  CMOCK_USART0_SetISRCb_CALLBACK USART0_SetISRCb_CallbackFunctionPointer;
+  int USART0_SetISRCb_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_SetISRCb_CallInstance;
+  char USART0_SetRXISRCb_IgnoreBool;
+  char USART0_SetRXISRCb_CallbackBool;
+  CMOCK_USART0_SetRXISRCb_CALLBACK USART0_SetRXISRCb_CallbackFunctionPointer;
+  int USART0_SetRXISRCb_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_SetRXISRCb_CallInstance;
+  char USART0_SetTXISRCb_IgnoreBool;
+  char USART0_SetTXISRCb_CallbackBool;
+  CMOCK_USART0_SetTXISRCb_CALLBACK USART0_SetTXISRCb_CallbackFunctionPointer;
+  int USART0_SetTXISRCb_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE USART0_SetTXISRCb_CallInstance;
 } Mock;
 
@@ -167,106 +241,225 @@ void Mockusart0_Verify(void)
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_MEM_INDEX_TYPE call_instance;
   call_instance = Mock.USART0_Initialize_CallInstance;
+  if (Mock.USART0_Initialize_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_Initialize);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_Enable_CallInstance;
+  if (Mock.USART0_Enable_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_Enable);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_Enable_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_EnableRx_CallInstance;
+  if (Mock.USART0_EnableRx_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_EnableRx);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_EnableRx_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_EnableTx_CallInstance;
+  if (Mock.USART0_EnableTx_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_EnableTx);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_EnableTx_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_Disable_CallInstance;
+  if (Mock.USART0_Disable_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_Disable);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_Disable_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_GetData_CallInstance;
+  if (Mock.USART0_GetData_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_GetData);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_GetData_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_IsTxReady_CallInstance;
+  if (Mock.USART0_IsTxReady_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_IsTxReady);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_IsTxReady_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_IsRxReady_CallInstance;
+  if (Mock.USART0_IsRxReady_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_IsRxReady);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_IsRxReady_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_IsTxBusy_CallInstance;
+  if (Mock.USART0_IsTxBusy_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_IsTxBusy);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_IsTxBusy_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_IsTxDone_CallInstance;
+  if (Mock.USART0_IsTxDone_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_IsTxDone);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_IsTxDone_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_Read_CallInstance;
+  if (Mock.USART0_Read_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_Read);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_Read_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_Write_CallInstance;
+  if (Mock.USART0_Write_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_Write);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_Write_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_DefaultRxIsrCb_CallInstance;
+  if (Mock.USART0_DefaultRxIsrCb_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_DefaultRxIsrCb);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_DefaultTxIsrCb_CallInstance;
+  if (Mock.USART0_DefaultTxIsrCb_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_DefaultTxIsrCb);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_SetISRCb_CallInstance;
+  if (Mock.USART0_SetISRCb_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_SetISRCb);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_SetISRCb_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_SetRXISRCb_CallInstance;
+  if (Mock.USART0_SetRXISRCb_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_SetRXISRCb);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
   }
+  if (Mock.USART0_SetRXISRCb_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.USART0_SetTXISRCb_CallInstance;
+  if (Mock.USART0_SetTXISRCb_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_USART0_SetTXISRCb);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.USART0_SetTXISRCb_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
 }
 
@@ -288,9 +481,35 @@ void USART0_Initialize(void)
   UNITY_SET_DETAIL(CMockString_USART0_Initialize);
   cmock_call_instance = (CMOCK_USART0_Initialize_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_Initialize_CallInstance);
   Mock.USART0_Initialize_CallInstance = CMock_Guts_MemNext(Mock.USART0_Initialize_CallInstance);
+  if (Mock.USART0_Initialize_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_Initialize_CallbackBool &&
+      Mock.USART0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Initialize_CallbackFunctionPointer(Mock.USART0_Initialize_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_Initialize_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Initialize_CallbackFunctionPointer(Mock.USART0_Initialize_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_Initialize_CMockIgnore(void)
+{
+  Mock.USART0_Initialize_IgnoreBool = (char)1;
+}
+
+void USART0_Initialize_CMockStopIgnore(void)
+{
+  Mock.USART0_Initialize_IgnoreBool = (char)0;
 }
 
 void USART0_Initialize_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -300,7 +519,22 @@ void USART0_Initialize_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_Initialize_CallInstance = CMock_Guts_MemChain(Mock.USART0_Initialize_CallInstance, cmock_guts_index);
+  Mock.USART0_Initialize_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_Initialize_AddCallback(CMOCK_USART0_Initialize_CALLBACK Callback)
+{
+  Mock.USART0_Initialize_IgnoreBool = (char)0;
+  Mock.USART0_Initialize_CallbackBool = (char)1;
+  Mock.USART0_Initialize_CallbackFunctionPointer = Callback;
+}
+
+void USART0_Initialize_Stub(CMOCK_USART0_Initialize_CALLBACK Callback)
+{
+  Mock.USART0_Initialize_IgnoreBool = (char)0;
+  Mock.USART0_Initialize_CallbackBool = (char)0;
+  Mock.USART0_Initialize_CallbackFunctionPointer = Callback;
 }
 
 void USART0_Enable(void)
@@ -310,9 +544,35 @@ void USART0_Enable(void)
   UNITY_SET_DETAIL(CMockString_USART0_Enable);
   cmock_call_instance = (CMOCK_USART0_Enable_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_Enable_CallInstance);
   Mock.USART0_Enable_CallInstance = CMock_Guts_MemNext(Mock.USART0_Enable_CallInstance);
+  if (Mock.USART0_Enable_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_Enable_CallbackBool &&
+      Mock.USART0_Enable_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Enable_CallbackFunctionPointer(Mock.USART0_Enable_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_Enable_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Enable_CallbackFunctionPointer(Mock.USART0_Enable_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_Enable_CMockIgnore(void)
+{
+  Mock.USART0_Enable_IgnoreBool = (char)1;
+}
+
+void USART0_Enable_CMockStopIgnore(void)
+{
+  Mock.USART0_Enable_IgnoreBool = (char)0;
 }
 
 void USART0_Enable_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -322,7 +582,22 @@ void USART0_Enable_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_Enable_CallInstance = CMock_Guts_MemChain(Mock.USART0_Enable_CallInstance, cmock_guts_index);
+  Mock.USART0_Enable_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_Enable_AddCallback(CMOCK_USART0_Enable_CALLBACK Callback)
+{
+  Mock.USART0_Enable_IgnoreBool = (char)0;
+  Mock.USART0_Enable_CallbackBool = (char)1;
+  Mock.USART0_Enable_CallbackFunctionPointer = Callback;
+}
+
+void USART0_Enable_Stub(CMOCK_USART0_Enable_CALLBACK Callback)
+{
+  Mock.USART0_Enable_IgnoreBool = (char)0;
+  Mock.USART0_Enable_CallbackBool = (char)0;
+  Mock.USART0_Enable_CallbackFunctionPointer = Callback;
 }
 
 void USART0_EnableRx(void)
@@ -332,9 +607,35 @@ void USART0_EnableRx(void)
   UNITY_SET_DETAIL(CMockString_USART0_EnableRx);
   cmock_call_instance = (CMOCK_USART0_EnableRx_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_EnableRx_CallInstance);
   Mock.USART0_EnableRx_CallInstance = CMock_Guts_MemNext(Mock.USART0_EnableRx_CallInstance);
+  if (Mock.USART0_EnableRx_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_EnableRx_CallbackBool &&
+      Mock.USART0_EnableRx_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_EnableRx_CallbackFunctionPointer(Mock.USART0_EnableRx_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_EnableRx_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_EnableRx_CallbackFunctionPointer(Mock.USART0_EnableRx_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_EnableRx_CMockIgnore(void)
+{
+  Mock.USART0_EnableRx_IgnoreBool = (char)1;
+}
+
+void USART0_EnableRx_CMockStopIgnore(void)
+{
+  Mock.USART0_EnableRx_IgnoreBool = (char)0;
 }
 
 void USART0_EnableRx_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -344,7 +645,22 @@ void USART0_EnableRx_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_EnableRx_CallInstance = CMock_Guts_MemChain(Mock.USART0_EnableRx_CallInstance, cmock_guts_index);
+  Mock.USART0_EnableRx_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_EnableRx_AddCallback(CMOCK_USART0_EnableRx_CALLBACK Callback)
+{
+  Mock.USART0_EnableRx_IgnoreBool = (char)0;
+  Mock.USART0_EnableRx_CallbackBool = (char)1;
+  Mock.USART0_EnableRx_CallbackFunctionPointer = Callback;
+}
+
+void USART0_EnableRx_Stub(CMOCK_USART0_EnableRx_CALLBACK Callback)
+{
+  Mock.USART0_EnableRx_IgnoreBool = (char)0;
+  Mock.USART0_EnableRx_CallbackBool = (char)0;
+  Mock.USART0_EnableRx_CallbackFunctionPointer = Callback;
 }
 
 void USART0_EnableTx(void)
@@ -354,9 +670,35 @@ void USART0_EnableTx(void)
   UNITY_SET_DETAIL(CMockString_USART0_EnableTx);
   cmock_call_instance = (CMOCK_USART0_EnableTx_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_EnableTx_CallInstance);
   Mock.USART0_EnableTx_CallInstance = CMock_Guts_MemNext(Mock.USART0_EnableTx_CallInstance);
+  if (Mock.USART0_EnableTx_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_EnableTx_CallbackBool &&
+      Mock.USART0_EnableTx_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_EnableTx_CallbackFunctionPointer(Mock.USART0_EnableTx_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_EnableTx_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_EnableTx_CallbackFunctionPointer(Mock.USART0_EnableTx_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_EnableTx_CMockIgnore(void)
+{
+  Mock.USART0_EnableTx_IgnoreBool = (char)1;
+}
+
+void USART0_EnableTx_CMockStopIgnore(void)
+{
+  Mock.USART0_EnableTx_IgnoreBool = (char)0;
 }
 
 void USART0_EnableTx_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -366,7 +708,22 @@ void USART0_EnableTx_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_EnableTx_CallInstance = CMock_Guts_MemChain(Mock.USART0_EnableTx_CallInstance, cmock_guts_index);
+  Mock.USART0_EnableTx_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_EnableTx_AddCallback(CMOCK_USART0_EnableTx_CALLBACK Callback)
+{
+  Mock.USART0_EnableTx_IgnoreBool = (char)0;
+  Mock.USART0_EnableTx_CallbackBool = (char)1;
+  Mock.USART0_EnableTx_CallbackFunctionPointer = Callback;
+}
+
+void USART0_EnableTx_Stub(CMOCK_USART0_EnableTx_CALLBACK Callback)
+{
+  Mock.USART0_EnableTx_IgnoreBool = (char)0;
+  Mock.USART0_EnableTx_CallbackBool = (char)0;
+  Mock.USART0_EnableTx_CallbackFunctionPointer = Callback;
 }
 
 void USART0_Disable(void)
@@ -376,9 +733,35 @@ void USART0_Disable(void)
   UNITY_SET_DETAIL(CMockString_USART0_Disable);
   cmock_call_instance = (CMOCK_USART0_Disable_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_Disable_CallInstance);
   Mock.USART0_Disable_CallInstance = CMock_Guts_MemNext(Mock.USART0_Disable_CallInstance);
+  if (Mock.USART0_Disable_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_Disable_CallbackBool &&
+      Mock.USART0_Disable_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Disable_CallbackFunctionPointer(Mock.USART0_Disable_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_Disable_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Disable_CallbackFunctionPointer(Mock.USART0_Disable_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_Disable_CMockIgnore(void)
+{
+  Mock.USART0_Disable_IgnoreBool = (char)1;
+}
+
+void USART0_Disable_CMockStopIgnore(void)
+{
+  Mock.USART0_Disable_IgnoreBool = (char)0;
 }
 
 void USART0_Disable_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -388,7 +771,22 @@ void USART0_Disable_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_Disable_CallInstance = CMock_Guts_MemChain(Mock.USART0_Disable_CallInstance, cmock_guts_index);
+  Mock.USART0_Disable_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_Disable_AddCallback(CMOCK_USART0_Disable_CALLBACK Callback)
+{
+  Mock.USART0_Disable_IgnoreBool = (char)0;
+  Mock.USART0_Disable_CallbackBool = (char)1;
+  Mock.USART0_Disable_CallbackFunctionPointer = Callback;
+}
+
+void USART0_Disable_Stub(CMOCK_USART0_Disable_CALLBACK Callback)
+{
+  Mock.USART0_Disable_IgnoreBool = (char)0;
+  Mock.USART0_Disable_CallbackBool = (char)0;
+  Mock.USART0_Disable_CallbackFunctionPointer = Callback;
 }
 
 uint8_t USART0_GetData(void)
@@ -398,10 +796,49 @@ uint8_t USART0_GetData(void)
   UNITY_SET_DETAIL(CMockString_USART0_GetData);
   cmock_call_instance = (CMOCK_USART0_GetData_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_GetData_CallInstance);
   Mock.USART0_GetData_CallInstance = CMock_Guts_MemNext(Mock.USART0_GetData_CallInstance);
+  if (Mock.USART0_GetData_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_GetData_FinalReturn;
+    Mock.USART0_GetData_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_GetData_CallbackBool &&
+      Mock.USART0_GetData_CallbackFunctionPointer != NULL)
+  {
+    uint8_t cmock_cb_ret = Mock.USART0_GetData_CallbackFunctionPointer(Mock.USART0_GetData_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_GetData_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_GetData_CallbackFunctionPointer(Mock.USART0_GetData_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_GetData_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_GetData_CALL_INSTANCE));
+  CMOCK_USART0_GetData_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_GetData_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_GetData_CallInstance = CMock_Guts_MemChain(Mock.USART0_GetData_CallInstance, cmock_guts_index);
+  Mock.USART0_GetData_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_GetData_IgnoreBool = (char)1;
+}
+
+void USART0_GetData_CMockStopIgnore(void)
+{
+  if(Mock.USART0_GetData_IgnoreBool)
+    Mock.USART0_GetData_CallInstance = CMock_Guts_MemNext(Mock.USART0_GetData_CallInstance);
+  Mock.USART0_GetData_IgnoreBool = (char)0;
 }
 
 void USART0_GetData_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
@@ -411,8 +848,23 @@ void USART0_GetData_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmo
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_GetData_CallInstance = CMock_Guts_MemChain(Mock.USART0_GetData_CallInstance, cmock_guts_index);
+  Mock.USART0_GetData_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_GetData_AddCallback(CMOCK_USART0_GetData_CALLBACK Callback)
+{
+  Mock.USART0_GetData_IgnoreBool = (char)0;
+  Mock.USART0_GetData_CallbackBool = (char)1;
+  Mock.USART0_GetData_CallbackFunctionPointer = Callback;
+}
+
+void USART0_GetData_Stub(CMOCK_USART0_GetData_CALLBACK Callback)
+{
+  Mock.USART0_GetData_IgnoreBool = (char)0;
+  Mock.USART0_GetData_CallbackBool = (char)0;
+  Mock.USART0_GetData_CallbackFunctionPointer = Callback;
 }
 
 bool USART0_IsTxReady(void)
@@ -422,10 +874,49 @@ bool USART0_IsTxReady(void)
   UNITY_SET_DETAIL(CMockString_USART0_IsTxReady);
   cmock_call_instance = (CMOCK_USART0_IsTxReady_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_IsTxReady_CallInstance);
   Mock.USART0_IsTxReady_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxReady_CallInstance);
+  if (Mock.USART0_IsTxReady_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_IsTxReady_FinalReturn;
+    Mock.USART0_IsTxReady_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_IsTxReady_CallbackBool &&
+      Mock.USART0_IsTxReady_CallbackFunctionPointer != NULL)
+  {
+    bool cmock_cb_ret = Mock.USART0_IsTxReady_CallbackFunctionPointer(Mock.USART0_IsTxReady_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_IsTxReady_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_IsTxReady_CallbackFunctionPointer(Mock.USART0_IsTxReady_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_IsTxReady_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_IsTxReady_CALL_INSTANCE));
+  CMOCK_USART0_IsTxReady_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_IsTxReady_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_IsTxReady_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxReady_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxReady_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_IsTxReady_IgnoreBool = (char)1;
+}
+
+void USART0_IsTxReady_CMockStopIgnore(void)
+{
+  if(Mock.USART0_IsTxReady_IgnoreBool)
+    Mock.USART0_IsTxReady_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxReady_CallInstance);
+  Mock.USART0_IsTxReady_IgnoreBool = (char)0;
 }
 
 void USART0_IsTxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
@@ -435,8 +926,23 @@ void USART0_IsTxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmoc
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_IsTxReady_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxReady_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxReady_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_IsTxReady_AddCallback(CMOCK_USART0_IsTxReady_CALLBACK Callback)
+{
+  Mock.USART0_IsTxReady_IgnoreBool = (char)0;
+  Mock.USART0_IsTxReady_CallbackBool = (char)1;
+  Mock.USART0_IsTxReady_CallbackFunctionPointer = Callback;
+}
+
+void USART0_IsTxReady_Stub(CMOCK_USART0_IsTxReady_CALLBACK Callback)
+{
+  Mock.USART0_IsTxReady_IgnoreBool = (char)0;
+  Mock.USART0_IsTxReady_CallbackBool = (char)0;
+  Mock.USART0_IsTxReady_CallbackFunctionPointer = Callback;
 }
 
 bool USART0_IsRxReady(void)
@@ -446,10 +952,49 @@ bool USART0_IsRxReady(void)
   UNITY_SET_DETAIL(CMockString_USART0_IsRxReady);
   cmock_call_instance = (CMOCK_USART0_IsRxReady_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_IsRxReady_CallInstance);
   Mock.USART0_IsRxReady_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsRxReady_CallInstance);
+  if (Mock.USART0_IsRxReady_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_IsRxReady_FinalReturn;
+    Mock.USART0_IsRxReady_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_IsRxReady_CallbackBool &&
+      Mock.USART0_IsRxReady_CallbackFunctionPointer != NULL)
+  {
+    bool cmock_cb_ret = Mock.USART0_IsRxReady_CallbackFunctionPointer(Mock.USART0_IsRxReady_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_IsRxReady_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_IsRxReady_CallbackFunctionPointer(Mock.USART0_IsRxReady_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_IsRxReady_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_IsRxReady_CALL_INSTANCE));
+  CMOCK_USART0_IsRxReady_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_IsRxReady_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_IsRxReady_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsRxReady_CallInstance, cmock_guts_index);
+  Mock.USART0_IsRxReady_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_IsRxReady_IgnoreBool = (char)1;
+}
+
+void USART0_IsRxReady_CMockStopIgnore(void)
+{
+  if(Mock.USART0_IsRxReady_IgnoreBool)
+    Mock.USART0_IsRxReady_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsRxReady_CallInstance);
+  Mock.USART0_IsRxReady_IgnoreBool = (char)0;
 }
 
 void USART0_IsRxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
@@ -459,8 +1004,23 @@ void USART0_IsRxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmoc
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_IsRxReady_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsRxReady_CallInstance, cmock_guts_index);
+  Mock.USART0_IsRxReady_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_IsRxReady_AddCallback(CMOCK_USART0_IsRxReady_CALLBACK Callback)
+{
+  Mock.USART0_IsRxReady_IgnoreBool = (char)0;
+  Mock.USART0_IsRxReady_CallbackBool = (char)1;
+  Mock.USART0_IsRxReady_CallbackFunctionPointer = Callback;
+}
+
+void USART0_IsRxReady_Stub(CMOCK_USART0_IsRxReady_CALLBACK Callback)
+{
+  Mock.USART0_IsRxReady_IgnoreBool = (char)0;
+  Mock.USART0_IsRxReady_CallbackBool = (char)0;
+  Mock.USART0_IsRxReady_CallbackFunctionPointer = Callback;
 }
 
 bool USART0_IsTxBusy(void)
@@ -470,10 +1030,49 @@ bool USART0_IsTxBusy(void)
   UNITY_SET_DETAIL(CMockString_USART0_IsTxBusy);
   cmock_call_instance = (CMOCK_USART0_IsTxBusy_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_IsTxBusy_CallInstance);
   Mock.USART0_IsTxBusy_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxBusy_CallInstance);
+  if (Mock.USART0_IsTxBusy_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_IsTxBusy_FinalReturn;
+    Mock.USART0_IsTxBusy_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_IsTxBusy_CallbackBool &&
+      Mock.USART0_IsTxBusy_CallbackFunctionPointer != NULL)
+  {
+    bool cmock_cb_ret = Mock.USART0_IsTxBusy_CallbackFunctionPointer(Mock.USART0_IsTxBusy_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_IsTxBusy_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_IsTxBusy_CallbackFunctionPointer(Mock.USART0_IsTxBusy_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_IsTxBusy_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_IsTxBusy_CALL_INSTANCE));
+  CMOCK_USART0_IsTxBusy_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_IsTxBusy_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_IsTxBusy_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxBusy_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)1;
+}
+
+void USART0_IsTxBusy_CMockStopIgnore(void)
+{
+  if(Mock.USART0_IsTxBusy_IgnoreBool)
+    Mock.USART0_IsTxBusy_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxBusy_CallInstance);
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)0;
 }
 
 void USART0_IsTxBusy_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
@@ -483,8 +1082,23 @@ void USART0_IsTxBusy_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_IsTxBusy_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxBusy_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_IsTxBusy_AddCallback(CMOCK_USART0_IsTxBusy_CALLBACK Callback)
+{
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)0;
+  Mock.USART0_IsTxBusy_CallbackBool = (char)1;
+  Mock.USART0_IsTxBusy_CallbackFunctionPointer = Callback;
+}
+
+void USART0_IsTxBusy_Stub(CMOCK_USART0_IsTxBusy_CALLBACK Callback)
+{
+  Mock.USART0_IsTxBusy_IgnoreBool = (char)0;
+  Mock.USART0_IsTxBusy_CallbackBool = (char)0;
+  Mock.USART0_IsTxBusy_CallbackFunctionPointer = Callback;
 }
 
 bool USART0_IsTxDone(void)
@@ -494,10 +1108,49 @@ bool USART0_IsTxDone(void)
   UNITY_SET_DETAIL(CMockString_USART0_IsTxDone);
   cmock_call_instance = (CMOCK_USART0_IsTxDone_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_IsTxDone_CallInstance);
   Mock.USART0_IsTxDone_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxDone_CallInstance);
+  if (Mock.USART0_IsTxDone_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_IsTxDone_FinalReturn;
+    Mock.USART0_IsTxDone_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_IsTxDone_CallbackBool &&
+      Mock.USART0_IsTxDone_CallbackFunctionPointer != NULL)
+  {
+    bool cmock_cb_ret = Mock.USART0_IsTxDone_CallbackFunctionPointer(Mock.USART0_IsTxDone_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_IsTxDone_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_IsTxDone_CallbackFunctionPointer(Mock.USART0_IsTxDone_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_IsTxDone_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_IsTxDone_CALL_INSTANCE));
+  CMOCK_USART0_IsTxDone_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_IsTxDone_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_IsTxDone_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxDone_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxDone_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_IsTxDone_IgnoreBool = (char)1;
+}
+
+void USART0_IsTxDone_CMockStopIgnore(void)
+{
+  if(Mock.USART0_IsTxDone_IgnoreBool)
+    Mock.USART0_IsTxDone_CallInstance = CMock_Guts_MemNext(Mock.USART0_IsTxDone_CallInstance);
+  Mock.USART0_IsTxDone_IgnoreBool = (char)0;
 }
 
 void USART0_IsTxDone_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return)
@@ -507,8 +1160,23 @@ void USART0_IsTxDone_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_IsTxDone_CallInstance = CMock_Guts_MemChain(Mock.USART0_IsTxDone_CallInstance, cmock_guts_index);
+  Mock.USART0_IsTxDone_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_IsTxDone_AddCallback(CMOCK_USART0_IsTxDone_CALLBACK Callback)
+{
+  Mock.USART0_IsTxDone_IgnoreBool = (char)0;
+  Mock.USART0_IsTxDone_CallbackBool = (char)1;
+  Mock.USART0_IsTxDone_CallbackFunctionPointer = Callback;
+}
+
+void USART0_IsTxDone_Stub(CMOCK_USART0_IsTxDone_CALLBACK Callback)
+{
+  Mock.USART0_IsTxDone_IgnoreBool = (char)0;
+  Mock.USART0_IsTxDone_CallbackBool = (char)0;
+  Mock.USART0_IsTxDone_CallbackFunctionPointer = Callback;
 }
 
 uint8_t USART0_Read(void)
@@ -518,10 +1186,49 @@ uint8_t USART0_Read(void)
   UNITY_SET_DETAIL(CMockString_USART0_Read);
   cmock_call_instance = (CMOCK_USART0_Read_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_Read_CallInstance);
   Mock.USART0_Read_CallInstance = CMock_Guts_MemNext(Mock.USART0_Read_CallInstance);
+  if (Mock.USART0_Read_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.USART0_Read_FinalReturn;
+    Mock.USART0_Read_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.USART0_Read_CallbackBool &&
+      Mock.USART0_Read_CallbackFunctionPointer != NULL)
+  {
+    uint8_t cmock_cb_ret = Mock.USART0_Read_CallbackFunctionPointer(Mock.USART0_Read_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_Read_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.USART0_Read_CallbackFunctionPointer(Mock.USART0_Read_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void USART0_Read_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_Read_CALL_INSTANCE));
+  CMOCK_USART0_Read_CALL_INSTANCE* cmock_call_instance = (CMOCK_USART0_Read_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.USART0_Read_CallInstance = CMock_Guts_MemChain(Mock.USART0_Read_CallInstance, cmock_guts_index);
+  Mock.USART0_Read_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.USART0_Read_IgnoreBool = (char)1;
+}
+
+void USART0_Read_CMockStopIgnore(void)
+{
+  if(Mock.USART0_Read_IgnoreBool)
+    Mock.USART0_Read_CallInstance = CMock_Guts_MemNext(Mock.USART0_Read_CallInstance);
+  Mock.USART0_Read_IgnoreBool = (char)0;
 }
 
 void USART0_Read_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return)
@@ -531,8 +1238,23 @@ void USART0_Read_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_Read_CallInstance = CMock_Guts_MemChain(Mock.USART0_Read_CallInstance, cmock_guts_index);
+  Mock.USART0_Read_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void USART0_Read_AddCallback(CMOCK_USART0_Read_CALLBACK Callback)
+{
+  Mock.USART0_Read_IgnoreBool = (char)0;
+  Mock.USART0_Read_CallbackBool = (char)1;
+  Mock.USART0_Read_CallbackFunctionPointer = Callback;
+}
+
+void USART0_Read_Stub(CMOCK_USART0_Read_CALLBACK Callback)
+{
+  Mock.USART0_Read_IgnoreBool = (char)0;
+  Mock.USART0_Read_CallbackBool = (char)0;
+  Mock.USART0_Read_CallbackFunctionPointer = Callback;
 }
 
 void USART0_Write(const uint8_t data)
@@ -542,11 +1264,27 @@ void USART0_Write(const uint8_t data)
   UNITY_SET_DETAIL(CMockString_USART0_Write);
   cmock_call_instance = (CMOCK_USART0_Write_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_Write_CallInstance);
   Mock.USART0_Write_CallInstance = CMock_Guts_MemNext(Mock.USART0_Write_CallInstance);
+  if (Mock.USART0_Write_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_Write_CallbackBool &&
+      Mock.USART0_Write_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Write_CallbackFunctionPointer(data, Mock.USART0_Write_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_USART0_Write,CMockString_data);
     UNITY_TEST_ASSERT_EQUAL_HEX8(cmock_call_instance->Expected_data, data, cmock_line, CMockStringMismatch);
+  }
+  if (Mock.USART0_Write_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_Write_CallbackFunctionPointer(data, Mock.USART0_Write_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -557,6 +1295,16 @@ void CMockExpectParameters_USART0_Write(CMOCK_USART0_Write_CALL_INSTANCE* cmock_
   cmock_call_instance->Expected_data = data;
 }
 
+void USART0_Write_CMockIgnore(void)
+{
+  Mock.USART0_Write_IgnoreBool = (char)1;
+}
+
+void USART0_Write_CMockStopIgnore(void)
+{
+  Mock.USART0_Write_IgnoreBool = (char)0;
+}
+
 void USART0_Write_CMockExpect(UNITY_LINE_TYPE cmock_line, const uint8_t data)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_Write_CALL_INSTANCE));
@@ -564,8 +1312,23 @@ void USART0_Write_CMockExpect(UNITY_LINE_TYPE cmock_line, const uint8_t data)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_Write_CallInstance = CMock_Guts_MemChain(Mock.USART0_Write_CallInstance, cmock_guts_index);
+  Mock.USART0_Write_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_USART0_Write(cmock_call_instance, data);
+}
+
+void USART0_Write_AddCallback(CMOCK_USART0_Write_CALLBACK Callback)
+{
+  Mock.USART0_Write_IgnoreBool = (char)0;
+  Mock.USART0_Write_CallbackBool = (char)1;
+  Mock.USART0_Write_CallbackFunctionPointer = Callback;
+}
+
+void USART0_Write_Stub(CMOCK_USART0_Write_CALLBACK Callback)
+{
+  Mock.USART0_Write_IgnoreBool = (char)0;
+  Mock.USART0_Write_CallbackBool = (char)0;
+  Mock.USART0_Write_CallbackFunctionPointer = Callback;
 }
 
 void USART0_DefaultRxIsrCb(void)
@@ -575,9 +1338,35 @@ void USART0_DefaultRxIsrCb(void)
   UNITY_SET_DETAIL(CMockString_USART0_DefaultRxIsrCb);
   cmock_call_instance = (CMOCK_USART0_DefaultRxIsrCb_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_DefaultRxIsrCb_CallInstance);
   Mock.USART0_DefaultRxIsrCb_CallInstance = CMock_Guts_MemNext(Mock.USART0_DefaultRxIsrCb_CallInstance);
+  if (Mock.USART0_DefaultRxIsrCb_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_DefaultRxIsrCb_CallbackBool &&
+      Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer(Mock.USART0_DefaultRxIsrCb_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer(Mock.USART0_DefaultRxIsrCb_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_DefaultRxIsrCb_CMockIgnore(void)
+{
+  Mock.USART0_DefaultRxIsrCb_IgnoreBool = (char)1;
+}
+
+void USART0_DefaultRxIsrCb_CMockStopIgnore(void)
+{
+  Mock.USART0_DefaultRxIsrCb_IgnoreBool = (char)0;
 }
 
 void USART0_DefaultRxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -587,7 +1376,22 @@ void USART0_DefaultRxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_DefaultRxIsrCb_CallInstance = CMock_Guts_MemChain(Mock.USART0_DefaultRxIsrCb_CallInstance, cmock_guts_index);
+  Mock.USART0_DefaultRxIsrCb_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_DefaultRxIsrCb_AddCallback(CMOCK_USART0_DefaultRxIsrCb_CALLBACK Callback)
+{
+  Mock.USART0_DefaultRxIsrCb_IgnoreBool = (char)0;
+  Mock.USART0_DefaultRxIsrCb_CallbackBool = (char)1;
+  Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer = Callback;
+}
+
+void USART0_DefaultRxIsrCb_Stub(CMOCK_USART0_DefaultRxIsrCb_CALLBACK Callback)
+{
+  Mock.USART0_DefaultRxIsrCb_IgnoreBool = (char)0;
+  Mock.USART0_DefaultRxIsrCb_CallbackBool = (char)0;
+  Mock.USART0_DefaultRxIsrCb_CallbackFunctionPointer = Callback;
 }
 
 void USART0_DefaultTxIsrCb(void)
@@ -597,9 +1401,35 @@ void USART0_DefaultTxIsrCb(void)
   UNITY_SET_DETAIL(CMockString_USART0_DefaultTxIsrCb);
   cmock_call_instance = (CMOCK_USART0_DefaultTxIsrCb_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_DefaultTxIsrCb_CallInstance);
   Mock.USART0_DefaultTxIsrCb_CallInstance = CMock_Guts_MemNext(Mock.USART0_DefaultTxIsrCb_CallInstance);
+  if (Mock.USART0_DefaultTxIsrCb_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_DefaultTxIsrCb_CallbackBool &&
+      Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer(Mock.USART0_DefaultTxIsrCb_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer(Mock.USART0_DefaultTxIsrCb_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
+}
+
+void USART0_DefaultTxIsrCb_CMockIgnore(void)
+{
+  Mock.USART0_DefaultTxIsrCb_IgnoreBool = (char)1;
+}
+
+void USART0_DefaultTxIsrCb_CMockStopIgnore(void)
+{
+  Mock.USART0_DefaultTxIsrCb_IgnoreBool = (char)0;
 }
 
 void USART0_DefaultTxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line)
@@ -609,7 +1439,22 @@ void USART0_DefaultTxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line)
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_DefaultTxIsrCb_CallInstance = CMock_Guts_MemChain(Mock.USART0_DefaultTxIsrCb_CallInstance, cmock_guts_index);
+  Mock.USART0_DefaultTxIsrCb_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
+}
+
+void USART0_DefaultTxIsrCb_AddCallback(CMOCK_USART0_DefaultTxIsrCb_CALLBACK Callback)
+{
+  Mock.USART0_DefaultTxIsrCb_IgnoreBool = (char)0;
+  Mock.USART0_DefaultTxIsrCb_CallbackBool = (char)1;
+  Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer = Callback;
+}
+
+void USART0_DefaultTxIsrCb_Stub(CMOCK_USART0_DefaultTxIsrCb_CALLBACK Callback)
+{
+  Mock.USART0_DefaultTxIsrCb_IgnoreBool = (char)0;
+  Mock.USART0_DefaultTxIsrCb_CallbackBool = (char)0;
+  Mock.USART0_DefaultTxIsrCb_CallbackFunctionPointer = Callback;
 }
 
 void USART0_SetISRCb(usart_callback cb, usart0_cb_t type)
@@ -619,6 +1464,18 @@ void USART0_SetISRCb(usart_callback cb, usart0_cb_t type)
   UNITY_SET_DETAIL(CMockString_USART0_SetISRCb);
   cmock_call_instance = (CMOCK_USART0_SetISRCb_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_SetISRCb_CallInstance);
   Mock.USART0_SetISRCb_CallInstance = CMock_Guts_MemNext(Mock.USART0_SetISRCb_CallInstance);
+  if (Mock.USART0_SetISRCb_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_SetISRCb_CallbackBool &&
+      Mock.USART0_SetISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetISRCb_CallbackFunctionPointer(cb, type, Mock.USART0_SetISRCb_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
@@ -628,6 +1485,10 @@ void USART0_SetISRCb(usart_callback cb, usart0_cb_t type)
   {
     UNITY_SET_DETAILS(CMockString_USART0_SetISRCb,CMockString_type);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_type), (void*)(&type), sizeof(usart0_cb_t), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.USART0_SetISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetISRCb_CallbackFunctionPointer(cb, type, Mock.USART0_SetISRCb_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -641,6 +1502,16 @@ void CMockExpectParameters_USART0_SetISRCb(CMOCK_USART0_SetISRCb_CALL_INSTANCE* 
          sizeof(usart0_cb_t[sizeof(type) == sizeof(usart0_cb_t) ? 1 : -1])); /* add usart0_cb_t to :treat_as_array if this causes an error */
 }
 
+void USART0_SetISRCb_CMockIgnore(void)
+{
+  Mock.USART0_SetISRCb_IgnoreBool = (char)1;
+}
+
+void USART0_SetISRCb_CMockStopIgnore(void)
+{
+  Mock.USART0_SetISRCb_IgnoreBool = (char)0;
+}
+
 void USART0_SetISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb, usart0_cb_t type)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_SetISRCb_CALL_INSTANCE));
@@ -648,8 +1519,23 @@ void USART0_SetISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb, 
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_SetISRCb_CallInstance = CMock_Guts_MemChain(Mock.USART0_SetISRCb_CallInstance, cmock_guts_index);
+  Mock.USART0_SetISRCb_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_USART0_SetISRCb(cmock_call_instance, cb, type);
+}
+
+void USART0_SetISRCb_AddCallback(CMOCK_USART0_SetISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetISRCb_CallbackBool = (char)1;
+  Mock.USART0_SetISRCb_CallbackFunctionPointer = Callback;
+}
+
+void USART0_SetISRCb_Stub(CMOCK_USART0_SetISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetISRCb_CallbackBool = (char)0;
+  Mock.USART0_SetISRCb_CallbackFunctionPointer = Callback;
 }
 
 void USART0_SetRXISRCb(usart_callback cb)
@@ -659,11 +1545,27 @@ void USART0_SetRXISRCb(usart_callback cb)
   UNITY_SET_DETAIL(CMockString_USART0_SetRXISRCb);
   cmock_call_instance = (CMOCK_USART0_SetRXISRCb_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_SetRXISRCb_CallInstance);
   Mock.USART0_SetRXISRCb_CallInstance = CMock_Guts_MemNext(Mock.USART0_SetRXISRCb_CallInstance);
+  if (Mock.USART0_SetRXISRCb_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_SetRXISRCb_CallbackBool &&
+      Mock.USART0_SetRXISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetRXISRCb_CallbackFunctionPointer(cb, Mock.USART0_SetRXISRCb_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_USART0_SetRXISRCb,CMockString_cb);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb), sizeof(usart_callback), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.USART0_SetRXISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetRXISRCb_CallbackFunctionPointer(cb, Mock.USART0_SetRXISRCb_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -675,6 +1577,16 @@ void CMockExpectParameters_USART0_SetRXISRCb(CMOCK_USART0_SetRXISRCb_CALL_INSTAN
          sizeof(usart_callback[sizeof(cb) == sizeof(usart_callback) ? 1 : -1])); /* add usart_callback to :treat_as_array if this causes an error */
 }
 
+void USART0_SetRXISRCb_CMockIgnore(void)
+{
+  Mock.USART0_SetRXISRCb_IgnoreBool = (char)1;
+}
+
+void USART0_SetRXISRCb_CMockStopIgnore(void)
+{
+  Mock.USART0_SetRXISRCb_IgnoreBool = (char)0;
+}
+
 void USART0_SetRXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_SetRXISRCb_CALL_INSTANCE));
@@ -682,8 +1594,23 @@ void USART0_SetRXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_SetRXISRCb_CallInstance = CMock_Guts_MemChain(Mock.USART0_SetRXISRCb_CallInstance, cmock_guts_index);
+  Mock.USART0_SetRXISRCb_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_USART0_SetRXISRCb(cmock_call_instance, cb);
+}
+
+void USART0_SetRXISRCb_AddCallback(CMOCK_USART0_SetRXISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetRXISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetRXISRCb_CallbackBool = (char)1;
+  Mock.USART0_SetRXISRCb_CallbackFunctionPointer = Callback;
+}
+
+void USART0_SetRXISRCb_Stub(CMOCK_USART0_SetRXISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetRXISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetRXISRCb_CallbackBool = (char)0;
+  Mock.USART0_SetRXISRCb_CallbackFunctionPointer = Callback;
 }
 
 void USART0_SetTXISRCb(usart_callback cb)
@@ -693,11 +1620,27 @@ void USART0_SetTXISRCb(usart_callback cb)
   UNITY_SET_DETAIL(CMockString_USART0_SetTXISRCb);
   cmock_call_instance = (CMOCK_USART0_SetTXISRCb_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.USART0_SetTXISRCb_CallInstance);
   Mock.USART0_SetTXISRCb_CallInstance = CMock_Guts_MemNext(Mock.USART0_SetTXISRCb_CallInstance);
+  if (Mock.USART0_SetTXISRCb_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.USART0_SetTXISRCb_CallbackBool &&
+      Mock.USART0_SetTXISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetTXISRCb_CallbackFunctionPointer(cb, Mock.USART0_SetTXISRCb_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
   {
     UNITY_SET_DETAILS(CMockString_USART0_SetTXISRCb,CMockString_cb);
     UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(&cmock_call_instance->Expected_cb), (void*)(&cb), sizeof(usart_callback), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.USART0_SetTXISRCb_CallbackFunctionPointer != NULL)
+  {
+    Mock.USART0_SetTXISRCb_CallbackFunctionPointer(cb, Mock.USART0_SetTXISRCb_CallbackCalls++);
   }
   UNITY_CLR_DETAILS();
 }
@@ -709,6 +1652,16 @@ void CMockExpectParameters_USART0_SetTXISRCb(CMOCK_USART0_SetTXISRCb_CALL_INSTAN
          sizeof(usart_callback[sizeof(cb) == sizeof(usart_callback) ? 1 : -1])); /* add usart_callback to :treat_as_array if this causes an error */
 }
 
+void USART0_SetTXISRCb_CMockIgnore(void)
+{
+  Mock.USART0_SetTXISRCb_IgnoreBool = (char)1;
+}
+
+void USART0_SetTXISRCb_CMockStopIgnore(void)
+{
+  Mock.USART0_SetTXISRCb_IgnoreBool = (char)0;
+}
+
 void USART0_SetTXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb)
 {
   CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_USART0_SetTXISRCb_CALL_INSTANCE));
@@ -716,7 +1669,22 @@ void USART0_SetTXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.USART0_SetTXISRCb_CallInstance = CMock_Guts_MemChain(Mock.USART0_SetTXISRCb_CallInstance, cmock_guts_index);
+  Mock.USART0_SetTXISRCb_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   CMockExpectParameters_USART0_SetTXISRCb(cmock_call_instance, cb);
+}
+
+void USART0_SetTXISRCb_AddCallback(CMOCK_USART0_SetTXISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetTXISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetTXISRCb_CallbackBool = (char)1;
+  Mock.USART0_SetTXISRCb_CallbackFunctionPointer = Callback;
+}
+
+void USART0_SetTXISRCb_Stub(CMOCK_USART0_SetTXISRCb_CALLBACK Callback)
+{
+  Mock.USART0_SetTXISRCb_IgnoreBool = (char)0;
+  Mock.USART0_SetTXISRCb_CallbackBool = (char)0;
+  Mock.USART0_SetTXISRCb_CallbackFunctionPointer = Callback;
 }
 

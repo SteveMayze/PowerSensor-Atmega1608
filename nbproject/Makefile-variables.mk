@@ -4,11 +4,15 @@
 # NOCDDL
 #
 CND_BASEDIR=`pwd`
-# default configuration
-CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=PowerSensor-ATMEGA1608.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/PowerSensor-ATMEGA1608.X.production.hex
-# Test configuration
-CND_ARTIFACT_DIR_Test=dist/Test/production
-CND_ARTIFACT_NAME_Test=PowerSensor-ATMEGA1608.X.production.hex
-CND_ARTIFACT_PATH_Test=dist/Test/production/PowerSensor-ATMEGA1608.X.production.hex
+# main configuration
+CND_ARTIFACT_DIR_main=dist/main/production
+CND_ARTIFACT_NAME_main=PowerSensor-Atmega1608.production.hex
+CND_ARTIFACT_PATH_main=dist/main/production/PowerSensor-Atmega1608.production.hex
+# test_fsm configuration
+CND_ARTIFACT_DIR_test_fsm=dist/test_fsm/production
+CND_ARTIFACT_NAME_test_fsm=PowerSensor-Atmega1608.production.hex
+CND_ARTIFACT_PATH_test_fsm=dist/test_fsm/production/PowerSensor-Atmega1608.production.hex
+# test_adapter configuration
+CND_ARTIFACT_DIR_test_adapter=dist/test_adapter/production
+CND_ARTIFACT_NAME_test_adapter=PowerSensor-Atmega1608.production.hex
+CND_ARTIFACT_PATH_test_adapter=dist/test_adapter/production/PowerSensor-Atmega1608.production.hex

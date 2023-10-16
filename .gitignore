@@ -35,3 +35,8 @@
 dist
 
 usart*_output.txt
+
+.DS_Store
+
+libavrxbee-master.zip
+

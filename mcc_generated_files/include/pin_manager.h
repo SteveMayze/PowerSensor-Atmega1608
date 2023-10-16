@@ -162,6 +162,24 @@
 #define PC0_DisableDigitalInputBuffer() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
 #define PC0_EnableInterruptForLowLevelSensing() do { PORTC.PIN0CTRL = (PORTC.PIN0CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
 
+//get/set MODEM_RESET aliases
+#define MODEM_RESET_SetHigh() do { PORTD_OUTSET = 0x1; } while(0)
+#define MODEM_RESET_SetLow() do { PORTD_OUTCLR = 0x1; } while(0)
+#define MODEM_RESET_Toggle() do { PORTD_OUTTGL = 0x1; } while(0)
+#define MODEM_RESET_GetValue() (VPORTD.IN & (0x1 << 0))
+#define MODEM_RESET_SetDigitalInput() do { PORTD_DIRCLR = 0x1; } while(0)
+#define MODEM_RESET_SetDigitalOutput() do { PORTD_DIRSET = 0x1; } while(0)
+#define MODEM_RESET_SetPullUp() do { PORTD_PIN0CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define MODEM_RESET_ResetPullUp() do { PORTD_PIN0CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define MODEM_RESET_SetInverted() do { PORTD_PIN0CTRL  |= PORT_INVEN_bm; } while(0)
+#define MODEM_RESET_ResetInverted() do { PORTD_PIN0CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define MODEM_RESET_DisableInterruptOnChange() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define MODEM_RESET_EnableInterruptForBothEdges() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define MODEM_RESET_EnableInterruptForRisingEdge() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define MODEM_RESET_EnableInterruptForFallingEdge() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define MODEM_RESET_DisableDigitalInputBuffer() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define MODEM_RESET_EnableInterruptForLowLevelSensing() do { PORTD.PIN0CTRL = (PORTD.PIN0CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+
 //get/set PC1 aliases
 #define PC1_SetHigh() do { PORTC_OUTSET = 0x2; } while(0)
 #define PC1_SetLow() do { PORTC_OUTCLR = 0x2; } while(0)
@@ -195,6 +213,8 @@ void PORTA_PA7_DefaultInterruptHandler(void);
 void PORTA_PA7_SetInterruptHandler(void (* interruptHandler)(void)) ;
 void PORTC_PC0_DefaultInterruptHandler(void);
 void PORTC_PC0_SetInterruptHandler(void (* interruptHandler)(void)) ;
+void PORTD_MODEM_RESET_DefaultInterruptHandler(void);
+void PORTD_MODEM_RESET_SetInterruptHandler(void (* interruptHandler)(void)) ;
 void PORTC_PC1_DefaultInterruptHandler(void);
 void PORTC_PC1_SetInterruptHandler(void (* interruptHandler)(void)) ;
 #endif /* PINS_H_INCLUDED */

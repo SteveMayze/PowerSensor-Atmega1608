@@ -13,18 +13,19 @@
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>unit</sourceRootElem>
-                <sourceRootElem>src/main</sourceRootElem>
-                <sourceRootElem>mocks</sourceRootElem>
-                <sourceRootElem>cmock/src</sourceRootElem>
+                <sourceRootElem>.</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>default</name>
+                    <name>main</name>
                     <type>2</type>
                 </confElem>
                 <confElem>
-                    <name>Test</name>
+                    <name>test_fsm</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>test_adapter</name>
                     <type>2</type>
                 </confElem>
             </confList>
@@ -35,8 +36,10 @@
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>addr</word>
             <word>dest</word>
+            <word>initialise</word>
             <word>rf</word>
             <word>struct</word>
+            <word>tx</word>
             <word>uint</word>
             <word>xbee</word>
         </spellchecker-wordlist>

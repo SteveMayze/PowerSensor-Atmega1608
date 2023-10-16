@@ -3,9 +3,9 @@
   <projectmakefile>Makefile</projectmakefile>
   <defaultConf>1</defaultConf>
   <confs>
-    <conf name="default" type="2">
+    <conf name="main" type="2">
       <platformToolSN></platformToolSN>
-      <languageToolchainDir>/Applications/microchip/xc8/v2.36/bin</languageToolchainDir>
+      <languageToolchainDir>D:\Program Files\Microchip\xc8\v2.36\bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>
@@ -21,9 +21,27 @@
         </environment>
       </runprofile>
     </conf>
-    <conf name="Test" type="2">
+    <conf name="test_fsm" type="2">
       <platformToolSN></platformToolSN>
-      <languageToolchainDir>/Applications/microchip/xc8/v2.36/bin</languageToolchainDir>
+      <languageToolchainDir>D:\Program Files\Microchip\xc8\v2.36\bin</languageToolchainDir>
+      <mdbdebugger version="1">
+        <placeholder1>place holder 1</placeholder1>
+        <placeholder2>place holder 2</placeholder2>
+      </mdbdebugger>
+      <runprofile version="6">
+        <args></args>
+        <rundir></rundir>
+        <buildfirst>true</buildfirst>
+        <console-type>0</console-type>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="test_adapter" type="2">
+      <platformToolSN></platformToolSN>
+      <languageToolchainDir>D:\Program Files\Microchip\xc8\v2.40\bin</languageToolchainDir>
       <mdbdebugger version="1">
         <placeholder1>place holder 1</placeholder1>
         <placeholder2>place holder 2</placeholder2>

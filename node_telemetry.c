@@ -1,5 +1,5 @@
 
-#include "xbee.h"
+#include "node_telemetry.h"
 #include "sensor_core.h"
 
 #define FLOAT_LENGTH sizeof(float)

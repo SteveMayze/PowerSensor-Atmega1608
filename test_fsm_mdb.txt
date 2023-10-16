@@ -1,0 +1,29 @@
+device atmega4808
+hwtool sim
+# stim "/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/Stimuli.scl"
+
+# set uart0io.output file
+# set uart0io.uartioenabled true
+# set uart0io.outputfile "/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart0_output.txt"
+
+set uart1io.output file
+set uart1io.uartioenabled true
+set uart1io.outputfile "/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/usart1_output.txt"
+
+program "/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/dist/test_fsm/debug/PowerSensor-ATMEGA1608.X.debug.elf"
+
+upload
+
+break test_main.c:24
+break node_basic_test.c:100
+
+run
+
+# Wait 60000
+
+# halt
+
+# quit
+
+
+                                                                                                                                   

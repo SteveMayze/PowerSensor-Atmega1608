@@ -2,7 +2,7 @@
 #ifndef _MOCKUSART0_H
 #define _MOCKUSART0_H
 
-#include "../cmock/src/unity.h"
+#include "../unit/unity.h"
 #include "../mcc_generated_files/include/usart0.h"
 
 /* Ignore the following warnings, since we are copying code */
@@ -28,40 +28,176 @@ void Mockusart0_Verify(void);
 
 
 
+#define USART0_Initialize_Ignore() USART0_Initialize_CMockIgnore()
+void USART0_Initialize_CMockIgnore(void);
+#define USART0_Initialize_StopIgnore() USART0_Initialize_CMockStopIgnore()
+void USART0_Initialize_CMockStopIgnore(void);
 #define USART0_Initialize_Expect() USART0_Initialize_CMockExpect(__LINE__)
 void USART0_Initialize_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_Initialize_CALLBACK)(int cmock_num_calls);
+void USART0_Initialize_AddCallback(CMOCK_USART0_Initialize_CALLBACK Callback);
+void USART0_Initialize_Stub(CMOCK_USART0_Initialize_CALLBACK Callback);
+#define USART0_Initialize_StubWithCallback USART0_Initialize_Stub
+#define USART0_Enable_Ignore() USART0_Enable_CMockIgnore()
+void USART0_Enable_CMockIgnore(void);
+#define USART0_Enable_StopIgnore() USART0_Enable_CMockStopIgnore()
+void USART0_Enable_CMockStopIgnore(void);
 #define USART0_Enable_Expect() USART0_Enable_CMockExpect(__LINE__)
 void USART0_Enable_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_Enable_CALLBACK)(int cmock_num_calls);
+void USART0_Enable_AddCallback(CMOCK_USART0_Enable_CALLBACK Callback);
+void USART0_Enable_Stub(CMOCK_USART0_Enable_CALLBACK Callback);
+#define USART0_Enable_StubWithCallback USART0_Enable_Stub
+#define USART0_EnableRx_Ignore() USART0_EnableRx_CMockIgnore()
+void USART0_EnableRx_CMockIgnore(void);
+#define USART0_EnableRx_StopIgnore() USART0_EnableRx_CMockStopIgnore()
+void USART0_EnableRx_CMockStopIgnore(void);
 #define USART0_EnableRx_Expect() USART0_EnableRx_CMockExpect(__LINE__)
 void USART0_EnableRx_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_EnableRx_CALLBACK)(int cmock_num_calls);
+void USART0_EnableRx_AddCallback(CMOCK_USART0_EnableRx_CALLBACK Callback);
+void USART0_EnableRx_Stub(CMOCK_USART0_EnableRx_CALLBACK Callback);
+#define USART0_EnableRx_StubWithCallback USART0_EnableRx_Stub
+#define USART0_EnableTx_Ignore() USART0_EnableTx_CMockIgnore()
+void USART0_EnableTx_CMockIgnore(void);
+#define USART0_EnableTx_StopIgnore() USART0_EnableTx_CMockStopIgnore()
+void USART0_EnableTx_CMockStopIgnore(void);
 #define USART0_EnableTx_Expect() USART0_EnableTx_CMockExpect(__LINE__)
 void USART0_EnableTx_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_EnableTx_CALLBACK)(int cmock_num_calls);
+void USART0_EnableTx_AddCallback(CMOCK_USART0_EnableTx_CALLBACK Callback);
+void USART0_EnableTx_Stub(CMOCK_USART0_EnableTx_CALLBACK Callback);
+#define USART0_EnableTx_StubWithCallback USART0_EnableTx_Stub
+#define USART0_Disable_Ignore() USART0_Disable_CMockIgnore()
+void USART0_Disable_CMockIgnore(void);
+#define USART0_Disable_StopIgnore() USART0_Disable_CMockStopIgnore()
+void USART0_Disable_CMockStopIgnore(void);
 #define USART0_Disable_Expect() USART0_Disable_CMockExpect(__LINE__)
 void USART0_Disable_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_Disable_CALLBACK)(int cmock_num_calls);
+void USART0_Disable_AddCallback(CMOCK_USART0_Disable_CALLBACK Callback);
+void USART0_Disable_Stub(CMOCK_USART0_Disable_CALLBACK Callback);
+#define USART0_Disable_StubWithCallback USART0_Disable_Stub
+#define USART0_GetData_IgnoreAndReturn(cmock_retval) USART0_GetData_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_GetData_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define USART0_GetData_StopIgnore() USART0_GetData_CMockStopIgnore()
+void USART0_GetData_CMockStopIgnore(void);
 #define USART0_GetData_ExpectAndReturn(cmock_retval) USART0_GetData_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_GetData_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_USART0_GetData_CALLBACK)(int cmock_num_calls);
+void USART0_GetData_AddCallback(CMOCK_USART0_GetData_CALLBACK Callback);
+void USART0_GetData_Stub(CMOCK_USART0_GetData_CALLBACK Callback);
+#define USART0_GetData_StubWithCallback USART0_GetData_Stub
+#define USART0_IsTxReady_IgnoreAndReturn(cmock_retval) USART0_IsTxReady_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_IsTxReady_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+#define USART0_IsTxReady_StopIgnore() USART0_IsTxReady_CMockStopIgnore()
+void USART0_IsTxReady_CMockStopIgnore(void);
 #define USART0_IsTxReady_ExpectAndReturn(cmock_retval) USART0_IsTxReady_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_IsTxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+typedef bool (* CMOCK_USART0_IsTxReady_CALLBACK)(int cmock_num_calls);
+void USART0_IsTxReady_AddCallback(CMOCK_USART0_IsTxReady_CALLBACK Callback);
+void USART0_IsTxReady_Stub(CMOCK_USART0_IsTxReady_CALLBACK Callback);
+#define USART0_IsTxReady_StubWithCallback USART0_IsTxReady_Stub
+#define USART0_IsRxReady_IgnoreAndReturn(cmock_retval) USART0_IsRxReady_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_IsRxReady_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+#define USART0_IsRxReady_StopIgnore() USART0_IsRxReady_CMockStopIgnore()
+void USART0_IsRxReady_CMockStopIgnore(void);
 #define USART0_IsRxReady_ExpectAndReturn(cmock_retval) USART0_IsRxReady_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_IsRxReady_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+typedef bool (* CMOCK_USART0_IsRxReady_CALLBACK)(int cmock_num_calls);
+void USART0_IsRxReady_AddCallback(CMOCK_USART0_IsRxReady_CALLBACK Callback);
+void USART0_IsRxReady_Stub(CMOCK_USART0_IsRxReady_CALLBACK Callback);
+#define USART0_IsRxReady_StubWithCallback USART0_IsRxReady_Stub
+#define USART0_IsTxBusy_IgnoreAndReturn(cmock_retval) USART0_IsTxBusy_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_IsTxBusy_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+#define USART0_IsTxBusy_StopIgnore() USART0_IsTxBusy_CMockStopIgnore()
+void USART0_IsTxBusy_CMockStopIgnore(void);
 #define USART0_IsTxBusy_ExpectAndReturn(cmock_retval) USART0_IsTxBusy_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_IsTxBusy_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+typedef bool (* CMOCK_USART0_IsTxBusy_CALLBACK)(int cmock_num_calls);
+void USART0_IsTxBusy_AddCallback(CMOCK_USART0_IsTxBusy_CALLBACK Callback);
+void USART0_IsTxBusy_Stub(CMOCK_USART0_IsTxBusy_CALLBACK Callback);
+#define USART0_IsTxBusy_StubWithCallback USART0_IsTxBusy_Stub
+#define USART0_IsTxDone_IgnoreAndReturn(cmock_retval) USART0_IsTxDone_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_IsTxDone_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+#define USART0_IsTxDone_StopIgnore() USART0_IsTxDone_CMockStopIgnore()
+void USART0_IsTxDone_CMockStopIgnore(void);
 #define USART0_IsTxDone_ExpectAndReturn(cmock_retval) USART0_IsTxDone_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_IsTxDone_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, bool cmock_to_return);
+typedef bool (* CMOCK_USART0_IsTxDone_CALLBACK)(int cmock_num_calls);
+void USART0_IsTxDone_AddCallback(CMOCK_USART0_IsTxDone_CALLBACK Callback);
+void USART0_IsTxDone_Stub(CMOCK_USART0_IsTxDone_CALLBACK Callback);
+#define USART0_IsTxDone_StubWithCallback USART0_IsTxDone_Stub
+#define USART0_Read_IgnoreAndReturn(cmock_retval) USART0_Read_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void USART0_Read_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+#define USART0_Read_StopIgnore() USART0_Read_CMockStopIgnore()
+void USART0_Read_CMockStopIgnore(void);
 #define USART0_Read_ExpectAndReturn(cmock_retval) USART0_Read_CMockExpectAndReturn(__LINE__, cmock_retval)
 void USART0_Read_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t cmock_to_return);
+typedef uint8_t (* CMOCK_USART0_Read_CALLBACK)(int cmock_num_calls);
+void USART0_Read_AddCallback(CMOCK_USART0_Read_CALLBACK Callback);
+void USART0_Read_Stub(CMOCK_USART0_Read_CALLBACK Callback);
+#define USART0_Read_StubWithCallback USART0_Read_Stub
+#define USART0_Write_Ignore() USART0_Write_CMockIgnore()
+void USART0_Write_CMockIgnore(void);
+#define USART0_Write_StopIgnore() USART0_Write_CMockStopIgnore()
+void USART0_Write_CMockStopIgnore(void);
 #define USART0_Write_Expect(data) USART0_Write_CMockExpect(__LINE__, data)
 void USART0_Write_CMockExpect(UNITY_LINE_TYPE cmock_line, const uint8_t data);
+typedef void (* CMOCK_USART0_Write_CALLBACK)(const uint8_t data, int cmock_num_calls);
+void USART0_Write_AddCallback(CMOCK_USART0_Write_CALLBACK Callback);
+void USART0_Write_Stub(CMOCK_USART0_Write_CALLBACK Callback);
+#define USART0_Write_StubWithCallback USART0_Write_Stub
+#define USART0_DefaultRxIsrCb_Ignore() USART0_DefaultRxIsrCb_CMockIgnore()
+void USART0_DefaultRxIsrCb_CMockIgnore(void);
+#define USART0_DefaultRxIsrCb_StopIgnore() USART0_DefaultRxIsrCb_CMockStopIgnore()
+void USART0_DefaultRxIsrCb_CMockStopIgnore(void);
 #define USART0_DefaultRxIsrCb_Expect() USART0_DefaultRxIsrCb_CMockExpect(__LINE__)
 void USART0_DefaultRxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_DefaultRxIsrCb_CALLBACK)(int cmock_num_calls);
+void USART0_DefaultRxIsrCb_AddCallback(CMOCK_USART0_DefaultRxIsrCb_CALLBACK Callback);
+void USART0_DefaultRxIsrCb_Stub(CMOCK_USART0_DefaultRxIsrCb_CALLBACK Callback);
+#define USART0_DefaultRxIsrCb_StubWithCallback USART0_DefaultRxIsrCb_Stub
+#define USART0_DefaultTxIsrCb_Ignore() USART0_DefaultTxIsrCb_CMockIgnore()
+void USART0_DefaultTxIsrCb_CMockIgnore(void);
+#define USART0_DefaultTxIsrCb_StopIgnore() USART0_DefaultTxIsrCb_CMockStopIgnore()
+void USART0_DefaultTxIsrCb_CMockStopIgnore(void);
 #define USART0_DefaultTxIsrCb_Expect() USART0_DefaultTxIsrCb_CMockExpect(__LINE__)
 void USART0_DefaultTxIsrCb_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_USART0_DefaultTxIsrCb_CALLBACK)(int cmock_num_calls);
+void USART0_DefaultTxIsrCb_AddCallback(CMOCK_USART0_DefaultTxIsrCb_CALLBACK Callback);
+void USART0_DefaultTxIsrCb_Stub(CMOCK_USART0_DefaultTxIsrCb_CALLBACK Callback);
+#define USART0_DefaultTxIsrCb_StubWithCallback USART0_DefaultTxIsrCb_Stub
+#define USART0_SetISRCb_Ignore() USART0_SetISRCb_CMockIgnore()
+void USART0_SetISRCb_CMockIgnore(void);
+#define USART0_SetISRCb_StopIgnore() USART0_SetISRCb_CMockStopIgnore()
+void USART0_SetISRCb_CMockStopIgnore(void);
 #define USART0_SetISRCb_Expect(cb, type) USART0_SetISRCb_CMockExpect(__LINE__, cb, type)
 void USART0_SetISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb, usart0_cb_t type);
+typedef void (* CMOCK_USART0_SetISRCb_CALLBACK)(usart_callback cb, usart0_cb_t type, int cmock_num_calls);
+void USART0_SetISRCb_AddCallback(CMOCK_USART0_SetISRCb_CALLBACK Callback);
+void USART0_SetISRCb_Stub(CMOCK_USART0_SetISRCb_CALLBACK Callback);
+#define USART0_SetISRCb_StubWithCallback USART0_SetISRCb_Stub
+#define USART0_SetRXISRCb_Ignore() USART0_SetRXISRCb_CMockIgnore()
+void USART0_SetRXISRCb_CMockIgnore(void);
+#define USART0_SetRXISRCb_StopIgnore() USART0_SetRXISRCb_CMockStopIgnore()
+void USART0_SetRXISRCb_CMockStopIgnore(void);
 #define USART0_SetRXISRCb_Expect(cb) USART0_SetRXISRCb_CMockExpect(__LINE__, cb)
 void USART0_SetRXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb);
+typedef void (* CMOCK_USART0_SetRXISRCb_CALLBACK)(usart_callback cb, int cmock_num_calls);
+void USART0_SetRXISRCb_AddCallback(CMOCK_USART0_SetRXISRCb_CALLBACK Callback);
+void USART0_SetRXISRCb_Stub(CMOCK_USART0_SetRXISRCb_CALLBACK Callback);
+#define USART0_SetRXISRCb_StubWithCallback USART0_SetRXISRCb_Stub
+#define USART0_SetTXISRCb_Ignore() USART0_SetTXISRCb_CMockIgnore()
+void USART0_SetTXISRCb_CMockIgnore(void);
+#define USART0_SetTXISRCb_StopIgnore() USART0_SetTXISRCb_CMockStopIgnore()
+void USART0_SetTXISRCb_CMockStopIgnore(void);
 #define USART0_SetTXISRCb_Expect(cb) USART0_SetTXISRCb_CMockExpect(__LINE__, cb)
 void USART0_SetTXISRCb_CMockExpect(UNITY_LINE_TYPE cmock_line, usart_callback cb);
+typedef void (* CMOCK_USART0_SetTXISRCb_CALLBACK)(usart_callback cb, int cmock_num_calls);
+void USART0_SetTXISRCb_AddCallback(CMOCK_USART0_SetTXISRCb_CALLBACK Callback);
+void USART0_SetTXISRCb_Stub(CMOCK_USART0_SetTXISRCb_CALLBACK Callback);
+#define USART0_SetTXISRCb_StubWithCallback USART0_SetTXISRCb_Stub
 
 #ifdef __cplusplus
 }
