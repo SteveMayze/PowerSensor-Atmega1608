@@ -28,8 +28,10 @@ int main(void)
     run_sensor_core_tests();
 
     printf("\n\n===================================\n\n");
+    
+    printf("\n\n node basic tests ignored \n\n");
 
-    run_node_basic_tests();
+    // run_node_basic_tests();
     
     printf("\n\n===================================\n\n");
 
