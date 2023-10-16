@@ -109,7 +109,7 @@ void node_fsm_execution() {
     // Execute the current state.
     FSM_States_t state = fsm_state_table[node_state.state](0);
     node_state.state = state;
-    printf("node_fsm_execution: end state: %02X \n", state);
+    printf("node_fsm_execution: end - new state: %02X \n", state);
 }
 
 void node_fsm_poller() {
