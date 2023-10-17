@@ -35,7 +35,7 @@ extern "C" {
     void node_data_received(void);
     void node_intro_callback(void);
     void node_intro_ack_callback(void);
-    
+    void node_timeout_callback(void);
     Node_Message_t *node_create_message(Token_t token, uint8_t *sid);
 
     typedef void (*Event_Callback_t)();

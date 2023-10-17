@@ -68,7 +68,7 @@ struct xbee_tx_request r;
 struct xbee_frame *f;
 
 void modem_send_message(unsigned char* node_message, uint8_t data_length){
-    printf("modem_send_message: BEGIN\n");
+    printf("modem_send_message: BEGIN \n");
     
     // The message stream is actually a node message stream. This needs to be
     // converted to an XBee message stream and then written to the XBee using
@@ -88,9 +88,12 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     unsigned int size;
     unsigned char *bytes;
     bytes = xbee_frame_to_bytes(f, &size);
+    printf("Sending: ");
     for(int idx = 0; idx<size; idx++){
+        printf("%02X ", bytes[idx]);
         USART0_Write(bytes[idx]);
     }
+    printf("\n");
 
     printf("modem_send_message: END\n");
 }

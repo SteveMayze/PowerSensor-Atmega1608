@@ -57,7 +57,13 @@ Error_t node_intitialise() {
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;
-    
+
+    fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
+    fsm_set_event_callback(FSM_DATAACK, node_data_received);
+    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
+    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
+    fsm_set_event_callback(FSM_TIMEOUT, node_timeout_callback);
+
     INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_DEFAULT);
 
     return NODE_OK;
@@ -101,13 +107,13 @@ void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb) {
 
 void node_wait() {
     // Test for any messages on the XBEE.
-    //_delay_ms(1000);
+    _delay_ms(1000);
 }
 
-void node_fsm_execution() {
+void node_fsm_execution(uint8_t count) {
     printf("node_fsm_execution: Executing for state: %02X\n", node_state.state);
     // Execute the current state.
-    FSM_States_t state = fsm_state_table[node_state.state](0);
+    FSM_States_t state = fsm_state_table[node_state.state](count);
     node_state.state = state;
     printf("node_fsm_execution: end - new state: %02X \n", state);
 }
@@ -118,7 +124,7 @@ void node_fsm_poller() {
     while (node_state.busy) {
         printf("node_fsm_poller: Polling...\n");
         node_wait();
-        node_fsm_execution();
+        node_fsm_execution(count++);
         if (!(node_state.timeout--)) {
             node_state.event_callbacks[FSM_TIMEOUT](count++);
             node_state.busy = 0;
@@ -130,29 +136,42 @@ void node_fsm_poller() {
 }
 
 void node_check() {
-    printf("node_check: Checking for operation: %02X, state: %0X2 \n", _message.operation, node_state.state);
+    printf("node_check: Checking for operation: %02X, state: %02X \n", _message.operation, node_state.state);
+    if(node_state.state == FSM_IDLE){
+        printf("Coming in from idle, initiate a reset \n");
+        node_state.state = FSM_RESET;
+    }
     if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
-        node_fsm_execution();
+        node_fsm_execution(0);
         node_fsm_poller();
     }
     modem_close();
 }
 
+static uint8_t payload[64];
 static FSM_States_t FSM_READY_STATE(uint8_t count) {
-    ModemResponse_t* response;
+    
     printf("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
 
-    // Send message
-    _message.operation = NODE_TOKEN_READY;
-    _message.data_length = 0;
-    uint8_t payload[1];
-    uint8_t size = node_message_to_stream(&_message, payload);
+    if (count == 0){
+        printf("Sending READY \n");
+        
+        // Send message
+        _message.operation = NODE_TOKEN_READY;
+        _message.data_length = 0;
+        // uint8_t payload[1];
+        uint8_t size = node_message_to_stream(&_message, payload);
 
-    modem_send_message(payload, size);
+       modem_send_message(payload, size);
+    } else {
+        printf("Waiting for a response \n");
+    }
     // handle the response based on a request or a timeouts
+    printf("Checking for a response \n");
     if (modem_message_arrived()) {
+        ModemResponse_t* response;
         printf("FSM_READY_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
@@ -210,21 +229,21 @@ static FSM_States_t FSM_DATA_STATE(uint8_t count) {
 
 static FSM_States_t FSM_RESET_STATE(uint8_t count) {
     printf("NODE_RESET: count: %d \n", count);
-    FSM_States_t ret = FSM_IDLE;
+    //FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
-    switch (_message.operation ) {
-        case NODE_TOKEN_READY:
+//    switch (_message.operation ) {
+//        case NODE_TOKEN_READY:
             printf("NODE_RESET: Setting next state as READY\n");
             node_state.busy = 1;
-            ret = FSM_READY;
-            break;
-        default:
-            printf("NODE_RESET: Not supported operation - Staying in IDLE \n");
-            node_state.busy = 0;
-            ret = FSM_IDLE;
-            break;
-    }
-    return ret;
+            //ret = FSM_READY;
+//            break;
+//        default:
+//            printf("NODE_RESET: Not supported operation - Staying in IDLE \n");
+//            node_state.busy = 0;
+//            ret = FSM_IDLE;
+//            break;
+//    }
+    return FSM_READY;
 }
 
 
@@ -353,4 +372,7 @@ uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream)
     return message_length;
 }
 
+void node_timeout_callback(void){
+    printf("test_handle_timeout: Handle timeout \n");
+}
    

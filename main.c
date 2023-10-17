@@ -13,7 +13,10 @@ int main(void)
     
     node_intitialise();
     
-    _delay_ms(3000);
+    node_set_timeout(0x0003);
+    // This time, set up the real call-backs to go through the motions.
+
+    _delay_ms(5000);
     
     printf("\n Starting the control loop \n");
     while(1){
