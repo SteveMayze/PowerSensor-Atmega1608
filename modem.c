@@ -47,6 +47,11 @@ ModemResponse_t* modem_receive_message(void){
     
     // This data then needs to be traversed again to extract the actual
     // node message
+    printf("Received: size: %d, data: ", buffer_ptr);
+    for(int idx = 0; idx<buffer_ptr; idx++){
+        printf("%02X ", rx_buffer[idx]);
+    }
+    printf("\n");
     
     xbee_frame_to_rx_packet(rx_buffer, &p);
     
@@ -91,9 +96,11 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     printf("Sending: ");
     for(int idx = 0; idx<size; idx++){
         printf("%02X ", bytes[idx]);
-        USART0_Write(bytes[idx]);
     }
     printf("\n");
+    for(int idx = 0; idx<size; idx++){
+        USART0_Write(bytes[idx]);
+    }
 
     printf("modem_send_message: END\n");
 }

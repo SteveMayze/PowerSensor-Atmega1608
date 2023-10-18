@@ -24,6 +24,6 @@ int main(void)
         node_create_message(NODE_TOKEN_READY, eprom_read_serial_id());
         node_check();
         printf("sleeping... \n");
-        _delay_ms(10000);
+        _delay_ms(30000);
     }
 }
