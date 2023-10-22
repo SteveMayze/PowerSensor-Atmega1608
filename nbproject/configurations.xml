@@ -12,6 +12,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="libavrxbee" projectFiles="true">
+        <itemPath>libavrxbee/xbee.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -56,8 +59,6 @@
                    displayName="Source Files"
                    projectFiles="true">
       <logicalFolder name="f5" displayName="adapters" projectFiles="true">
-        <itemPath>libavrxbee/xbee.c</itemPath>
-        <itemPath>libavrxbee/xbee.h</itemPath>
         <itemPath>ina219/INA219.c</itemPath>
         <itemPath>ina219/INA219.h</itemPath>
         <itemPath>eprom.h</itemPath>
@@ -72,6 +73,9 @@
         <itemPath>sensor_core.h</itemPath>
         <itemPath>node.c</itemPath>
         <itemPath>node.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f7" displayName="libavrxbee" projectFiles="true">
+        <itemPath>libavrxbee/xbee.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="main" projectFiles="true">
         <itemPath>main.c</itemPath>
@@ -189,7 +193,7 @@
         <property key="communication.speed" value="0.500"/>
         <property key="debugoptions.debug-startup" value="Use system settings"/>
         <property key="debugoptions.reset-behaviour" value="Use system settings"/>
-        <property key="debugoptions.useswbreakpoints" value="true"/>
+        <property key="debugoptions.useswbreakpoints" value="false"/>
         <property key="firmware.path"
                   value="Press to browse for a specific firmware version"/>
         <property key="firmware.toolpack"
@@ -210,6 +214,8 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-1fff"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="D:/Projects/Leawood/PowerSensor-Atmega1608/debug/main/main_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -828,6 +834,8 @@
         <property key="periphComp5.gte" value="gt"/>
         <property key="periphComp6.gte" value="gt"/>
         <property key="poweroptions.powerenable" value="false"/>
+        <property key="programmerToGoFilePath"
+                  value="D:/Projects/Leawood/PowerSensor-Atmega1608/debug/main/main_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -1367,26 +1375,6 @@
         <XC8-config-global>
         </XC8-config-global>
       </item>
-      <item path="libavrxbee/xbee.c" ex="false" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="libavrxbee/xbee.h" ex="false" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
       <item path="mocks/MockINA219.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
@@ -1676,11 +1664,11 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.36</languageToolchainVersion>
+        <languageToolchainVersion>2.40</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="ATmega_DFP" vendor="Microchip" version="3.0.158"/>
+        <pack name="ATmega_DFP" vendor="Microchip" version="3.1.264"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -2766,26 +2754,6 @@
         </XC8-config-global>
       </item>
       <item path="ina219/INA219.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="libavrxbee/xbee.c" ex="true" overriding="false">
-        <HI-TECH-COMP>
-        </HI-TECH-COMP>
-        <HI-TECH-LINK>
-        </HI-TECH-LINK>
-        <XC8-CO>
-        </XC8-CO>
-        <XC8-config-global>
-        </XC8-config-global>
-      </item>
-      <item path="libavrxbee/xbee.h" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
         <HI-TECH-LINK>

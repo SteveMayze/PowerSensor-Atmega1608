@@ -2,18 +2,19 @@
 #include "modem.h"
 #include "mcc_generated_files/include/usart0.h"
 #include <string.h>
-
+#include <util/delay.h>
 
 uint64_t coord_addresss;
 
 ModemResponse_t response;
-uint8_t buffer[70];
+struct xbee_tx_status s;
 
 void modem_open(uint64_t coordinator){
     coord_addresss = coordinator;
     // Reset the modem ~{RESET} pin...
     MODEM_RESET_SetLow();
-    MODEM_RESET_SetHigh();    
+    MODEM_RESET_SetHigh();  
+    _delay_ms(1000);
 }
 
 uint64_t modem_get_coord_addr(){
@@ -27,6 +28,7 @@ void modem_close(void){
 
 uint8_t rx_buffer[USART0_RX_BUFFER_SIZE];
 struct xbee_rx_packet p;
+uint8_t rx_pkt_data[90];
 
 ModemResponse_t* modem_receive_message(void){
     printf("modem_receive_message: BEGIN\n");
@@ -52,8 +54,28 @@ ModemResponse_t* modem_receive_message(void){
         printf("%02X ", rx_buffer[idx]);
     }
     printf("\n");
-    
-    xbee_frame_to_rx_packet(rx_buffer, &p);
+    response.frame_type = rx_buffer[3];
+    printf("Frame type: %02X \n", response.frame_type);
+    switch (response.frame_type) {
+        case XBEE_FT_TX_RESPONSE:
+            printf("Modem Status \n");
+            xbee_frame_to_tx_status(rx_buffer, &s);
+            response.operation = NODE_TOKEN_VOID;
+            break;
+        case XBEE_FT_RX_RECIEVED:
+            printf("Modem Rx Request \n");
+            p.data = rx_pkt_data;
+            xbee_frame_to_rx_packet(rx_buffer, &p);
+            coord_addresss = p.addr;
+            response.operation = p.data[1];
+            response.data_length = p.len;
+            response.data = p.data;
+            printf("Received  length: %d \n", p.len);
+            break;
+        default:
+            response.operation = NODE_TOKEN_VOID;
+            break;
+    }
     
     // This should only be set on Data request
     coord_addresss = p.addr;

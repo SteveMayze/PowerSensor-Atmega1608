@@ -31,6 +31,7 @@ extern "C" {
 
 
     typedef enum token_e {
+        NODE_TOKEN_VOID = 0x00,
         
         NODE_TOKEN_HEADER_OPERATION = HEADER_GROUP | 0x01,
         NODE_TOKEN_HEADER_SERIAL_ID = HEADER_GROUP | 0x02,
@@ -65,6 +66,7 @@ extern "C" {
 
     typedef struct response_message {
         
+        xbee_frame_type frame_type;
         Token_t operation;
         uint8_t data_length;
         uint8_t *data;

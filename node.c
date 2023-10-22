@@ -176,27 +176,31 @@ static FSM_States_t FSM_READY_STATE(uint8_t count) {
         ModemResponse_t* response;
         printf("FSM_READY_STATE: A message has arrived \n");
         response = modem_receive_message();
-        switch (response->operation) {
-            case NODE_TOKEN_DATAREQ:
-                printf("FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
-                // Received DATAREQ - Move to the DATA state
-                node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
-                printf("FSM_READY_STATE: Called %02X \n", FSM_DATAREQ);                
-                node_state.state = FSM_DATA;
-                node_state.busy = 1;
-                break;
-            case NODE_TOKEN_NODEINTROREQ:
-                printf("FSM_READY_STATE: Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
-                // Received DATAREQ - Move to the DATA state
-                node_state.event_callbacks[FSM_NODEINTROREQ](); // Collect the information to send
-                node_state.state = FSM_NODEINTRO;
-                node_state.busy = 1;
-                break;
-            default:
-                printf("FSM_READY_STATE: Not supported operation - Staying in READY \n");
-                node_state.busy = 1;
-                node_state.state = FSM_READY;
-                break;
+        if(response->frame_type == 0x90){
+            switch (response->operation) {
+                case NODE_TOKEN_DATAREQ:
+                    printf("FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
+                    // Received DATAREQ - Move to the DATA state
+                    node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
+                    printf("FSM_READY_STATE: Called %02X \n", FSM_DATAREQ);                
+                    node_state.state = FSM_DATA;
+                    node_state.busy = 1;
+                    break;
+                case NODE_TOKEN_NODEINTROREQ:
+                    printf("FSM_READY_STATE: Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
+                    // Received DATAREQ - Move to the DATA state
+                    node_state.event_callbacks[FSM_NODEINTROREQ](); // Collect the information to send
+                    node_state.state = FSM_NODEINTRO;
+                    node_state.busy = 1;
+                    break;
+                default:
+                    printf("FSM_READY_STATE: Not supported operation - Staying in READY \n");
+                    node_state.busy = 1;
+                    node_state.state = FSM_READY;
+                    break;
+                }
+        } else {
+            printf("FSM_READY_STATE: Unsupported message.\n");
         }
     }
     printf("FSM_READY_STATE: End with state: %02X \n", node_state.state);

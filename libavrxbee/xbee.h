@@ -116,7 +116,7 @@ struct xbee_rx_packet {
     uint8_t network;
     rx_packet_option opts;
     int len;
-    unsigned char data[16];
+    unsigned char * data;
 };
 
 struct xbee_tx_request_frame {
