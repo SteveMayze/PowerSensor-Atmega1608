@@ -13,7 +13,7 @@ int main(void)
     
     node_intitialise();
     
-    node_set_timeout(0x0003);
+    node_set_timeout(0x0006);
     // This time, set up the real call-backs to go through the motions.
 
     _delay_ms(5000);
@@ -23,7 +23,7 @@ int main(void)
         printf("\f Waking - Node check \n");
         node_create_message(NODE_TOKEN_READY, eprom_read_serial_id());
         node_check();
-        printf("sleeping... \n");
-        _delay_ms(30000);
+        printf("sleeping 60 seconds... \n");
+        _delay_ms(60000);
     }
 }

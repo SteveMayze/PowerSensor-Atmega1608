@@ -15,12 +15,14 @@
             <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_basic_test.c</file>
         </group>
         <group name="Leawood_FieldDevice_R3">
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/sensor_core.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/main.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.c</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/libavrxbee/xbee.c</file>
         </group>
     </open-files>
 </project-private>

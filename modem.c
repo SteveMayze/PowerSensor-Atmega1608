@@ -35,8 +35,13 @@ ModemResponse_t* modem_receive_message(void){
     
     // Receive XBee message
     uint8_t buffer_ptr = 0;
+    bool inSync = false;
     while(USART0_IsRxReady()){
-        rx_buffer[buffer_ptr++] = USART0_Read();
+        uint8_t byte = USART0_Read();
+        if(byte == 0x7E)
+            inSync = true;
+        if(inSync)
+            rx_buffer[buffer_ptr++] = byte;
     }
     
     // uint8_t buffer_length = buffer_ptr;

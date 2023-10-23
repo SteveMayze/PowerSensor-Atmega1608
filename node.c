@@ -109,7 +109,8 @@ void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb) {
 
 void node_wait() {
     // Test for any messages on the XBEE.
-    _delay_ms(1000);
+    printf("Waiting for a response - 2 seconds... \n");
+    _delay_ms(2000);
 }
 
 void node_fsm_execution(uint8_t count) {
