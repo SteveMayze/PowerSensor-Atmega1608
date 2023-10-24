@@ -320,7 +320,7 @@ void node_data_received(void){
 
 
 void node_intro_callback(void){
-    _message.operation = NODE_TOKEN_DATA;
+    _message.operation = NODE_TOKEN_NODEINTRO;
     _message.data_length = 5;
     _message.data_token[0] = NODE_TOKEN_HEADER_DOMAIN;
     _message.data_value[0] = NODE_METADATA_DOMAIN_POWER;

@@ -40,9 +40,30 @@ ModemResponse_t* modem_receive_message(void){
         uint8_t byte = USART0_Read();
         if(byte == 0x7E)
             inSync = true;
-        if(inSync)
+        if(inSync){
             rx_buffer[buffer_ptr++] = byte;
+        }
     }
+//    if(USART0_IsRxReady()){
+//        uint8_t byte=USART0_Read();
+//        while(byte!= 0x7E){
+//            printf(". ");
+//            byte=USART0_Read();
+//        }
+//        printf("\n ");
+//        rx_buffer[buffer_ptr++] = byte;
+//        rx_buffer[buffer_ptr++] = USART0_Read();
+//        rx_buffer[buffer_ptr++] = USART0_Read();
+//        uint16_t len;
+//        memcpy(&len, &rx_buffer[4], sizeof(len));
+//        len = endian_swap_64(len);   
+//        
+//        for(uint8_t i=0;i<len;i++){
+//            rx_buffer[buffer_ptr++] = USART0_Read();
+//        }
+//        rx_buffer[buffer_ptr++] = USART0_Read();
+//    }
+
     
     // uint8_t buffer_length = buffer_ptr;
     
