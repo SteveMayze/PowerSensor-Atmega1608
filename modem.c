@@ -4,6 +4,11 @@
 #include <string.h>
 #include <util/delay.h>
 
+#define LOGGER_INFO
+#define LOGGER_DEBUG
+
+#include "logger.h"
+
 uint64_t coord_addresss;
 
 ModemResponse_t response;
@@ -31,7 +36,7 @@ struct xbee_rx_packet p;
 uint8_t rx_pkt_data[90];
 
 ModemResponse_t* modem_receive_message(void){
-    printf("modem_receive_message: BEGIN\n");
+    LOG_DEBUG("modem_receive_message: BEGIN\n");
     
     // Receive XBee message
     uint8_t buffer_ptr = 0;
@@ -47,10 +52,10 @@ ModemResponse_t* modem_receive_message(void){
 //    if(USART0_IsRxReady()){
 //        uint8_t byte=USART0_Read();
 //        while(byte!= 0x7E){
-//            printf(". ");
+//            LOG_DEBUG(". ");
 //            byte=USART0_Read();
 //        }
-//        printf("\n ");
+//        LOG_DEBUG("\n ");
 //        rx_buffer[buffer_ptr++] = byte;
 //        rx_buffer[buffer_ptr++] = USART0_Read();
 //        rx_buffer[buffer_ptr++] = USART0_Read();
@@ -75,28 +80,28 @@ ModemResponse_t* modem_receive_message(void){
     
     // This data then needs to be traversed again to extract the actual
     // node message
-    printf("Received: size: %d, data: ", buffer_ptr);
+    LOG_DEBUG("Received: size: %d, data: ", buffer_ptr);
     for(int idx = 0; idx<buffer_ptr; idx++){
-        printf("%02X ", rx_buffer[idx]);
+        LOG_DEBUG("%02X ", rx_buffer[idx]);
     }
-    printf("\n");
+    LOG_DEBUG("\n");
     response.frame_type = rx_buffer[3];
-    printf("Frame type: %02X \n", response.frame_type);
+    LOG_DEBUG("Frame type: %02X \n", response.frame_type);
     switch (response.frame_type) {
         case XBEE_FT_TX_RESPONSE:
-            printf("Modem Status \n");
+            LOG_DEBUG("Modem Status \n");
             xbee_frame_to_tx_status(rx_buffer, &s);
             response.operation = NODE_TOKEN_VOID;
             break;
         case XBEE_FT_RX_RECIEVED:
-            printf("Modem Rx Request \n");
+            LOG_DEBUG("Modem Rx Request \n");
             p.data = rx_pkt_data;
             xbee_frame_to_rx_packet(rx_buffer, &p);
             coord_addresss = p.addr;
             response.operation = p.data[1];
             response.data_length = p.len;
             response.data = p.data;
-            printf("Received  length: %d \n", p.len);
+            LOG_DEBUG("Received  length: %d \n", p.len);
             break;
         default:
             response.operation = NODE_TOKEN_VOID;
@@ -109,7 +114,7 @@ ModemResponse_t* modem_receive_message(void){
     response.data_length = p.len;
     response.data = p.data;
     
-    printf("modem_receive_message: END\n");
+    LOG_DEBUG("modem_receive_message: END\n");
     return &response;
 }
     
@@ -121,7 +126,7 @@ struct xbee_tx_request r;
 struct xbee_frame *f;
 
 void modem_send_message(unsigned char* node_message, uint8_t data_length){
-    printf("modem_send_message: BEGIN \n");
+    LOG_DEBUG("modem_send_message: BEGIN \n");
     
     // The message stream is actually a node message stream. This needs to be
     // converted to an XBee message stream and then written to the XBee using
@@ -136,20 +141,20 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     r.data = node_message;
     r.len =  data_length;
 
-    f = xbee_create_tx_request_frame(0x01, &r);
+    f = xbee_create_tx_request_frame(0x00, &r);
 
     unsigned int size;
     unsigned char *bytes;
     bytes = xbee_frame_to_bytes(f, &size);
-    printf("Sending: ");
+    LOG_DEBUG("Sending: ");
     for(int idx = 0; idx<size; idx++){
-        printf("%02X ", bytes[idx]);
+        LOG_DEBUG("%02X ", bytes[idx]);
     }
-    printf("\n");
+    LOG_DEBUG("\n");
     for(int idx = 0; idx<size; idx++){
         USART0_Write(bytes[idx]);
     }
 
-    printf("modem_send_message: END\n");
+    LOG_DEBUG("modem_send_message: END\n");
 }
 

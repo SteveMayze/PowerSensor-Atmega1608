@@ -5,11 +5,16 @@
 #include "node.h"
 #include "eprom.h"
 
+#define LOGGER_INFO
+
+#include "logger.h"
+
+
 int main(void)
 {
     SYSTEM_Initialize();
     _delay_ms(1000);
-    printf("\n\n\n\f Node Initialisation \n");
+    LOG_INFO("\n\n\n\f main: Node Initialisation \n");
     
     node_intitialise();
     
@@ -18,12 +23,12 @@ int main(void)
 
     _delay_ms(5000);
     
-    printf("\n Starting the control loop \n");
+    LOG_INFO("\n main: Starting the control loop \n");
     while(1){
-        printf("\f Waking - Node check \n");
+        LOG_DEBUG("\f main: Waking - Node check \n");
         node_create_message(NODE_TOKEN_READY, eprom_read_serial_id());
         node_check();
-        printf("sleeping 60 seconds... \n");
+        LOG_DEBUG("main: sleeping 60 seconds... \n");
         _delay_ms(60000);
     }
 }
