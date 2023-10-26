@@ -1,0 +1,35 @@
+ main: Node Initialisation
+
+ main: Starting the control loop
+FSM_READY_STATE: Sending READY
+modem_send_message: BEGIN
+Sending: 7E 00 1B 10 00 00 00 00 00 00 00 FF FF FF FE 00 00 11 21 12 9C 01 F3 01 80 81 91 81 90 FF 7D
+modem_send_message: END
+modem_receive_message: BEGIN
+Received: size: 6, data: 7E 00 02 8A 00 75
+Frame type: 8A
+modem_receive_message: END
+FSM_READY_STATE: End with state: 01
+FSM_READY_STATE: Waiting for a response
+modem_receive_message: BEGIN
+Received: size: 29, data: 7E 00 19 90 00 13 A2 00 41 5C 0F 82 FF FE C1 11 22 12 9C 01 F3 01 80 81 91 81 90 FF 56
+Frame type: 90
+Modem Rx Request
+Received  length: 13
+modem_receive_message: END
+FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.
+node_data_collection: transmitting the collected data
+Parsing the data for NODE_TOKEN_DATA
+modem_send_message: BEGIN
+Sending: 7E 00 2A 10 00 00 13 A2 00 41 5C 0F 82 FF FE 00 00 11 23 12 9C 01 F3 01 80 81 91 81 90 FF 31 F9 53 63 3F 32 5C C4 27 3F 33 00 00 00 00 8C
+modem_send_message: END
+FSM_READY_STATE: End with state: 02
+FSM_DATA_STATE: A message has arrived
+modem_receive_message: BEGIN
+Received: size: 29, data: 7E 00 19 90 00 13 A2 00 41 5C 0F 82 FF FE C1 11 24 12 9C 01 F3 01 80 81 91 81 90 FF 54
+Frame type: 90
+Modem Rx Request
+Received  length: 13
+modem_receive_message: END
+FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAACK callback.
+

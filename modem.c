@@ -4,8 +4,8 @@
 #include <string.h>
 #include <util/delay.h>
 
-#define LOGGER_INFO
-#define LOGGER_DEBUG
+//#define LOGGER_INFO
+//#define LOGGER_DEBUG
 
 #include "logger.h"
 

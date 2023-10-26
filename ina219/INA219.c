@@ -3,6 +3,10 @@
 #include "../mcc_generated_files/include/twi0_master.h"
 #include "INA219.h"
 #include "util/delay.h"
+
+//#define LOGGER_DEBUG
+// #define LOGGER_INFO
+
 #include "../logger.h"
 
 void INA219_set_read_callback(twi0_callback_t callback);
@@ -59,12 +63,6 @@ profileSetupFunction ina219_configurations[] = {
     INA219_12V_3A_CONFIG,
 };
 
-// LEGACY
-//#define INA219_DEFAULT_CFG 0x199F
-//#define INA219_DEFAULT_CFG_0 0x19
-//#define INA219_DEFAULT_CFG_1 0x9F
-
-
 void INA219_set_calibration(uint16_t calibaration){
     LOG_DEBUG("INA219_set_calibration: start calibration: %04X\n", calibaration);
     uint8_t data[3];
@@ -72,7 +70,7 @@ void INA219_set_calibration(uint16_t calibaration){
     data[1] = calibaration >> 8;   // MSB
     data[2] = 0xFF & calibaration; // LSB
     while(!I2C0_Open(iic_address));
-    I2C0_SetBuffer(data, 2);
+    I2C0_SetBuffer(data, 3);
     I2C0_MasterWrite(); // Write
     I2C0_Close();    
     LOG_DEBUG("INA219_set_calibration: end\n");
@@ -112,7 +110,7 @@ void INA219_Initialise(uint8_t addr, INA219_Config_Profile_t profile) {
     data[1] = ina219_configuration >> 8;      // MSB
     data[2] = 0xFF & ina219_configuration;    // LSB
     while(!I2C0_Open(iic_address));
-    I2C0_SetBuffer(data, 2);
+    I2C0_SetBuffer(data, 3);
     I2C0_MasterWrite(); // Write
     I2C0_Close();    
     LOG_DEBUG("INA219_Initialise: End\n");
@@ -133,9 +131,10 @@ void INA219_set_restartwrite_callback(twi0_callback_t callback){
 }
 
 uint16_t read_register_value(uint8_t reg, bool calibrate){
-    LOG_DEBUG("get_register_value: start reg: %d, calibrate: %d\n", reg, (uint8_t)calibrate);
+    LOG_DEBUG("read_register_value: start reg: %d, calibrate: %d \n", reg, (uint8_t)calibrate);
     if( calibrate ){
         INA219_set_calibration(ina219_calibration);
+        _delay_ms(500);
     }
     
     while(!I2C0_Open(iic_address)); // sit here until we get the bus..
@@ -172,7 +171,7 @@ INA219_Data_t* INA219_get_all_readings() {
 
     LOG_DEBUG("INA219_get_all_readings: get INA219_CURRENT\n");
     INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
-    INA219_Data.current = ((float) INA219_Data.raw_current * 0.001);
+    INA219_Data.current = ((float) INA219_Data.raw_current /10000);
     
     LOG_DEBUG("INA219_getReadings: get INA219_POWER\n");
     INA219_Data.raw_power = read_register_value(INA219_POWER, true);
@@ -192,11 +191,11 @@ static uint16_t get_raw_bus_voltage(){
 }
 
 static uint16_t get_raw_current(){
-    return read_register_value(INA219_CURRENT, false);
+    return read_register_value(INA219_CURRENT, true);
 }
 
 static uint16_t get_raw_power(){
-    return read_register_value(INA219_POWER, false);
+    return read_register_value(INA219_POWER, true);
 }
 
 

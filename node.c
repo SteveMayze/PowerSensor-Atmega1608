@@ -53,14 +53,14 @@ static stateHandlerFunction *fsm_state_table[] = {
  * @return 
  */
 Error_t node_intitialise() {
-#ifdef DEBUG
+#ifdef LOGGER_DEBUG
     uint8_t *sid_ = eprom_read_serial_id();
+    LOG_DEBUG("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
+            sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
 #endif
     
     MODEM_RESET_SetHigh();    
 
-    LOG_DEBUG("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
-            sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;
@@ -71,7 +71,7 @@ Error_t node_intitialise() {
     fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
     fsm_set_event_callback(FSM_TIMEOUT, node_timeout_callback);
 
-    INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_12V_3A);
 
     return NODE_OK;
 }
@@ -223,7 +223,7 @@ static FSM_States_t FSM_DATA_STATE(uint8_t count) {
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_DATAACK:
-                LOG_INFO("FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAREQ callback.\n");
+                LOG_INFO("FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAACK callback.\n");
                 node_state.event_callbacks[FSM_DATAACK](); // Collect the information to send
                 node_state.state = FSM_IDLE;
                 node_state.busy = 0;
@@ -243,18 +243,8 @@ static FSM_States_t FSM_RESET_STATE(uint8_t count) {
     LOG_DEBUG("NODE_RESET: count: %d \n", count);
     //FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
-//    switch (_message.operation ) {
-//        case NODE_TOKEN_READY:
-            LOG_DEBUG("NODE_RESET: Setting next state as READY\n");
-            node_state.busy = 1;
-            //ret = FSM_READY;
-//            break;
-//        default:
-//            LOG_DEBUG("NODE_RESET: Not supported operation - Staying in IDLE \n");
-//            node_state.busy = 0;
-//            ret = FSM_IDLE;
-//            break;
-//    }
+    LOG_DEBUG("NODE_RESET: Setting next state as READY\n");
+    node_state.busy = 1;
     return FSM_READY;
 }
 

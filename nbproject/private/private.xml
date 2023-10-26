@@ -17,6 +17,7 @@
         <group name="Leawood_FieldDevice_R3">
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/sensor_core.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.h</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/logger.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/ina219/INA219.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/power_sensor.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/main.c</file>
