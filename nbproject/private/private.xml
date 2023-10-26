@@ -2,18 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/sensor_core.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/test_common.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/test_common.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.h</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/test_fsm_main.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_test.c</file>
-            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/unit/node_basic_test.c</file>
-        </group>
         <group name="Leawood_FieldDevice_R3">
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/sensor_core.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.h</file>
@@ -23,6 +11,13 @@
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/main.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.c</file>
+        </group>
+        <group>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/logger.h</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/eprom.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/node.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/modem.c</file>
+            <file>file:/Users/steve/MPLABXProjects/Leawood/PowerSensor-ATMEGA1608.X/main.c</file>
         </group>
     </open-files>
 </project-private>

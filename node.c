@@ -12,6 +12,7 @@
 #include <util/delay.h>
 
 #define LOGGER_INFO
+// #define LOGGER_DEBUG
 
 #include "logger.h"
 
@@ -53,12 +54,7 @@ static stateHandlerFunction *fsm_state_table[] = {
  * @return 
  */
 Error_t node_intitialise() {
-#ifdef LOGGER_DEBUG
-    uint8_t *sid_ = eprom_read_serial_id();
-    LOG_DEBUG("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
-            sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
-#endif
-    
+
     MODEM_RESET_SetHigh();    
 
     node_state.busy = 0;

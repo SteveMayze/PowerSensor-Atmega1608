@@ -4,8 +4,8 @@
 #include <string.h>
 #include <util/delay.h>
 
-//#define LOGGER_INFO
-//#define LOGGER_DEBUG
+#define LOGGER_INFO
+// #define LOGGER_DEBUG
 
 #include "logger.h"
 
@@ -80,11 +80,8 @@ ModemResponse_t* modem_receive_message(void){
     
     // This data then needs to be traversed again to extract the actual
     // node message
-    LOG_DEBUG("Received: size: %d, data: ", buffer_ptr);
-    for(int idx = 0; idx<buffer_ptr; idx++){
-        LOG_DEBUG("%02X ", rx_buffer[idx]);
-    }
-    LOG_DEBUG("\n");
+    LOG_BYTE_STREAM("Received Data: ", rx_buffer, buffer_ptr);
+
     response.frame_type = rx_buffer[3];
     LOG_DEBUG("Frame type: %02X \n", response.frame_type);
     switch (response.frame_type) {
@@ -146,11 +143,7 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     unsigned int size;
     unsigned char *bytes;
     bytes = xbee_frame_to_bytes(f, &size);
-    LOG_DEBUG("Sending: ");
-    for(int idx = 0; idx<size; idx++){
-        LOG_DEBUG("%02X ", bytes[idx]);
-    }
-    LOG_DEBUG("\n");
+    LOG_BYTE_STREAM("Sending: ", bytes, size);
     for(int idx = 0; idx<size; idx++){
         USART0_Write(bytes[idx]);
     }

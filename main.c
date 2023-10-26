@@ -14,7 +14,7 @@ int main(void)
 {
     SYSTEM_Initialize();
     _delay_ms(1000);
-    LOG_INFO("\n\n\n\f main: Node Initialisation \n");
+    LOG_INFO("\n\n\nmain: Node Initialisation \n");
     
     node_intitialise();
     
