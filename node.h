@@ -19,7 +19,8 @@ extern "C" {
 #include "ina219/INA219.h"
 
 #define NODE_INA219_IIC_ADDR INA219_ADDR_GND_GND
-
+#define NODE_INA219_PROFILE INA219_CONFIG_PROFILE_12V_3A
+    
     typedef struct {
         Token_t operation;
         uint8_t *sid;

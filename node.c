@@ -67,7 +67,7 @@ Error_t node_intitialise() {
     fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
     fsm_set_event_callback(FSM_TIMEOUT, node_timeout_callback);
 
-    INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_12V_3A);
+    INA219_Initialise(NODE_INA219_IIC_ADDR, NODE_INA219_PROFILE);
 
     return NODE_OK;
 }

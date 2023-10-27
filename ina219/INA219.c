@@ -5,7 +5,7 @@
 #include "util/delay.h"
 
 //#define LOGGER_DEBUG
-// #define LOGGER_INFO
+#define LOGGER_INFO
 
 #include "../logger.h"
 

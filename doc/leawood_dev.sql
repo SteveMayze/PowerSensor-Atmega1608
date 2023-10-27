@@ -5,7 +5,7 @@ SELECT
     message
 FROM
     lw_sqllog
-    where created > to_date('26-OCT-23 09.00', 'dd-mon-rr hh24.mi')
+    where created > to_date('27-OCT-23 08.00', 'dd-mon-rr hh24.mi')
     order by created;
     
 SELECT
@@ -17,7 +17,7 @@ SELECT
 FROM
     lw_data_series s, lw_data_def md
 where md.def_id = s.def_id
-  and point_timestamp > to_date('26-OCT-23 11.24', 'dd-mon-rr hh24.mi')
+  and point_timestamp > to_date('27-OCT-23 08.00', 'dd-mon-rr hh24.mi')
   order by s.point_timestamp;
     
 SELECT
