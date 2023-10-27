@@ -68,24 +68,29 @@ INA219_Data_t *get_ina219_data(){
 ModemResponse_t *get_dataReq_response(){
     printf("get_dataReq_response: Response NODE_TOKEN_DATAREQ\n");
     node_create_message(NODE_TOKEN_DATA, get_test_sid());
-    // node_data_collection();
+    datareq_response.frame_type = 0x90;
     datareq_response.operation = NODE_TOKEN_DATAREQ;  
     return &datareq_response;
 }
 
 ModemResponse_t *get_dataack_response(){
     printf("get_dataack_response: response: NODE_TOKEN_DATAACK\n");
+    dataack_response.frame_type = 0x90;
     dataack_response.operation = NODE_TOKEN_DATAACK;
     return &dataack_response;
 }
 
 ModemResponse_t *get_nodeintroreq_response(){
     printf("get_nodeintroreq_response: response: ... \n");
+    nodeintroreq_response.frame_type = 0x90;
+    nodeintroreq_response.operation = NODE_TOKEN_NODEINTROREQ;
     return &nodeintroreq_response;
 }
 
 ModemResponse_t *get_nodeintroack_response(){
     printf("get_nodeintroack_response: response: ... \n");
+    nodeintroack_response.frame_type = 0x90;
+    nodeintroreq_response.operation = NODE_TOKEN_NODEINTROACK;
     return &nodeintroack_response;
 }
 

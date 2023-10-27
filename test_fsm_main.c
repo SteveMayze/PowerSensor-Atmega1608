@@ -31,7 +31,7 @@ int main(void)
     
     printf("\n\n node basic tests ignored \n\n");
 
-    // run_node_basic_tests();
+    run_node_basic_tests();
     
     printf("\n\n===================================\n\n");
 

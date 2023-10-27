@@ -36,7 +36,7 @@ void ready_datareq_dataack_test(){
     modem_close_Ignore();
     
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
-    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
 
     node_intitialise();
 
@@ -89,7 +89,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     set_nodeintroreq_response_flag(false);
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
-    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
 
     node_intitialise();
     

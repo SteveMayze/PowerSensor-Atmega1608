@@ -21,6 +21,12 @@ extern "C" {
 #define NODE_INA219_IIC_ADDR INA219_ADDR_GND_GND
 #define NODE_INA219_PROFILE INA219_CONFIG_PROFILE_12V_3A
     
+#ifndef UNIT_TEST    
+#define NODE_WAIT_DELAY 2000
+#else
+    #define NODE_WAIT_DELAY 1
+#endif
+    
     typedef struct {
         Token_t operation;
         uint8_t *sid;

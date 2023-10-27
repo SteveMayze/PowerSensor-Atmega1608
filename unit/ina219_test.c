@@ -18,13 +18,13 @@ void ina219_initialise_default_profile_test(void) {
     
     // CALIBRATION
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
-    I2C0_SetBuffer_Expect(expected_cal, 2);
+    I2C0_SetBuffer_Expect(expected_cal, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     I2C0_Close_IgnoreAndReturn(I2C0_NOERR);
 
     // CONFIGURATION
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
-    I2C0_SetBuffer_Expect(expected_cfg, 2);
+    I2C0_SetBuffer_Expect(expected_cfg, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     // I2C0_Close_ExpectAndReturn(I2C0_NOERR); 
     
@@ -58,7 +58,7 @@ void ina219_initialise_large_profile_test(void) {
     
     // CALIBRATION
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
-    I2C0_SetBuffer_Expect(expected_cal, 2);
+    I2C0_SetBuffer_Expect(expected_cal, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
@@ -67,7 +67,7 @@ void ina219_initialise_large_profile_test(void) {
     expected_cfg[0] = INA219_CFG;
     expected_cfg[1] = 0x39;
     expected_cfg[2] = 0x9F;
-    I2C0_SetBuffer_Expect(expected_cfg, 2);
+    I2C0_SetBuffer_Expect(expected_cfg, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR); 
     
@@ -99,13 +99,13 @@ void ina219_initialise_small_profile_test(void) {
     
     // CALIBRATION
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
-    I2C0_SetBuffer_Expect(expected_cal, 2);
+    I2C0_SetBuffer_Expect(expected_cal, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR);
 
     // CONFIGURATION
     I2C0_Open_ExpectAndReturn(0x40, I2C0_BUSY);
-    I2C0_SetBuffer_Expect(expected_cfg, 2);
+    I2C0_SetBuffer_Expect(expected_cfg, 3);
     I2C0_MasterWrite_ExpectAndReturn(I2C0_NOERR); // Write
     I2C0_Close_ExpectAndReturn(I2C0_NOERR); 
     
@@ -229,6 +229,8 @@ Calibration: 3828 -> 0x0EF4
 */
 void ina219_get_all_readings_test(void) {
     printf("\n ina219_get_all_readings_test: start\n");
+//    I2C0_SetBuffer_Ignore();
+//    INA219_Initialise(INA219_ADDR_GND_GND, INA219_CONFIG_PROFILE_12V_3A );
 
     INA219_set_read_callback(test_read_callback);
     INA219_set_restartwrite_callback(test_restart_callback);

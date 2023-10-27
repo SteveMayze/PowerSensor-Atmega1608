@@ -1,5 +1,7 @@
 #include "node_test.h"
 #include "unity.h"
+
+#define UNIT_TEST
 #include "../node.h"
 #include <stdlib.h>
 #include "../mocks/Mockmodem.h"
@@ -7,6 +9,10 @@
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
 
+#define LOGGING_DEBUG
+#define LOGGING_INFO
+
+#include  "../logger.h"
 
 uint8_t message_stream[128] = { 0 }; 
 
@@ -17,7 +23,7 @@ uint8_t message_stream[128] = { 0 };
 void ready_data_collection_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
-    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
 
     node_intitialise();
 
@@ -31,9 +37,6 @@ void ready_data_collection_test(){
     
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
-    
-    datareq_response_ptr->operation = NODE_TOKEN_DATAREQ;  
-    dataack_response_ptr->operation = NODE_TOKEN_DATAACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -87,15 +90,8 @@ void ready_data_collection_test(){
     
     uint8_t message_length = node_message_to_stream(expected_message, message_stream);
     
-    printf("expected_message_stream: ");
-    for(uint8_t i=0; i<message_length; i++){
-        printf("%02X ", expected_message_stream[i]);
-    }
-    printf("\n         message_stream: ");
-    for(uint8_t i=0; i<message_length; i++){
-        printf("%02X ", message_stream[i]);
-    }
-    printf("\n");
+    LOG_BYTE_STREAM("expected_message_stream: ", expected_message_stream, message_length);
+    LOG_BYTE_STREAM("         message_stream: ", message_stream, message_length);
     
     uint8_t expected_message_length = 28;
     TEST_ASSERT_EQUAL(expected_message_length, message_length);
@@ -126,21 +122,20 @@ void ready_data_collection_test(){
 
 }
 
+void set_node_state(FSM_States_t state);
+
 void ready_node_intro_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
-    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
 
     node_intitialise();
-    
+    set_node_state(FSM_NODEINTRO);
     printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
 
     
     ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
     ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
-    
-    nodeintroreq_response_ptr->operation = NODE_TOKEN_NODEINTROREQ;  
-    nodeintroack_response_ptr->operation = NODE_TOKEN_NODEINTROACK;
     
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -156,7 +151,7 @@ void ready_node_intro_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_NODEINTRO, actual->operation);
     
-   printf("\nready_node_intro_test: Testing the send operation for READY\n");
+   printf("\nready_node_intro_test: Testing the send operation for NODEINTRO \n");
    node_set_timeout(0x000F);
    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
@@ -186,16 +181,8 @@ void ready_node_intro_test(){
     
     uint8_t message_length = node_message_to_stream(expected_message, message_stream);
     
-    printf("expected_message_stream: ");
-    for(uint8_t i=0; i<message_length; i++){
-        printf("%02X ", expected_message_stream[i]);
-    }
-    printf("\n         message_stream: ");
-    for(uint8_t i=0; i<message_length; i++){
-        printf("%02X ", message_stream[i]);
-    }
-    printf("\n");
-    
+    LOG_BYTE_STREAM("expected_message_stream: ", expected_message_stream, message_length);
+    LOG_BYTE_STREAM("         message_stream: ", message_stream, message_length);
     
     uint8_t expected_message_length = 23;
 

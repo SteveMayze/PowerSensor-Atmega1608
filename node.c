@@ -28,7 +28,7 @@ typedef struct {
     unsigned busy : 1;
 } Node_State_t;
 
-static Node_State_t node_state = {0};
+static Node_State_t node_state;
 
 typedef FSM_States_t(stateHandlerFunction)(uint8_t count);
 
@@ -72,6 +72,11 @@ Error_t node_intitialise() {
     return NODE_OK;
 }
 
+void set_node_state(FSM_States_t state){
+    node_state.state = state;
+}
+
+
 /**
  * Sets the call timeout - in seconds.
  * When expired, the state machine will return to idle but will call
@@ -110,8 +115,8 @@ void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb) {
 
 void node_wait() {
     // Test for any messages on the XBEE.
-    LOG_DEBUG("Waiting for a response - 2 seconds... \n");
-    _delay_ms(2000);
+    LOG_DEBUG("Waiting for a response - %d ms... \n", NODE_WAIT_DELAY);
+    _delay_ms(NODE_WAIT_DELAY);
 }
 
 void node_fsm_execution(uint8_t count) {
@@ -142,7 +147,7 @@ void node_fsm_poller() {
 void node_check() {
     LOG_DEBUG("node_check: Checking for operation: %02X, state: %02X \n", _message.operation, node_state.state);
     if(node_state.state == FSM_IDLE){
-        LOG_DEBUG("Coming in from idle, initiate a reset \n");
+        LOG_DEBUG("node_check: Coming in from idle, initiate a reset \n");
         node_state.state = FSM_RESET;
     }
     if (!node_state.busy) {
@@ -176,8 +181,9 @@ static FSM_States_t FSM_READY_STATE(uint8_t count) {
     LOG_DEBUG("FSM_READY_STATE: Checking for a response \n");
     if (modem_message_arrived()) {
         ModemResponse_t* response;
-        LOG_DEBUG("FSM_READY_STATE: A message has arrived \n");
         response = modem_receive_message();
+        LOG_DEBUG("FSM_READY_STATE: A message has arrived: frame_type: %d, operation: %d ", response->frame_type, response->operation);
+        LOG_BYTE_STREAM(", data: ", response->data, response->data_length);
         if(response->frame_type == 0x90){
             switch (response->operation) {
                 case NODE_TOKEN_DATAREQ:

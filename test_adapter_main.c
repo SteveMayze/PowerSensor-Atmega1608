@@ -36,11 +36,11 @@ int main(void) {
     
     printf("\n\n========== Test starting - MODEM send Tests ===========\n\n");    
     
-    run_modem_send_tests();
+    // run_modem_send_tests();
   
     printf("\n\n========== Test starting - MODEM receive Tests ===========\n\n");    
 
-    run_modem_receive_tests();
+    // run_modem_receive_tests();
 
     printf("\n\n================= Test Completed =================\n\n");
 

@@ -4,7 +4,7 @@
 #include "INA219.h"
 #include "util/delay.h"
 
-//#define LOGGER_DEBUG
+// #define LOGGER_DEBUG
 #define LOGGER_INFO
 
 #include "../logger.h"
@@ -171,7 +171,7 @@ INA219_Data_t* INA219_get_all_readings() {
 
     LOG_DEBUG("INA219_get_all_readings: get INA219_CURRENT\n");
     INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
-    INA219_Data.current = ((float) INA219_Data.raw_current /10000);
+    INA219_Data.current = ((float) INA219_Data.raw_current /1000);
     
     LOG_DEBUG("INA219_getReadings: get INA219_POWER\n");
     INA219_Data.raw_power = read_register_value(INA219_POWER, true);
