@@ -1,11 +1,8 @@
-#define F_CPU 10000000
-
+#include "build-config.h"
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
 #include "node.h"
 #include "eprom.h"
-
-#define LOGGER_INFO
 
 #include "logger.h"
 

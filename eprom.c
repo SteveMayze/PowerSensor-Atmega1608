@@ -1,10 +1,9 @@
+#include "build-config.h"
 
 #include "mcc_generated_files/mcc.h"
 #include "eprom.h"
-// #include <avr/pgmspace.h>
 #include <string.h>
 #include <avr/sfr_defs.h>
-#define LOGGER_INFO
 
 #include "logger.h"
 

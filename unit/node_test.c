@@ -1,7 +1,9 @@
+
+#include "../build-config.h"
+
 #include "node_test.h"
 #include "unity.h"
 
-#define UNIT_TEST
 #include "../node.h"
 #include <stdlib.h>
 #include "../mocks/Mockmodem.h"
@@ -9,10 +11,6 @@
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
 
-#define LOGGING_DEBUG
-#define LOGGING_INFO
-
-#include  "../logger.h"
 
 uint8_t message_stream[128] = { 0 }; 
 
@@ -27,7 +25,7 @@ void ready_data_collection_test(){
 
     node_intitialise();
 
-    printf("\nready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
+    LOG_INFO("ready_data_collection_test: READY DATAREQ - Data Collection Data Send and then DATAREQ\n");
     
     INA219_Data_t* ina219Data_ptr = get_ina219_data();
     INA219_get_all_readings_ExpectAndReturn(ina219Data_ptr);
@@ -52,7 +50,7 @@ void ready_data_collection_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_DATA, actual->operation);
     
-    printf("\nready_data_collection_test: Testing the send operation for DATAREQ\n");
+    LOG_INFO("ready_data_collection_test: Testing the send operation for DATAREQ\n");
     node_set_timeout(0x000F);
     // This time, set up the real call-backs to go through the motions.
     fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
@@ -131,7 +129,7 @@ void ready_node_intro_test(){
 
     node_intitialise();
     set_node_state(FSM_NODEINTRO);
-    printf("\nready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
+    LOG_INFO("ready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");
 
     
     ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
@@ -151,7 +149,7 @@ void ready_node_intro_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_NODEINTRO, actual->operation);
     
-   printf("\nready_node_intro_test: Testing the send operation for NODEINTRO \n");
+   LOG_INFO("ready_node_intro_test: Testing the send operation for NODEINTRO \n");
    node_set_timeout(0x000F);
    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
@@ -234,11 +232,11 @@ void ready_node_intro_test(){
 int run_node_tests(){
     UnityBegin("node_test");
         
-    printf("\n\n=============== ready_data_collection_test ====================\n\n");
+    LOG_INFO("=============== ready_data_collection_test ====================\n\n");
 
     RUN_TEST(ready_data_collection_test);
 
-    printf("\n\n=============== ready_node_intro_test ====================\n\n");
+    LOG_INFO("=============== ready_node_intro_test ====================\n\n");
 
     RUN_TEST(ready_node_intro_test);
 

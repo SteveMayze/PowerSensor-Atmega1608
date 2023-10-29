@@ -1,4 +1,6 @@
 
+#include "../build-config.h"
+
 #include "unity.h"
 #include "modem_receive_test.h"
 #include "../modem.h"
@@ -58,7 +60,7 @@ uint8_t modem_test_USART0_Read_cb(int call_count){
             TEST_FAIL_MESSAGE("The fixture type is not supported.");
             break;
     }
-    printf("modem_test_USART0_Read_cb %d, %02X \n", call_count,  fixture[fixture_idx]);
+    LOG_INFO("modem_test_USART0_Read_cb %d, %02X \n", call_count,  fixture[fixture_idx]);
     return fixture[fixture_idx++];
 }
 
@@ -66,13 +68,13 @@ bool modem_test_USART0_IsRxReady_cb(int call_count){
     if (fixture_idx < fixture_length){
         return true;
     }
-    printf("modem_test_USART0_Read_cb %d, EOD \n", call_count);
+    LOG_INFO("modem_test_USART0_Read_cb %d, EOD \n", call_count);
     return false;
 }
 
 
 void modem_receive_message_DATAREQ_test(){
-    printf("\n modem_receive_message_DATAREQ_test: begin \n");
+    LOG_INFO("\n modem_receive_message_DATAREQ_test: begin \n");
 
     fixture_type = NODE_TOKEN_DATAREQ;
     fixture_idx = 0;
@@ -81,23 +83,23 @@ void modem_receive_message_DATAREQ_test(){
     USART0_Read_StubWithCallback(modem_test_USART0_Read_cb);
          
     ModemResponse_t* received = modem_receive_message();
-    printf("\n modem_receive_message_DATAREQ_test: operation: %d, data length: %d\n", 
+    LOG_INFO("\n modem_receive_message_DATAREQ_test: operation: %d, data length: %d\n", 
                received->operation, received->data_length);
        
     uint64_t coordinator = modem_get_coord_addr();
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected =  expected_coord >> i*16;
-        printf("modem_receive_message_DATAREQ_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        LOG_INFO("modem_receive_message_DATAREQ_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
     TEST_ASSERT_EQUAL_INT8(NODE_TOKEN_DATAREQ, received->operation);        
 
-    printf("\n modem_receive_message_DATAREQ_test: end \n");
+    LOG_INFO("\n modem_receive_message_DATAREQ_test: end \n");
 }
 
 void modem_receive_message_DATAACK_test(){
-    printf("\n modem_receive_message_DATAACK_test: begin \n");
+    LOG_INFO("\n modem_receive_message_DATAACK_test: begin \n");
     
     fixture_type = NODE_TOKEN_DATAACK;
     fixture_idx = 0;
@@ -106,23 +108,23 @@ void modem_receive_message_DATAACK_test(){
     USART0_Read_StubWithCallback(modem_test_USART0_Read_cb);
          
     ModemResponse_t* received = modem_receive_message();
-    printf("\n modem_receive_message_DATAACK_test: operation: %d, data length: %d\n", 
+    LOG_INFO("\n modem_receive_message_DATAACK_test: operation: %d, data length: %d\n", 
                received->operation, received->data_length);
        
     uint64_t coordinator = modem_get_coord_addr();
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected =  expected_coord >> i*16;
-        printf("modem_receive_message_DATAACK_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        LOG_INFO("modem_receive_message_DATAACK_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
     TEST_ASSERT_EQUAL_INT8(NODE_TOKEN_DATAACK, received->operation);        
     
-    printf("\n modem_receive_message_DATAACK_test: end \n");
+    LOG_INFO("\n modem_receive_message_DATAACK_test: end \n");
 }
 
 void modem_receive_message_NODEINTROREQ_test(){
-    printf("\n modem_receive_message_NODEINTROREQ_test: begin \n");
+    LOG_INFO("\n modem_receive_message_NODEINTROREQ_test: begin \n");
 
     fixture_type = NODE_TOKEN_NODEINTROREQ;
     fixture_idx = 0;
@@ -131,23 +133,23 @@ void modem_receive_message_NODEINTROREQ_test(){
     USART0_Read_StubWithCallback(modem_test_USART0_Read_cb);
          
     ModemResponse_t* received = modem_receive_message();
-    printf("\n modem_receive_message_NODEINTROREQ_test: operation: %d, data length: %d\n", 
+    LOG_INFO("\n modem_receive_message_NODEINTROREQ_test: operation: %d, data length: %d\n", 
                received->operation, received->data_length);
        
     uint64_t coordinator = modem_get_coord_addr();
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected =  expected_coord >> i*16;
-        printf("modem_receive_message_NODEINTROREQ_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        LOG_INFO("modem_receive_message_NODEINTROREQ_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
     TEST_ASSERT_EQUAL_INT8(NODE_TOKEN_NODEINTROREQ, received->operation);            
     
-    printf("\n modem_receive_message_NODEINTROREQ_test: end \n");
+    LOG_INFO("\n modem_receive_message_NODEINTROREQ_test: end \n");
 }
 
 void modem_receive_message_NODEINTROACK_test(){
-    printf("\n modem_receive_message_NODEINTROACK_test: begin \n");
+    LOG_INFO("\n modem_receive_message_NODEINTROACK_test: begin \n");
 
     fixture_type = NODE_TOKEN_NODEINTROACK;
     fixture_idx = 0;
@@ -156,26 +158,26 @@ void modem_receive_message_NODEINTROACK_test(){
     USART0_Read_StubWithCallback(modem_test_USART0_Read_cb);
          
     ModemResponse_t* received = modem_receive_message();
-    printf("\n modem_receive_message_NODEINTROACK_test: operation: %d, data length: %d\n", 
+    LOG_INFO("\n modem_receive_message_NODEINTROACK_test: operation: %d, data length: %d\n", 
                received->operation, received->data_length);
        
     uint64_t coordinator = modem_get_coord_addr();
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected =  expected_coord >> i*16;
-        printf("modem_receive_message_NODEINTROACK_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        LOG_INFO("modem_receive_message_NODEINTROACK_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
     TEST_ASSERT_EQUAL_INT8(NODE_TOKEN_NODEINTROACK, received->operation);            
 
     
-    printf("\n modem_receive_message_NODEINTROACK_test: end \n");
+    LOG_INFO("\n modem_receive_message_NODEINTROACK_test: end \n");
 }
 
 
 int run_modem_receive_tests(){
     UnityBegin("modem_test");
-    printf("run_modem_receive_ready_tests: begin\n");
+    LOG_INFO("run_modem_receive_ready_tests: begin\n");
     
     RUN_TEST(modem_receive_message_DATAREQ_test);
     RUN_TEST(modem_receive_message_DATAACK_test);
@@ -184,7 +186,7 @@ int run_modem_receive_tests(){
     
 
     UnityEnd();
-    printf("run_modem_receive_ready_tests: end\n\n");
+    LOG_INFO("run_modem_receive_ready_tests: end\n\n");
     return 0;   
  
 }

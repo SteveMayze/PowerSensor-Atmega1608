@@ -1,11 +1,13 @@
 
+#include "../build-config.h"
+
 #include "unity.h"
 #include "modem_send_test.h"
 #include "../modem.h"
 #include "../mocks/Mockusart0.h"
 #include "../libavrxbee/xbee.h"
 #include "test_common.h"
-
+#include <string.h>
 
 /**
  * On wake, the node needs to toggle the reset and then
@@ -20,7 +22,7 @@
 
 
 void initialise_modem_test(){
-    printf("\n initialise_modem_test: begin \n");
+    LOG_INFO("initialise_modem_test: begin \n");
     
     // The broadcast address is set on the initial start up of the system
     // this enables the system to connect to the nearest available coordinator
@@ -29,7 +31,7 @@ void initialise_modem_test(){
     
     uint64_t coordinator = modem_get_coord_addr();
     
-    printf("initialise_modem_test: Coordinator Address: %04X %04X %04X %04X\n", 
+    LOG_INFO("initialise_modem_test: Coordinator Address: %04X %04X %04X %04X\n", 
             (uint16_t)(coordinator >> 48)&0xFFFF, 
             (uint16_t)(coordinator >> 32)&0xFFFF, 
             (uint16_t)(coordinator >> 16)&0xFFFF, 
@@ -38,90 +40,73 @@ void initialise_modem_test(){
     for(uint8_t i = 0; i<4; i++){
         uint16_t actual = coordinator >> i*16;
         uint16_t expected = XBEE_ADDR_BROADCAST >> i*16;
-        printf("initialise_modem_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
+        LOG_INFO("initialise_modem_test: Group: %d, expected: %04X, actual: %04X \n", i, expected, actual );
         
         TEST_ASSERT_EQUAL_INT16(expected, actual);        
     }
-    printf("\n initialise_modem_test: end \n");
+    LOG_INFO("\n initialise_modem_test: end \n");
 }
 
 uint8_t ready_fixture[31] = {   
-    0x7E, 0x00, 0x1B, 0x10, 0x01, 0x00, 0x00, 0x00, 
+    0x7E, 0x00, 0x1B, 0x10, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFE, 0x00, 
     0x00, 0x11, 0x21, 0x12, 0x02, 0xC0, 0x2B, 0xE2, 
-    0x09, 0xC0, 0x2D, 0xE2, 0x07, 0xC0, 0x41,
+    0x09, 0xC0, 0x2D, 0xE2, 0x07, 0xC0, 0x42,
 };
 
 void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
-    printf("modem_test_USART0_Write %d, %02X \n", call_count, data);
+    LOG_INFO("modem_test_USART0_Write %d, %02X \n", call_count, data);
     actual[actual_idx++] = data;
 }
 
 
  void modem_send_message_READY_test(){
-    printf("\n modem_send_message_READY_test: begin \n");
+    LOG_INFO("modem_send_message_READY_test: begin \n");
     actual_idx = 0;
      
     uint8_t *sid_ = get_test_sid();
      
     USART0_Write_StubWithCallback(modem_test_USART0_Write_cb);
      
-
-    printf("ready_fixture=\t");
-    for(uint8_t i=0; i<31;i++ ){
-        printf("0x%02X, ", ready_fixture[i]);
-        expected[i] = ready_fixture[i];
-    }
-    printf("\n");    
+    LOG_BYTE_STREAM("ready_fixture=\t", ready_fixture, 31);
+    memcpy(expected, ready_fixture, 31);
      
     modem_test_message = node_create_message(NODE_TOKEN_READY, sid_);
     // Operation token, operation, sid
     modem_test_message->data_length = 0;
     
     uint8_t size = node_message_to_stream(modem_test_message, payload);
-    printf("payload size=\t%d \n", size);
+    LOG_INFO("payload size=\t%d \n", size);
 
     modem_send_message(payload, size);
     TEST_ASSERT_EQUAL(31, actual_idx); 
-    printf("expected=\t");
-    for(uint8_t i=0; i<31;i++ ){
-        printf("0x%02X, ", expected[i]);
-    }
-    printf("\n");    
-    printf("  actual=\t");
-    for(uint8_t i=0; i<31;i++ ){
-        printf("0x%02X, ", actual[i]);
-    }
-    printf("\n");
+    
+    LOG_BYTE_STREAM("expected=\t", expected, 31);
+    LOG_BYTE_STREAM("  actual=\t", actual, 31);
     
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, actual_idx);
-    printf("\n modem_send_message_READY_test: end \n");
+    LOG_INFO("\n modem_send_message_READY_test: end \n");
      
  }
  
  
      uint8_t data_fixture[46] = {
-        0x7E, 0x00, 0x2A, 0x10, 0x01, 0x00, 0x00, 0x00, 
+        0x7E, 0x00, 0x2A, 0x10, 0x00, 0x00, 0x00, 0x00, 
         0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFE, 0x00, 
         0x00, 0x11, 0x23, 0x12, 0x02, 0xC0, 0x2B, 0xE2, 
         0x09, 0xC0, 0x2D, 0xE2, 0x07, 0xC0, 0x31, 0x00, 
         0x00, 0x28, 0x41, 0x32, 0xCD, 0xCC, 0x4C, 0x3E, 
-        0x33, 0x00, 0x00, 0xC0, 0x3F, 0x1E};
+        0x33, 0x00, 0x00, 0xC0, 0x3F, 0x1F};
 
  void modem_send_message_DATA_test(){
-    printf("\n modem_send_message_DATA_test: begin \n");
+    LOG_INFO("\n modem_send_message_DATA_test: begin \n");
     actual_idx = 0;
      
     USART0_Write_StubWithCallback(modem_test_USART0_Write_cb);
      
+    LOG_BYTE_STREAM("data_fixture=\t", data_fixture, 46);
+    memcpy(expected, data_fixture, 46);
 
-    printf("data_fixture=\t");
-    for(uint8_t i=0; i<46;i++ ){
-        printf("0x%02X, ", data_fixture[i]);
-        expected[i] = data_fixture[i];
-    }
-    printf("\n");    
-     
     modem_test_message = node_create_message(NODE_TOKEN_DATA, get_test_sid());
     
     modem_test_message->data_length = 3;
@@ -133,28 +118,22 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
     modem_test_message->data_value[2] = (float)1.5;    
        
     uint8_t size = node_message_to_stream(modem_test_message, payload);
-    printf("payload size=\t%d \n", size);
+    LOG_INFO("payload size=\t%d \n", size);
 
     modem_send_message(payload, size);
     TEST_ASSERT_EQUAL(46, actual_idx);    
-    printf("expected=\t");
-    for(uint8_t i=0; i<46;i++ ){
-        printf("0x%02X, ", expected[i]);
-    }
-    printf("\n");    
-    printf("  actual=\t");
-    for(uint8_t i=0; i<46;i++ ){
-        printf("0x%02X, ", actual[i]);
-    }
-    printf("\n");
+    
+    LOG_BYTE_STREAM("expected=\t", expected, 46);
+    LOG_BYTE_STREAM("  actual=\t", actual, 46);
+    
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, actual_idx);
-    printf("\n modem_send_message_DATA_test: end \n");
+    LOG_INFO("\n modem_send_message_DATA_test: end \n");
      
  }
  
  
   uint8_t nodeintro_fixture[41] = {
-    0x7E, 0x00, 0x25, 0x10, 0x01, 0x00, 0x00, 0x00, 
+    0x7E, 0x00, 0x25, 0x10, 0x00, 0x00, 0x00, 0x00, 
     0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFE, 0x00, 0x00, 
     NODE_TOKEN_HEADER_OPERATION, NODE_TOKEN_NODEINTRO,
     NODE_TOKEN_HEADER_SERIAL_ID, 0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0,
@@ -162,28 +141,21 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
     NODE_TOKEN_HEADER_CLASS, NODE_METADATA_CLASS_SENSOR,
     NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_BUS_VOLTAGE,
     NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_SHUNT_VOLTAGE,
-    NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_LOAD_CURRENT, 0x5B,
+    NODE_TOKEN_PROPERTY, NODE_TOKEN_PROPERTY_LOAD_CURRENT, 0x5E,
   };
   
   
  void modem_send_message_NODEINTRO_test(){
-    printf("\n modem_send_message_NODEINTRO_test: begin \n");
+    LOG_INFO("\n modem_send_message_NODEINTRO_test: begin \n");
     actual_idx = 0;
     uint8_t payload_length = 41;
     uint8_t *sid_ = get_test_sid();
      
     USART0_Write_StubWithCallback(modem_test_USART0_Write_cb);
      
-   
+    LOG_BYTE_STREAM("nodeintro_fixture=\t", nodeintro_fixture, payload_length);
+    memcpy(expected, nodeintro_fixture, payload_length);
 
-    printf("nodeintro_fixture=\t");
-    for(uint8_t i=0; i<payload_length;i++ ){
-        printf("0x%02X, ", nodeintro_fixture[i]);
-        expected[i] = nodeintro_fixture[i];
-    }
-    printf("\n");    
-     
-   
     Node_Message_t *modem_test_message = node_create_message(NODE_TOKEN_NODEINTRO, sid_);
     modem_test_message->data_length = 5;
     modem_test_message->data_token[0]=NODE_TOKEN_HEADER_DOMAIN;
@@ -201,19 +173,13 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
     uint8_t size = node_message_to_stream(modem_test_message, payload);
 
     modem_send_message(payload, size);
-    TEST_ASSERT_EQUAL(payload_length, actual_idx);    
-    printf("expected=\t");
-    for(uint8_t i=0; i<payload_length;i++ ){
-        printf("0x%02X, ", expected[i]);
-    }
-    printf("\n");    
-    printf("  actual=\t");
-    for(uint8_t i=0; i<payload_length;i++ ){
-        printf("0x%02X, ", actual[i]);
-    }
-    printf("\n");
+    TEST_ASSERT_EQUAL(payload_length, actual_idx);
+    
+    LOG_BYTE_STREAM("expected=\t", expected, payload_length);
+    LOG_BYTE_STREAM("  actual=\t", actual, payload_length);
+
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, actual_idx);
-    printf("\n modem_send_message_NODEINTRO_test: end \n");
+    LOG_INFO("modem_send_message_NODEINTRO_test: end \n");
      
  }
  
@@ -235,7 +201,7 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
  */
 int run_modem_send_tests(){
     UnityBegin("modem_test");
-    printf("run_modem_send_ready_tests: begin\n");
+    LOG_INFO("run_modem_send_ready_tests: begin\n");
     
     RUN_TEST(initialise_modem_test);
     
@@ -244,7 +210,7 @@ int run_modem_send_tests(){
     RUN_TEST(modem_send_message_NODEINTRO_test);
 
     UnityEnd();
-    printf("run_modem_send_ready_tests: end\n\n");
+    LOG_INFO("run_modem_send_ready_tests: end\n\n");
     return 0;   
  
 }

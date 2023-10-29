@@ -1,13 +1,9 @@
+#include "../build-config.h"
 
 #include "../mcc_generated_files/mcc.h"
 #include "../mcc_generated_files/include/twi0_master.h"
 #include "INA219.h"
 #include "util/delay.h"
-
-// #define LOGGER_DEBUG
-#define LOGGER_INFO
-
-#include "../logger.h"
 
 void INA219_set_read_callback(twi0_callback_t callback);
 void INA219_set_restartwrite_callback(twi0_callback_t callback);

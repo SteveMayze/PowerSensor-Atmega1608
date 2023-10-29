@@ -12,32 +12,45 @@
 extern "C" {
 #endif
 
-
-#ifdef LOGGER_DEBUG
-    #define LOG_DEBUG(args...) printf(args)
-#else
- #define LOG_DEBUG(args...) 
-#endif
-
-#if defined(LOGGER_INFO)
-    #define LOG_INFO(args...) printf(args)
-#else
- #define LOG_INFO(args...) 
-#endif
-
-#define LOG_ERROR(args...) printf(args)
+   
+#define LOGGER_LEVEL_OFF 0
+#define LOGGER_LEVEL_ERROR 1
+#define LOGGER_LEVEL_INFO 2
+#define LOGGER_LEVEL_DEBUG 4
+#define LOGGER_LEVEL_ALL 7
     
-#if defined(LOGGER_DEBUG) || defined(LOGGER_INFO)    
-#define LOG_BYTE_STREAM(prefix, byte_stream, stream_size) { \
-    LOG_INFO(prefix);                                      \
-    for(int idx = 0; idx<stream_size; idx++) {              \
-        LOG_INFO("%02X ", byte_stream[idx]);               \
-    }                                                       \
-    LOG_INFO("\n");                                        \
-} 
+    
+#if defined(LOGGER_LEVEL) && LOGGER_LEVEL > LOGGER_LEVEL_OFF
+    #define LOG_ERROR(args...) {printf("ERROR: "); printf(args); }
 #else
-#define LOG_BYTE_STREAM(prefix, byte_stream, stream_size)
+    #define LOG_ERROR(args...)
 #endif
+
+#if defined(LOGGER_LEVEL) && LOGGER_LEVEL > LOGGER_LEVEL_ERROR
+    #define LOG_INFO(args...) {printf("INFO: "); printf(args); }
+#else
+    #define LOG_INFO(args...) 
+#endif
+
+
+#if defined(LOGGER_LEVEL) && LOGGER_LEVEL > LOGGER_LEVEL_INFO 
+    #define LOG_DEBUG(args...) {printf("DEBUG: "); printf(args); }
+#else
+    #define LOG_DEBUG(args...) 
+#endif
+
+    
+#if defined(LOGGER_LEVEL) && LOGGER_LEVEL > LOGGER_LEVEL_ERROR
+    #define LOG_BYTE_STREAM(prefix, byte_stream, stream_size) { \
+        LOG_INFO(prefix);                                      \
+        for(int idx = 0; idx<stream_size; idx++) {              \
+            printf("%02X ", byte_stream[idx]);               \
+        }                                                       \
+        printf("\n");                                        \
+    } 
+    #else
+        #define LOG_BYTE_STREAM(prefix, byte_stream, stream_size)
+    #endif
     
 
 #ifdef	__cplusplus

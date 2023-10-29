@@ -1,3 +1,6 @@
+
+#include "../build-config.h"
+
 #include "node_init_test.h"
 #include "unity.h"
 #include "../node.h"

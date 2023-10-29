@@ -1,3 +1,6 @@
+
+#include "../build-config.h"
+
 #include "node_basic_test.h"
 #include "unity.h"
 #include "../node.h"
@@ -10,16 +13,16 @@ void send_message_callback(unsigned char* node_message, uint8_t data_length, int
     uint8_t operation = node_message[1];
     switch(operation){
         case NODE_TOKEN_READY:
-            printf("send_message_callback: NODE_TOKEN_READY call_count: %d \n", call_count);
+            LOG_INFO("send_message_callback: NODE_TOKEN_READY call_count: %d \n", call_count);
             break;
         case NODE_TOKEN_DATA:
-            printf("send_message_callback: NODE_TOKEN_DATA call_count: %d \n", call_count);
+            LOG_INFO("send_message_callback: NODE_TOKEN_DATA call_count: %d \n", call_count);
             break;
         case NODE_TOKEN_NODEINTRO:
-            printf("send_message_callback: NODE_TOKEN_NODEINTRO call_count: %d \n", call_count);
+            LOG_INFO("send_message_callback: NODE_TOKEN_NODEINTRO call_count: %d \n", call_count);
             break;
         default:
-            printf("send_message_callback: UNKNOWN call_count: %d \n", call_count);
+            LOG_INFO("send_message_callback: UNKNOWN call_count: %d \n", call_count);
             break;
     }
     
@@ -44,7 +47,7 @@ void ready_datareq_dataack_test(){
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    printf("\nready_datareq_dataack_test: READY DATAREQ DATAACK message test\n");
+    LOG_INFO("ready_datareq_dataack_test: READY DATAREQ DATAACK message test\n");
     ModemResponse_t* datareq_response_ptr = get_dataReq_response();    
     ModemResponse_t* dataack_response_ptr = get_dataack_response();
     
@@ -65,7 +68,7 @@ void ready_datareq_dataack_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
-    printf("\n ready_datareq_dataack_test: Testing the send operation for READY\n");
+    LOG_INFO("ready_datareq_dataack_test: Testing the send operation for READY\n");
     node_set_timeout(0x000F);
     fsm_set_event_callback(FSM_DATAREQ, test_handle_datareq_response);
     fsm_set_event_callback(FSM_DATAACK, test_handle_dataack_response);
@@ -96,7 +99,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    printf("\nready_nodeintroreq_nodeintroack_test: READY NODEINTROREQ NODEINTROACK message test\n");
+    LOG_INFO("ready_nodeintroreq_nodeintroack_test: READY NODEINTROREQ NODEINTROACK message test\n");
     ModemResponse_t* nodeintroreq_response_ptr = get_nodeintroreq_response();    
     ModemResponse_t* nodeintroack_response_ptr = get_nodeintroack_response();
     
@@ -117,7 +120,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 5);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_DATA, actual->operation);
     
-    printf("\n ready_nodeintroreq_nodeintroack_test: Testing the send operation for READY \n");
+    LOG_INFO("ready_nodeintroreq_nodeintroack_test: Testing the send operation for READY \n");
     node_set_timeout(0x000F);
     
     // fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
@@ -151,7 +154,7 @@ void node_timeout_test(){
     // For READY, the payload is empty.
     // This is where I need to refer to the Python gateway for the 
     // structure.
-    printf("\nnode_timeout_test: TIMEOUT message test\n");
+    LOG_INFO("node_timeout_test: TIMEOUT message test\n");
 
     modem_open_Expect(XBEE_ADDR_BROADCAST);
     modem_close_Expect();
@@ -165,7 +168,7 @@ void node_timeout_test(){
     TEST_ASSERT_EQUAL_HEX8_ARRAY(get_test_sid(), actual->sid, 10);  
     TEST_ASSERT_EQUAL(NODE_TOKEN_READY, actual->operation);
     
-    printf("\nnode_timeout_test: Testing the timeout operation\n");
+    LOG_INFO("node_timeout_test: Testing the timeout operation\n");
     node_set_timeout(0x0002);
     fsm_set_event_callback(FSM_TIMEOUT, test_handle_timeout);
 
@@ -198,15 +201,15 @@ void node_timeout_test(){
 int run_node_basic_tests(){
     UnityBegin("run_node_basic_tests");
     
-    printf("\n\n================ ready_datareq_dataack_test ===================\n\n");
+    LOG_INFO("\n\n================ ready_datareq_dataack_test ===================\n\n");
     
     RUN_TEST(ready_datareq_dataack_test);
     
-    printf("\n\n================ready_nodeintroreq_nodeintroack_test ===================\n\n");
+    LOG_INFO("\n\n================ready_nodeintroreq_nodeintroack_test ===================\n\n");
 
     RUN_TEST(ready_nodeintroreq_nodeintroack_test);
 
-    printf("\n\n=============== ready_nodeintroreq_nodeintroack_test ====================\n\n");
+    LOG_INFO("\n\n=============== ready_nodeintroreq_nodeintroack_test ====================\n\n");
 
     RUN_TEST(node_timeout_test);
     

@@ -1,4 +1,6 @@
 
+#include "../build-config.h"
+
 #include <stdlib.h>
 
 #include "test_common.h"
@@ -6,8 +8,6 @@
 #include "../mocks/Mockmodem.h"
 #include "../mocks/Mockeprom.h"
 #include "../mocks/MockINA219.h"
-
-
 
 uint8_t node_test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 bool datareq_response_flag = false;
@@ -66,7 +66,7 @@ INA219_Data_t *get_ina219_data(){
 }
 
 ModemResponse_t *get_dataReq_response(){
-    printf("get_dataReq_response: Response NODE_TOKEN_DATAREQ\n");
+    LOG_INFO("get_dataReq_response: Response NODE_TOKEN_DATAREQ\n");
     node_create_message(NODE_TOKEN_DATA, get_test_sid());
     datareq_response.frame_type = 0x90;
     datareq_response.operation = NODE_TOKEN_DATAREQ;  
@@ -74,28 +74,28 @@ ModemResponse_t *get_dataReq_response(){
 }
 
 ModemResponse_t *get_dataack_response(){
-    printf("get_dataack_response: response: NODE_TOKEN_DATAACK\n");
+    LOG_INFO("get_dataack_response: response: NODE_TOKEN_DATAACK\n");
     dataack_response.frame_type = 0x90;
     dataack_response.operation = NODE_TOKEN_DATAACK;
     return &dataack_response;
 }
 
 ModemResponse_t *get_nodeintroreq_response(){
-    printf("get_nodeintroreq_response: response: ... \n");
+    LOG_INFO("get_nodeintroreq_response: response: ... \n");
     nodeintroreq_response.frame_type = 0x90;
     nodeintroreq_response.operation = NODE_TOKEN_NODEINTROREQ;
     return &nodeintroreq_response;
 }
 
 ModemResponse_t *get_nodeintroack_response(){
-    printf("get_nodeintroack_response: response: ... \n");
+    LOG_INFO("get_nodeintroack_response: response: ... \n");
     nodeintroack_response.frame_type = 0x90;
     nodeintroreq_response.operation = NODE_TOKEN_NODEINTROACK;
     return &nodeintroack_response;
 }
 
 void test_handle_datareq_response(){
-    printf("test_handle_datareq_response: Handle DATAREQ - Collect and send information \n");
+    LOG_INFO("test_handle_datareq_response: Handle DATAREQ - Collect and send information \n");
     // Collect the data from the INA219
     // node_create_message(NODE_TOKEN_DATA, get_test_sid());
     // ModemResponse_t *msg = get_dataReq_response();
@@ -103,23 +103,23 @@ void test_handle_datareq_response(){
 }
 
 void test_handle_dataack_response(){
-    printf("test_handle_dataack_response: Handle DATAACK - Success. Go back to sleep \n");
+    LOG_INFO("test_handle_dataack_response: Handle DATAACK - Success. Go back to sleep \n");
     dataack_response_flag = true;
 }
 
 void test_handle_nodeintroreq_response(){
-    printf("test_handle_nodeintroreq_response: Handle NODEINTROREQ - Collect the details of the node and send \n");
+    LOG_INFO("test_handle_nodeintroreq_response: Handle NODEINTROREQ - Collect the details of the node and send \n");
     node_create_message(NODE_TOKEN_NODEINTRO, get_test_sid());
     nodeintroreq_response_flag = true;
 }
 
 void test_handle_nodeintroack_response(){
-    printf("test_handle_nodeintroack_response: Handle NODEINTROACK - Success. Go back to sleep \n");
+    LOG_INFO("test_handle_nodeintroack_response: Handle NODEINTROACK - Success. Go back to sleep \n");
     nodeintroack_response_flag = true;
 }
 
 void test_handle_timeout(){
-    printf("test_handle_timeout: Handle timeout \n");
+    LOG_INFO("test_handle_timeout: Handle timeout \n");
     timeout_response_flag = true;
 }
 

@@ -1,11 +1,10 @@
+#include "build-config.h"
 
 #include "modem.h"
 #include "mcc_generated_files/include/usart0.h"
 #include <string.h>
-#include <util/delay.h>
 
-#define LOGGER_INFO
-// #define LOGGER_DEBUG
+#include <util/delay.h>
 
 #include "logger.h"
 

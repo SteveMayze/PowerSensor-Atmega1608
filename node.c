@@ -1,3 +1,4 @@
+#include "build-config.h"
 
 #include "node.h"
 #include "sensor_core.h"
@@ -5,14 +6,8 @@
 #include <string.h>
 #include "modem.h"
 
-#ifndef F_CPU
-#define F_CPU 1000000UL
-#endif
 
 #include <util/delay.h>
-
-#define LOGGER_INFO
-// #define LOGGER_DEBUG
 
 #include "logger.h"
 
