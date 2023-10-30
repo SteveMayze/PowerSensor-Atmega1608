@@ -15,7 +15,7 @@ void ina219_initialise_default_profile_test(void) {
 
     LOG_INFO("ina219_initialise_default_profile_test default profile: start\n");
     
-    uint8_t expected_cal[3] = {INA219_CAL, 0x00, 0x10};
+    uint8_t expected_cal[3] = {INA219_CAL, 0x99, 0x01};
     uint8_t expected_cfg[3] = {INA219_CFG, 0x39, 0x9F};
     
     // CALIBRATION
@@ -55,7 +55,7 @@ void ina219_initialise_default_profile_test(void) {
 void ina219_initialise_large_profile_test(void) {
 
     LOG_INFO("ina219_initialise_large_profile_test large profile: start\n");
-    uint8_t expected_cal[3] = {INA219_CAL, 0x74, 0x91};
+    uint8_t expected_cal[3] = {INA219_CAL, 0x99, 0x01};
     uint8_t expected_cfg[3] = {INA219_CFG, 0x39, 0x9F};
     
     // CALIBRATION
@@ -96,7 +96,7 @@ void ina219_initialise_large_profile_test(void) {
 void ina219_initialise_small_profile_test(void) {
 
     LOG_INFO("ina219_initialise_small_profile_test small profile: start\n");
-    uint8_t expected_cal[3] = {INA219_CAL, 0xF4, 0x0E};
+    uint8_t expected_cal[3] = {INA219_CAL, 0x99, 0x01};
     uint8_t expected_cfg[3] = {INA219_CFG, 0x18, 0x8F};
     
     // CALIBRATION

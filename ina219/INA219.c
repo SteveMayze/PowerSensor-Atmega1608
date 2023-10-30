@@ -13,10 +13,9 @@ void INA219_set_restartwrite_callback(twi0_callback_t callback);
   uint16_t ina219_configuration;
 
 INA219_Data_t INA219_Data;
-        
-
 
 uint8_t write_buffer[3];
+
 union read_buffer_t {
     float bitFloat;
     uint16_t bit16;
@@ -157,21 +156,23 @@ INA219_Data_t* INA219_get_all_readings() {
     INA219_Data.current = 0.0;
     INA219_Data.power = 0.0;
 
-    LOG_DEBUG("INA219_get_all_readings: get INA219_BUS_VOLTAGE\n");
     INA219_Data.raw_bus_voltage = read_register_value(INA219_BUS_VOLTAGE, false);
     INA219_Data.bus_voltage = (float) ((float)(INA219_Data.raw_bus_voltage >> 3) * 0.004);
+    LOG_DEBUG("INA219_get_all_readings: INA219_BUS_VOLTAGE raw: %04X converted: %08X \n", INA219_Data.raw_bus_voltage, (uint16_t)INA219_Data.bus_voltage );
     
-    LOG_DEBUG("INA219_get_all_readings: get INA219_SHUNT_VOLTAGE\n");
     INA219_Data.raw_shunt_voltage = read_register_value(INA219_SHUNT_VOLTAGE, false);
     INA219_Data.shunt_voltage = ((float)INA219_Data.raw_shunt_voltage * 0.000010);
+    LOG_DEBUG("INA219_get_all_readings: INA219_SHUNT_VOLTAGE raw: %04X converted: %08X \n", INA219_Data.raw_shunt_voltage, (uint16_t)INA219_Data.shunt_voltage );
 
-    LOG_DEBUG("INA219_get_all_readings: get INA219_CURRENT\n");
     INA219_Data.raw_current = read_register_value(INA219_CURRENT, true);
     INA219_Data.current = ((float) INA219_Data.raw_current /1000);
+    LOG_DEBUG("INA219_get_all_readings: INA219_CURRENT raw: %04X converted: %08X \n", INA219_Data.raw_current, (uint16_t)INA219_Data.current );
     
     LOG_DEBUG("INA219_getReadings: get INA219_POWER\n");
     INA219_Data.raw_power = read_register_value(INA219_POWER, true);
     INA219_Data.power = ((float) INA219_Data.raw_power * 0.02);
+    LOG_DEBUG("INA219_get_all_readings: INA219_POWER raw: %04X converted: %08X \n", INA219_Data.raw_power, (uint16_t)INA219_Data.power );
+
     LOG_DEBUG("INA219_getReadings: end\n");
 
     return &INA219_Data;
@@ -212,7 +213,7 @@ static void INA219_DEFAULT_CONFIG(void){
     ina219_configuration = 0x00;
     ina219_configuration = INA219_BRNG_32V | INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
-    ina219_calibration = 0x399F;
+    ina219_calibration = 0x0199;
     LOG_DEBUG("INA219_DEFAULT_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
@@ -241,7 +242,7 @@ static void INA219_20V_15A_CONFIG(void){
     ina219_configuration = 0x00;
     ina219_configuration = INA219_BRNG_32V | INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
-    ina219_calibration = 0x9174;
+    ina219_calibration = 0x0199;
     LOG_DEBUG("INA219_20V_15A_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
@@ -269,7 +270,7 @@ static void INA219_12V_3A_CONFIG(void){
     ina219_configuration = 0x00;
     ina219_configuration = INA219_PGA_8 | INA219_BADC_12_BIT | 
                            INA219_SADC_12_BIT | INA219_MODE_CNT_SHB;
-    ina219_calibration = 0x0EF4;
+    ina219_calibration = 0x0199;
     LOG_DEBUG("INA219_12V_3A_CONFIG: End configuration: %02x, calibration: %02x\n", ina219_configuration, ina219_calibration);
 }
 
