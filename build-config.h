@@ -29,7 +29,7 @@ extern "C" {
     #ifndef LOGGER_LEVEL
         #define LOGGER_LEVEL LOGGER_LEVEL_INFO
     #endif
-    #define F_CPU 10000000UL
+    #define F_CPU 20000000UL
 #endif
 
     

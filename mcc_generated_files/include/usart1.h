@@ -45,7 +45,7 @@ extern "C" {
 #endif
 
 /* Normal Mode, Baud register value */
-#define USART1_BAUD_RATE(BAUD_RATE) (((float)10000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
+#define USART1_BAUD_RATE(BAUD_RATE) (((float)20000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
 /**
  * \brief Initialize USART interface

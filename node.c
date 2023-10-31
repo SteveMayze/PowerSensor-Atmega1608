@@ -170,7 +170,7 @@ static FSM_States_t FSM_READY_STATE(uint8_t count) {
 
        modem_send_message(payload, size);
     } else {
-        LOG_INFO("FSM_READY_STATE: Waiting for a response \n");
+        LOG_DEBUG("FSM_READY_STATE: Waiting for a response \n");
     }
     // handle the response based on a request or a timeouts
     LOG_DEBUG("FSM_READY_STATE: Checking for a response \n");
@@ -206,7 +206,7 @@ static FSM_States_t FSM_READY_STATE(uint8_t count) {
             LOG_DEBUG("FSM_READY_STATE: Unsupported message.\n");
         }
     }
-    LOG_INFO("FSM_READY_STATE: End with state: %02X \n", node_state.state);
+    LOG_DEBUG("FSM_READY_STATE: End with state: %02X \n", node_state.state);
     return node_state.state;
 }
 
@@ -372,6 +372,6 @@ uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream)
 }
 
 void node_timeout_callback(void){
-    LOG_DEBUG("test_handle_timeout: Handle timeout \n");
+    LOG_INFO("node_timeout_callback: Receive message timeout \n");
 }
    

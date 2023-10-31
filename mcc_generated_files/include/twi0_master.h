@@ -44,7 +44,7 @@ extern "C" {
 #endif
 
 #define TWI0_BAUD(F_SCL, T_RISE)    \
-    ((((((float)10000000 / (float)F_SCL)) - 10 - ((float)10000000 * T_RISE / 1000000))) / 2)
+    ((((((float)20000000 / (float)F_SCL)) - 10 - ((float)20000000 * T_RISE / 1000000))) / 2)
 
 
 typedef enum {
