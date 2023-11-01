@@ -1,13 +1,12 @@
 
+ #define LOGGER_LEVEL 2
+
 #include "build-config.h"
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
 #include "node.h"
 #include "eprom.h"
 
-
-
-#include "logger.h"
 #include <avr/sleep.h>
 
 volatile bool tick;
@@ -40,8 +39,8 @@ int main(void)
     while(1){
         
         /* Put the CPU in sleep */
-        for(uint8_t i = 0; i < 4; i++){
-            sleep_mode(); // 8 ~second sleep
+        for(uint8_t i = 0; i < 2; i++){
+            sleep_mode(); // 30 ~second sleep
         }
         
         if (tick){

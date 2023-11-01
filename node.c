@@ -1,3 +1,4 @@
+
 #include "build-config.h"
 
 #include "node.h"
@@ -50,8 +51,8 @@ static stateHandlerFunction *fsm_state_table[] = {
  */
 Error_t node_intitialise() {
 
-    MODEM_RESET_SetHigh();    
-
+    modem_initialise();
+    
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;

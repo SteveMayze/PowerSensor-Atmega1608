@@ -71,8 +71,8 @@ int8_t RTC_Initialize()
     //PI disabled; 
     RTC.PITINTCTRL = 0x00;
         
-    //PERIOD CYC8192; PITEN enabled; 
-    RTC.PITCTRLA = 0x61;
+    //PERIOD CYC32768; PITEN enabled; 
+    RTC.PITCTRLA = 0x71;
      
     return 0;
 }

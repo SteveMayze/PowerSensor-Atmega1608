@@ -72,7 +72,9 @@ extern "C" {
         uint8_t *data;
         
     } ModemResponse_t;
-
+    
+    void modem_initialise();
+    
     void modem_open(uint64_t coordinator);
     
     void modem_close(void);

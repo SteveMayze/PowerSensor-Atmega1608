@@ -700,7 +700,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name PD1"/>
-         <value/>
+         <value>MODEM_SLEEP</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name PD2"/>
@@ -808,7 +808,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="DIR_PD1"/>
-         <value>false</value>
+         <value>true</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="DIR_PD2"/>
@@ -1024,7 +1024,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="PD1"/>
-         <value>disabled</value>
+         <value>output</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="PD2"/>
@@ -1132,7 +1132,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet PD1"/>
-         <value>disabled</value>
+         <value>enabled</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="customNameUserSet PD2"/>
@@ -3824,7 +3824,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="PORTD.DIR"/>
-         <value>1</value>
+         <value>3</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="PORTD.DIRCLR"/>
@@ -4592,7 +4592,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="PORTD.DIR" settingAlias="PORTD.DIR"/>
-         <value>1</value>
+         <value>3</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="PORTD.DIRCLR" settingAlias="PORTD.DIRCLR"/>
@@ -5376,7 +5376,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="RTC" name="periodSelection"/>
-         <value>RTC Clock Cycles 8192</value>
+         <value>RTC Clock Cycles 32768</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="RTC" name="period_MAX"/>
@@ -5672,7 +5672,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="RTC" registerAlias="PITCTRLA"/>
-         <value>97</value>
+         <value>113</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="RTC" registerAlias="PITDBGCTRL"/>
@@ -5764,7 +5764,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="RTC" registerAlias="PITCTRLA" settingAlias="PERIOD"/>
-         <value>CYC8192</value>
+         <value>CYC32768</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="RTC" registerAlias="PITCTRLA" settingAlias="PITEN"/>
@@ -8386,7 +8386,7 @@
    <generatedFileHashHistoryMap class="java.util.HashMap">
       <entry>
          <file>mcc_generated_files\include\pin_manager.h</file>
-         <hash>49cbaed2836ed7925230b80b11b111264eeac4b0b074431a2c57524e240e225d</hash>
+         <hash>ae3cfe51dd143cc95fc5cccbd1fdb7af7aafe4bd6e0efe7e273dfa054e21a4ed</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\src\protected_io.S</file>
@@ -8406,19 +8406,19 @@
       </entry>
       <entry>
          <file>mcc_generated_files\src\pin_manager.c</file>
-         <hash>03e498ca8fb8d96f56df86c99e8d8dfc03373b797e87e33493e61d3600217cd2</hash>
+         <hash>f61885554fc76801a6f1b1b52dbe21eb96f46547c90ad6289080db0674476cac</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\utils\atomic.h</file>
          <hash>80e018fe02cd0c54394bb9a54dcf927d346410567dc6dded62bea9b49e322acf</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\utils\interrupt_avr8.h</file>
-         <hash>98adc596175f2e76d4d918685cf050032a3efb605901edb6be0a35dda05a57e9</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\src\cpuint.c</file>
          <hash>f9b05fddddeabf0ade976e485b8adaddad2516e86dfa428741fd8ea920e07f2f</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\utils\interrupt_avr8.h</file>
+         <hash>98adc596175f2e76d4d918685cf050032a3efb605901edb6be0a35dda05a57e9</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\include\rtc.h</file>
@@ -8430,7 +8430,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\src\rtc.c</file>
-         <hash>e67ddff32bc09bc69ef41bf1234b339808bf12229bc4c342e88e8f0045d7baee</hash>
+         <hash>f3967e6a418a4abbf147825ce2f939eb92c9cf29169476e52bd81f89315a93e3</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\include\ccp.h</file>
@@ -8442,7 +8442,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.c</file>
-         <hash>ec480d401c88a354f148fd69fc9e9bfbd8edd29dd6eca872475c00592c3e198a</hash>
+         <hash>0b9e03affc4258c60b8a89f9a9fe68435129e5c434eee144944c7df3ce56f870</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\src\usart1.c</file>
@@ -8462,7 +8462,7 @@
       </entry>
       <entry>
          <file>mcc_generated_files\mcc.h</file>
-         <hash>04d87fc1a5021f7279764599035453a194db948116ddd0ae1fa42dd515f24843</hash>
+         <hash>ade43b9d28a7164a157433e8b848f29f63fd464b7846c22e61c675262cd5317b</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\src\usart0.c</file>
@@ -8489,12 +8489,12 @@
          <hash>002db199835943a5e634d5e9904119d0f50eb94af5300454791a93c81c5353b7</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\include\rstctrl.h</file>
-         <hash>3aaf94dcc7f4f51ce811c4b290f1dbcd29748fb231cb4d3e7f27f49586651c83</hash>
-      </entry>
-      <entry>
          <file>mcc_generated_files\include\cpuint.h</file>
          <hash>802591ef9a8f76d82a9ebdd96dac4c62c9a3c56d991188efaebd5ec3ca4228e2</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\include\rstctrl.h</file>
+         <hash>3aaf94dcc7f4f51ce811c4b290f1dbcd29748fb231cb4d3e7f27f49586651c83</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\include\usart0.h</file>

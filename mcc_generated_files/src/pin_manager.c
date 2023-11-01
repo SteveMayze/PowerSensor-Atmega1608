@@ -38,6 +38,7 @@ static void (*PORTA_PA4_InterruptHandler)(void);
 static void (*PORTA_PA3_InterruptHandler)(void);
 static void (*PORTA_PA5_InterruptHandler)(void);
 static void (*PORTA_PA7_InterruptHandler)(void);
+static void (*PORTD_MODEM_SLEEP_InterruptHandler)(void);
 static void (*PORTC_PC0_InterruptHandler)(void);
 static void (*PORTD_MODEM_RESET_InterruptHandler)(void);
 static void (*PORTC_PC1_InterruptHandler)(void);
@@ -52,7 +53,7 @@ void PIN_MANAGER_Initialize()
     PORTA.DIR = 0x90;
     PORTB.DIR = 0x00;
     PORTC.DIR = 0x09;
-    PORTD.DIR = 0x01;
+    PORTD.DIR = 0x03;
     PORTE.DIR = 0x00;
     PORTF.DIR = 0x00;
 
@@ -129,6 +130,7 @@ void PIN_MANAGER_Initialize()
     PORTA_PA3_SetInterruptHandler(PORTA_PA3_DefaultInterruptHandler);
     PORTA_PA5_SetInterruptHandler(PORTA_PA5_DefaultInterruptHandler);
     PORTA_PA7_SetInterruptHandler(PORTA_PA7_DefaultInterruptHandler);
+    PORTD_MODEM_SLEEP_SetInterruptHandler(PORTD_MODEM_SLEEP_DefaultInterruptHandler);
     PORTC_PC0_SetInterruptHandler(PORTC_PC0_DefaultInterruptHandler);
     PORTD_MODEM_RESET_SetInterruptHandler(PORTD_MODEM_RESET_DefaultInterruptHandler);
     PORTC_PC1_SetInterruptHandler(PORTC_PC1_DefaultInterruptHandler);
@@ -244,6 +246,19 @@ void PORTA_PA7_DefaultInterruptHandler(void)
 {
     // add your PORTA_PA7 interrupt custom code
     // or set custom function using PORTA_PA7_SetInterruptHandler()
+}
+/**
+  Allows selecting an interrupt handler for PORTD_MODEM_SLEEP at application runtime
+*/
+void PORTD_MODEM_SLEEP_SetInterruptHandler(void (* interruptHandler)(void)) 
+{
+    PORTD_MODEM_SLEEP_InterruptHandler = interruptHandler;
+}
+
+void PORTD_MODEM_SLEEP_DefaultInterruptHandler(void)
+{
+    // add your PORTD_MODEM_SLEEP interrupt custom code
+    // or set custom function using PORTD_MODEM_SLEEP_SetInterruptHandler()
 }
 /**
   Allows selecting an interrupt handler for PORTC_PC0 at application runtime

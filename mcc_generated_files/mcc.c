@@ -41,13 +41,13 @@ void SYSTEM_Initialize(void)
     PIN_MANAGER_Initialize();
     BOD_Initialize();
     WDT_Initialize();
-    CLKCTRL_Initialize();
     SLPCTRL_Initialize();
+    CLKCTRL_Initialize();
     I2C0_Initialize();
     RTC_Initialize();
     CPUINT_Initialize();
-    USART0_Initialize();
     USART1_Initialize();
+    USART0_Initialize();
 }
 
 /**

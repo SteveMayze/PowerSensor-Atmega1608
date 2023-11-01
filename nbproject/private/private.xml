@@ -13,9 +13,11 @@
         </group>
         <group name="Leawood_FieldDevice_R3">
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/build-config.h</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/logger.h</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/main.c</file>
             <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/node.c</file>
+            <file>file:/D:/Projects/Leawood/PowerSensor-Atmega1608/modem.c</file>
         </group>
     </open-files>
 </project-private>

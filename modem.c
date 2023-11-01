@@ -1,3 +1,6 @@
+
+ #define LOGGER_LEVEL 4
+
 #include "build-config.h"
 
 #include "modem.h"
@@ -6,27 +9,38 @@
 
 #include <util/delay.h>
 
-#include "logger.h"
-
 uint64_t coord_addresss;
 
 ModemResponse_t response;
 struct xbee_tx_status s;
 
-void modem_open(uint64_t coordinator){
-    coord_addresss = coordinator;
-    // Reset the modem ~{RESET} pin...
-    MODEM_RESET_SetLow();
-    MODEM_RESET_SetHigh();  
-    _delay_ms(1000);
+
+void modem_initialise(){
+    LOG_DEBUG("modem_initialise \n");
+    
+    MODEM_RESET_SetHigh();   
+    MODEM_SLEEP_SetLow();
 }
 
 uint64_t modem_get_coord_addr(){
     return coord_addresss;
 }
 
+
+void modem_open(uint64_t coordinator){
+    LOG_DEBUG("modem_open \n");
+    coord_addresss = coordinator;
+    // Reset the modem ~{RESET} pin...
+    MODEM_SLEEP_SetLow();
+    _delay_ms(500);
+    MODEM_RESET_SetLow();
+    MODEM_RESET_SetHigh();  
+    _delay_ms(1000);
+}
+
 void modem_close(void){
-    
+    LOG_DEBUG("modem_close \n");
+    MODEM_SLEEP_SetHigh();    
 }
 
 
@@ -48,37 +62,6 @@ ModemResponse_t* modem_receive_message(void){
             rx_buffer[buffer_ptr++] = byte;
         }
     }
-//    if(USART0_IsRxReady()){
-//        uint8_t byte=USART0_Read();
-//        while(byte!= 0x7E){
-//            LOG_DEBUG(". ");
-//            byte=USART0_Read();
-//        }
-//        LOG_DEBUG("\n ");
-//        rx_buffer[buffer_ptr++] = byte;
-//        rx_buffer[buffer_ptr++] = USART0_Read();
-//        rx_buffer[buffer_ptr++] = USART0_Read();
-//        uint16_t len;
-//        memcpy(&len, &rx_buffer[4], sizeof(len));
-//        len = endian_swap_64(len);   
-//        
-//        for(uint8_t i=0;i<len;i++){
-//            rx_buffer[buffer_ptr++] = USART0_Read();
-//        }
-//        rx_buffer[buffer_ptr++] = USART0_Read();
-//    }
-
-    
-    // uint8_t buffer_length = buffer_ptr;
-    
-    // Traverse the buffer since this will be an XBEE message
-    // and extract the data. 
-    
-    // What if this message is not correct - The operation could be set to some 
-    // error/unknown operation that can be dealt with like a timeout.
-    
-    // This data then needs to be traversed again to extract the actual
-    // node message
     LOG_BYTE_STREAM("Received Data: ", rx_buffer, buffer_ptr);
 
     response.frame_type = rx_buffer[3];
