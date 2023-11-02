@@ -4,6 +4,7 @@
 #include "eprom.h"
 #include <string.h>
 #include <avr/sfr_defs.h>
+#include <avr/eeprom.h>
 
 #include "logger.h"
 
@@ -20,13 +21,16 @@ uint8_t*  eprom_read_serial_id()
 {
     if (!sid_init){
         memcpy(_sid, ( void *)&SIGROW.SERNUM0, 10);
-//        uint16_t address = 0x1100; // Start address of the signature row
-//        for (uint8_t i = 0; i < 10; i++) {
-//            _sid[i] = pgm_read_byte(address + i); // Read the signature row byte by byte
-//        }
         sid_init = true;
         LOG_BYTE_STREAM("Serial_ID: ", _sid, 10);
     }
     return _sid;
 }
 
+void eprom_write_addr(uint64_t *addr){
+    eeprom_write_block (addr,  0, sizeof(uint64_t));
+}
+
+void eprom_read_addr(uint64_t *addr){
+    eeprom_read_block (addr,  0, sizeof(uint64_t));
+}

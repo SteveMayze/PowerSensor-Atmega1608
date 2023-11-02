@@ -1,11 +1,10 @@
 
 #include "build-config.h"
-
 #include "modem.h"
 #include "mcc_generated_files/include/usart0.h"
 #include <string.h>
-
 #include <util/delay.h>
+#include "eprom.h"
 
 uint64_t coord_addresss;
 
@@ -21,7 +20,21 @@ void modem_initialise(){
 }
 
 uint64_t modem_get_coord_addr(){
+    uint64_t addr = 0;
+    eprom_read_addr(&addr);
+    if(addr != 0xFFFFFFFFFFFFFFFF && addr != coord_addresss){
+        coord_addresss = addr;
+        LOG_DEBUG("modem_get_coord_addr: Getting addr EEPROM %llu \n", coord_addresss);
+    } else {
+        LOG_DEBUG("modem_get_coord_addr: Getting addr cache %llu \n", coord_addresss);
+    }
     return coord_addresss;
+}
+
+void modem_set_coord_addr(uint64_t addr){
+    LOG_DEBUG("modem_set_coord_addr: Writing the addr to EEPROM %llu \n", addr);
+    coord_addresss = addr;
+    eprom_write_addr(&coord_addresss);
 }
 
 
@@ -74,7 +87,9 @@ ModemResponse_t* modem_receive_message(void){
             LOG_DEBUG("Modem Rx Request \n");
             p.data = rx_pkt_data;
             xbee_frame_to_rx_packet(rx_buffer, &p);
-            coord_addresss = p.addr;
+            if(modem_get_coord_addr() == XBEE_ADDR_BROADCAST){
+                modem_set_coord_addr(p.addr);
+            }
             response.operation = p.data[1];
             response.data_length = p.len;
             response.data = p.data;
@@ -86,7 +101,6 @@ ModemResponse_t* modem_receive_message(void){
     }
     
     // This should only be set on Data request
-    coord_addresss = p.addr;
     response.operation = p.data[1];
     response.data_length = p.len;
     response.data = p.data;
@@ -111,7 +125,7 @@ void modem_send_message(unsigned char* node_message, uint8_t data_length){
     // machine to set a buffer and then write the content - which could be 
     // simpler
     
-    r.addr = coord_addresss;
+    r.addr = modem_get_coord_addr();
     r.network = 0xFFFE;
     r.radius = 0;
     r.opts = 0;

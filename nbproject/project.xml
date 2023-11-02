@@ -37,6 +37,8 @@
             <word>addr</word>
             <word>dest</word>
             <word>initialise</word>
+            <word>llu</word>
+            <word>llud</word>
             <word>rf</word>
             <word>struct</word>
             <word>tx</word>
