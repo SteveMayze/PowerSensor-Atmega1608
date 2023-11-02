@@ -1,6 +1,4 @@
 
- #define LOGGER_LEVEL 4
-
 #include "build-config.h"
 
 #include "modem.h"
