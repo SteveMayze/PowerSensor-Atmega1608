@@ -18,12 +18,13 @@ extern "C" {
 #define LOGGER_LEVEL_DEBUG 4
 #define LOGGER_LEVEL_ALL 7
 
-//#define UNIT_TEST_CFG
+#define UNIT_TEST_CFG
     
 #ifdef UNIT_TEST_CFG
     #ifndef LOGGER_LEVEL
-        #define LOGGER_LEVEL LOGGER_LEVEL_NONE
+        #define LOGGER_LEVEL LOGGER_LEVEL_DEBUG
     #endif
+    // #define F_CPU 250000UL
     #define F_CPU 1UL
 #else
     #ifndef LOGGER_LEVEL
