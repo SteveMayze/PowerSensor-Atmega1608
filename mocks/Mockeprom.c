@@ -5,7 +5,10 @@
 #include "../cmock/src/cmock.h"
 #include "Mockeprom.h"
 
+static const char* CMockString_addr = "addr";
+static const char* CMockString_eprom_read_addr = "eprom_read_addr";
 static const char* CMockString_eprom_read_serial_id = "eprom_read_serial_id";
+static const char* CMockString_eprom_write_addr = "eprom_write_addr";
 
 typedef struct _CMOCK_eprom_read_serial_id_CALL_INSTANCE
 {
@@ -14,9 +17,44 @@ typedef struct _CMOCK_eprom_read_serial_id_CALL_INSTANCE
 
 } CMOCK_eprom_read_serial_id_CALL_INSTANCE;
 
+typedef struct _CMOCK_eprom_write_addr_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  uint64_t* Expected_addr;
+  char ReturnThruPtr_addr_Used;
+  uint64_t* ReturnThruPtr_addr_Val;
+  size_t ReturnThruPtr_addr_Size;
+
+} CMOCK_eprom_write_addr_CALL_INSTANCE;
+
+typedef struct _CMOCK_eprom_read_addr_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+  uint64_t* Expected_addr;
+  char ReturnThruPtr_addr_Used;
+  uint64_t* ReturnThruPtr_addr_Val;
+  size_t ReturnThruPtr_addr_Size;
+
+} CMOCK_eprom_read_addr_CALL_INSTANCE;
+
 static struct MockepromInstance
 {
+  char eprom_read_serial_id_IgnoreBool;
+  uint8_t* eprom_read_serial_id_FinalReturn;
+  char eprom_read_serial_id_CallbackBool;
+  CMOCK_eprom_read_serial_id_CALLBACK eprom_read_serial_id_CallbackFunctionPointer;
+  int eprom_read_serial_id_CallbackCalls;
   CMOCK_MEM_INDEX_TYPE eprom_read_serial_id_CallInstance;
+  char eprom_write_addr_IgnoreBool;
+  char eprom_write_addr_CallbackBool;
+  CMOCK_eprom_write_addr_CALLBACK eprom_write_addr_CallbackFunctionPointer;
+  int eprom_write_addr_CallbackCalls;
+  CMOCK_MEM_INDEX_TYPE eprom_write_addr_CallInstance;
+  char eprom_read_addr_IgnoreBool;
+  char eprom_read_addr_CallbackBool;
+  CMOCK_eprom_read_addr_CALLBACK eprom_read_addr_CallbackFunctionPointer;
+  int eprom_read_addr_CallbackCalls;
+  CMOCK_MEM_INDEX_TYPE eprom_read_addr_CallInstance;
 } Mock;
 
 extern jmp_buf AbortFrame;
@@ -26,10 +64,43 @@ void Mockeprom_Verify(void)
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_MEM_INDEX_TYPE call_instance;
   call_instance = Mock.eprom_read_serial_id_CallInstance;
+  if (Mock.eprom_read_serial_id_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
   if (CMOCK_GUTS_NONE != call_instance)
   {
     UNITY_SET_DETAIL(CMockString_eprom_read_serial_id);
     UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.eprom_read_serial_id_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
+  call_instance = Mock.eprom_write_addr_CallInstance;
+  if (Mock.eprom_write_addr_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_eprom_write_addr);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.eprom_write_addr_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
+  call_instance = Mock.eprom_read_addr_CallInstance;
+  if (Mock.eprom_read_addr_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_eprom_read_addr);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.eprom_read_addr_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
   }
 }
 
@@ -51,10 +122,49 @@ uint8_t* eprom_read_serial_id(void)
   UNITY_SET_DETAIL(CMockString_eprom_read_serial_id);
   cmock_call_instance = (CMOCK_eprom_read_serial_id_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.eprom_read_serial_id_CallInstance);
   Mock.eprom_read_serial_id_CallInstance = CMock_Guts_MemNext(Mock.eprom_read_serial_id_CallInstance);
+  if (Mock.eprom_read_serial_id_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    if (cmock_call_instance == NULL)
+      return Mock.eprom_read_serial_id_FinalReturn;
+    Mock.eprom_read_serial_id_FinalReturn = cmock_call_instance->ReturnVal;
+    return cmock_call_instance->ReturnVal;
+  }
+  if (!Mock.eprom_read_serial_id_CallbackBool &&
+      Mock.eprom_read_serial_id_CallbackFunctionPointer != NULL)
+  {
+    uint8_t* cmock_cb_ret = Mock.eprom_read_serial_id_CallbackFunctionPointer(Mock.eprom_read_serial_id_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return cmock_cb_ret;
+  }
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
   cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.eprom_read_serial_id_CallbackFunctionPointer != NULL)
+  {
+    cmock_call_instance->ReturnVal = Mock.eprom_read_serial_id_CallbackFunctionPointer(Mock.eprom_read_serial_id_CallbackCalls++);
+  }
   UNITY_CLR_DETAILS();
   return cmock_call_instance->ReturnVal;
+}
+
+void eprom_read_serial_id_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t* cmock_to_return)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_eprom_read_serial_id_CALL_INSTANCE));
+  CMOCK_eprom_read_serial_id_CALL_INSTANCE* cmock_call_instance = (CMOCK_eprom_read_serial_id_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.eprom_read_serial_id_CallInstance = CMock_Guts_MemChain(Mock.eprom_read_serial_id_CallInstance, cmock_guts_index);
+  Mock.eprom_read_serial_id_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  cmock_call_instance->ReturnVal = cmock_to_return;
+  Mock.eprom_read_serial_id_IgnoreBool = (char)1;
+}
+
+void eprom_read_serial_id_CMockStopIgnore(void)
+{
+  if(Mock.eprom_read_serial_id_IgnoreBool)
+    Mock.eprom_read_serial_id_CallInstance = CMock_Guts_MemNext(Mock.eprom_read_serial_id_CallInstance);
+  Mock.eprom_read_serial_id_IgnoreBool = (char)0;
 }
 
 void eprom_read_serial_id_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t* cmock_to_return)
@@ -64,7 +174,202 @@ void eprom_read_serial_id_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8
   UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
   memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
   Mock.eprom_read_serial_id_CallInstance = CMock_Guts_MemChain(Mock.eprom_read_serial_id_CallInstance, cmock_guts_index);
+  Mock.eprom_read_serial_id_IgnoreBool = (char)0;
   cmock_call_instance->LineNumber = cmock_line;
   cmock_call_instance->ReturnVal = cmock_to_return;
+}
+
+void eprom_read_serial_id_AddCallback(CMOCK_eprom_read_serial_id_CALLBACK Callback)
+{
+  Mock.eprom_read_serial_id_IgnoreBool = (char)0;
+  Mock.eprom_read_serial_id_CallbackBool = (char)1;
+  Mock.eprom_read_serial_id_CallbackFunctionPointer = Callback;
+}
+
+void eprom_read_serial_id_Stub(CMOCK_eprom_read_serial_id_CALLBACK Callback)
+{
+  Mock.eprom_read_serial_id_IgnoreBool = (char)0;
+  Mock.eprom_read_serial_id_CallbackBool = (char)0;
+  Mock.eprom_read_serial_id_CallbackFunctionPointer = Callback;
+}
+
+void eprom_write_addr(uint64_t* addr)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_eprom_write_addr_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_eprom_write_addr);
+  cmock_call_instance = (CMOCK_eprom_write_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.eprom_write_addr_CallInstance);
+  Mock.eprom_write_addr_CallInstance = CMock_Guts_MemNext(Mock.eprom_write_addr_CallInstance);
+  if (Mock.eprom_write_addr_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.eprom_write_addr_CallbackBool &&
+      Mock.eprom_write_addr_CallbackFunctionPointer != NULL)
+  {
+    Mock.eprom_write_addr_CallbackFunctionPointer(addr, Mock.eprom_write_addr_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  {
+    UNITY_SET_DETAILS(CMockString_eprom_write_addr,CMockString_addr);
+    UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(cmock_call_instance->Expected_addr), (void*)(addr), sizeof(uint64_t), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.eprom_write_addr_CallbackFunctionPointer != NULL)
+  {
+    Mock.eprom_write_addr_CallbackFunctionPointer(addr, Mock.eprom_write_addr_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_addr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(addr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)addr, (void*)cmock_call_instance->ReturnThruPtr_addr_Val,
+      cmock_call_instance->ReturnThruPtr_addr_Size);
+  }
+  UNITY_CLR_DETAILS();
+}
+
+void CMockExpectParameters_eprom_write_addr(CMOCK_eprom_write_addr_CALL_INSTANCE* cmock_call_instance, uint64_t* addr);
+void CMockExpectParameters_eprom_write_addr(CMOCK_eprom_write_addr_CALL_INSTANCE* cmock_call_instance, uint64_t* addr)
+{
+  cmock_call_instance->Expected_addr = addr;
+  cmock_call_instance->ReturnThruPtr_addr_Used = 0;
+}
+
+void eprom_write_addr_CMockIgnore(void)
+{
+  Mock.eprom_write_addr_IgnoreBool = (char)1;
+}
+
+void eprom_write_addr_CMockStopIgnore(void)
+{
+  Mock.eprom_write_addr_IgnoreBool = (char)0;
+}
+
+void eprom_write_addr_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t* addr)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_eprom_write_addr_CALL_INSTANCE));
+  CMOCK_eprom_write_addr_CALL_INSTANCE* cmock_call_instance = (CMOCK_eprom_write_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.eprom_write_addr_CallInstance = CMock_Guts_MemChain(Mock.eprom_write_addr_CallInstance, cmock_guts_index);
+  Mock.eprom_write_addr_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  CMockExpectParameters_eprom_write_addr(cmock_call_instance, addr);
+}
+
+void eprom_write_addr_AddCallback(CMOCK_eprom_write_addr_CALLBACK Callback)
+{
+  Mock.eprom_write_addr_IgnoreBool = (char)0;
+  Mock.eprom_write_addr_CallbackBool = (char)1;
+  Mock.eprom_write_addr_CallbackFunctionPointer = Callback;
+}
+
+void eprom_write_addr_Stub(CMOCK_eprom_write_addr_CALLBACK Callback)
+{
+  Mock.eprom_write_addr_IgnoreBool = (char)0;
+  Mock.eprom_write_addr_CallbackBool = (char)0;
+  Mock.eprom_write_addr_CallbackFunctionPointer = Callback;
+}
+
+void eprom_write_addr_CMockReturnMemThruPtr_addr(UNITY_LINE_TYPE cmock_line, uint64_t* addr, size_t cmock_size)
+{
+  CMOCK_eprom_write_addr_CALL_INSTANCE* cmock_call_instance = (CMOCK_eprom_write_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.eprom_write_addr_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_addr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_addr_Val = addr;
+  cmock_call_instance->ReturnThruPtr_addr_Size = cmock_size;
+}
+
+void eprom_read_addr(uint64_t* addr)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_eprom_read_addr_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_eprom_read_addr);
+  cmock_call_instance = (CMOCK_eprom_read_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.eprom_read_addr_CallInstance);
+  Mock.eprom_read_addr_CallInstance = CMock_Guts_MemNext(Mock.eprom_read_addr_CallInstance);
+  if (Mock.eprom_read_addr_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.eprom_read_addr_CallbackBool &&
+      Mock.eprom_read_addr_CallbackFunctionPointer != NULL)
+  {
+    Mock.eprom_read_addr_CallbackFunctionPointer(addr, Mock.eprom_read_addr_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  {
+    UNITY_SET_DETAILS(CMockString_eprom_read_addr,CMockString_addr);
+    UNITY_TEST_ASSERT_EQUAL_MEMORY((void*)(cmock_call_instance->Expected_addr), (void*)(addr), sizeof(uint64_t), cmock_line, CMockStringMismatch);
+  }
+  if (Mock.eprom_read_addr_CallbackFunctionPointer != NULL)
+  {
+    Mock.eprom_read_addr_CallbackFunctionPointer(addr, Mock.eprom_read_addr_CallbackCalls++);
+  }
+  if (cmock_call_instance->ReturnThruPtr_addr_Used)
+  {
+    UNITY_TEST_ASSERT_NOT_NULL(addr, cmock_line, CMockStringPtrIsNULL);
+    memcpy((void*)addr, (void*)cmock_call_instance->ReturnThruPtr_addr_Val,
+      cmock_call_instance->ReturnThruPtr_addr_Size);
+  }
+  UNITY_CLR_DETAILS();
+}
+
+void CMockExpectParameters_eprom_read_addr(CMOCK_eprom_read_addr_CALL_INSTANCE* cmock_call_instance, uint64_t* addr);
+void CMockExpectParameters_eprom_read_addr(CMOCK_eprom_read_addr_CALL_INSTANCE* cmock_call_instance, uint64_t* addr)
+{
+  cmock_call_instance->Expected_addr = addr;
+  cmock_call_instance->ReturnThruPtr_addr_Used = 0;
+}
+
+void eprom_read_addr_CMockIgnore(void)
+{
+  Mock.eprom_read_addr_IgnoreBool = (char)1;
+}
+
+void eprom_read_addr_CMockStopIgnore(void)
+{
+  Mock.eprom_read_addr_IgnoreBool = (char)0;
+}
+
+void eprom_read_addr_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t* addr)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_eprom_read_addr_CALL_INSTANCE));
+  CMOCK_eprom_read_addr_CALL_INSTANCE* cmock_call_instance = (CMOCK_eprom_read_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.eprom_read_addr_CallInstance = CMock_Guts_MemChain(Mock.eprom_read_addr_CallInstance, cmock_guts_index);
+  Mock.eprom_read_addr_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+  CMockExpectParameters_eprom_read_addr(cmock_call_instance, addr);
+}
+
+void eprom_read_addr_AddCallback(CMOCK_eprom_read_addr_CALLBACK Callback)
+{
+  Mock.eprom_read_addr_IgnoreBool = (char)0;
+  Mock.eprom_read_addr_CallbackBool = (char)1;
+  Mock.eprom_read_addr_CallbackFunctionPointer = Callback;
+}
+
+void eprom_read_addr_Stub(CMOCK_eprom_read_addr_CALLBACK Callback)
+{
+  Mock.eprom_read_addr_IgnoreBool = (char)0;
+  Mock.eprom_read_addr_CallbackBool = (char)0;
+  Mock.eprom_read_addr_CallbackFunctionPointer = Callback;
+}
+
+void eprom_read_addr_CMockReturnMemThruPtr_addr(UNITY_LINE_TYPE cmock_line, uint64_t* addr, size_t cmock_size)
+{
+  CMOCK_eprom_read_addr_CALL_INSTANCE* cmock_call_instance = (CMOCK_eprom_read_addr_CALL_INSTANCE*)CMock_Guts_GetAddressFor(CMock_Guts_MemEndOfChain(Mock.eprom_read_addr_CallInstance));
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringPtrPreExp);
+  cmock_call_instance->ReturnThruPtr_addr_Used = 1;
+  cmock_call_instance->ReturnThruPtr_addr_Val = addr;
+  cmock_call_instance->ReturnThruPtr_addr_Size = cmock_size;
 }
 

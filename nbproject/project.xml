@@ -36,6 +36,7 @@
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
             <word>addr</word>
             <word>dest</word>
+            <word>initialisation</word>
             <word>initialise</word>
             <word>llu</word>
             <word>llud</word>

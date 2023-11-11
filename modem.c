@@ -24,16 +24,28 @@ uint64_t modem_get_coord_addr(){
     eprom_read_addr(&addr);
     if(addr != 0xFFFFFFFFFFFFFFFF && addr != coord_addresss){
         coord_addresss = addr;
-        LOG_DEBUG("modem_get_coord_addr: Getting addr EEPROM %llu \n", coord_addresss);
+        LOG_INFO("modem_get_coord_addr: Getting addr EEPROM: %04X %04X %04X %04X\n", 
+                (uint16_t)(coord_addresss >> 48)&0xFFFF, 
+                (uint16_t)(coord_addresss >> 32)&0xFFFF, 
+                (uint16_t)(coord_addresss >> 16)&0xFFFF, 
+                (uint16_t)(coord_addresss)&0xFFFF);    
     } else {
-        LOG_DEBUG("modem_get_coord_addr: Getting addr cache %llu \n", coord_addresss);
+        LOG_INFO("modem_get_coord_addr: Getting addr cache: %04X %04X %04X %04X\n", 
+                (uint16_t)(coord_addresss >> 48)&0xFFFF, 
+                (uint16_t)(coord_addresss >> 32)&0xFFFF, 
+                (uint16_t)(coord_addresss >> 16)&0xFFFF, 
+                (uint16_t)(coord_addresss)&0xFFFF);    
     }
     return coord_addresss;
 }
 
 void modem_set_coord_addr(uint64_t addr){
-    LOG_DEBUG("modem_set_coord_addr: Writing the addr to EEPROM %llu \n", addr);
     coord_addresss = addr;
+    LOG_INFO("modem_set_coord_addr: Writing the addr to EEPROM: %04X %04X %04X %04X\n", 
+            (uint16_t)(coord_addresss >> 48)&0xFFFF, 
+            (uint16_t)(coord_addresss >> 32)&0xFFFF, 
+            (uint16_t)(coord_addresss >> 16)&0xFFFF, 
+            (uint16_t)(coord_addresss)&0xFFFF);    
     eprom_write_addr(&coord_addresss);
 }
 

@@ -9,6 +9,7 @@
 #include "test_common.h"
 
 uint64_t expected_coord = 0x02040810204080CC;
+uint64_t expected_init_addr = XBEE_ADDR_BROADCAST;
 
 
 uint8_t receive_datareq_fixture[18] = {
@@ -100,7 +101,7 @@ void modem_receive_message_DATAREQ_test(){
 
 void modem_receive_message_DATAACK_test(){
     LOG_INFO("\n modem_receive_message_DATAACK_test: begin \n");
-    
+
     fixture_type = NODE_TOKEN_DATAACK;
     fixture_idx = 0;
     
@@ -176,7 +177,7 @@ void modem_receive_message_NODEINTROACK_test(){
 
 
 int run_modem_receive_tests(){
-    UnityBegin("modem_test");
+    UnityBegin("modem_receive_test");
     LOG_INFO("run_modem_receive_ready_tests: begin\n");
     
     RUN_TEST(modem_receive_message_DATAREQ_test);

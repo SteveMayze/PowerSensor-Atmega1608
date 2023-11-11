@@ -28,6 +28,16 @@ void Mockmodem_Verify(void);
 
 
 
+#define modem_initialise_Ignore() modem_initialise_CMockIgnore()
+void modem_initialise_CMockIgnore(void);
+#define modem_initialise_StopIgnore() modem_initialise_CMockStopIgnore()
+void modem_initialise_CMockStopIgnore(void);
+#define modem_initialise_Expect() modem_initialise_CMockExpect(__LINE__)
+void modem_initialise_CMockExpect(UNITY_LINE_TYPE cmock_line);
+typedef void (* CMOCK_modem_initialise_CALLBACK)(int cmock_num_calls);
+void modem_initialise_AddCallback(CMOCK_modem_initialise_CALLBACK Callback);
+void modem_initialise_Stub(CMOCK_modem_initialise_CALLBACK Callback);
+#define modem_initialise_StubWithCallback modem_initialise_Stub
 #define modem_open_Ignore() modem_open_CMockIgnore()
 void modem_open_CMockIgnore(void);
 #define modem_open_StopIgnore() modem_open_CMockStopIgnore()

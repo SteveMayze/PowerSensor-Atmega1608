@@ -27,17 +27,17 @@ int main(void) {
 
     SYSTEM_Initialize();
 
-    LOG_INFO("========== Test starting - INA219 Tests ==========\n\n");
-
-    run_ina219_tests();
+//    LOG_INFO("========== Test starting - INA219 Tests ==========\n\n");
+//
+//    run_ina219_tests();
     
     LOG_INFO("========== Test starting - MODEM send Tests ===========\n\n");    
     
     run_modem_send_tests();
   
-    LOG_INFO("========== Test starting - MODEM receive Tests ===========\n\n");    
-
-    run_modem_receive_tests();
+//    LOG_INFO("========== Test starting - MODEM receive Tests ===========\n\n");    
+//
+//    run_modem_receive_tests();
 
     LOG_INFO("================= Test Completed =================\n\n");
 

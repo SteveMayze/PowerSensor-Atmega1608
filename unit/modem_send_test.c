@@ -5,10 +5,10 @@
 #include "modem_send_test.h"
 #include "../modem.h"
 #include "../mocks/Mockusart0.h"
+#include "../mocks/Mockeprom.h"
 #include "../libavrxbee/xbee.h"
 #include "test_common.h"
 #include <string.h>
-
 /**
  * On wake, the node needs to toggle the reset and then
  * send a READY and then wait for a response.
@@ -20,6 +20,16 @@
  * 
  */
 
+void modem_eprom_read_addr_cb(uint64_t *addr, int call_count){
+        LOG_INFO("modem_test_modem_get_coord_addr_cb call_count, %d, input: %04X %04X %04X %04X\n", 
+                call_count,
+                (uint16_t)(*addr >> 48)&0xFFFF, 
+                (uint16_t)(*addr >> 32)&0xFFFF, 
+                (uint16_t)(*addr >> 16)&0xFFFF, 
+                (uint16_t)(*addr)&0xFFFF);    
+     *addr = XBEE_ADDR_BROADCAST;
+}
+
 
 void initialise_modem_test(){
     LOG_INFO("initialise_modem_test: begin \n");
@@ -27,6 +37,9 @@ void initialise_modem_test(){
     // The broadcast address is set on the initial start up of the system
     // this enables the system to connect to the nearest available coordinator
     // and introduce itself.
+
+    eprom_read_addr_StubWithCallback(modem_eprom_read_addr_cb);
+
     modem_open(XBEE_ADDR_BROADCAST);
     
     uint64_t coordinator = modem_get_coord_addr();
@@ -62,6 +75,7 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
 
  void modem_send_message_READY_test(){
     LOG_INFO("modem_send_message_READY_test: begin \n");
+
     actual_idx = 0;
      
     uint8_t *sid_ = get_test_sid();
@@ -85,7 +99,7 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
     LOG_BYTE_STREAM("  actual=\t", actual, 31);
     
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, actual_idx);
-    LOG_INFO("\n modem_send_message_READY_test: end \n");
+    LOG_INFO("modem_send_message_READY_test: end \n");
      
  }
  
@@ -99,7 +113,8 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
         0x33, 0x00, 0x00, 0xC0, 0x3F, 0x1F};
 
  void modem_send_message_DATA_test(){
-    LOG_INFO("\n modem_send_message_DATA_test: begin \n");
+    LOG_INFO("modem_send_message_DATA_test: begin \n");
+
     actual_idx = 0;
      
     USART0_Write_StubWithCallback(modem_test_USART0_Write_cb);
@@ -127,7 +142,7 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
     LOG_BYTE_STREAM("  actual=\t", actual, 46);
     
     TEST_ASSERT_EQUAL_HEX8_ARRAY(expected, actual, actual_idx);
-    LOG_INFO("\n modem_send_message_DATA_test: end \n");
+    LOG_INFO("modem_send_message_DATA_test: end \n");
      
  }
  
@@ -146,7 +161,8 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
   
   
  void modem_send_message_NODEINTRO_test(){
-    LOG_INFO("\n modem_send_message_NODEINTRO_test: begin \n");
+    LOG_INFO("modem_send_message_NODEINTRO_test: begin \n");
+
     actual_idx = 0;
     uint8_t payload_length = 41;
     uint8_t *sid_ = get_test_sid();
@@ -200,7 +216,7 @@ void modem_test_USART0_Write_cb(const uint8_t data, int call_count){
  * @return 
  */
 int run_modem_send_tests(){
-    UnityBegin("modem_test");
+    UnityBegin("modem_send_test");
     LOG_INFO("run_modem_send_ready_tests: begin\n");
     
     RUN_TEST(initialise_modem_test);

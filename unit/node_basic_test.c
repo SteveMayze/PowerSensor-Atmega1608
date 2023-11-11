@@ -8,6 +8,7 @@
 #include "../mocks/Mockeprom.h"
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
+#include "../mocks/Mockmodem.h"
 
 void send_message_callback(unsigned char* node_message, uint8_t data_length, int call_count){
     uint8_t operation = node_message[1];
@@ -40,6 +41,7 @@ void ready_datareq_dataack_test(){
     
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
+    modem_initialise_Expect();
 
     node_intitialise();
 
@@ -93,6 +95,7 @@ void ready_nodeintroreq_nodeintroack_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
+    modem_initialise_Expect();
 
     node_intitialise();
     

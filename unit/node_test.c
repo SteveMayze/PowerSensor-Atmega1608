@@ -10,6 +10,7 @@
 #include "../mocks/Mockeprom.h"
 #include "../mocks/MockINA219.h"
 #include "test_common.h"
+#include "../mocks/Mockmodem.h"
 
 
 uint8_t message_stream[128] = { 0 }; 
@@ -22,6 +23,7 @@ void ready_data_collection_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
+    modem_initialise_Expect();
 
     node_intitialise();
 
@@ -126,7 +128,8 @@ void ready_node_intro_test(){
     set_timeout_response_flag(false);
     eprom_read_serial_id_ExpectAndReturn(get_test_sid());
     INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
-
+    modem_initialise_Expect();
+    
     node_intitialise();
     set_node_state(FSM_NODEINTRO);
     LOG_INFO("ready_node_intro_test: Testing the send intro information for NODEINTROREQ\n");

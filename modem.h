@@ -83,6 +83,8 @@ extern "C" {
     
     uint64_t modem_get_coord_addr();
     
+    void modem_set_coord_addr(uint64_t addr);
+    
     ModemResponse_t* modem_receive_message(void);
     
     void modem_send_message(unsigned char* node_message, uint8_t data_length);
