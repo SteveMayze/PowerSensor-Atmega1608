@@ -8,6 +8,9 @@
 #ifndef MODEM_H
 #define	MODEM_H
 
+#define __XBEE_8CC__
+
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
