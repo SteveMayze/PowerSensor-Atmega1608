@@ -153,7 +153,7 @@
         <targetPluginBoard></targetPluginBoard>
         <platformTool>AtmelIceTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
-        <languageToolchainVersion>2.40</languageToolchainVersion>
+        <languageToolchainVersion>2.10</languageToolchainVersion>
         <platform>3</platform>
       </toolsSet>
       <packs>
@@ -1665,7 +1665,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.36</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.1.264"/>
@@ -2855,7 +2855,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.36</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>4</platform>
       </toolsSet>
       <packs>
         <pack name="ATmega_DFP" vendor="Microchip" version="3.1.264"/>
