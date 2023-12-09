@@ -9,11 +9,18 @@ static const char* CMockString_coordinator = "coordinator";
 static const char* CMockString_data_length = "data_length";
 static const char* CMockString_modem_close = "modem_close";
 static const char* CMockString_modem_get_coord_addr = "modem_get_coord_addr";
+static const char* CMockString_modem_initialise = "modem_initialise";
 static const char* CMockString_modem_message_arrived = "modem_message_arrived";
 static const char* CMockString_modem_open = "modem_open";
 static const char* CMockString_modem_receive_message = "modem_receive_message";
 static const char* CMockString_modem_send_message = "modem_send_message";
 static const char* CMockString_node_message = "node_message";
+
+typedef struct _CMOCK_modem_initialise_CALL_INSTANCE
+{
+  UNITY_LINE_TYPE LineNumber;
+
+} CMOCK_modem_initialise_CALL_INSTANCE;
 
 typedef struct _CMOCK_modem_open_CALL_INSTANCE
 {
@@ -62,6 +69,11 @@ typedef struct _CMOCK_modem_send_message_CALL_INSTANCE
 
 static struct MockmodemInstance
 {
+  char modem_initialise_IgnoreBool;
+  char modem_initialise_CallbackBool;
+  CMOCK_modem_initialise_CALLBACK modem_initialise_CallbackFunctionPointer;
+  int modem_initialise_CallbackCalls;
+  CMOCK_MEM_INDEX_TYPE modem_initialise_CallInstance;
   char modem_open_IgnoreBool;
   char modem_open_CallbackBool;
   CMOCK_modem_open_CALLBACK modem_open_CallbackFunctionPointer;
@@ -103,6 +115,19 @@ void Mockmodem_Verify(void)
 {
   UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
   CMOCK_MEM_INDEX_TYPE call_instance;
+  call_instance = Mock.modem_initialise_CallInstance;
+  if (Mock.modem_initialise_IgnoreBool)
+    call_instance = CMOCK_GUTS_NONE;
+  if (CMOCK_GUTS_NONE != call_instance)
+  {
+    UNITY_SET_DETAIL(CMockString_modem_initialise);
+    UNITY_TEST_FAIL(cmock_line, CMockStringCalledLess);
+  }
+  if (Mock.modem_initialise_CallbackFunctionPointer != NULL)
+  {
+    call_instance = CMOCK_GUTS_NONE;
+    (void)call_instance;
+  }
   call_instance = Mock.modem_open_CallInstance;
   if (Mock.modem_open_IgnoreBool)
     call_instance = CMOCK_GUTS_NONE;
@@ -192,6 +217,69 @@ void Mockmodem_Destroy(void)
 {
   CMock_Guts_MemFreeAll();
   memset(&Mock, 0, sizeof(Mock));
+}
+
+void modem_initialise(void)
+{
+  UNITY_LINE_TYPE cmock_line = TEST_LINE_NUM;
+  CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance;
+  UNITY_SET_DETAIL(CMockString_modem_initialise);
+  cmock_call_instance = (CMOCK_modem_initialise_CALL_INSTANCE*)CMock_Guts_GetAddressFor(Mock.modem_initialise_CallInstance);
+  Mock.modem_initialise_CallInstance = CMock_Guts_MemNext(Mock.modem_initialise_CallInstance);
+  if (Mock.modem_initialise_IgnoreBool)
+  {
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  if (!Mock.modem_initialise_CallbackBool &&
+      Mock.modem_initialise_CallbackFunctionPointer != NULL)
+  {
+    Mock.modem_initialise_CallbackFunctionPointer(Mock.modem_initialise_CallbackCalls++);
+    UNITY_CLR_DETAILS();
+    return;
+  }
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringCalledMore);
+  cmock_line = cmock_call_instance->LineNumber;
+  if (Mock.modem_initialise_CallbackFunctionPointer != NULL)
+  {
+    Mock.modem_initialise_CallbackFunctionPointer(Mock.modem_initialise_CallbackCalls++);
+  }
+  UNITY_CLR_DETAILS();
+}
+
+void modem_initialise_CMockIgnore(void)
+{
+  Mock.modem_initialise_IgnoreBool = (char)1;
+}
+
+void modem_initialise_CMockStopIgnore(void)
+{
+  Mock.modem_initialise_IgnoreBool = (char)0;
+}
+
+void modem_initialise_CMockExpect(UNITY_LINE_TYPE cmock_line)
+{
+  CMOCK_MEM_INDEX_TYPE cmock_guts_index = CMock_Guts_MemNew(sizeof(CMOCK_modem_initialise_CALL_INSTANCE));
+  CMOCK_modem_initialise_CALL_INSTANCE* cmock_call_instance = (CMOCK_modem_initialise_CALL_INSTANCE*)CMock_Guts_GetAddressFor(cmock_guts_index);
+  UNITY_TEST_ASSERT_NOT_NULL(cmock_call_instance, cmock_line, CMockStringOutOfMemory);
+  memset(cmock_call_instance, 0, sizeof(*cmock_call_instance));
+  Mock.modem_initialise_CallInstance = CMock_Guts_MemChain(Mock.modem_initialise_CallInstance, cmock_guts_index);
+  Mock.modem_initialise_IgnoreBool = (char)0;
+  cmock_call_instance->LineNumber = cmock_line;
+}
+
+void modem_initialise_AddCallback(CMOCK_modem_initialise_CALLBACK Callback)
+{
+  Mock.modem_initialise_IgnoreBool = (char)0;
+  Mock.modem_initialise_CallbackBool = (char)1;
+  Mock.modem_initialise_CallbackFunctionPointer = Callback;
+}
+
+void modem_initialise_Stub(CMOCK_modem_initialise_CALLBACK Callback)
+{
+  Mock.modem_initialise_IgnoreBool = (char)0;
+  Mock.modem_initialise_CallbackBool = (char)0;
+  Mock.modem_initialise_CallbackFunctionPointer = Callback;
 }
 
 void modem_open(uint64_t coordinator)

@@ -1,16 +1,16 @@
 
+#include "build-config.h"
+
 #include "node.h"
 #include "sensor_core.h"
 #include  "eprom.h"
 #include <string.h>
 #include "modem.h"
 
-#ifndef F_CPU
-#define F_CPU 1000000UL
-#endif
 
 #include <util/delay.h>
 
+#include "logger.h"
 
 Node_Message_t _message;
 
@@ -24,7 +24,7 @@ typedef struct {
     unsigned busy : 1;
 } Node_State_t;
 
-static Node_State_t node_state = {0};
+static Node_State_t node_state;
 
 typedef FSM_States_t(stateHandlerFunction)(uint8_t count);
 
@@ -50,18 +50,28 @@ static stateHandlerFunction *fsm_state_table[] = {
  * @return 
  */
 Error_t node_intitialise() {
-    uint8_t *sid_ = eprom_read_serial_id();
 
-    printf("node_initialise: sid: %02X %02X %02X %02X %02X %02X %02X %02X %02X %02X\n",
-            sid_[0], sid_[1], sid_[2], sid_[3], sid_[4], sid_[5], sid_[6], sid_[7], sid_[8], sid_[9]);
+    modem_initialise();
+    
     node_state.busy = 0;
     node_state.state = FSM_RESET;
     node_state.coordinator_addr = XBEE_ADDR_BROADCAST;
-    
-    INA219_Initialise(NODE_INA219_IIC_ADDR, INA219_CONFIG_PROFILE_DEFAULT);
+
+    fsm_set_event_callback(FSM_DATAREQ, node_data_collection);
+    fsm_set_event_callback(FSM_DATAACK, node_data_received);
+    fsm_set_event_callback(FSM_NODEINTROREQ, node_intro_callback);
+    fsm_set_event_callback(FSM_NODEINTROACK, node_intro_ack_callback);
+    fsm_set_event_callback(FSM_TIMEOUT, node_timeout_callback);
+
+    INA219_Initialise(NODE_INA219_IIC_ADDR, NODE_INA219_PROFILE);
 
     return NODE_OK;
 }
+
+void set_node_state(FSM_States_t state){
+    node_state.state = state;
+}
+
 
 /**
  * Sets the call timeout - in seconds.
@@ -95,30 +105,31 @@ Node_Message_t* node_create_message(Token_t token, uint8_t *sid) {
 }
 
 void fsm_set_event_callback(FSM_Events_t event, Event_Callback_t cb) {
-    printf("node_set_callback: Setting callback for the operation: %02X\n", event);
+    LOG_DEBUG("node_set_callback: Setting callback for the operation: %02X\n", event);
     node_state.event_callbacks[event] = cb;
 }
 
 void node_wait() {
     // Test for any messages on the XBEE.
-    //_delay_ms(1000);
+    LOG_DEBUG("Waiting for a response - %d ms... \n", NODE_WAIT_DELAY);
+    _delay_ms(NODE_WAIT_DELAY);
 }
 
-void node_fsm_execution() {
-    printf("node_fsm_execution: Executing for state: %02X\n", node_state.state);
+void node_fsm_execution(uint8_t count) {
+    LOG_DEBUG("node_fsm_execution: Executing for state: %02X\n", node_state.state);
     // Execute the current state.
-    FSM_States_t state = fsm_state_table[node_state.state](0);
+    FSM_States_t state = fsm_state_table[node_state.state](count);
     node_state.state = state;
-    printf("node_fsm_execution: end state: %02X \n", state);
+    LOG_DEBUG("node_fsm_execution: end - new state: %02X \n", state);
 }
 
 void node_fsm_poller() {
-    printf("node_fsm_poller: BEGIN\n");
+    LOG_DEBUG("node_fsm_poller: BEGIN\n");
     uint8_t count = 0;
     while (node_state.busy) {
-        printf("node_fsm_poller: Polling...\n");
+        LOG_DEBUG("node_fsm_poller: Polling...\n");
         node_wait();
-        node_fsm_execution();
+        node_fsm_execution(count++);
         if (!(node_state.timeout--)) {
             node_state.event_callbacks[FSM_TIMEOUT](count++);
             node_state.busy = 0;
@@ -126,120 +137,128 @@ void node_fsm_poller() {
         }
 
     }
-    printf("node_fsm_poller: END\n");
+    LOG_DEBUG("node_fsm_poller: END\n");
 }
 
 void node_check() {
-    printf("node_check: Checking for operation: %02X, state: %0X2 \n", _message.operation, node_state.state);
+    LOG_DEBUG("node_check: Checking for operation: %02X, state: %02X \n", _message.operation, node_state.state);
+    if(node_state.state == FSM_IDLE){
+        LOG_DEBUG("node_check: Coming in from idle, initiate a reset \n");
+        node_state.state = FSM_RESET;
+    }
     if (!node_state.busy) {
         node_state.timeout = node_state.timeout_value;
         node_state.busy = 1;
-        node_fsm_execution();
+        node_fsm_execution(0);
         node_fsm_poller();
     }
     modem_close();
 }
 
+static uint8_t payload[64];
 static FSM_States_t FSM_READY_STATE(uint8_t count) {
-    ModemResponse_t* response;
-    printf("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
+    
+    LOG_DEBUG("FSM_READY_STATE: Send the READY signal and wait for the reply. count: %d \n", count);
 
-    // Send message
-    _message.operation = NODE_TOKEN_READY;
-    _message.data_length = 0;
-    uint8_t payload[1];
-    uint8_t size = node_message_to_stream(&_message, payload);
+    if (count == 0){
+        LOG_INFO("FSM_READY_STATE: Sending READY \n");
+        
+        // Send message
+        _message.operation = NODE_TOKEN_READY;
+        _message.data_length = 0;
+        // uint8_t payload[1];
+        uint8_t size = node_message_to_stream(&_message, payload);
 
-    modem_send_message(payload, size);
+       modem_send_message(payload, size);
+    } else {
+        LOG_DEBUG("FSM_READY_STATE: Waiting for a response \n");
+    }
     // handle the response based on a request or a timeouts
+    LOG_DEBUG("FSM_READY_STATE: Checking for a response \n");
     if (modem_message_arrived()) {
-        printf("FSM_READY_STATE: A message has arrived \n");
+        ModemResponse_t* response;
         response = modem_receive_message();
-        switch (response->operation) {
-            case NODE_TOKEN_DATAREQ:
-                printf("FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
-                // Received DATAREQ - Move to the DATA state
-                node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
-                printf("FSM_READY_STATE: Called %02X \n", FSM_DATAREQ);                
-                node_state.state = FSM_DATA;
-                node_state.busy = 1;
-                break;
-            case NODE_TOKEN_NODEINTROREQ:
-                printf("FSM_READY_STATE: Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
-                // Received DATAREQ - Move to the DATA state
-                node_state.event_callbacks[FSM_NODEINTROREQ](); // Collect the information to send
-                node_state.state = FSM_NODEINTRO;
-                node_state.busy = 1;
-                break;
-            default:
-                printf("FSM_READY_STATE: Not supported operation - Staying in READY \n");
-                node_state.busy = 1;
-                node_state.state = FSM_READY;
-                break;
+        LOG_DEBUG("FSM_READY_STATE: A message has arrived: frame_type: %d, operation: %d ", response->frame_type, response->operation);
+        LOG_BYTE_STREAM(", data: ", response->data, response->data_length);
+        if(response->frame_type == 0x90){
+            switch (response->operation) {
+                case NODE_TOKEN_DATAREQ:
+                    LOG_INFO("FSM_READY_STATE: Operation NODE_TOKEN_DATAREQ - Calling the DATAREQ callback.\n");
+                    // Received DATAREQ - Move to the DATA state
+                    node_state.event_callbacks[FSM_DATAREQ](); // Collect the information to send
+                    LOG_DEBUG("FSM_READY_STATE: Called %02X \n", FSM_DATAREQ);                
+                    node_state.state = FSM_DATA;
+                    node_state.busy = 1;
+                    break;
+                case NODE_TOKEN_NODEINTROREQ:
+                    LOG_INFO("FSM_READY_STATE: Operation NODE_TOKEN_NODEINTROREQ - Calling the NODEINTRO callback.\n");
+                    // Received DATAREQ - Move to the DATA state
+                    node_state.event_callbacks[FSM_NODEINTROREQ](); // Collect the information to send
+                    node_state.state = FSM_NODEINTRO;
+                    node_state.busy = 1;
+                    break;
+                default:
+                    LOG_INFO("FSM_READY_STATE: Not supported operation - Staying in READY \n");
+                    node_state.busy = 1;
+                    node_state.state = FSM_READY;
+                    break;
+                }
+        } else {
+            LOG_DEBUG("FSM_READY_STATE: Unsupported message.\n");
         }
     }
-    printf("FSM_READY_STATE: End with state: %02X \n", node_state.state);
+    LOG_DEBUG("FSM_READY_STATE: End with state: %02X \n", node_state.state);
     return node_state.state;
 }
 
 static FSM_States_t FSM_DATA_STATE(uint8_t count) {
     ModemResponse_t* response;
-    printf("FSM_DATA_STATE: Waiting for ack on the transmitted data count: %d \n", count);
+    LOG_DEBUG("FSM_DATA_STATE: Waiting for ack on the transmitted data count: %d \n", count);
     
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
-        printf("FSM_DATA_STATE: A message has arrived \n");
+        LOG_INFO("FSM_DATA_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_DATAACK:
-                printf("FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAREQ callback.\n");
+                LOG_INFO("FSM_DATA_STATE: Operation NODE_TOKEN_DATAACK - Calling the DATAACK callback.\n");
                 node_state.event_callbacks[FSM_DATAACK](); // Collect the information to send
                 node_state.state = FSM_IDLE;
                 node_state.busy = 0;
                 break;
             default:
-                printf("FSM_DATA_STATE: Not supported operation - Staying in DATA \n");
+                LOG_INFO("FSM_DATA_STATE: Not supported operation - Staying in DATA \n");
                 node_state.busy = 1;
                 node_state.state = FSM_DATA;
                 break;
         }
     }
-    printf("FSM_DATA_STATE: End with state: %02X \n", node_state.state);
+    LOG_DEBUG("FSM_DATA_STATE: End with state: %02X \n", node_state.state);
     return node_state.state;    
 }
 
 static FSM_States_t FSM_RESET_STATE(uint8_t count) {
-    printf("NODE_RESET: count: %d \n", count);
-    FSM_States_t ret = FSM_IDLE;
+    LOG_DEBUG("NODE_RESET: count: %d \n", count);
+    //FSM_States_t ret = FSM_IDLE;
     modem_open(node_state.coordinator_addr);
-    switch (_message.operation ) {
-        case NODE_TOKEN_READY:
-            printf("NODE_RESET: Setting next state as READY\n");
-            node_state.busy = 1;
-            ret = FSM_READY;
-            break;
-        default:
-            printf("NODE_RESET: Not supported operation - Staying in IDLE \n");
-            node_state.busy = 0;
-            ret = FSM_IDLE;
-            break;
-    }
-    return ret;
+    LOG_DEBUG("NODE_RESET: Setting next state as READY\n");
+    node_state.busy = 1;
+    return FSM_READY;
 }
 
 
 static FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
 
     ModemResponse_t* response;
-    printf("FSM_NODEINTRO_STATE: Transmit the node information count: %d \n", count);
+    LOG_DEBUG("FSM_NODEINTRO_STATE: Transmit the node information count: %d \n", count);
 
     // handle the response based on a request or a timeouts
     if (modem_message_arrived()) {
-        printf("FSM_NODEINTRO_STATE: A message has arrived \n");
+        LOG_INFO("FSM_NODEINTRO_STATE: A message has arrived \n");
         response = modem_receive_message();
         switch (response->operation) {
             case NODE_TOKEN_NODEINTROACK:
-                printf("Operation NODE_TOKEN_NODEINTROACK - Calling the NODEINTROACK callback.\n");
+                LOG_DEBUG("Operation NODE_TOKEN_NODEINTROACK - Calling the NODEINTROACK callback.\n");
                 node_state.event_callbacks[FSM_NODEINTROACK](); 
                 node_state.state = FSM_IDLE;
                 node_state.busy = 0;
@@ -258,14 +277,14 @@ static FSM_States_t FSM_NODEINTRO_STATE(uint8_t count) {
 
 
 static FSM_States_t FSM_IDLE_STATE(uint8_t count) {
-    printf("NODE_IDLE: dozing... count: %d \n", count);
+    LOG_DEBUG("NODE_IDLE: dozing... count: %d \n", count);
     // _delay_ms(1000);
     return FSM_IDLE;
 }
 
 
 void node_data_collection(){
-    printf("node_data_collection: BEGIN\n");
+    LOG_DEBUG("node_data_collection: BEGIN\n");
     INA219_Data_t* data = INA219_get_all_readings();
     // Move the data into the struct node_message message
     _message.operation = NODE_TOKEN_DATA;
@@ -277,24 +296,24 @@ void node_data_collection(){
     _message.data_token[2] = NODE_TOKEN_PROPERTY_LOAD_CURRENT; // load current
     _message.data_value[2] = data->current;
     
-    printf("node_data_collection: transmitting the collected data \n");
+    LOG_INFO("node_data_collection: transmitting the collected data \n");
     // Send message
     uint8_t payload[50] = {0};
     uint8_t size = node_message_to_stream(&_message, payload);
     modem_send_message(payload, size);
 
-    printf("node_data_collection: END\n");
+    LOG_DEBUG("node_data_collection: END\n");
 }
 
 
 void node_data_received(void){
-    printf("node_data_received: BEGIN\n");
-    printf("node_data_received: END\n");
+    LOG_DEBUG("node_data_received: BEGIN\n");
+    LOG_DEBUG("node_data_received: END\n");
 }
 
 
 void node_intro_callback(void){
-    _message.operation = NODE_TOKEN_DATA;
+    _message.operation = NODE_TOKEN_NODEINTRO;
     _message.data_length = 5;
     _message.data_token[0] = NODE_TOKEN_HEADER_DOMAIN;
     _message.data_value[0] = NODE_METADATA_DOMAIN_POWER;
@@ -307,7 +326,7 @@ void node_intro_callback(void){
     _message.data_token[4] = NODE_TOKEN_PROPERTY;
     _message.data_value[4] = NODE_TOKEN_PROPERTY_LOAD_CURRENT;
 
-    printf("node_intro_callback: transmitting the node information \n");
+    LOG_INFO("node_intro_callback: transmitting the node information \n");
     uint8_t payload[50] = {0};
     uint8_t size = node_message_to_stream(&_message, payload);
     modem_send_message(payload, size);
@@ -320,7 +339,7 @@ void node_intro_ack_callback(void){
 
 
 uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream){
-    printf("node_message_to_stream: BEGIN for operation %02X\n", message->operation);
+    LOG_DEBUG("node_message_to_stream: BEGIN for operation %02X \n", message->operation);
     
     uint8_t message_length = 0;
     message_stream[message_length++] = NODE_TOKEN_HEADER_OPERATION;
@@ -330,7 +349,7 @@ uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream)
         message_stream[message_length++] = message->sid[i];
     }
     if( NODE_TOKEN_DATA == message->operation){
-        printf("Parsing the data for NODE_TOKEN_DATA\n");
+        LOG_INFO("Parsing the data for NODE_TOKEN_DATA \n");
         uint8_t buffer[4];
         for(uint8_t i=0; i<message->data_length; i++){
             message_stream[message_length++] = message->data_token[i];
@@ -342,15 +361,18 @@ uint8_t node_message_to_stream(Node_Message_t *message, uint8_t *message_stream)
         }
     }
     if( NODE_TOKEN_NODEINTRO == message->operation){
-        printf("Parsing the data for NODE_TOKEN_NODEINTRO\n");
+        LOG_INFO("Parsing the data for NODE_TOKEN_NODEINTRO \n");
         for(uint8_t i=0; i<message->data_length; i++){
             message_stream[message_length++] = message->data_token[i];
             message_stream[message_length++] = message->data_value[i];
         }
     }
 
-    printf("node_message_to_stream: END message_length: %d\n", message_length);
+    LOG_DEBUG("node_message_to_stream: END message_length: %d\n", message_length);
     return message_length;
 }
 
+void node_timeout_callback(void){
+    LOG_INFO("node_timeout_callback: Receive message timeout \n");
+}
    

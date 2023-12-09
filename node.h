@@ -19,7 +19,14 @@ extern "C" {
 #include "ina219/INA219.h"
 
 #define NODE_INA219_IIC_ADDR INA219_ADDR_GND_GND
-
+#define NODE_INA219_PROFILE INA219_CONFIG_PROFILE_DEFAULT
+    
+#ifndef UNIT_TEST    
+#define NODE_WAIT_DELAY 2000
+#else
+    #define NODE_WAIT_DELAY 1
+#endif
+    
     typedef struct {
         Token_t operation;
         uint8_t *sid;
@@ -35,7 +42,7 @@ extern "C" {
     void node_data_received(void);
     void node_intro_callback(void);
     void node_intro_ack_callback(void);
-    
+    void node_timeout_callback(void);
     Node_Message_t *node_create_message(Token_t token, uint8_t *sid);
 
     typedef void (*Event_Callback_t)();

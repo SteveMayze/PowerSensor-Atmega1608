@@ -28,8 +28,44 @@ void Mockeprom_Verify(void);
 
 
 
+#define eprom_read_serial_id_IgnoreAndReturn(cmock_retval) eprom_read_serial_id_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void eprom_read_serial_id_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t* cmock_to_return);
+#define eprom_read_serial_id_StopIgnore() eprom_read_serial_id_CMockStopIgnore()
+void eprom_read_serial_id_CMockStopIgnore(void);
 #define eprom_read_serial_id_ExpectAndReturn(cmock_retval) eprom_read_serial_id_CMockExpectAndReturn(__LINE__, cmock_retval)
 void eprom_read_serial_id_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, uint8_t* cmock_to_return);
+typedef uint8_t* (* CMOCK_eprom_read_serial_id_CALLBACK)(int cmock_num_calls);
+void eprom_read_serial_id_AddCallback(CMOCK_eprom_read_serial_id_CALLBACK Callback);
+void eprom_read_serial_id_Stub(CMOCK_eprom_read_serial_id_CALLBACK Callback);
+#define eprom_read_serial_id_StubWithCallback eprom_read_serial_id_Stub
+#define eprom_write_addr_Ignore() eprom_write_addr_CMockIgnore()
+void eprom_write_addr_CMockIgnore(void);
+#define eprom_write_addr_StopIgnore() eprom_write_addr_CMockStopIgnore()
+void eprom_write_addr_CMockStopIgnore(void);
+#define eprom_write_addr_Expect(addr) eprom_write_addr_CMockExpect(__LINE__, addr)
+void eprom_write_addr_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t* addr);
+typedef void (* CMOCK_eprom_write_addr_CALLBACK)(uint64_t* addr, int cmock_num_calls);
+void eprom_write_addr_AddCallback(CMOCK_eprom_write_addr_CALLBACK Callback);
+void eprom_write_addr_Stub(CMOCK_eprom_write_addr_CALLBACK Callback);
+#define eprom_write_addr_StubWithCallback eprom_write_addr_Stub
+#define eprom_write_addr_ReturnThruPtr_addr(addr) eprom_write_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, sizeof(uint64_t))
+#define eprom_write_addr_ReturnArrayThruPtr_addr(addr, cmock_len) eprom_write_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, cmock_len * sizeof(*addr))
+#define eprom_write_addr_ReturnMemThruPtr_addr(addr, cmock_size) eprom_write_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, cmock_size)
+void eprom_write_addr_CMockReturnMemThruPtr_addr(UNITY_LINE_TYPE cmock_line, uint64_t* addr, size_t cmock_size);
+#define eprom_read_addr_Ignore() eprom_read_addr_CMockIgnore()
+void eprom_read_addr_CMockIgnore(void);
+#define eprom_read_addr_StopIgnore() eprom_read_addr_CMockStopIgnore()
+void eprom_read_addr_CMockStopIgnore(void);
+#define eprom_read_addr_Expect(addr) eprom_read_addr_CMockExpect(__LINE__, addr)
+void eprom_read_addr_CMockExpect(UNITY_LINE_TYPE cmock_line, uint64_t* addr);
+typedef void (* CMOCK_eprom_read_addr_CALLBACK)(uint64_t* addr, int cmock_num_calls);
+void eprom_read_addr_AddCallback(CMOCK_eprom_read_addr_CALLBACK Callback);
+void eprom_read_addr_Stub(CMOCK_eprom_read_addr_CALLBACK Callback);
+#define eprom_read_addr_StubWithCallback eprom_read_addr_Stub
+#define eprom_read_addr_ReturnThruPtr_addr(addr) eprom_read_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, sizeof(uint64_t))
+#define eprom_read_addr_ReturnArrayThruPtr_addr(addr, cmock_len) eprom_read_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, cmock_len * sizeof(*addr))
+#define eprom_read_addr_ReturnMemThruPtr_addr(addr, cmock_size) eprom_read_addr_CMockReturnMemThruPtr_addr(__LINE__, addr, cmock_size)
+void eprom_read_addr_CMockReturnMemThruPtr_addr(UNITY_LINE_TYPE cmock_line, uint64_t* addr, size_t cmock_size);
 
 #ifdef __cplusplus
 }

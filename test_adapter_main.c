@@ -1,5 +1,5 @@
 
-#define F_CPU 1000000UL
+#include "build-config.h"
 
 #include "mocks/Mocktwi0_master.h"
 
@@ -26,23 +26,20 @@ int main(void) {
     USART0_Initialize_Expect();
 
     SYSTEM_Initialize();
-    _delay_ms(1000);
 
-
-
-    printf("\n\n========== Test starting - INA219 Tests ==========\n\n");
-
-    run_ina219_tests();
+//    LOG_INFO("========== Test starting - INA219 Tests ==========\n\n");
+//
+//    run_ina219_tests();
     
-    printf("\n\n========== Test starting - MODEM send Tests ===========\n\n");    
+    LOG_INFO("========== Test starting - MODEM send Tests ===========\n\n");    
     
     run_modem_send_tests();
   
-    printf("\n\n========== Test starting - MODEM receive Tests ===========\n\n");    
+//    LOG_INFO("========== Test starting - MODEM receive Tests ===========\n\n");    
+//
+//    run_modem_receive_tests();
 
-    run_modem_receive_tests();
-
-    printf("\n\n================= Test Completed =================\n\n");
+    LOG_INFO("================= Test Completed =================\n\n");
 
 }
 

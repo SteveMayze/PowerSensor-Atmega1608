@@ -6,6 +6,8 @@
 #define XBEE_ADDR_BROADCAST     0x000000000000FFFF
 #define XBEE_ADDR_COORDINATOR   0x0000000000000000
 
+#define XBEE_DATA_MAX_LENGTH 90
+
 
 typedef enum {
     XBEE_FT_AT_CMD = 0x08,
@@ -116,7 +118,7 @@ struct xbee_rx_packet {
     uint8_t network;
     rx_packet_option opts;
     int len;
-    unsigned char data[16];
+    unsigned char * data;
 };
 
 struct xbee_tx_request_frame {

@@ -1,40 +1,58 @@
-#define F_CPU 1000000UL
 
+ #define LOGGER_LEVEL 2
+
+#include "build-config.h"
 #include "mcc_generated_files/mcc.h"
 #include <util/delay.h>
+#include "node.h"
+#include "eprom.h"
 
+#include <avr/sleep.h>
+
+volatile bool tick;
+
+void PIT_cb(void)
+{
+    /* Clear flag by writing '1': */
+    RTC.PITINTFLAGS = RTC_PI_bm;
+    LOG_DEBUG("TICK \n");
+
+    tick = true;
+}
 
 int main(void)
 {
-    // Initialize drivers from MCC
     SYSTEM_Initialize();
     _delay_ms(1000);
+    LOG_INFO("main: Node Initialisation \n");
+    RTC_SetPITIsrCallback( PIT_cb );
     
+    node_intitialise();
+    
+    node_set_timeout(0x0006);
+    // This time, set up the real call-backs to go through the motions.
+
+    _delay_ms(5000);
+    
+    LOG_INFO("main: Starting the control loop \n");
+    RTC_EnablePITInterrupt();
     while(1){
         
-//        idle();
-//        // Send the data ready. The XBEE will report if it was sent OK.
-//        // Then wait for the message from the HUB. This will be either
-//        // a request to introduce the new node or to send the data.
-//        // In each case there will be an immediate response from the XBee to 
-//        // say it has been delivered.
-//        // In all cases there can be a timeout if there are some problems.
-//        // In that case the system should back off and try again later.
-//        
-//        // xbee_usart should be restricted to just the send and recieve of
-//        // the frame data. There should be another XBee module to handle the
-//        // generation of the frame etc. Therefore the tests will then make sense.
-//        
-//        if(send_data_ready()  == ACK){
-//            if(wait_for_data_req() == SUCCESS){
-//                
-//            } else {
-//            // An error, back down and try again later.
-//        }
-//            
-//        } else {
-//            // An error, back down and try again later.
-//        }
+        /* Put the CPU in sleep */
+        for(uint8_t i = 0; i < 2; i++){
+            sleep_mode(); // 30 ~second sleep
+        }
+        
+        if (tick){
+            RTC_DisablePITInterrupt();
+            tick = false;
+            _delay_ms(5000);
+        
+            LOG_DEBUG("main: Waking - Node check \n");
+            node_create_message(NODE_TOKEN_READY, eprom_read_serial_id());
+            node_check();
+            LOG_DEBUG("main: sleeping 60 seconds... \n");
+            RTC_EnablePITInterrupt(); 
+        }
     }
 }
-

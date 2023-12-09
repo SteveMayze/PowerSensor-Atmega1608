@@ -60,19 +60,19 @@ int8_t RTC_Initialize()
     RTC.PER = 0x01;
 
     //Clock selection
-    RTC.CLKSEL = 0x00;
+    RTC.CLKSEL = 0x01;
 
     //CMP disabled; OVF enabled; 
     RTC.INTCTRL = 0x01;
 
-    //RUNSTDBY disabled; PRESCALER DIV1; CORREN disabled; RTCEN enabled; 
-    RTC.CTRLA = 0x01;
     
     while (RTC.PITSTATUS > 0) { /* Wait for all register to be synchronized */
     }
     //PI disabled; 
     RTC.PITINTCTRL = 0x00;
         
+    //PERIOD CYC32768; PITEN enabled; 
+    RTC.PITCTRLA = 0x71;
      
     return 0;
 }

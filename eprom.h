@@ -21,6 +21,9 @@ extern "C" {
  */
 uint8_t* eprom_read_serial_id();
 
+void eprom_write_addr(uint64_t *addr);
+
+void eprom_read_addr(uint64_t *addr);
 
 #ifdef	__cplusplus
 }

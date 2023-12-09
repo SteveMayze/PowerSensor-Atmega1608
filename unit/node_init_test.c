@@ -1,9 +1,13 @@
+
+#include "../build-config.h"
+
 #include "node_init_test.h"
 #include "unity.h"
 #include "../node.h"
 #include <stdlib.h>
 #include "../mocks/Mockeprom.h"
 #include "../mocks/MockINA219.h"
+#include "../mocks/Mockmodem.h"
 
 uint8_t node_init_test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D , 0xE2 , 0x07 , 0xC0};
 
@@ -13,7 +17,8 @@ uint8_t node_init_test_sid[10] = {0x02 , 0xC0 , 0x2B , 0xE2 , 0x09 , 0xC0 , 0x2D
 void initialise_node_test(){  
     uint8_t *expected_sid = node_init_test_sid;
     eprom_read_serial_id_ExpectAndReturn(expected_sid);
-    INA219_Initialise_Expect(0x40, INA219_CONFIG_PROFILE_DEFAULT);
+    INA219_Initialise_Expect(0x40, NODE_INA219_PROFILE);
+    modem_initialise_Expect();
     Error_t expected_status = NODE_OK;
     // Check the state of the modem.
     // Retrieve the Serial ID.

@@ -45,7 +45,7 @@ extern "C" {
 #endif
 
 /* Normal Mode, Baud register value */
-#define USART0_BAUD_RATE(BAUD_RATE) (((float)10000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
+#define USART0_BAUD_RATE(BAUD_RATE) (((float)20000000 * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
 /* USART0 Ringbuffer */
 
@@ -53,14 +53,9 @@ extern "C" {
 #define USART0_TX_BUFFER_SIZE 128
 #define USART0_RX_BUFFER_MASK (USART0_RX_BUFFER_SIZE - 1)
 #define USART0_TX_BUFFER_MASK (USART0_TX_BUFFER_SIZE - 1)
-    
+
 typedef enum { USART0_RX_CB = 1, USART0_TX_CB } usart0_cb_t;
 typedef void (*usart_callback)(void);
-
-#ifdef USART0_TEST_DEFINES
-extern uint8_t usart0_test_RXDATAL;
-#endif
-
 
 /**
  * \brief Initialize USART interface
@@ -110,7 +105,7 @@ void USART0_EnableTx();
 void USART0_Disable();
 
 /**
- * \brief Get received data from USART0
+ * \brief Get recieved data from USART0
  *
  * \return Data register from USART0 module
  */

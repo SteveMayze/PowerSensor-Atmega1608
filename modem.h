@@ -8,6 +8,9 @@
 #ifndef MODEM_H
 #define	MODEM_H
 
+#define __XBEE_8CC__
+
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -31,6 +34,7 @@ extern "C" {
 
 
     typedef enum token_e {
+        NODE_TOKEN_VOID = 0x00,
         
         NODE_TOKEN_HEADER_OPERATION = HEADER_GROUP | 0x01,
         NODE_TOKEN_HEADER_SERIAL_ID = HEADER_GROUP | 0x02,
@@ -54,10 +58,10 @@ extern "C" {
         // METADATA
         NODE_METADATA_DOMAIN_POWER =  METADATA_DOMAIN_GROUP | 0x01,
         NODE_METADATA_DOMAIN_CAPACITY =  METADATA_DOMAIN_GROUP | 0x02,
-        NODE_METADATA_DOMAIN_RATEY =  METADATA_DOMAIN_GROUP | 0x03,
+        NODE_METADATA_DOMAIN_RATE =  METADATA_DOMAIN_GROUP | 0x03,
                 
-        NODE_METADATA_CLASS_SENSOR =  METADATA_CLASS_GROUP | 0x03,
-        NODE_METADATA_CLASS_ACTUATOR =  METADATA_CLASS_GROUP | 0x03,
+        NODE_METADATA_CLASS_SENSOR =  METADATA_CLASS_GROUP | 0x01,
+        NODE_METADATA_CLASS_ACTUATOR =  METADATA_CLASS_GROUP | 0x02,
 
     } Token_t;
 
@@ -65,12 +69,15 @@ extern "C" {
 
     typedef struct response_message {
         
+        xbee_frame_type frame_type;
         Token_t operation;
         uint8_t data_length;
         uint8_t *data;
         
     } ModemResponse_t;
-
+    
+    void modem_initialise();
+    
     void modem_open(uint64_t coordinator);
     
     void modem_close(void);
@@ -78,6 +85,8 @@ extern "C" {
     bool modem_message_arrived(void);
     
     uint64_t modem_get_coord_addr();
+    
+    void modem_set_coord_addr(uint64_t addr);
     
     ModemResponse_t* modem_receive_message(void);
     
